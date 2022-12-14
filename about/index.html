@@ -33,6 +33,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://img-blog.csdnimg.cn/2a451f2b521e412385ed8cc04660d26c.jpeg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <header class="navbar-fixed">
@@ -586,7 +596,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"web笔记","value":1},{"name":"ctf秀","value":1},{"name":"学习网站","value":1},{"name":"工具","value":1}],
+                data: [{"name":"web笔记","value":1},{"name":"学习网站","value":1},{"name":"ctf秀","value":1},{"name":"工具","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -667,20 +677,20 @@
         
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/0.jpg">
-                <img src="/medias/featureimages/0.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/featureimages/5.jpg">
+                <img src="/medias/featureimages/5.jpg" class="responsive-img">
             </div>
         </div>
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/1.jpg">
-                <img src="/medias/featureimages/1.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/featureimages/3.jpg">
+                <img src="/medias/featureimages/3.jpg" class="responsive-img">
             </div>
         </div>
         
         <div class="photo col s12 m6 l4" data-aos="fade-up">
-            <div class="img-item" data-src="/medias/featureimages/2.jpg">
-                <img src="/medias/featureimages/2.jpg" class="responsive-img">
+            <div class="img-item" data-src="/medias/featureimages/4.jpg">
+                <img src="/medias/featureimages/4.jpg" class="responsive-img">
             </div>
         </div>
         
@@ -1036,6 +1046,8 @@ $(function () {
     
 
     
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
@@ -1050,6 +1062,14 @@ $(function () {
         </script>
     
     
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你不回来了嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好呀好呀！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+    
+
 </body>
 
 </html>

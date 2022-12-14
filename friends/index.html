@@ -33,6 +33,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://img-blog.csdnimg.cn/2a451f2b521e412385ed8cc04660d26c.jpeg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <header class="navbar-fixed">
@@ -1168,6 +1178,8 @@ $(function () {
     
 
     
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
@@ -1182,6 +1194,14 @@ $(function () {
         </script>
     
     
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你不回来了嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好呀好呀！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+    
+
 </body>
 
 </html>

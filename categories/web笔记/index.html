@@ -33,6 +33,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://img-blog.csdnimg.cn/2a451f2b521e412385ed8cc04660d26c.jpeg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <header class="navbar-fixed">
@@ -371,19 +381,19 @@
                 </a>
                 
                 
-                <a href="/categories/web%E7%AC%94%E8%AE%B0/ctf%E7%A7%80/" title="ctf秀: 1">
+                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/" title="学习网站: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F5EEF8;">ctf秀
+                            style="background-color: #F5EEF8;">学习网站
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%BD%91%E7%AB%99/" title="学习网站: 1">
+                <a href="/categories/web%E7%AC%94%E8%AE%B0/ctf%E7%A7%80/" title="ctf秀: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D5F5E3;">学习网站
+                            style="background-color: #D5F5E3;">ctf秀
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -804,6 +814,8 @@ $(function () {
     
 
     
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
 
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
@@ -818,6 +830,14 @@ $(function () {
         </script>
     
     
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你不回来了嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好呀好呀！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+    
+
 </body>
 
 </html>
