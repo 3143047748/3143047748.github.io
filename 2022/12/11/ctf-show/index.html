@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="ctf show, north&#39;s bolg">
-    <meta name="description" content="">
+    <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -155,7 +155,7 @@
         <div class="logo-name">north&#39;s bolg</div>
         <div class="logo-desc">
             
-            Never really desperate, only the lost of the soul.
+            本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。
             
         </div>
     </div>
@@ -603,7 +603,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">3143047748</a>
+                    <a href="/about" rel="external nofollow noreferrer">north</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -626,7 +626,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">3143047748</a>
+                    <a href="/about" target="_blank">north</a>
                     !
                 </span>
             </div>
@@ -1239,7 +1239,7 @@
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
             + '来源: north&#39;s bolg<br />'
-            + '文章作者: 3143047748<br />'
+            + '文章作者: north<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
@@ -1431,7 +1431,7 @@
                 <span id="year">2022</span>
             
             <span id="year">2022</span>
-            <a href="/about" target="_blank">3143047748</a>
+            <a href="/about" target="_blank">north</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
@@ -1704,14 +1704,6 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
     
-        <script type="text/javascript">
-        //只在桌面版网页启用特效
-        var windowWidth = $(window).width();
-        if (windowWidth > 768) {
-            document.write('<script type="text/javascript" src="/js/sakura.js"></script>');
-        }
-        </script>
-    
     
     <script type="text/javascript">
         var OriginTitile=document.title,st;
@@ -1720,6 +1712,58 @@ $(function () {
         })
     </script>
     
+    <!-- 冒泡 -->
+    
+        <script type="text/javascript">
+          // 只在桌面版网页启用特效
+          var windowWidth = $(window).width();
+          document.write(
+              '<script type="text/javascript" src="/libs/others/buble.js"><\/script>');
+        </script>
+    
+    
+    <!-- 白天和黑夜主题 -->
+<div class="sum-moon-box">
+    <a class="btn-floating btn-large waves-effect waves-light" onclick="switchNightMode()" title="切换主题" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="width:48px; height:48px; font-size: 28px;"></i>
+    </a>
+  </div>
+  
+  <script>
+    function switchNightMode() {
+      $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+          $('body').hasClass('DarkMode')
+          ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon'))
+          : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+  
+          setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+              $(this).remove()
+            })
+          }, 2e3)
+        })
+    }
+  </script>
+
+<div class="stars-con">
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+</div>
+
+
+    /* 模式判断 */
+    <script>
+      /* 模式判断 */
+      if (localStorage.getItem('isDark') === '1') {
+        document.body.classList.add('DarkMode');
+        $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')
+      } else {
+        document.body.classList.remove('DarkMode');
+        $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')
+      }
+    </script>
 
 </body>
 
