@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-17
+                    2022-12-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3k
+                    3.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    13 分
                 </div>
                 
 
@@ -666,6 +666,53 @@ mt_srand(372619038);
 print(mt_rand());
 ?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="https://img-blog.csdnimg.cn/10e71b69aefc4ce6af505059950068dd.png" alt="24"><br>get传参传入?r&#x3D;1122388967,得到flag.</p>
+<h3 id="web25"><a href="#web25" class="headerlink" title="web25"></a>web25</h3><p>打开后有以下代码</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+
+&#x2F;*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-03 13:56:57
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-03 15:47:33
+# @email: h1xa@ctfer.com
+# @link: https:&#x2F;&#x2F;ctfer.com
+
+*&#x2F;
+
+
+error_reporting(0);
+include(&quot;flag.php&quot;);
+if(isset($_GET[&#39;r&#39;]))&#123;
+    $r &#x3D; $_GET[&#39;r&#39;];
+    mt_srand(hexdec(substr(md5($flag), 0,8)));
+    $rand &#x3D; intval($r)-intval(mt_rand());
+    if((!$rand))&#123;
+        if($_COOKIE[&#39;token&#39;]&#x3D;&#x3D;(mt_rand()+mt_rand()))&#123;
+            echo $flag;
+        &#125;
+    &#125;else&#123;
+        echo $rand;
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+    echo system(&#39;cat &#x2F;proc&#x2F;version&#39;);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>mt_scrand(seed)这个函数的意思，是通过分发seed种子，然后种子有了后，靠mt_rand()生成随机数。<br>这里没有明确给出seed，因此我们需要用工具逆推出seed。</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$rand &#x3D; intval($r)-intval(mt_rand());<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>从这里我们可以判断出，如果我们输入的r为0，那么$rand为第一个随机数的负数，并且因为非零，在if判断中会在else中输出，因此我们先GET输入?r&#x3D;0，得到第一个随机数的负数。</p>
+<p><img src="https://img-blog.csdnimg.cn/20875749074848f196d6b7b1fdc4ef49.png" alt="25"><br>虚拟机打开终端输入ls查看，得到文件php_mt_seed，输入* .&#x2F;php_mt_seed第一个随机数*<br>bp抓包repeater后send为php7.0以上版本<br><img src="https://img-blog.csdnimg.cn/7d7b0b2bcd994279b5a64993de43eb05.png" alt="25"><br>这里有三个（用php7.0版本以上运行代码)</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+mt_srand(3095355977);
+echo mt_rand().&quot;\n&quot;;
+echo mt_rand()+mt_rand();<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>三种可能都试一下，<br><img src="https://img-blog.csdnimg.cn/b91295d5b03f466fa046b44d34f332cd.png" alt="25"><br>通过代码:</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">if((!$rand))&#123;
+       if($_COOKIE[&#39;token&#39;]&#x3D;&#x3D;(mt_rand()+mt_rand()))&#123;
+           echo $flag;
+       &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>令r&#x3D;1374935140可以使得!$rand为真,然后执行if语句，如果cookie传入值正确，得出flag。<br>利用hackbar进行get传参，进行cookie传参得到flag。</p>
 
                 
             </div>
@@ -1517,7 +1564,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">6.7k</span>&nbsp;字
+                class="white-color">7.1k</span>&nbsp;字
             
             
             
