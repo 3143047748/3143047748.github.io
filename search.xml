@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>Crypto中可能用的密码</title>
+      <link href="/2022/12/19/Crypto%E4%B8%AD%E5%8F%AF%E8%83%BD%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81/"/>
+      <url>/2022/12/19/Crypto%E4%B8%AD%E5%8F%AF%E8%83%BD%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<h1 id="常见的密码特征"><a href="#常见的密码特征" class="headerlink" title="常见的密码特征"></a>常见的密码特征</h1><h2 id="base密码"><a href="#base密码" class="headerlink" title="base密码"></a>base密码</h2><h3 id="base100"><a href="#base100" class="headerlink" title="base100"></a>base100</h3><p><strong>特点：密文由 Emoji 表情组成。</strong></p><table><thead><tr><th>原文</th><th>base100加密</th></tr></thead><tbody><tr><td>flag</td><td>👝👣👘👞</td></tr><tr><td>flag{gycfev123FGH_}</td><td>👝👣👘👞👲👞👰👚👝👜👭🐨🐩🐪🐽🐾🐿👖👴</td></tr></tbody></table><h3 id="base92"><a href="#base92" class="headerlink" title="base92"></a>base92</h3><p><em>特征特点：密文由92个字符（0-9，a-z，A-Z,!#$%&amp;()</em>+,.&#x2F;:;&lt;&#x3D;&gt;?@[]^_&#96;{|}”~）*组成<br><strong>比base91多一个 。</strong></p><h3 id="base91"><a href="#base91" class="headerlink" title="base91"></a>base91</h3><p><strong>特点：密文由91个字符（0-9，a-z，A-Z,!#$%&amp;()*+,.&#x2F;:;&lt;&#x3D;&gt;?@[]^_&#96;{|}~”）组成 。</strong></p><table><thead><tr><th>原文</th><th>base91加密</th></tr></thead><tbody><tr><td>flag</td><td>@iH&lt;Z</td></tr><tr><td>flag{ASD231fgh_hj}</td><td>@iH&lt;,{cSBMB.9*gkg}Q2S}A</td></tr></tbody></table><h3 id="base85"><a href="#base85" class="headerlink" title="base85"></a>base85</h3><p><strong>特点：奇怪的字符比较多，但是很难出现等号。</strong></p><table><thead><tr><th>原文</th><th>base85加密</th></tr></thead><tbody><tr><td>flag</td><td>Ao(mg</td></tr><tr><td>flag{}JK_gisyu</td><td>Ao(mgH[SLZ?Y&#x3D;(oH$’</td></tr></tbody></table><h3 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h3><p><strong>特点：密文由64个字符(A-Z,a-z,0-9,+,&#x2F;)组成，一般情况下密文尾部都会有两个等号，明文很少的时候则没有；</strong></p><table><thead><tr><th>原文</th><th>base64加密</th></tr></thead><tbody><tr><td>flag{asdfgs1sedfvfvdfd2345_}</td><td>ZmxhZ3thc2RmZ3Mxc2VkZnZmdmRmZDIzNDVffQ&#x3D;&#x3D;</td></tr><tr><td>flag{asdfgsdfd2345_}</td><td>ZmxhZ3thc2RmZ3NkZmQyMzQ1X30&#x3D;</td></tr><tr><td>flag</td><td>ZmxhZw&#x3D;&#x3D;</td></tr><tr><td>sdfdfc</td><td>c2RmZGZj</td></tr></tbody></table><h3 id="base62"><a href="#base62" class="headerlink" title="base62"></a>base62</h3><p><strong>特征特点：密文由62字符（0-9，a-z，A-Z）组成</strong></p><h3 id="base58"><a href="#base58" class="headerlink" title="base58"></a>base58</h3><p><strong>特点： Base58是用于Bitcoin中使用的一种独特的编码方式，主要用于产生Bitcoin的钱包地址，Base58不使用数字”0”，字母大写”O”，字母大写”I”，和字母小写”l”，以及”+”和”&#x2F;”符号</strong></p><table><thead><tr><th>原文</th><th>base58加密</th></tr></thead><tbody><tr><td>flag</td><td>3cr9Ae</td></tr><tr><td>flag{4561230ASDO}</td><td>xpoetRNMzw3NmoorXfTgNTn</td></tr></tbody></table><h3 id="base36"><a href="#base36" class="headerlink" title="base36"></a>base36</h3><p><strong>特点：密文由36个字符（0-9,a-z）组成，加密仅支持整数数字，解密仅支持字符串，不支持中文 密文由36个字符（0-9,A-Z）</strong></p><table><thead><tr><th>原文</th><th>base36加密</th></tr></thead><tbody><tr><td>123456</td><td>2n9c</td></tr><tr><td>10</td><td>a</td></tr><tr><td>9</td><td>9</td></tr><tr><td>11</td><td>b</td></tr></tbody></table><h3 id="base32"><a href="#base32" class="headerlink" title="base32"></a>base32</h3><p><strong>特点：密文由32个字符（A-Z,2-7)组成，末尾可能会有‘&#x3D;’，但最多有6个。</strong></p><table><thead><tr><th>原文</th><th>base32加密</th></tr></thead><tbody><tr><td>flag</td><td>MZWGCZY&#x3D;</td></tr><tr><td>flag{123asd}</td><td>MZWGCZ33GEZDGYLTMR6Q&#x3D;&#x3D;&#x3D;&#x3D;</td></tr><tr><td>flag{123asd_sxvhgjh}</td><td>MZWGCZ33GEZDGYLTMRPXG6DWNBTWU2D5</td></tr></tbody></table><h3 id="base16"><a href="#base16" class="headerlink" title="base16"></a>base16</h3><p><strong>特点：密文由16个字符（0-9,A-F）。</strong></p><table><thead><tr><th>原文</th><th>base16加密</th></tr></thead><tbody><tr><td>flag</td><td>666C6167</td></tr><tr><td>flag{dujv_1236}</td><td>666C61677B64756A765F313233367D</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 密码 </category>
+          
+          <category> 解密 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> crypto </tag>
+            
+            <tag> 密码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>php之伪随机数爆破</title>
       <link href="/2022/12/17/php%E4%B9%8B%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%88%86%E7%A0%B4/"/>
       <url>/2022/12/17/php%E4%B9%8B%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%88%86%E7%A0%B4/</url>
