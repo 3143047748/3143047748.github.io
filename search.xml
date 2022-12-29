@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>CTF中常用的php伪协议总结</title>
+      <link href="/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/"/>
+      <url>/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><pre class="line-numbers language-python" data-language="python"><code class="language-python">php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）file:&#x2F;&#x2F; — 访问本地文件系统phar:&#x2F;&#x2F; — PHP 归档zlib:&#x2F;&#x2F; — 压缩流data:&#x2F;&#x2F; — 数据（RFC 2397）http:&#x2F;&#x2F; — 访问 HTTP(s) 网址ftp:&#x2F;&#x2F; — 访问 FTP(s) URLsglob:&#x2F;&#x2F; — 查找匹配的文件路径模式ssh2:&#x2F;&#x2F; — Secure Shell 2rar:&#x2F;&#x2F; — RARogg:&#x2F;&#x2F; — 音频流expect:&#x2F;&#x2F; — 处理交互式的流123456789101112<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><h1 id="file-x2F-x2F"><a href="#file-x2F-x2F" class="headerlink" title="file:&#x2F;&#x2F;"></a>file:&#x2F;&#x2F;</h1><p>用于访问本地文件系统，并且不受<code>allow_url_fopen</code>，<code>allow_url_include</code>影响<br> <code>file://</code>协议主要用于访问文件(绝对路径、相对路径以及网络路径)<br> 比如：<code>http://www.xx.com?file=file:///etc/passsword</code></p><h1 id="php-x2F-x2F"><a href="#php-x2F-x2F" class="headerlink" title="php:&#x2F;&#x2F;"></a>php:&#x2F;&#x2F;</h1><p>在<code>allow_url_fopen</code>，<code>allow_url_include</code>都关闭的情况下可以正常使用<br> <code>php://</code>作用为访问输入输出流</p><h2 id="php-x2F-x2F-filter"><a href="#php-x2F-x2F-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a>php:&#x2F;&#x2F;filter</h2><p>读取源代码并编码输出，例如：<br> <code>http://127.0.0.1/cmd.php?cmd=php://filter/read=convert.base64-encode/resource=[文件名]（针对php文件需要base64编码）</code><br> 说明：<br> <code>resource=&lt;要过滤的数据流&gt;</code> 这个参数是必须的。它指定了你要筛选过滤的数据流<br> <code>read=&lt;读链的筛选列表&gt;</code> 该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br> <code>write=&lt;写链的筛选列表&gt;</code>该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br> <code>&lt;；两个链的筛选列表&gt;</code> 任何没有以 read&#x3D; 或 write&#x3D; 作前缀 的筛选器列表会视情况应用于读或写链。</p><h2 id="php-x2F-x2F-input"><a href="#php-x2F-x2F-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h2><p><code>php://input</code>执行post数据中的代码：<br> 例如：<br> <code>http://127.0.0.1/cmd.php?cmd=php://input</code><br> POST数据：<code>&lt;?php phpinfo()?&gt;</code><br> 注意：<br> 当<code>enctype=&quot;multipart/form-data&quot;的时候</code> php:&#x2F;&#x2F;input&#96; 是无效的</p><h1 id="data-x2F-x2F"><a href="#data-x2F-x2F" class="headerlink" title="data:&#x2F;&#x2F;"></a>data:&#x2F;&#x2F;</h1><p>自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。一般需要用到base64编码传输<br> 比如：<br> 通过data:&#x2F;&#x2F;text&#x2F;plain协议来进行漏洞利用。<br> <code>?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</code><br> <code>url=data://text/plain,&lt;?php print_r(glob(&quot;*&quot;)); ?&gt;</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ctf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> php伪协议 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>优质图床</title>
       <link href="/2022/12/28/%E4%BC%98%E8%B4%A8%E5%9B%BE%E5%BA%8A/"/>
       <url>/2022/12/28/%E4%BC%98%E8%B4%A8%E5%9B%BE%E5%BA%8A/</url>

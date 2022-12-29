@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="php之伪随机数爆破, north&#39;s bolg">
+    <meta name="keywords" content="CTF中常用的php伪协议总结, north&#39;s bolg">
     <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>php之伪随机数爆破 | north&#39;s bolg</title>
+    <title>CTF中常用的php伪协议总结 | north&#39;s bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -321,12 +321,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">php之伪随机数爆破</h1>
+                    <h1 class="description center-align post-title">CTF中常用的php伪协议总结</h1>
                 </div>
             </div>
         </div>
@@ -445,8 +445,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/PHP/">
-                                <span class="chip bg-color">PHP</span>
+                            <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
+                                <span class="chip bg-color">php伪协议</span>
                             </a>
                         
                     </div>
@@ -457,12 +457,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%91%98%E6%8A%84/" class="post-category">
-                                摘抄
-                            </a>
-                        
-                            <a href="/categories/%E6%91%98%E6%8A%84/php/" class="post-category">
-                                php
+                            <a href="/categories/ctf/" class="post-category">
+                                ctf
                             </a>
                         
                     </div>
@@ -474,28 +470,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-17
+                    2022-12-29
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-17
+                    2022-12-29
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.9k
+                    526
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    2 分
                 </div>
                 
 
@@ -518,141 +514,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="PHP的伪随机数爆破"><a href="#PHP的伪随机数爆破" class="headerlink" title="PHP的伪随机数爆破"></a>PHP的伪随机数爆破</h1><h2 id="随机数并不随机"><a href="#随机数并不随机" class="headerlink" title="随机数并不随机"></a>随机数并不随机</h2><p>首先需要声明的是，计算机不会产生绝对随机的随机数，计算机只能产生“伪随机数”。其实绝对随机的随机数只是一种理想的随机数，即使计算机怎样发展，它也不会产生一串绝对随机的随机数。计算机只能生成相对的随机数，即伪随机数。</p>
-<p><strong>伪随机数并不是假随机数，这里的“伪”是有规律的意思，就是计算机产生的伪随机数既是随机的又是有规律的。</strong>  怎样理解呢？产生的伪随机数有时遵守一定的规律，有时不遵守任何规律；伪随机数有一部分遵守一定的规律；另一部分不遵守任何规律。比如“世上没有两片形状完全相同的树叶”，这正是点到了事物的特性，即随机性，但是每种树的叶子都有近似的形状，这正是事物的共性，即规律性。从这个角度讲，你大概就会接受这样的事实了：<strong>计算机只能产生伪随机数而不能产生绝对随机的随机数</strong>。</p>
-<p><strong>真随机数和伪随机数的概念</strong></p>
-<ul>
-<li>真随机数发生器：英文为：true random number generators ，简称为：TRNGs，是利用不可预知的物理方式来产生的随机数。</li>
-<li>伪随机数发生器：英文为：pseudo-random number generators ，简称为：PRNGs，是计算机利用一定的算法来产生的。</li>
-</ul>
-<h2 id="PHP的伪随机数有关的两个函数"><a href="#PHP的伪随机数有关的两个函数" class="headerlink" title="PHP的伪随机数有关的两个函数"></a>PHP的伪随机数有关的两个函数</h2><h3 id="mt-rand"><a href="#mt-rand" class="headerlink" title="mt_rand()"></a>mt_rand()</h3><p>mt_rand() 函数使用 Mersenne Twister 算法返回随机整数（随机数生成器）。</p>
-<p><strong>语法</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">mt_rand(min,max)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <h1 id="总览"><a href="#总览" class="headerlink" title="总览"></a>总览</h1><pre class="line-numbers language-python" data-language="python"><code class="language-python">php:&#x2F;&#x2F; — 访问各个输入&#x2F;输出流（I&#x2F;O streams）
+file:&#x2F;&#x2F; — 访问本地文件系统
+phar:&#x2F;&#x2F; — PHP 归档
+zlib:&#x2F;&#x2F; — 压缩流
+data:&#x2F;&#x2F; — 数据（RFC 2397）
+http:&#x2F;&#x2F; — 访问 HTTP(s) 网址
+ftp:&#x2F;&#x2F; — 访问 FTP(s) URLs
+glob:&#x2F;&#x2F; — 查找匹配的文件路径模式
+ssh2:&#x2F;&#x2F; — Secure Shell 2
+rar:&#x2F;&#x2F; — RAR
+ogg:&#x2F;&#x2F; — 音频流
+expect:&#x2F;&#x2F; — 处理交互式的流
+123456789101112<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>说明</strong></p>
-<p>如果没有提供可选参数 min 和 max，mt_rand() 返回 0 到 RAND_MAX 之间的伪随机数。</p>
-<p>很多老的 libc 的随机数发生器具有一些不确定和未知的特性而且很慢。PHP 的 rand() 函数默认使用 libc  随机数发生器。mt_rand() 函数是非正式用来替换它的。该函数用了 Mersenne Twister  中已知的特性作为随机数发生器，它可以产生随机数值的平均速度比 libc 提供的 rand() 快四倍。</p>
-<p><strong>例子</strong></p>
-<p>在本例中，我们会返回一些随机数：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-echo(mt_rand());
-echo(mt_rand());
-echo(mt_rand(10,100));
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>输出类似：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">3150906288
-513289678
-35<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="mt-srand"><a href="#mt-srand" class="headerlink" title="mt_srand()"></a>mt_srand()</h3><p>mt_srand() 播种 Mersenne Twister 随机数生成器。</p>
-<p><strong>语法</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">mt_srand(seed)
-1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>参数 seed：规定播种值、用 seed 来给随机数发生器播种。</p>
-<p><strong>例子</strong><br> 在本例中，我们将播种随机数生成器：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-mt_srand(mktime());
-echo(mt_rand());
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>输出类似：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">1132656473<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这段代码的意思是，是通过mt_srand分发seed种子，然后种子有了后，才能靠mt_rand()来生成随机数。</p>
-<h4 id="为什么随机数要用种子播种，对种子的理解"><a href="#为什么随机数要用种子播种，对种子的理解" class="headerlink" title="为什么随机数要用种子播种，对种子的理解"></a>为什么随机数要用种子播种，对种子的理解</h4><p>首先我们要知道，计算机不能产生绝对的随机数，只能产生伪随机数。伪就是有规律的意思。伪随机数就是说计算机产生的随机数是有规律的。那么计算机是怎么产生随机数的？当然是通过算法，这个算法是有映射关系的，如我放进1，他会出来一个特定的数</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">RAND_SEED&#x3D;(RAND_SEED*123+59)%65536;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这是某个系统的随机数算法。</p>
-<p>我们可以把这个算法看成是一个黑盒子，你放进一个数，就会出来一个特定的数，并把这个数当做下一次的种子在放进去。在这里，你第一次放进去的数就是随机数种子，也就是说随机种子（Random Seed）就是这些随机数的初始值。</p>
-<p>系统实现随机数是把当前的系统时间放进去，每次时间都不一样，所以可以实现每次出来的数都不一样。如果你每次都放进一样的种子，生成的随机数列就是一样的了。</p>
-<p>注释：自 PHP 4.2.0 起，不再需要用 srand() 或 mt_srand() 函数给随机数发生器播种了，随机数生成器可以自动播种，因此没有必要使用该函数。</p>
-<h2 id="PHP伪随机数安全"><a href="#PHP伪随机数安全" class="headerlink" title="PHP伪随机数安全"></a>PHP伪随机数安全</h2><h3 id="可预测性"><a href="#可预测性" class="headerlink" title="可预测性"></a>可预测性</h3><p>mt_rand()并不是一个真随机数生成函数，实际上绝大多数编程语言中的随机数函数生成的都是伪随机数。</p>
-<p><strong>伪随机是由可确定的函数，通过一个种子（常用时钟）播种，产生的伪随机数。这意味着：如果知道了种子，或者已经产生的随机数，或者已知产生的随机数的一部分，都可能获得接下来随机数序列的信息，知道了你的随机数序列，就可以确定你的种子值。 （可预测性）。</strong></p>
-<p><strong>简单假设一下 mt_rand()内部生成随机数的函数为: rand &#x3D; seed+(i*10) 其中 seed 是随机数种子， i 表示第几次调用这个随机数函数。当我们同时知道 i 和 rand 两个值的时候，就能很容易的算出seed的值来。比如 rand&#x3D;21 , i&#x3D;2 代入函数 21&#x3D;seed+(2*10) 就能得到 seed&#x3D;1 。是不是很简单，当我们拿到seed之后，就能计算出当 i 为任意值时候的 rand 的值了。</strong></p>
-<h3 id="PHP的自动播种"><a href="#PHP的自动播种" class="headerlink" title="PHP的自动播种"></a>PHP的自动播种</h3><p>我们已经知道每一次mt_rand()被调用都会根据seed和当前调用的次数i来计算出一个伪随机数。而且seed是自动播种的：</p>
-<blockquote>
-<p>Note: 自 PHP 4.2.0 起，不再需要用 srand() 或 mt_srand() 给随机数发生器播种，因为现在是由系统自动完成的。</p>
-</blockquote>
-<p>那么问题就来了，到底系统自动完成播种是在什么时候，如果每次调用mt_rand()都会自动播种那么破解seed也就没意义了。</p>
-<p>不幸的是，php每次调用mt_rand()函数时，都会先检查是否已经播种。如果已经播种就直接产生随机数，否则调用php_mt_srand来播种。也就是说每个php cgi进程期间，只有第一次调用mt_rand()会自动播种。接下来都会根据这个第一次播种的种子来生成随机数。</p>
-<p><strong>php_mt_seed</strong></p>
-<p>我们已经知道随机数的生成是依赖特定的函数，上面曾经假设为 rand &#x3D; seed+(i<em>10) 。对于这样一个简单的函数，我们当然可以直接计算出一组解来，但 mt_rand() 实际使用的函数可是相当复杂且无法逆运算的。*<em>有效的破解方法其实是穷举所有的种子并根据枚举出的种子生成随机数序列再跟已知的随机数序列做比对来验证种子是否正确。php_mt_seed就是这么一个工具，它的速度非常快，跑完2^32位seed也就几分钟。</em></em> 它可以根据单次mt_rand()的输出结果直接爆破出可能的种子，当然也可以爆破类似mt_rand(1,100)这样限定了MIN MAX输出的种子。</p>
-<p>很多国内开发者在程序中使用了mt_rand()来生成安全令牌、核心加解密key等等导致严重的安全问题。</p>
-<p>用到的是爆破，已经有写好的C脚本了。</p>
-<p>这里简单的介绍下这个脚本咋用</p>
-<h3 id="种子爆破工具——php-mt-seed"><a href="#种子爆破工具——php-mt-seed" class="headerlink" title="种子爆破工具——php_mt_seed"></a>种子爆破工具——php_mt_seed</h3><p>下载地址：<a target="_blank" rel="noopener" href="http://www.openwall.com/php_mt_seed">http://www.openwall.com/php_mt_seed</a></p>
-<p>它可以根据单次mt_rand()的输出结果直接爆破出可能的种子，当然也可以爆破类似mt_rand(1,100)这样限定了MIN MAX输出的种子。</p>
-<p>下载后，执行如下命令编译生成：</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kali下，进入目录，make  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h4 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h4><p>php_mt_seed的用法可能很简单，也可能很复杂，具体取决于用例的详细信息。这是一个最简单的用法示例：<br> 首先使用PHP生成一个“随机”数字，例如：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ php5 -r &#39;mt_srand(1234567890); echo mt_rand(),&quot;\n&quot;;&#39;
-1328851649<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>然后运行cracker（在此示例中，在与上面用于构建的系统相同的系统上）：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ time .&#x2F;php_mt_seed 1328851649
-   Pattern: EXACT
-   Version: 3.0.7 to 5.2.0
-   Found 0, trying 0xfc000000 - 0xffffffff, speed 16261.0 Mseeds&#x2F;s
-   Version: 5.2.1+
-   Found 0, trying 0x1e000000 - 0x1fffffff, speed 91.8 Mseeds&#x2F;s
-   seed &#x3D; 0x1fd65f9a &#x3D; 534142874 (PHP 7.1.0+)
-   Found 1, trying 0x26000000 - 0x27ffffff, speed 91.9 Mseeds&#x2F;s
-   seed &#x3D; 0x273a3517 &#x3D; 658126103 (PHP 5.2.1 to 7.0.x; HHVM)
-   Found 2, trying 0x48000000 - 0x49ffffff, speed 91.9 Mseeds&#x2F;s
-   seed &#x3D; 0x499602d2 &#x3D; 1234567890 (PHP 5.2.1 to 7.0.x; HHVM)
-   seed &#x3D; 0x499602d2 &#x3D; 1234567890 (PHP 7.1.0+)
-   Found 4, trying 0xfe000000 - 0xffffffff, speed 91.9 Mseeds&#x2F;s
-   Found 4
-  
-   real    0m47.028s
-   user    6m15.211s
-   sys     0m0.015s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>php_mt_seed首先搜索旧版PHP 3.0.7至5.2.0的种子，通常只需一秒钟即可完成。然后，它会同时搜索PHP 5.2.1至7.0.x和PHP 7.1.0+的种子，这需要一段时间。</p>
-<p>下面演示一个复杂的用法示例：<br> php_mt_seed 在其命令行上可以有1、2、4或更多的数字。数字指定了对 mt_rand()函数输出的约束，如mt_rand(0,50)。</p>
-<p>当仅使用一个数字调用时，这是mt_rand函数的第一个用来爆破种子的输出。<br> 当用2个数字调用时，它们是第一个mt_rand()的输出应落入的范围（最小和最大，按该顺序）。<br> <strong>当用4个数字调用时，前2个给出第一个mt_rand()输出的界限，后两个2给出传递到mt_rand()的范围。</strong></p>
-<h1 id="实例——-GWCTF-2019-枯燥的抽奖"><a href="#实例——-GWCTF-2019-枯燥的抽奖" class="headerlink" title="实例——[GWCTF 2019]枯燥的抽奖"></a>实例——[GWCTF 2019]枯燥的抽奖</h1><p>进入题目<br> <img src="https://img-blog.csdnimg.cn/20200712185058965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 是个猜字符的游戏，并且告诉你了一部分值：<code>utP4yKDDVV</code>，估计是已知产生的随机数的一部分。<br> F12 查看源码，发现check.php：<br> <img src="https://img-blog.csdnimg.cn/20200712185243498.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 进入check.php，给出了你源码：<br> <img src="https://img-blog.csdnimg.cn/20200712185326552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 可知源码的逻辑是，先产生一个0到999999999之间的随机整数作为随机数种子被mt_srand()函数播种。然后在<code>$str_long1</code>这一长串字符串中用mt_rand()来随机取出20个字符构成字符串<code>$str</code>并输出<code>$str</code>的前十位给你。最后，将你猜的输入的值拼上给你的值与<code>$str</code>进行强类型比较，对比成功则返回flag。可见，如果最后能POST正确的20位，获得flag。那么关键就是，要根据给你的10位密码，反推出mt_srand的种子是什么，从而依葫芦画瓢构造私钥。<br> 接下来我们用php_mt_seed工具对随机数种子进行爆破。</p>
-<p>先用脚本将伪随机数转换成php_mt_seed可以识别的数据格式：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">str1&#x3D;&#39;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
-str2&#x3D;&#39;utP4yKDDVV&#39;
-str3 &#x3D; str1[::-1]     # 倒序
-length &#x3D; len(str2)    # 10
-res&#x3D;&#39;&#39;
-for i in range(len(str2)):
-    for j in range(len(str1)):
-        if str2[i] &#x3D;&#x3D; str1[j]:
-            res+&#x3D;str(j)+&#39; &#39;+str(j)+&#39; &#39;+&#39;0&#39;+&#39; &#39;+str(len(str1)-1)+&#39; &#39;
-            break
-print res
-
-&#x2F;&#x2F; 前两个str(j)代表第一个mt_rand()输出的界限，后两个参数0和str(len(str1)-1)表示传递到 mt_rand()的范围为0到61
-12345678910111213<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://img-blog.csdnimg.cn/20200712192116451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 得到：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">20 20 0 61 19 19 0 61 51 51 0 61 30 30 0 61 24 24 0 61 46 46 0 61 39 39 0 61 39 39 0 61 57 57 0 61 57 57 0 61<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>将这一串拿到工具里去使用<br> 爆破出伪随机数和php版本</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">.&#x2F;php_mt_seed 20 20 0 61 19 19 0 61 51 51 0 61 30 30 0 61 24 24 0 61 46 46 0 61 39 39 0 61 39 39 0 61 57 57 0 61 57 57 0 61<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="https://img-blog.csdnimg.cn/20200712192456776.png" alt="在这里插入图片描述"><br> 爆破的到种子为：206396968，如下改写源码，便可以得到完整的字符串</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-mt_srand(206396968);
-
-$str_long1 &#x3D; &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
-$str&#x3D;&#39;&#39;;
-$len1&#x3D;20;
-for ( $i &#x3D; 0; $i &lt; $len1; $i++ )&#123;
-    $str.&#x3D;substr($str_long1, mt_rand(0, strlen($str_long1) - 1), 1);       
-&#125;
-echo $str;
-
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://img-blog.csdnimg.cn/20200712192710912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 拿着得到得字符转提交即可得到flag：<br> <img src="https://img-blog.csdnimg.cn/20200712192816550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>**以上内容摘自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281">WHOAMIAnony</a> **</p>
+<h1 id="file-x2F-x2F"><a href="#file-x2F-x2F" class="headerlink" title="file:&#x2F;&#x2F;"></a>file:&#x2F;&#x2F;</h1><p>用于访问本地文件系统，并且不受<code>allow_url_fopen</code>，<code>allow_url_include</code>影响<br> <code>file://</code>协议主要用于访问文件(绝对路径、相对路径以及网络路径)<br> 比如：<code>http://www.xx.com?file=file:///etc/passsword</code></p>
+<h1 id="php-x2F-x2F"><a href="#php-x2F-x2F" class="headerlink" title="php:&#x2F;&#x2F;"></a>php:&#x2F;&#x2F;</h1><p>在<code>allow_url_fopen</code>，<code>allow_url_include</code>都关闭的情况下可以正常使用<br> <code>php://</code>作用为访问输入输出流</p>
+<h2 id="php-x2F-x2F-filter"><a href="#php-x2F-x2F-filter" class="headerlink" title="php:&#x2F;&#x2F;filter"></a>php:&#x2F;&#x2F;filter</h2><p>读取源代码并编码输出，例如：<br> <code>http://127.0.0.1/cmd.php?cmd=php://filter/read=convert.base64-encode/resource=[文件名]（针对php文件需要base64编码）</code><br> 说明：<br> <code>resource=&lt;要过滤的数据流&gt;</code> 这个参数是必须的。它指定了你要筛选过滤的数据流<br> <code>read=&lt;读链的筛选列表&gt;</code> 该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br> <code>write=&lt;写链的筛选列表&gt;</code>该参数可选。可以设定一个或多个过滤器名称，以管道符（|）分隔。<br> <code>&lt;；两个链的筛选列表&gt;</code> 任何没有以 read&#x3D; 或 write&#x3D; 作前缀 的筛选器列表会视情况应用于读或写链。</p>
+<h2 id="php-x2F-x2F-input"><a href="#php-x2F-x2F-input" class="headerlink" title="php:&#x2F;&#x2F;input"></a>php:&#x2F;&#x2F;input</h2><p><code>php://input</code>执行post数据中的代码：<br> 例如：<br> <code>http://127.0.0.1/cmd.php?cmd=php://input</code><br> POST数据：<code>&lt;?php phpinfo()?&gt;</code><br> 注意：<br> 当<code>enctype=&quot;multipart/form-data&quot;的时候</code> php:&#x2F;&#x2F;input&#96; 是无效的</p>
+<h1 id="data-x2F-x2F"><a href="#data-x2F-x2F" class="headerlink" title="data:&#x2F;&#x2F;"></a>data:&#x2F;&#x2F;</h1><p>自PHP&gt;&#x3D;5.2.0起，可以使用data:&#x2F;&#x2F;数据流封装器，以传递相应格式的数据。通常可以用来执行PHP代码。一般需要用到base64编码传输<br> 比如：<br> 通过data:&#x2F;&#x2F;text&#x2F;plain协议来进行漏洞利用。<br> <code>?file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</code><br> <code>url=data://text/plain,&lt;?php print_r(glob(&quot;*&quot;)); ?&gt;</code></p>
 
                 
             </div>
@@ -679,7 +559,7 @@ echo $str;
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://3143047748.github.io/2022/12/17/php%E4%B9%8B%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%88%86%E7%A0%B4/">http://3143047748.github.io/2022/12/17/php%E4%B9%8B%E4%BC%AA%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%88%86%E7%A0%B4/</a>
+                    <a href="http://3143047748.github.io/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/">http://3143047748.github.io/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -717,8 +597,8 @@ echo $str;
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/PHP/">
-                                    <span class="chip bg-color">PHP</span>
+                                <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
+                                    <span class="chip bg-color">php伪协议</span>
                                 </a>
                             
                         </div>
@@ -1153,17 +1033,18 @@ echo $str;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/12/19/Crypto%E4%B8%AD%E5%8F%AF%E8%83%BD%E7%94%A8%E7%9A%84%E5%AF%86%E7%A0%81/">
+                <a href="/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Crypto中可能用的密码">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="CTF中常用的php伪协议总结">
                         
-                        <span class="card-title">Crypto中可能用的密码</span>
+                        <span class="card-title">CTF中常用的php伪协议总结</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1173,34 +1054,27 @@ echo $str;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-19
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%AF%86%E7%A0%81/" class="post-category">
-                                    密码
-                                </a>
-                            
-                            <a href="/categories/%E5%AF%86%E7%A0%81/%E8%A7%A3%E5%AF%86/" class="post-category">
-                                    解密
+                            <a href="/categories/ctf/" class="post-category">
+                                    ctf
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/crypto/">
-                        <span class="chip bg-color">crypto</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%AF%86%E7%A0%81/">
-                        <span class="chip bg-color">密码</span>
+                    <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">php伪协议</span>
                     </a>
                     
                 </div>
@@ -1214,13 +1088,13 @@ echo $str;
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/12/11/ctf-show/">
+                <a href="/2022/12/28/%E4%BC%98%E8%B4%A8%E5%9B%BE%E5%BA%8A/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="ctf show">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="优质图床">
                         
-                        <span class="card-title">ctf show</span>
+                        <span class="card-title">优质图床</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1231,18 +1105,14 @@ echo $str;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-28
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/web%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    web笔记
-                                </a>
-                            
-                            <a href="/categories/web%E7%AC%94%E8%AE%B0/ctf%E7%A7%80/" class="post-category">
-                                    ctf秀
+                            <a href="/categories/%E5%9B%BE%E5%BA%8A/" class="post-category">
+                                    图床
                                 </a>
                             
                             
@@ -1252,12 +1122,8 @@ echo $str;
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%81%9A%E9%A2%98/">
-                        <span class="chip bg-color">做题</span>
-                    </a>
-                    
-                    <a href="/tags/web/">
-                        <span class="chip bg-color">web</span>
+                    <a href="/tags/%E5%9B%BE%E5%BA%8A/">
+                        <span class="chip bg-color">图床</span>
                     </a>
                     
                 </div>
