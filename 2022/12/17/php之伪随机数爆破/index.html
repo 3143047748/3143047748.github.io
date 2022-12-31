@@ -29,8 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 
@@ -495,7 +494,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    10 分
                 </div>
                 
 
@@ -527,42 +526,42 @@
 </ul>
 <h2 id="PHP的伪随机数有关的两个函数"><a href="#PHP的伪随机数有关的两个函数" class="headerlink" title="PHP的伪随机数有关的两个函数"></a>PHP的伪随机数有关的两个函数</h2><h3 id="mt-rand"><a href="#mt-rand" class="headerlink" title="mt_rand()"></a>mt_rand()</h3><p>mt_rand() 函数使用 Mersenne Twister 算法返回随机整数（随机数生成器）。</p>
 <p><strong>语法</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">mt_rand(min,max)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token function">mt_rand</span><span class="token punctuation">(</span>min<span class="token punctuation">,</span>max<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><strong>说明</strong></p>
 <p>如果没有提供可选参数 min 和 max，mt_rand() 返回 0 到 RAND_MAX 之间的伪随机数。</p>
 <p>很多老的 libc 的随机数发生器具有一些不确定和未知的特性而且很慢。PHP 的 rand() 函数默认使用 libc  随机数发生器。mt_rand() 函数是非正式用来替换它的。该函数用了 Mersenne Twister  中已知的特性作为随机数发生器，它可以产生随机数值的平均速度比 libc 提供的 rand() 快四倍。</p>
 <p><strong>例子</strong></p>
 <p>在本例中，我们会返回一些随机数：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-echo(mt_rand());
-echo(mt_rand());
-echo(mt_rand(10,100));
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">mt_rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">mt_rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">mt_rand</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>输出类似：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">3150906288
-513289678
-35<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token number">3150906288</span>
+<span class="token number">513289678</span>
+<span class="token number">35</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="mt-srand"><a href="#mt-srand" class="headerlink" title="mt_srand()"></a>mt_srand()</h3><p>mt_srand() 播种 Mersenne Twister 随机数生成器。</p>
 <p><strong>语法</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">mt_srand(seed)
-1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token function">mt_srand</span><span class="token punctuation">(</span>seed<span class="token punctuation">)</span>
+<span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>参数 seed：规定播种值、用 seed 来给随机数发生器播种。</p>
 <p><strong>例子</strong><br> 在本例中，我们将播种随机数生成器：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-mt_srand(mktime());
-echo(mt_rand());
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">mt_srand</span><span class="token punctuation">(</span><span class="token function">mktime</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">mt_rand</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>输出类似：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">1132656473<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token number">1132656473</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这段代码的意思是，是通过mt_srand分发seed种子，然后种子有了后，才能靠mt_rand()来生成随机数。</p>
 <h4 id="为什么随机数要用种子播种，对种子的理解"><a href="#为什么随机数要用种子播种，对种子的理解" class="headerlink" title="为什么随机数要用种子播种，对种子的理解"></a>为什么随机数要用种子播种，对种子的理解</h4><p>首先我们要知道，计算机不能产生绝对的随机数，只能产生伪随机数。伪就是有规律的意思。伪随机数就是说计算机产生的随机数是有规律的。那么计算机是怎么产生随机数的？当然是通过算法，这个算法是有映射关系的，如我放进1，他会出来一个特定的数</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">RAND_SEED&#x3D;(RAND_SEED*123+59)%65536;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token constant">RAND_SEED</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token constant">RAND_SEED</span><span class="token operator">*</span><span class="token number">123</span><span class="token operator">+</span><span class="token number">59</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">65536</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这是某个系统的随机数算法。</p>
 <p>我们可以把这个算法看成是一个黑盒子，你放进一个数，就会出来一个特定的数，并把这个数当做下一次的种子在放进去。在这里，你第一次放进去的数就是随机数种子，也就是说随机种子（Random Seed）就是这些随机数的初始值。</p>
@@ -588,68 +587,68 @@ echo(mt_rand());
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kali下，进入目录，make  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h4 id="具体使用"><a href="#具体使用" class="headerlink" title="具体使用"></a>具体使用</h4><p>php_mt_seed的用法可能很简单，也可能很复杂，具体取决于用例的详细信息。这是一个最简单的用法示例：<br> 首先使用PHP生成一个“随机”数字，例如：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ php5 -r &#39;mt_srand(1234567890); echo mt_rand(),&quot;\n&quot;;&#39;
-1328851649<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ php5 <span class="token operator">-</span>r <span class="token string single-quoted-string">'mt_srand(1234567890); echo mt_rand(),"\n";'</span>
+<span class="token number">1328851649</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>然后运行cracker（在此示例中，在与上面用于构建的系统相同的系统上）：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ time .&#x2F;php_mt_seed 1328851649
-   Pattern: EXACT
-   Version: 3.0.7 to 5.2.0
-   Found 0, trying 0xfc000000 - 0xffffffff, speed 16261.0 Mseeds&#x2F;s
-   Version: 5.2.1+
-   Found 0, trying 0x1e000000 - 0x1fffffff, speed 91.8 Mseeds&#x2F;s
-   seed &#x3D; 0x1fd65f9a &#x3D; 534142874 (PHP 7.1.0+)
-   Found 1, trying 0x26000000 - 0x27ffffff, speed 91.9 Mseeds&#x2F;s
-   seed &#x3D; 0x273a3517 &#x3D; 658126103 (PHP 5.2.1 to 7.0.x; HHVM)
-   Found 2, trying 0x48000000 - 0x49ffffff, speed 91.9 Mseeds&#x2F;s
-   seed &#x3D; 0x499602d2 &#x3D; 1234567890 (PHP 5.2.1 to 7.0.x; HHVM)
-   seed &#x3D; 0x499602d2 &#x3D; 1234567890 (PHP 7.1.0+)
-   Found 4, trying 0xfe000000 - 0xffffffff, speed 91.9 Mseeds&#x2F;s
-   Found 4
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">$ time <span class="token operator">.</span><span class="token operator">/</span>php_mt_seed <span class="token number">1328851649</span>
+   Pattern<span class="token punctuation">:</span> <span class="token constant">EXACT</span>
+   Version<span class="token punctuation">:</span> <span class="token number">3.0</span><span class="token number">.7</span> to <span class="token number">5.2</span><span class="token number">.0</span>
+   Found <span class="token number">0</span><span class="token punctuation">,</span> trying <span class="token number">0xfc000000</span> <span class="token operator">-</span> <span class="token number">0xffffffff</span><span class="token punctuation">,</span> speed <span class="token number">16261.0</span> Mseeds<span class="token operator">/</span>s
+   Version<span class="token punctuation">:</span> <span class="token number">5.2</span><span class="token number">.1</span><span class="token operator">+</span>
+   Found <span class="token number">0</span><span class="token punctuation">,</span> trying <span class="token number">0x1e000000</span> <span class="token operator">-</span> <span class="token number">0x1fffffff</span><span class="token punctuation">,</span> speed <span class="token number">91.8</span> Mseeds<span class="token operator">/</span>s
+   seed <span class="token operator">=</span> <span class="token number">0x1fd65f9a</span> <span class="token operator">=</span> <span class="token number">534142874</span> <span class="token punctuation">(</span><span class="token constant">PHP</span> <span class="token number">7.1</span><span class="token number">.0</span><span class="token operator">+</span><span class="token punctuation">)</span>
+   Found <span class="token number">1</span><span class="token punctuation">,</span> trying <span class="token number">0x26000000</span> <span class="token operator">-</span> <span class="token number">0x27ffffff</span><span class="token punctuation">,</span> speed <span class="token number">91.9</span> Mseeds<span class="token operator">/</span>s
+   seed <span class="token operator">=</span> <span class="token number">0x273a3517</span> <span class="token operator">=</span> <span class="token number">658126103</span> <span class="token punctuation">(</span><span class="token constant">PHP</span> <span class="token number">5.2</span><span class="token number">.1</span> to <span class="token number">7.0</span><span class="token operator">.</span>x<span class="token punctuation">;</span> <span class="token constant">HHVM</span><span class="token punctuation">)</span>
+   Found <span class="token number">2</span><span class="token punctuation">,</span> trying <span class="token number">0x48000000</span> <span class="token operator">-</span> <span class="token number">0x49ffffff</span><span class="token punctuation">,</span> speed <span class="token number">91.9</span> Mseeds<span class="token operator">/</span>s
+   seed <span class="token operator">=</span> <span class="token number">0x499602d2</span> <span class="token operator">=</span> <span class="token number">1234567890</span> <span class="token punctuation">(</span><span class="token constant">PHP</span> <span class="token number">5.2</span><span class="token number">.1</span> to <span class="token number">7.0</span><span class="token operator">.</span>x<span class="token punctuation">;</span> <span class="token constant">HHVM</span><span class="token punctuation">)</span>
+   seed <span class="token operator">=</span> <span class="token number">0x499602d2</span> <span class="token operator">=</span> <span class="token number">1234567890</span> <span class="token punctuation">(</span><span class="token constant">PHP</span> <span class="token number">7.1</span><span class="token number">.0</span><span class="token operator">+</span><span class="token punctuation">)</span>
+   Found <span class="token number">4</span><span class="token punctuation">,</span> trying <span class="token number">0xfe000000</span> <span class="token operator">-</span> <span class="token number">0xffffffff</span><span class="token punctuation">,</span> speed <span class="token number">91.9</span> Mseeds<span class="token operator">/</span>s
+   Found <span class="token number">4</span>
   
-   real    0m47.028s
-   user    6m15.211s
-   sys     0m0.015s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+   real    <span class="token number">0</span>m47<span class="token operator">.</span><span class="token number">028</span>s
+   user    <span class="token number">6</span>m15<span class="token operator">.</span><span class="token number">211</span>s
+   sys     <span class="token number">0</span>m0<span class="token operator">.</span><span class="token number">015</span>s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>php_mt_seed首先搜索旧版PHP 3.0.7至5.2.0的种子，通常只需一秒钟即可完成。然后，它会同时搜索PHP 5.2.1至7.0.x和PHP 7.1.0+的种子，这需要一段时间。</p>
 <p>下面演示一个复杂的用法示例：<br> php_mt_seed 在其命令行上可以有1、2、4或更多的数字。数字指定了对 mt_rand()函数输出的约束，如mt_rand(0,50)。</p>
 <p>当仅使用一个数字调用时，这是mt_rand函数的第一个用来爆破种子的输出。<br> 当用2个数字调用时，它们是第一个mt_rand()的输出应落入的范围（最小和最大，按该顺序）。<br> <strong>当用4个数字调用时，前2个给出第一个mt_rand()输出的界限，后两个2给出传递到mt_rand()的范围。</strong></p>
 <h1 id="实例——-GWCTF-2019-枯燥的抽奖"><a href="#实例——-GWCTF-2019-枯燥的抽奖" class="headerlink" title="实例——[GWCTF 2019]枯燥的抽奖"></a>实例——[GWCTF 2019]枯燥的抽奖</h1><p>进入题目<br> <img src="https://img-blog.csdnimg.cn/20200712185058965.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 是个猜字符的游戏，并且告诉你了一部分值：<code>utP4yKDDVV</code>，估计是已知产生的随机数的一部分。<br> F12 查看源码，发现check.php：<br> <img src="https://img-blog.csdnimg.cn/20200712185243498.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 进入check.php，给出了你源码：<br> <img src="https://img-blog.csdnimg.cn/20200712185326552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 可知源码的逻辑是，先产生一个0到999999999之间的随机整数作为随机数种子被mt_srand()函数播种。然后在<code>$str_long1</code>这一长串字符串中用mt_rand()来随机取出20个字符构成字符串<code>$str</code>并输出<code>$str</code>的前十位给你。最后，将你猜的输入的值拼上给你的值与<code>$str</code>进行强类型比较，对比成功则返回flag。可见，如果最后能POST正确的20位，获得flag。那么关键就是，要根据给你的10位密码，反推出mt_srand的种子是什么，从而依葫芦画瓢构造私钥。<br> 接下来我们用php_mt_seed工具对随机数种子进行爆破。</p>
 <p>先用脚本将伪随机数转换成php_mt_seed可以识别的数据格式：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">str1&#x3D;&#39;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
-str2&#x3D;&#39;utP4yKDDVV&#39;
-str3 &#x3D; str1[::-1]     # 倒序
-length &#x3D; len(str2)    # 10
-res&#x3D;&#39;&#39;
-for i in range(len(str2)):
-    for j in range(len(str1)):
-        if str2[i] &#x3D;&#x3D; str1[j]:
-            res+&#x3D;str(j)+&#39; &#39;+str(j)+&#39; &#39;+&#39;0&#39;+&#39; &#39;+str(len(str1)-1)+&#39; &#39;
-            break
-print res
+<pre class="line-numbers language-php" data-language="php"><code class="language-php">str1<span class="token operator">=</span><span class="token string single-quoted-string">'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'</span>
+str2<span class="token operator">=</span><span class="token string single-quoted-string">'utP4yKDDVV'</span>
+str3 <span class="token operator">=</span> str1<span class="token punctuation">[</span><span class="token operator">::</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>     <span class="token comment"># 倒序</span>
+length <span class="token operator">=</span> <span class="token function">len</span><span class="token punctuation">(</span>str2<span class="token punctuation">)</span>    <span class="token comment"># 10</span>
+res<span class="token operator">=</span><span class="token string single-quoted-string">''</span>
+<span class="token keyword">for</span> i in <span class="token function">range</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>str2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> j in <span class="token function">range</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>str1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> str2<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> str1<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">:</span>
+            res<span class="token operator">+=</span><span class="token function">str</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string single-quoted-string">' '</span><span class="token operator">+</span><span class="token function">str</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string single-quoted-string">' '</span><span class="token operator">+</span><span class="token string single-quoted-string">'0'</span><span class="token operator">+</span><span class="token string single-quoted-string">' '</span><span class="token operator">+</span><span class="token function">str</span><span class="token punctuation">(</span><span class="token function">len</span><span class="token punctuation">(</span>str1<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string single-quoted-string">' '</span>
+            <span class="token keyword">break</span>
+<span class="token keyword">print</span> res
 
-&#x2F;&#x2F; 前两个str(j)代表第一个mt_rand()输出的界限，后两个参数0和str(len(str1)-1)表示传递到 mt_rand()的范围为0到61
-12345678910111213<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token comment">// 前两个str(j)代表第一个mt_rand()输出的界限，后两个参数0和str(len(str1)-1)表示传递到 mt_rand()的范围为0到61</span>
+<span class="token number">12345678910111213</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://img-blog.csdnimg.cn/20200712192116451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 得到：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">20 20 0 61 19 19 0 61 51 51 0 61 30 30 0 61 24 24 0 61 46 46 0 61 39 39 0 61 39 39 0 61 57 57 0 61 57 57 0 61<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token number">20</span> <span class="token number">20</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">19</span> <span class="token number">19</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">51</span> <span class="token number">51</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">24</span> <span class="token number">24</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">46</span> <span class="token number">46</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">39</span> <span class="token number">39</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">39</span> <span class="token number">39</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">57</span> <span class="token number">57</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">57</span> <span class="token number">57</span> <span class="token number">0</span> <span class="token number">61</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>将这一串拿到工具里去使用<br> 爆破出伪随机数和php版本</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">.&#x2F;php_mt_seed 20 20 0 61 19 19 0 61 51 51 0 61 30 30 0 61 24 24 0 61 46 46 0 61 39 39 0 61 39 39 0 61 57 57 0 61 57 57 0 61<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token operator">.</span><span class="token operator">/</span>php_mt_seed <span class="token number">20</span> <span class="token number">20</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">19</span> <span class="token number">19</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">51</span> <span class="token number">51</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">30</span> <span class="token number">30</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">24</span> <span class="token number">24</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">46</span> <span class="token number">46</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">39</span> <span class="token number">39</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">39</span> <span class="token number">39</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">57</span> <span class="token number">57</span> <span class="token number">0</span> <span class="token number">61</span> <span class="token number">57</span> <span class="token number">57</span> <span class="token number">0</span> <span class="token number">61</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="https://img-blog.csdnimg.cn/20200712192456776.png" alt="在这里插入图片描述"><br> 爆破的到种子为：206396968，如下改写源码，便可以得到完整的字符串</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php">&lt;?php
-mt_srand(206396968);
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">mt_srand</span><span class="token punctuation">(</span><span class="token number">206396968</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-$str_long1 &#x3D; &quot;abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;;
-$str&#x3D;&#39;&#39;;
-$len1&#x3D;20;
-for ( $i &#x3D; 0; $i &lt; $len1; $i++ )&#123;
-    $str.&#x3D;substr($str_long1, mt_rand(0, strlen($str_long1) - 1), 1);       
-&#125;
-echo $str;
+<span class="token variable">$str_long1</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span><span class="token punctuation">;</span>
+<span class="token variable">$str</span><span class="token operator">=</span><span class="token string single-quoted-string">''</span><span class="token punctuation">;</span>
+<span class="token variable">$len1</span><span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span> <span class="token variable">$i</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token variable">$i</span> <span class="token operator">&lt;</span> <span class="token variable">$len1</span><span class="token punctuation">;</span> <span class="token variable">$i</span><span class="token operator">++</span> <span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token variable">$str</span><span class="token operator">.=</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$str_long1</span><span class="token punctuation">,</span> <span class="token function">mt_rand</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$str_long1</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">echo</span> <span class="token variable">$str</span><span class="token punctuation">;</span>
 
-?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="https://img-blog.csdnimg.cn/20200712192710912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 拿着得到得字符转提交即可得到flag：<br> <img src="https://img-blog.csdnimg.cn/20200712192816550.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NTIxMjgx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>**以上内容摘自<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281">WHOAMIAnony</a> **</p>
@@ -1504,7 +1503,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">11.2k</span>&nbsp;字
+                class="white-color">11.6k</span>&nbsp;字
             
             
             
