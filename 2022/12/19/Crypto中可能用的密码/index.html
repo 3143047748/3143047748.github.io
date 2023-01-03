@@ -317,6 +317,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将找博主要密码！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -1221,8 +1234,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BE%BF%E5%88%A9%E5%B7%A5%E5%85%B7/">
-                        <span class="chip bg-color">便利工具</span>
+                    <a href="/tags/%E9%82%AE%E7%AE%B1%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%8F%B7/">
+                        <span class="chip bg-color">邮箱，手机号</span>
                     </a>
                     
                 </div>
@@ -1513,7 +1526,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2022</span>
+                <span id="year">2022-2023</span>
             
             <span id="year">2022</span>
             <a href="/about" target="_blank">north</a>
@@ -1522,7 +1535,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">11.6k</span>&nbsp;字
+                class="white-color">11.5k</span>&nbsp;字
             
             
             
