@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, north&#39;s bolg">
+    <meta name="keywords" content="文件解析，文件头欺骗, north&#39;s bolg">
     <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | north&#39;s bolg</title>
+    <title>文件解析，文件头欺骗 | north&#39;s bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">文件解析，文件头欺骗</h1>
                 </div>
             </div>
         </div>
@@ -455,12 +455,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                                <span class="chip bg-color">漏洞</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-category">
+                                文件上传
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -469,21 +482,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-07
+                    2023-01-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-12-07
+                    2023-01-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    433
                 </div>
                 
 
@@ -513,19 +526,21 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="文件解析漏洞——"><a href="#文件解析漏洞——" class="headerlink" title="文件解析漏洞——"></a>文件解析漏洞——</h1><p>解析漏洞主要说的是一些特殊文件被iis，apache，nginx在某种情况下解释成脚本文件格士的漏洞。</p>
+<h2 id="Iis解析漏洞"><a href="#Iis解析漏洞" class="headerlink" title="Iis解析漏洞"></a>Iis解析漏洞</h2><h3 id="1-目录解析"><a href="#1-目录解析" class="headerlink" title="1.目录解析"></a>1.目录解析</h3><p>当网站下建立文件夹的名字为.asp，.asa的文件夹，其目录内的任何扩展名的文件都被iis当作asp文件来解析并执行，如创建目录&#x2F;xxx.asp&#x2F;xx.jpg  xx.jpg被当作asp文件来执行，如果黑客可以控制活上传文件夹路径，就可以不管上传后的图片改不改名都能拿shell。</p>
+<h3 id="2-符号后面不被解析——（可使用抓包软件改后缀）"><a href="#2-符号后面不被解析——（可使用抓包软件改后缀）" class="headerlink" title="2.符号后面不被解析——（可使用抓包软件改后缀）"></a>2.符号后面不被解析——（可使用抓包软件改后缀）</h3><p>在这种情况下，分号后面的不被解析，也就是说xxx.asp;.jpg会被服务器看成是xxx.jpg</p>
+<h2 id="Apache解析漏洞"><a href="#Apache解析漏洞" class="headerlink" title="Apache解析漏洞"></a>Apache解析漏洞</h2><p>apache是从右到左开始判断解析，如果为不可识别解析，就再往左判断，如xxx.php.owf.rar ，”.owf”和”.rar”这两种后缀是apache解析不了的，apache就会把xxx.php.owf.rar解析成php.</p>
+<p>怎么去判断是不是合法的后缀就是这个漏洞利用关键，测试时把常见的后缀都写上，去测试是不是合法，任意不识别的后缀，逐级向上识别</p>
+<h1 id="文件头欺骗漏洞——"><a href="#文件头欺骗漏洞——" class="headerlink" title="文件头欺骗漏洞——"></a>文件头欺骗漏洞——</h1><p>在一句话木马内容前面加入gif89a，如：gif89a &lt;%eval request(“xx”)%&gt; 然后将木马保存为图片的格式，如xxx.jpg，xx.gif文件头欺骗可以用来绕过简单的waf。</p>
+<p> <img src="https://img-blog.csdnimg.cn/bf55298bd8f14a2d8b8d9b9813ce976b.png" alt="5"></p>
+<h2 id="00截断——"><a href="#00截断——" class="headerlink" title="00截断——"></a>00截断——</h2><p>找到上传漏洞后，打开选择上传的一句话木马，打开抓包软件，进行00截断，把抓到的数据包改为%00</p>
+<p><img src="https://img-blog.csdnimg.cn/7a82003694db4edcb8fbde4e1e0f3aa8.png" alt="1"></p>
+<p>选取%00</p>
+<p><img src="https://img-blog.csdnimg.cn/e8560e2da51d4cb28d0118f8137af159.png" alt="2"></p>
+<p>变成16进制</p>
+<p> <img src="https://img-blog.csdnimg.cn/0e98b39607174575864baa6e3fb4cda2.png" alt="3"></p>
+<p>放包</p>
+<p><img src="https://img-blog.csdnimg.cn/2cda82f915804842b99f150d56196ea0.png" alt="4"></p>
 
                 
             </div>
@@ -552,7 +567,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://3143047748.github.io/2022/12/07/hello-world/">http://3143047748.github.io/2022/12/07/hello-world/</a>
+                    <a href="http://3143047748.github.io/2023/01/05/%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B4%E6%AC%BA%E9%AA%97/">http://3143047748.github.io/2023/01/05/%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B4%E6%AC%BA%E9%AA%97/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -589,7 +604,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                                    <span class="chip bg-color">漏洞</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1022,46 +1041,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/12/09/%E5%88%B7%E9%A2%98%E7%BD%91%E7%AB%99/">
+                <a href="/2023/01/05/%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B4%E6%AC%BA%E9%AA%97/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="刷题网站和做题工具">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="文件解析，文件头欺骗">
                         
-                        <span class="card-title">刷题网站和做题工具</span>
+                        <span class="card-title">文件解析，文件头欺骗</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            文件解析漏洞
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    小工具
+                            <a href="/categories/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="post-category">
+                                    文件上传
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%BD%91%E7%AB%99/">
-                        <span class="chip bg-color">网站</span>
+                    <a href="/tags/%E6%BC%8F%E6%B4%9E/">
+                        <span class="chip bg-color">漏洞</span>
                     </a>
                     
                 </div>
@@ -1072,37 +1093,48 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/12/07/hello-world/">
+                <a href="/2023/01/03/buuctf-web%E9%83%A8%E5%88%86%E5%81%9A%E9%A2%98%E8%AE%B0%E5%BD%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="buuctf-web部分做题记录">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">buuctf-web部分做题记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            buuctf
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-03
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            north
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/buuctf/" class="post-category">
+                                    buuctf
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
