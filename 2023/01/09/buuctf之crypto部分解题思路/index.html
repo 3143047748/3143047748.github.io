@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="优质图床, north&#39;s bolg">
+    <meta name="keywords" content="buuctf之crypto部分解题思路, north&#39;s bolg">
     <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>优质图床 | north&#39;s bolg</title>
+    <title>buuctf之crypto部分解题思路 | north&#39;s bolg</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -320,7 +320,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92';
+        let pwd = '';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，去找博主要密码吧！');
@@ -333,12 +333,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">优质图床</h1>
+                    <h1 class="description center-align post-title">buuctf之crypto部分解题思路</h1>
                 </div>
             </div>
         </div>
@@ -457,8 +457,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%9B%BE%E5%BA%8A/">
-                                <span class="chip bg-color">图床</span>
+                            <a href="/tags/crypto/">
+                                <span class="chip bg-color">crypto</span>
                             </a>
                         
                     </div>
@@ -469,8 +469,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="post-category">
-                                小工具
+                            <a href="/categories/buuctf/" class="post-category">
+                                buuctf
                             </a>
                         
                     </div>
@@ -482,28 +482,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-12-28
+                    2023-01-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-01-05
+                    2023-01-09
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    104
+                    438
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -526,20 +526,61 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="图床"><a href="#图床" class="headerlink" title="图床"></a>图床</h1><p>给大家推荐一些免费好用的优质图床：</p>
-<p>1、SM.MS：<a target="_blank" rel="noopener" href="https://sm.ms/">https://sm.ms</a></p>
-<p>2、imgbox：<a target="_blank" rel="noopener" href="https://imgbox.com/">https://imgbox.com</a></p>
-<p>3、Postimage：<a target="_blank" rel="noopener" href="https://postimages.org/">https://postimages.org</a></p>
-<p>4、imgurl：<a target="_blank" rel="noopener" href="https://imgurl.org/">https://imgurl.org</a></p>
-<p>5、路过图床：<a target="_blank" rel="noopener" href="https://imgchr.com/">https://imgchr.com</a></p>
-<p>6、Coding 图床：<a target="_blank" rel="noopener" href="http://picbed.librejo.cn/">http://picbed.librejo.cn</a></p>
-<p>7、图库：<a target="_blank" rel="noopener" href="http://tuku.link/">http://tuku.link</a></p>
-<p>8、牛图网：<a target="_blank" rel="noopener" href="https://www.niupic.com/">https://www.niupic.com</a></p>
-<p>需要登录的图床：</p>
-<p>1、imgur：<a target="_blank" rel="noopener" href="https://imgur.com/">https://imgur.com</a></p>
-<p>2、聚合图床：<a target="_blank" rel="noopener" href="https://www.superbed.cn/">https://www.superbed.cn</a></p>
-<p>3、hualigs：<a target="_blank" rel="noopener" href="https://www.hualigs.cn/">https://www.hualigs.cn</a></p>
-<p>4、Hello 图床：<a target="_blank" rel="noopener" href="https://www.helloimg.com/">https://www.helloimg.com</a></p>
+                <h2 id="大帝的密码武器"><a href="#大帝的密码武器" class="headerlink" title="大帝的密码武器"></a>大帝的密码武器</h2><p><strong>题目</strong></p>
+<blockquote>
+<p>公元前一百年，在罗马出生了一位对世界影响巨大的人物，他生前是罗马三巨头之一。<br>他率先使用了一种简单的加密函，因此这种加密方法以他的名字命名。<br>以下密文被解开后可以获得一个有意义的单词：<strong>FRPHEVGL</strong><br>你可以用这个相同的加密向量加密附件中的密文，作为答案进行提交。</p>
+</blockquote>
+<p>进行凯撒密码解密<br>python脚本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">decode</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token builtin">min</span><span class="token operator">=</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span>
+    <span class="token builtin">max</span><span class="token operator">=</span><span class="token builtin">ord</span><span class="token punctuation">(</span><span class="token string">"z"</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span> offset <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">26</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        plaint<span class="token operator">=</span><span class="token string">''</span>
+        <span class="token keyword">for</span> s <span class="token keyword">in</span> secret<span class="token punctuation">:</span>
+            o<span class="token operator">=</span><span class="token builtin">ord</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token operator">+</span>offset
+            o<span class="token operator">=</span><span class="token punctuation">(</span>o<span class="token operator">-</span><span class="token builtin">max</span><span class="token operator">+</span><span class="token builtin">min</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">if</span> o<span class="token operator">></span><span class="token builtin">max</span> <span class="token keyword">else</span> o
+            plaint<span class="token operator">+=</span><span class="token builtin">chr</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>plaint<span class="token punctuation">,</span>offset<span class="token punctuation">)</span>
+
+str_secret<span class="token operator">=</span><span class="token string">'FRPHEVGL'</span><span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+decode<span class="token punctuation">(</span>str_secret<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>得到：</p>
+<blockquote>
+<p>frphevgl 0<br>gsqifwhm 1<br>htrjgxin 2<br>iuskhyjo 3<br>jvtlizkp 4<br>kwumjalq 5<br>lxvnkbmr 6<br>mywolcns 7<br>nzxpmdot 8<br>oayqnepu 9<br>pbzrofqv 10<br>qcaspgrw 11<br>rdbtqhsx 12<br>security 13<br>tfdvsjuz 14<br>ugewtkva 15<br>vhfxulwb 16<br>wigyvmxc 17<br>xjhzwnyd 18<br>ykiaxoze 19<br>zljbypaf 20<br>amkczqbg 21<br>bnldarch 22<br>comebsdi 23<br>dpnfctej 24<br>eqogdufk 25</p>
+</blockquote>
+<p>移位13得到security。再对附件中的密文加密：ComeChina<br>注意大小写</p>
+<p><img src="https://img-blog.csdnimg.cn/cc5d04de020147259e4ab27b26e5a941.png" alt="1"><br>P要大写<strong>flag{PbzrPuvan}</strong></p>
+<h2 id="rsarsa"><a href="#rsarsa" class="headerlink" title="rsarsa"></a>rsarsa</h2><blockquote>
+<p>Math is cool! Use the RSA algorithm to decode the secret message, c, p, q, and e are parameters for the RSA algorithm.&#x2F;&#x2F;数学很酷！使用 RSA 算法解码秘密消息，c、 p、 q 和 e 是 RSA 算法的参数</p>
+</blockquote>
+<blockquote>
+<p>p &#x3D;  9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483<br>q &#x3D;  11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407<br>e &#x3D;  65537<br>c &#x3D;  83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</p>
+</blockquote>
+<blockquote>
+<p>Use RSA to find the secret message&#x2F;&#x2F;使用RSA来找到秘密消息</p>
+</blockquote>
+<p>已知c,p,q,e,n&#x3D;p*q,求明文M<br>python脚本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token triple-quoted-string string">'''已知p,q,e,c.很明朗了，求d再解：'''</span>
+<span class="token keyword">import</span> gmpy2
+
+e <span class="token operator">=</span> <span class="token number">65537</span>
+p <span class="token operator">=</span> <span class="token number">9648423029010515676590551740010426534945737639235739800643989352039852507298491399561035009163427050370107570733633350911691280297777160200625281665378483</span>
+q <span class="token operator">=</span> <span class="token number">11874843837980297032092405848653656852760910154543380907650040190704283358909208578251063047732443992230647903887510065547947313543299303261986053486569407</span>
+n <span class="token operator">=</span> p <span class="token operator">*</span> q
+<span class="token comment"># 密文</span>
+C <span class="token operator">=</span> <span class="token number">83208298995174604174773590298203639360540024871256126892889661345742403314929861939100492666605647316646576486526217457006376842280869728581726746401583705899941768214138742259689334840735633553053887641847651173776251820293087212885670180367406807406765923638973161375817392737747832762751690104423869019034</span>
+
+d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span> <span class="token punctuation">(</span>p <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token punctuation">(</span>q <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span>
+<span class="token comment"># 求明文</span>
+M <span class="token operator">=</span> <span class="token builtin">pow</span><span class="token punctuation">(</span>C<span class="token punctuation">,</span> d<span class="token punctuation">,</span> n<span class="token punctuation">)</span>  <span class="token comment"># 快速求幂取模运算</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>M<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>解出M值：5577446633554466577768879988<br><strong>flag{5577446633554466577768879988}</strong></p>
+<h2 id="Windows系统密码"><a href="#Windows系统密码" class="headerlink" title="Windows系统密码"></a>Windows系统密码</h2><p>内容：</p>
+<blockquote>
+<p>Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::<br>ctf:1002:06af9108f2e1fecf144e2e8adef09efd:a7fcb22a88038f35a8f39d503e7f0062:::<br>Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::<br>SUPPORT_388945a0:1001:aad3b435b51404eeaad3b435b51404ee:bef14eee40dffbc345eeb3f58e290d56:::</p>
+</blockquote>
+<p>像hash密码，<strong>常用hash算法：</strong><br><img src="https://img-blog.csdnimg.cn/93de742bfb504a6ebe0ea469b3fe75d1.png" alt="1"><br>先试试MD5，<strong>a7fcb22a88038f35a8f39d503e7f0062</strong>明文为<strong>good-luck</strong><a target="_blank" rel="noopener" href="https://www.cmd5.com/">md5解密</a><br><strong>flag{good-luck}</strong></p>
 
                 
             </div>
@@ -566,7 +607,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://3143047748.github.io/2022/12/28/%E4%BC%98%E8%B4%A8%E5%9B%BE%E5%BA%8A/">http://3143047748.github.io/2022/12/28/%E4%BC%98%E8%B4%A8%E5%9B%BE%E5%BA%8A/</a>
+                    <a href="http://3143047748.github.io/2023/01/09/buuctf%E4%B9%8Bcrypto%E9%83%A8%E5%88%86%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/">http://3143047748.github.io/2023/01/09/buuctf%E4%B9%8Bcrypto%E9%83%A8%E5%88%86%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -604,8 +645,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%9B%BE%E5%BA%8A/">
-                                    <span class="chip bg-color">图床</span>
+                                <a href="/tags/crypto/">
+                                    <span class="chip bg-color">crypto</span>
                                 </a>
                             
                         </div>
@@ -1040,46 +1081,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/12/29/CTF%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84php%E4%BC%AA%E5%8D%8F%E8%AE%AE%E6%80%BB%E7%BB%93/">
+                <a href="/2023/01/09/buuctf%E4%B9%8Bcrypto%E9%83%A8%E5%88%86%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="CTF中常用的php伪协议总结">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="buuctf之crypto部分解题思路">
                         
-                        <span class="card-title">CTF中常用的php伪协议总结</span>
+                        <span class="card-title">buuctf之crypto部分解题思路</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            buuctf
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/php/" class="post-category">
-                                    php
+                            <a href="/categories/buuctf/" class="post-category">
+                                    buuctf
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">php伪协议</span>
+                    <a href="/tags/crypto/">
+                        <span class="chip bg-color">crypto</span>
                     </a>
                     
                 </div>
@@ -1093,13 +1136,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/12/28/%E4%B8%B4%E6%97%B6%E9%82%AE%E7%AE%B1/">
+                <a href="/2023/01/09/ASCII%E7%A0%81%E5%AF%B9%E5%BA%94%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="临时邮箱和临时手机号">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="ASCII码对应表">
                         
-                        <span class="card-title">临时邮箱和临时手机号</span>
+                        <span class="card-title">ASCII码对应表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1110,16 +1153,12 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-12-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-09
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    小工具
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            north
                             
                         </span>
                     </div>
@@ -1127,8 +1166,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%82%AE%E7%AE%B1%EF%BC%8C%E6%89%8B%E6%9C%BA%E5%8F%B7/">
-                        <span class="chip bg-color">邮箱，手机号</span>
+                    <a href="/tags/ASCII%E7%A0%81/">
+                        <span class="chip bg-color">ASCII码</span>
                     </a>
                     
                 </div>
