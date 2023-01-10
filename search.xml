@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>zip伪加密</title>
+      <link href="/2023/01/10/zip%E4%BC%AA%E5%8A%A0%E5%AF%86/"/>
+      <url>/2023/01/10/zip%E4%BC%AA%E5%8A%A0%E5%AF%86/</url>
+      
+        <content type="html"><![CDATA[<p><strong>zip伪加密</strong>是在文件头的加密标志位做修改，进而再打开文件时识被别为加密压缩包</p><p>一个 ZIP 文件由<strong>三个部分</strong>组成：</p><p>压缩源文件数据区+压缩源文件目录区+压缩源文件目录结束标志</p><h2 id="压缩源文件数据区："><a href="#压缩源文件数据区：" class="headerlink" title="压缩源文件数据区："></a>压缩源文件数据区：</h2><p>50 4B 03 04：这是头文件标记（0x04034b50）</p><p>14 00：解压文件所需 pkware 版本</p><p>00 00：全局方式位标记（有无加密）</p><p>08 00：压缩方式</p><p>5A 7E：最后修改文件时间</p><p>F7 46：最后修改文件日期</p><p>16 B5 80 14：CRC-32校验（1480B516）</p><p>19 00 00 00：压缩后尺寸（25）</p><p>17 00 00 00：未压缩尺寸（23）</p><p>07 00：文件名长度</p><p>00 00：扩展记录长度</p><h2 id="压缩源文件目录区："><a href="#压缩源文件目录区：" class="headerlink" title="压缩源文件目录区："></a>压缩源文件目录区：</h2><p>50 4B 01 02：目录中文件文件头标记(0x02014b50)</p><p>3F 00：压缩使用的 pkware 版本</p><p>14 00：解压文件所需 pkware 版本</p><p>00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）</p><p>08 00：压缩方式</p><p>5A 7E：最后修改文件时间</p><p>F7 46：最后修改文件日期</p><p>16 B5 80 14：CRC-32校验（1480B516）</p><p>19 00 00 00：压缩后尺寸（25）</p><p>17 00 00 00：未压缩尺寸（23）</p><p>07 00：文件名长度</p><p>24 00：扩展字段长度</p><p>00 00：文件注释长度</p><p>00 00：磁盘开始号</p><p>00 00：内部文件属性</p><p>20 00 00 00：外部文件属性</p><p>00 00 00 00：局部头部偏移量</p><h2 id="压缩源文件目录结束标志："><a href="#压缩源文件目录结束标志：" class="headerlink" title="压缩源文件目录结束标志："></a>压缩源文件目录结束标志：</h2><p>50 4B 05 06：目录结束标记</p><p>00 00：当前磁盘编号</p><p>00 00：目录区开始磁盘编号</p><p>01 00：本磁盘上纪录总数</p><p>01 00：目录区中纪录总数</p><p>59 00 00 00：目录区尺寸大小</p><p>3E 00 00 00：目录区对第一张磁盘的偏移量</p><p>00 00：ZIP 文件注释长度</p><p>因此，根据此题目来看：</p><p><strong>压缩源文件数据区</strong>：50 4B 03 04：这是头文件标记</p><p><strong>压缩源文件目录区：</strong></p><p>50 4B 01 02：目录中文件文件头标记</p><p>3F 00：压缩使用的 pkware 版本 </p><p>14 00：解压文件所需 pkware 版本 </p><p>00 00：全局方式位标记（有无加密，这个更改这里进行伪加密，改为09 00打开就会提示有密码了）</p><p><strong>压缩源文件目录结束标志</strong> ：50 4B 05 06：目录结束标记 </p><p><img src="https://img-blog.csdnimg.cn/b4f6011275304c798465c33b8b83a77e.png" alt="1"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> misc </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 伪加密 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>buuctf之MISC</title>
+      <link href="/2023/01/10/buuctf%E4%B9%8BMISC/"/>
+      <url>/2023/01/10/buuctf%E4%B9%8BMISC/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基础破解"><a href="#基础破解" class="headerlink" title="基础破解"></a>基础破解</h2><blockquote><p>给你一个压缩包，你并不能获得什么，因为他是四位数字加密的哈哈哈哈哈哈哈。。。不对&#x3D; &#x3D;我说了什么了不得的东西。。 注意：得到的 flag 请包上 flag{} 提交</p></blockquote><p>下载文件解压之后又得到一个压缩包flag.txt被加密了，提示密码是一个4位数字，用ARCHPR进行暴力破解，选择字典进行爆破<br><img src="https://img-blog.csdnimg.cn/c5332cec653f456dbf9d874b3cb7a2c3.png" alt="1"><br>得到密码，输入密码后得到一个base64加密的密文，解密后为flag。</p><h2 id="wireshark"><a href="#wireshark" class="headerlink" title="wireshark"></a>wireshark</h2><blockquote><p>黑客通过wireshark抓到管理员登陆网站的一段流量包（管理员的密码即是答案) 注意：得到的 flag 请包上 flag{} 提交</p></blockquote><p>得到一个pcap文件</p><blockquote><p> pcap文件是常用的数据报存储格式，可以理解为就是一种文件格式，只不过里面的数据是按照特定格式存储的，所以我们想要解析里面的数据，也必须按照一定的格式。普通的记事本打开pcap文件显示的是乱码，用安装了HEX-Editor插件的Notepad++打开，能够以16进制数据的格式显示，用wireshark这种抓包工具就可以正常打开这种文件，愉快地查看里面的网络数据报了，同时wireshark也可以生成这种格式的文件。当然这些工具只是我经常使用的，还有很多其它能够查看pcap文件的工具。</p></blockquote><p>显然是流量分析，登陆网站一般是HTTP post请求，用wireshark打开这个pcap数据包后，查找http,只有一个post请求<br><img src="https://img-blog.csdnimg.cn/2d8aee32f07a487d850f0b12fbd4e267.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/6128dbdf6f9c4bbabe0e3ab4d8e36c64.png" alt="2"><br>找到flag.</p><h2 id="LSB"><a href="#LSB" class="headerlink" title="LSB"></a>LSB</h2><p>打开后给一个校徽，由于题目是LSB</p><p><img src="https://img-blog.csdnimg.cn/64da9c8efb0a43d9b91316ee9b886da0.png" alt="1"></p><blockquote><p>LSB全称leastsignificant bit，是一种基于图片最低有效位修改储存信息的隐写方法，图片采用像素点构乘，利用人肉眼视觉分辨率的限制，像素点的低位变化引起图片整体的变化微乎其微，肉眼不足与察觉出异常。同样的MLSB旨在不被人眼察觉出异常的情况下，尽可能的多藏几位信息，从而提高消息隐藏的效率和容量。</p></blockquote><p>那就用stegsolve打开<br><img src="https://img-blog.csdnimg.cn/ef28ba074c0f480fb77fdf873f929c14.png" alt="2"><br>得到一个二维码<br><img src="https://img-blog.csdnimg.cn/1f0756bb9f6e4fb6824fb3d4c92ef795.png" alt="3"><br>扫二维码得到flag。</p><h2 id="zip伪加密"><a href="#zip伪加密" class="headerlink" title="zip伪加密"></a>zip伪加密</h2><p>被伪加密了，用010editor打开<br><img src="https://img-blog.csdnimg.cn/81cfb24d08d3451580870b94ad0da351.png" alt="1"></p><p><img src="https://img-blog.csdnimg.cn/da5cdea1475a4986bf29cd72e26ecbf5.png" alt="2"><br><strong>09 00改为00 00</strong>保存后得到flag。<strong>flag{Adm1N-B2G-kU-SZIP}</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> buuctf </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> misc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>buuctf之crypto部分解题思路</title>
       <link href="/2023/01/09/buuctf%E4%B9%8Bcrypto%E9%83%A8%E5%88%86%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/"/>
       <url>/2023/01/09/buuctf%E4%B9%8Bcrypto%E9%83%A8%E5%88%86%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF/</url>
