@@ -501,21 +501,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-30
+                    2023-09-27
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    10 分
+                    11 分
                 </div>
                 
 
@@ -807,6 +807,11 @@ app<span class="token punctuation">.</span>config<span class="token punctuation"
 <blockquote>
 <p>file:&#x2F;&#x2F;&#x2F;%66%6c%61%67<br>file:&#x2F;&#x2F;&#x2F;%2566%256c%2561%2567</p>
 </blockquote>
+<h2 id="bug（RCTF2021）"><a href="#bug（RCTF2021）" class="headerlink" title="bug（RCTF2021）"></a>bug（RCTF2021）</h2><p>全程BURP挂代理，能够从每一个包中获得有效信息，还是要仔细观察！！！<br>打开就是登录框：<br><img src="https://img-blog.csdnimg.cn/3efee6e2436046548b1c91b628940271.png" alt="1"><br>尝试admin登录，弱密码无果。先注册一个账号，注册admin显示用户名已存在，换test。<br>登陆成功后尝试每一个功能点：<br>使用manage时<br><img src="https://img-blog.csdnimg.cn/bc84396bd69046409299c59b0d5b7305.png" alt="123"><br>personal功能点：<br>这里比较可以的地方是cookie的user，应该是MD5加密，解密需要付费，暂时不考虑。还有就是<strong>uid</strong>值。<br>直接改为1是不允许的，找其他思路。看能不能找到不需要带cookie-user的包<br><img src="https://img-blog.csdnimg.cn/13e8f73a143545dbbf0c9b6ab04bb330.png" alt="2"></p>
+<p>登出之后看找回密码功能点。<br>由于我知道test用户的信息，直接输入<br><img src="https://img-blog.csdnimg.cn/44ed7431b53547d8aac7f20e35791019.png" alt="123"><br>这个包的详情如下：他没有进行user验证后面有希望。<br><img src="https://img-blog.csdnimg.cn/a57eb39e769e437db01e532a5e5fd17d.png" alt="5"><br>下面这个是输入新密码的包：</p>
+<p><img src="https://img-blog.csdnimg.cn/5f729b4838de4ca384d994ffd06da6a4.png" alt="4"><br>在这里尝试把username改为admin，成功修改admin密码<br><img src="https://img-blog.csdnimg.cn/5c48c75714ab4dbbab310d677fe9ee7b.png" alt="5"><br>随后成功登录admin账号。<br><img src="https://img-blog.csdnimg.cn/699097f08553466ca469704221d959ca.png" alt="1"><br>使用manage功能点发现IP不被允许。<br>直接X-Forwarded-For: 127.0.0.1，出现界面<br><img src="https://img-blog.csdnimg.cn/8826e8d89a444c78ae6bf348ebc53225.png" alt="2"></p>
+<p>查看源代码发现可疑<br><img src="https://img-blog.csdnimg.cn/8af6010afbe345ffbf0c271092bfab0c.png" alt="1"></p>
+<p>试试文件上传<strong>index.php?module&#x3D;filemanage&amp;do&#x3D;upload</strong>，开始文件上传绕过了。<br>上传普通文件<br><img src="https://img-blog.csdnimg.cn/0d3d7f7d4fb5489589b4ec2c5c1a4836.png" alt="1"><br>上传php文件<br><img src="https://img-blog.csdnimg.cn/6b49b925f1cd438188b1cc57f1273f96.png" alt="1"><br>经过一番折腾，该文件后缀php4,上传文件内容<code>&lt;script language=&#39;php&#39;&gt;alert(@eval($_POST[1]))&lt;script&gt;</code><br>得到flag。<br><img src="https://img-blog.csdnimg.cn/9e5e3e5165bc4e4da1937253f9808910.png" alt="2"></p>
 
                 
             </div>
@@ -1634,7 +1639,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">74k</span>&nbsp;字
+                class="white-color">74.4k</span>&nbsp;字
             
             
             
