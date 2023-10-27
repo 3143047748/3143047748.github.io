@@ -602,13 +602,6 @@
 
   
   <url>
-    <loc>http://3143047748.github.io/categories/%E8%B5%9B%E4%BA%8BWP/</loc>
-    <lastmod>2023-10-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://3143047748.github.io/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -616,7 +609,7 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/%E8%B5%9B%E4%BA%8Bwp/</loc>
+    <loc>http://3143047748.github.io/categories/%E8%B5%9B%E4%BA%8BWP/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -624,6 +617,13 @@
   
   <url>
     <loc>http://3143047748.github.io/categories/Bugku/</loc>
+    <lastmod>2023-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://3143047748.github.io/categories/%E8%B5%9B%E4%BA%8Bwp/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -672,14 +672,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
+    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
+    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
     <lastmod>2023-10-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
