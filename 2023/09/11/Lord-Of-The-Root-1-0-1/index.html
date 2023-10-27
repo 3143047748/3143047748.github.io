@@ -137,7 +137,7 @@
 </blockquote>
 <p>在拿到账号密码之后使用ssh登录靶机</p>
 <blockquote>
-<p>ssh <a href="mailto:&#115;&#109;&#101;&#x61;&#x67;&#111;&#108;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#50;&#48;&#54;&#46;&#x31;&#x34;&#x34;">&#115;&#109;&#101;&#x61;&#x67;&#111;&#108;&#64;&#x31;&#57;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#50;&#48;&#54;&#46;&#x31;&#x34;&#x34;</a> MyPreciousR00t</p>
+<p>ssh <a href="mailto:&#115;&#x6d;&#x65;&#97;&#103;&#x6f;&#x6c;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#50;&#48;&#54;&#x2e;&#x31;&#x34;&#52;">&#115;&#x6d;&#x65;&#97;&#103;&#x6f;&#x6c;&#64;&#49;&#x39;&#x32;&#x2e;&#49;&#54;&#x38;&#46;&#50;&#48;&#54;&#x2e;&#x31;&#x34;&#52;</a> MyPreciousR00t</p>
 </blockquote>
 <p>登录之后当然要开始收集信息进行提权了，查看系统版本</p>
 <blockquote>
@@ -256,7 +256,55 @@
     
   </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "5s6sYhVyYIhL1fb7zrErH8BX-gzGzoHsz",
+    app_key: "829xTABHQSNKYRHRILDlEluh",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
    
   
    
