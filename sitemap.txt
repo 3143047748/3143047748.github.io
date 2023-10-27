@@ -1,3 +1,4 @@
+http://3143047748.github.io/2023/10/27/Geekgame2023/
 http://3143047748.github.io/2023/01/18/SQL%E6%B3%A8%E5%85%A5%E9%80%9F%E6%9F%A5%E8%A1%A8/
 http://3143047748.github.io/2023/03/13/sqli-labs/
 http://3143047748.github.io/2023/03/11/PortSwigger-XXE/
@@ -78,6 +79,6 @@ http://3143047748.github.io/categories/hvv/
 http://3143047748.github.io/categories/uploadfile/
 http://3143047748.github.io/categories/sqli-labs/
 http://3143047748.github.io/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/
+http://3143047748.github.io/categories/nssctf/
 http://3143047748.github.io/categories/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C/
 http://3143047748.github.io/categories/%E5%8D%9A%E5%AE%A2/
-http://3143047748.github.io/categories/nssctf/
