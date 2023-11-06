@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.9k</span>
+            <span class="post-count">2.3k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">11 分钟</span>
         </span>
     </span>
 </div>
@@ -360,6 +360,79 @@ response <span class="token operator">=</span> requests<span class="token punctu
 </tbody></table>
 <p><img src="https://img-blog.csdnimg.cn/363feed2972e432a8558d32102c4a1bf.png" alt="1"></p>
 <h3 id="WEEK1-生成你的邀请函吧"><a href="#WEEK1-生成你的邀请函吧" class="headerlink" title="[WEEK1]生成你的邀请函吧~"></a>[WEEK1]生成你的邀请函吧~</h3><p><img src="https://img-blog.csdnimg.cn/72cb3c9f90a8402b9a32ef9287dd9387.png" alt="1"><br>按照他说的得到的图片下面就是flag。</p>
+<h3 id="WEEK2-MD5的事就拜托了"><a href="#WEEK2-MD5的事就拜托了" class="headerlink" title="[WEEK2]MD5的事就拜托了"></a>[WEEK2]MD5的事就拜托了</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">include</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"flag.php"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">extract</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$$$scheme</span><span class="token operator">===</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'length'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$num</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'length'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$num</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">!=</span><span class="token function">intval</span><span class="token punctuation">(</span><span class="token variable">$num</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token operator">!=</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token operator">===</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token operator">.</span><span class="token function">urldecode</span><span class="token punctuation">(</span><span class="token variable">$num</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"flag is"</span><span class="token operator">.</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先通过第一个if</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">extract</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$_POST</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$$$scheme</span><span class="token operator">===</span><span class="token string single-quoted-string">'SHCTF'</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">md5</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里<code>extract(parse_url($_POST[&#39;SHCTF&#39;]));</code>是将传入的SHCTF值的一部分再作为参数。<code>extract</code>会涉及到变量覆盖漏洞<br>参考资料<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xhds/p/12587249.html#_label5">PHP中的变量覆盖漏洞</a><br>在这里做一个测试：<br>比如说这一段代码</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token string single-quoted-string">'http://sd.com:12/as.php?s=456'</span><span class="token punctuation">;</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$b</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/*
+打印结果：
+Array
+(
+    [scheme] => http
+    [host] => sd.com
+    [port] => 12
+    [path] => /as.php
+    [query] => s=456
+)
+*/</span>
+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里我们将<code>http</code>改为<code>host</code>，将<code>sd.com</code>改为<code>query</code>，将<code>s=456</code>改为<code>SHCTF</code><br>也就是以下代码：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token variable">$a</span><span class="token operator">=</span><span class="token string single-quoted-string">'host://query/sd.php?SHCTF'</span><span class="token punctuation">;</span>
+<span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">parse_url</span><span class="token punctuation">(</span><span class="token variable">$a</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/*
+运行结果：
+Array
+(
+    [scheme] => host
+    [host] => query
+    [path] => /sd.php
+    [query] => SHCTF
+)
+*/</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里正好实现三次变量覆盖，输出了flag的md5值<br><img src="https://img-blog.csdnimg.cn/c14c045f09a9418bb0382e89e8f99724.png" alt="1"><br>接下来通过下面的代码：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'length'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token variable">$num</span><span class="token operator">=</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'length'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$num</span><span class="token operator">*</span><span class="token number">100</span><span class="token operator">!=</span><span class="token function">intval</span><span class="token punctuation">(</span><span class="token variable">$num</span><span class="token operator">*</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token function">strlen</span><span class="token punctuation">(</span><span class="token variable">$flag</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">echo</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"&lt;/br>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个好弄，就是将length赋值为带有三位小数的数值<code>length=132.456</code>，返回flag长度42。</p>
+<blockquote>
+<p>到这已经知道了：<br>flag.md5&#x3D;2f679a35b591a420d8cc6b60f90d3fb1<br>flag.length&#x3D;42</p>
+<p>后面这个其实也知道<code>哈希拓展攻击</code>，可是好像找的脚本不能用了。唉，复现一下。。。<br>使用脚本（<a target="_blank" rel="noopener" href="https://github.com/shellfeel/hash-ext-attack">脚本地址</a>）<br><img src="https://img-blog.csdnimg.cn/2d34bb2cb1de4c5085c00c2ebca01da1.png" alt="2"><br><img src="https://img-blog.csdnimg.cn/d4c7e7d9e3674f8694e493d9d887fc01.png" alt="3"></p>
+</blockquote>
 <h3 id="WEEK2-serialize"><a href="#WEEK2-serialize" class="headerlink" title="[WEEK2]serialize"></a>[WEEK2]serialize</h3><p>知识点：浅拷贝、反序列化<br>分享文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/crisprx/article/details/104457047">从两道题目浅谈PHP深浅拷贝</a></p>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
 <span class="token function">highlight_file</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
