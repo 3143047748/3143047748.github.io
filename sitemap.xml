@@ -660,13 +660,6 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
-    <lastmod>2023-11-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://3143047748.github.io/categories/uploadfile/</loc>
     <lastmod>2023-11-11</lastmod>
     <changefreq>weekly</changefreq>
@@ -674,7 +667,21 @@
   </url>
   
   <url>
+    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
+    <lastmod>2023-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://3143047748.github.io/categories/%E5%B0%8F%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2023-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://3143047748.github.io/categories/nssctf/</loc>
     <lastmod>2023-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -689,13 +696,6 @@
   
   <url>
     <loc>http://3143047748.github.io/categories/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2023-11-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://3143047748.github.io/categories/nssctf/</loc>
     <lastmod>2023-11-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
