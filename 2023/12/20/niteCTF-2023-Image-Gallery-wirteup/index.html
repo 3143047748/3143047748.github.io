@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>niteCTF-2023-Image-Gallery-wirteup |  n0rt6&#39;s blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.jpg" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--点击爱心-->
+<script type="text/javascript" src="\js\clickLove.js"></script>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-niteCTF-2023-Image-Gallery-wirteup"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  niteCTF-2023-Image-Gallery-wirteup
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/12/20/niteCTF-2023-Image-Gallery-wirteup/" class="article-date">
+  <time datetime="2023-12-20T13:20:40.000Z" itemprop="datePublished">2023-12-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%B5%9B%E4%BA%8BWP/">赛事WP</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">984</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <meta name="referrer" content="no-referrer"/>
+
+<h2 id="考点"><a href="#考点" class="headerlink" title="考点"></a>考点</h2><p>SQL注入绕过，js反混淆</p>
+<h2 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h2><p>题目给了源代码如下<br><strong>main.py</strong></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> flask <span class="token keyword">import</span> Flask<span class="token punctuation">,</span> render_template<span class="token punctuation">,</span> request<span class="token punctuation">,</span> redirect<span class="token punctuation">,</span> url_for<span class="token punctuation">,</span> session
+<span class="token keyword">import</span> sqlite3
+<span class="token keyword">import</span> uuid
+
+app <span class="token operator">=</span> Flask<span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+app<span class="token punctuation">.</span>secret_key <span class="token operator">=</span> <span class="token builtin">str</span><span class="token punctuation">(</span>uuid<span class="token punctuation">.</span>uuid4<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"GET"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token string">"logged_in"</span> <span class="token keyword">in</span> session <span class="token keyword">and</span> session<span class="token punctuation">[</span><span class="token string">"logged_in"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        session<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">"logged_in"</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">"login"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">"POST"</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span>
+        loweruser <span class="token operator">=</span> username<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        lowerpass <span class="token operator">=</span> password<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        invalid_entries <span class="token operator">=</span> invalid_entries <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token string">"="</span><span class="token punctuation">,</span>
+            <span class="token string">"&lt;"</span><span class="token punctuation">,</span>
+            <span class="token string">">"</span><span class="token punctuation">,</span>
+            <span class="token string">"+"</span><span class="token punctuation">,</span>
+            <span class="token string">"//"</span><span class="token punctuation">,</span>
+            <span class="token string">"|"</span><span class="token punctuation">,</span>
+            <span class="token string">";"</span><span class="token punctuation">,</span>
+            <span class="token string">" "</span><span class="token punctuation">,</span>
+            <span class="token string">" "</span><span class="token punctuation">,</span>
+            <span class="token string">"'1"</span><span class="token punctuation">,</span>
+            <span class="token string">" 1"</span><span class="token punctuation">,</span>
+            <span class="token string">" true"</span><span class="token punctuation">,</span>
+            <span class="token string">"'true"</span><span class="token punctuation">,</span>
+            <span class="token string">" or"</span><span class="token punctuation">,</span>
+            <span class="token string">"'or"</span><span class="token punctuation">,</span>
+            <span class="token string">"/or"</span><span class="token punctuation">,</span>
+            <span class="token string">" and"</span><span class="token punctuation">,</span>
+            <span class="token string">"'and"</span><span class="token punctuation">,</span>
+            <span class="token string">"/and"</span><span class="token punctuation">,</span>
+            <span class="token string">"'like"</span><span class="token punctuation">,</span>
+            <span class="token string">" like"</span><span class="token punctuation">,</span>
+            <span class="token string">"/like"</span><span class="token punctuation">,</span>
+            <span class="token string">"'where"</span><span class="token punctuation">,</span>
+            <span class="token string">" where"</span><span class="token punctuation">,</span>
+            <span class="token string">"/where"</span><span class="token punctuation">,</span>
+            <span class="token string">"%00"</span><span class="token punctuation">,</span>
+            <span class="token string">"null"</span><span class="token punctuation">,</span>
+            <span class="token string">"admin'"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+        matching_value <span class="token operator">=</span> <span class="token builtin">next</span><span class="token punctuation">(</span>
+            <span class="token punctuation">(</span>
+                value
+                <span class="token keyword">for</span> value <span class="token keyword">in</span> invalid_entries
+                <span class="token keyword">if</span> value <span class="token keyword">in</span> loweruser <span class="token keyword">or</span> value <span class="token keyword">in</span> lowerpass
+            <span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token boolean">None</span><span class="token punctuation">,</span>
+        <span class="token punctuation">)</span>
+        <span class="token keyword">if</span> matching_value<span class="token punctuation">:</span>
+            error <span class="token operator">=</span> <span class="token punctuation">(</span>
+                <span class="token string-interpolation"><span class="token string">f"Invalid entry in username and/or password fields. Please try again."</span></span>
+            <span class="token punctuation">)</span>
+            <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"login.html"</span><span class="token punctuation">,</span> error<span class="token operator">=</span>error<span class="token punctuation">)</span>
+
+        conn <span class="token operator">=</span> sqlite3<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token string">"chal.db"</span><span class="token punctuation">)</span>
+        cursor <span class="token operator">=</span> conn<span class="token punctuation">.</span>cursor<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        query <span class="token operator">=</span> <span class="token string-interpolation"><span class="token string">f"SELECT secret FROM login_details WHERE username = '</span><span class="token interpolation"><span class="token punctuation">&#123;</span>username<span class="token punctuation">&#125;</span></span><span class="token string">' AND password = '</span><span class="token interpolation"><span class="token punctuation">&#123;</span>password<span class="token punctuation">&#125;</span></span><span class="token string">';"</span></span>
+
+        result <span class="token operator">=</span> cursor<span class="token punctuation">.</span>execute<span class="token punctuation">(</span>query<span class="token punctuation">)</span>
+        user <span class="token operator">=</span> result<span class="token punctuation">.</span>fetchone<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        conn<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> user<span class="token punctuation">:</span>
+            session<span class="token punctuation">[</span><span class="token string">"logged_in"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">True</span>
+            session<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span> <span class="token operator">=</span> username
+            session<span class="token punctuation">[</span><span class="token string">"secret"</span><span class="token punctuation">]</span> <span class="token operator">=</span> user<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+            <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">"profile"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            error <span class="token operator">=</span> <span class="token string">"Invalid login credentials. Please try again."</span>
+            <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"login.html"</span><span class="token punctuation">,</span> error<span class="token operator">=</span>error<span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"login.html"</span><span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token string">"logged_in"</span> <span class="token keyword">in</span> session <span class="token keyword">and</span> session<span class="token punctuation">[</span><span class="token string">"logged_in"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        session<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">"logged_in"</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">"index"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"landing.html"</span><span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/profile"</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">profile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token string">"logged_in"</span> <span class="token keyword">in</span> session <span class="token keyword">and</span> session<span class="token punctuation">[</span><span class="token string">"logged_in"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> session<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span>
+        secret <span class="token operator">=</span> session<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">"secret"</span><span class="token punctuation">)</span>
+        key <span class="token operator">=</span> <span class="token string">"0"</span>
+        <span class="token keyword">if</span> <span class="token string">"secret"</span> <span class="token keyword">not</span> <span class="token keyword">in</span> <span class="token builtin">str</span><span class="token punctuation">(</span>secret<span class="token punctuation">)</span><span class="token punctuation">:</span>
+            key <span class="token operator">=</span> <span class="token string">"1"</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span>
+            <span class="token string">"profile.html"</span><span class="token punctuation">,</span> username<span class="token operator">=</span>username<span class="token punctuation">,</span> secret<span class="token operator">=</span>secret<span class="token punctuation">,</span> key<span class="token operator">=</span>key
+        <span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        error <span class="token operator">=</span> <span class="token string">"You are not logged in. Please log in first."</span>
+        <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"login.html"</span><span class="token punctuation">,</span> error<span class="token operator">=</span>error<span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/logout"</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    session<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">"logged_in"</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> render_template<span class="token punctuation">(</span><span class="token string">"login.html"</span><span class="token punctuation">)</span>
+
+
+<span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>after_request</span>
+<span class="token keyword">def</span> <span class="token function">add_cache_control</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    response<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">"Cache-Control"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"no-store, no-cache, must-revalidate, max-age=0"</span>
+    response<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">"Pragma"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"no-cache"</span>
+    response<span class="token punctuation">.</span>headers<span class="token punctuation">[</span><span class="token string">"Expires"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"-1"</span>
+    <span class="token keyword">return</span> response
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">"__main__"</span><span class="token punctuation">:</span>
+    app<span class="token punctuation">.</span>run<span class="token punctuation">(</span>host<span class="token operator">=</span><span class="token string">"0.0.0.0"</span><span class="token punctuation">,</span> port<span class="token operator">=</span><span class="token number">1337</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过对代码进行审计可以看到再login路由下存在SQL注入，也就是登录处，但是对字符进行了白名单限制</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@app<span class="token punctuation">.</span>route</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">,</span> methods<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"POST"</span><span class="token punctuation">,</span> <span class="token string">"GET"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">def</span> <span class="token function">login</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token string">"logged_in"</span> <span class="token keyword">in</span> session <span class="token keyword">and</span> session<span class="token punctuation">[</span><span class="token string">"logged_in"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+        session<span class="token punctuation">.</span>pop<span class="token punctuation">(</span><span class="token string">"logged_in"</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> redirect<span class="token punctuation">(</span>url_for<span class="token punctuation">(</span><span class="token string">"login"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">"POST"</span><span class="token punctuation">:</span>
+        username <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token string">"username"</span><span class="token punctuation">]</span>
+        password <span class="token operator">=</span> request<span class="token punctuation">.</span>form<span class="token punctuation">[</span><span class="token string">"password"</span><span class="token punctuation">]</span>
+        loweruser <span class="token operator">=</span> username<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        lowerpass <span class="token operator">=</span> password<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        invalid_entries <span class="token operator">=</span> invalid_entries <span class="token operator">=</span> <span class="token punctuation">[</span>
+            <span class="token string">"="</span><span class="token punctuation">,</span> <span class="token string">"&lt;"</span><span class="token punctuation">,</span> <span class="token string">">"</span><span class="token punctuation">,</span> <span class="token string">"+"</span><span class="token punctuation">,</span> <span class="token string">"//"</span><span class="token punctuation">,</span> <span class="token string">"|"</span><span class="token punctuation">,</span> <span class="token string">";"</span><span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">,</span> <span class="token string">" "</span><span class="token punctuation">,</span> <span class="token string">"'1"</span><span class="token punctuation">,</span> <span class="token string">" 1"</span><span class="token punctuation">,</span> <span class="token string">" true"</span><span class="token punctuation">,</span> <span class="token string">"'true"</span><span class="token punctuation">,</span> <span class="token string">" or"</span><span class="token punctuation">,</span> <span class="token string">"'or"</span><span class="token punctuation">,</span> <span class="token string">"/or"</span><span class="token punctuation">,</span> <span class="token string">" and"</span><span class="token punctuation">,</span> <span class="token string">"'and"</span><span class="token punctuation">,</span> <span class="token string">"/and"</span><span class="token punctuation">,</span> <span class="token string">"'like"</span><span class="token punctuation">,</span> <span class="token string">" like"</span><span class="token punctuation">,</span> <span class="token string">"/like"</span><span class="token punctuation">,</span> <span class="token string">"'where"</span><span class="token punctuation">,</span> <span class="token string">" where"</span><span class="token punctuation">,</span> <span class="token string">"/where"</span><span class="token punctuation">,</span> <span class="token string">"%00"</span><span class="token punctuation">,</span> <span class="token string">"null"</span><span class="token punctuation">,</span> <span class="token string">"admin'"</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>尝试使用tab键来绕过空格（space）<br><img src="https://img-blog.csdnimg.cn/direct/93bfeaf0295c43d48ef70cbd87a486ad.png" alt="123"><br>发现能够成功登录<br><img src="https://img-blog.csdnimg.cn/direct/52755f94cb094aa9a92e157b803d8a97.png" alt="123"><br>也没有发现什么，结合源码还给了一个SQL文件</p>
+<p><strong>schema_sql</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> login_details <span class="token punctuation">(</span>
+    id <span class="token keyword">INTEGER</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> AUTOINCREMENT<span class="token punctuation">,</span>
+    username <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    password <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token punctuation">,</span> secret <span class="token keyword">TEXT</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>尝试查看一下secret字段<br><img src="https://img-blog.csdnimg.cn/direct/b91ec43d9b3841cb9fa9d01fdbca11e5.png" alt="465"><br>这时候发现session内容变多了，结合前面登陆成功所给的secret，不免会想到session相关题目，将此处的session进行解码使用<code>flask-unsign</code><br><img src="https://img-blog.csdnimg.cn/direct/bb4db8d78a7941d9a60ca39d80f62c98.png" alt="456"><br>将得到的密文进行JWT解码<br><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmbGFnIjoibml0ZXtpc190aGlzX3RoZV9mbGFnP30iLCJuYW1lIjoiVHJ5IGFuZCBnZXQgdGhlIGZsYWchIiwiZGVzYyI6IihmdW5jdGlvbihfMHhkOGZiZGIsXzB4MjQyNDgzKXt2YXIgXzB4NTVkYzdjPV8weDNlN2QsXzB4M2FlZmExPV8weGQ4ZmJkYigpO3doaWxlKCEhW10pe3RyeXt2YXIgXzB4M2Q3ODQ3PS1wYXJzZUludChfMHg1NWRjN2MoMHg5MikpLzB4MSoocGFyc2VJbnQoXzB4NTVkYzdjKDB4OTYpKS8weDIpK3BhcnNlSW50KF8weDU1ZGM3YygweDhlKSkvMHgzKigtcGFyc2VJbnQoXzB4NTVkYzdjKDB4OTMpKS8weDQpK3BhcnNlSW50KF8weDU1ZGM3YygweDk0KSkvMHg1K3BhcnNlSW50KF8weDU1ZGM3YygweDhmKSkvMHg2KigtcGFyc2VJbnQoXzB4NTVkYzdjKDB4OGIpKS8weDcpK3BhcnNlSW50KF8weDU1ZGM3YygweDkxKSkvMHg4Ky1wYXJzZUludChfMHg1NWRjN2MoMHg4YykpLzB4OSoocGFyc2VJbnQoXzB4NTVkYzdjKDB4OTUpKS8weGEpK3BhcnNlSW50KF8weDU1ZGM3YygweDkwKSkvMHhiO2lmKF8weDNkNzg0Nz09PV8weDI0MjQ4MylicmVhaztlbHNlIF8weDNhZWZhMVsncHVzaCddKF8weDNhZWZhMVsnc2hpZnQnXSgpKTt9Y2F0Y2goXzB4NGIyODljKXtfMHgzYWVmYTFbJ3B1c2gnXShfMHgzYWVmYTFbJ3NoaWZ0J10oKSk7fX19KF8weDQ0ZTcsMHhiNGJmMSkpO2Z1bmN0aW9uIF8weDNlN2QoXzB4M2JjYTMzLF8weDIxZjY0OCl7dmFyIF8weDQ0ZTc3Yz1fMHg0NGU3KCk7cmV0dXJuIF8weDNlN2Q9ZnVuY3Rpb24oXzB4M2U3ZGU2LF8weDMxZmViYyl7XzB4M2U3ZGU2PV8weDNlN2RlNi0weDhiO3ZhciBfMHg1ZTU4NTA9XzB4NDRlNzdjW18weDNlN2RlNl07cmV0dXJuIF8weDVlNTg1MDt9LF8weDNlN2QoXzB4M2JjYTMzLF8weDIxZjY0OCk7fWZ1bmN0aW9uIHd1dF9pc190aGlzX25vdygpe3ZhciBfMHg1OTQ5NTY9XzB4M2U3ZDtjb25zb2xlWydsb2cnXShfMHg1OTQ5NTYoMHg4ZCkpO31mdW5jdGlvbiBfMHg0NGU3KCl7dmFyIF8weDQ1ZDA4ZT1bJzlsbENnTm8nLCdhSFIwY0hNNkx5OW5hWFJvZFdJdVkyOXRMMmx6YUdGdUxYTjFjbUZ1WVM5amFHRnNiR1Z1WjJVdicsJzkyNG9mb3BKQicsJzE1NzA5OHR0REd2YScsJzI0MjU3Mjc3YW1kc2RZJywnNDY1NzY4MFdhaWNKRCcsJzh4SHRxc2QnLCcxNjI1Mld6cWZjcycsJzExOTg3OTVlVUFmSUQnLCc0MDI1MTEwR1hveWJNJywnNzk2ODJRU254c1MnLCc4NHhCSnNzdyddO18weDQ0ZTc9ZnVuY3Rpb24oKXtyZXR1cm4gXzB4NDVkMDhlO307cmV0dXJuIF8weDQ0ZTcoKTt9IiwiaWF0IjoxNTE2MjM5MDIyfQ.bTHY_Rrkc2mn2xwJe1tP_PeGUftqNoWZFLO2yBH2B5Q</code></p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"header"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"alg"</span><span class="token operator">:</span> <span class="token string">"HS256"</span><span class="token punctuation">,</span>
+    <span class="token property">"typ"</span><span class="token operator">:</span> <span class="token string">"JWT"</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token property">"payload"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"flag"</span><span class="token operator">:</span> <span class="token string">"nite&#123;is_this_the_flag?&#125;"</span><span class="token punctuation">,</span>
+    <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"Try and get the flag!"</span><span class="token punctuation">,</span>
+    <span class="token property">"desc"</span><span class="token operator">:</span> <span class="token string">"(function(_0xd8fbdb,_0x242483)&#123;var _0x55dc7c=_0x3e7d,_0x3aefa1=_0xd8fbdb();while(!![])&#123;try&#123;var _0x3d7847=-parseInt(_0x55dc7c(0x92))/0x1*(parseInt(_0x55dc7c(0x96))/0x2)+parseInt(_0x55dc7c(0x8e))/0x3*(-parseInt(_0x55dc7c(0x93))/0x4)+parseInt(_0x55dc7c(0x94))/0x5+parseInt(_0x55dc7c(0x8f))/0x6*(-parseInt(_0x55dc7c(0x8b))/0x7)+parseInt(_0x55dc7c(0x91))/0x8+-parseInt(_0x55dc7c(0x8c))/0x9*(parseInt(_0x55dc7c(0x95))/0xa)+parseInt(_0x55dc7c(0x90))/0xb;if(_0x3d7847===_0x242483)break;else _0x3aefa1['push'](_0x3aefa1['shift']());&#125;catch(_0x4b289c)&#123;_0x3aefa1['push'](_0x3aefa1['shift']());&#125;&#125;&#125;(_0x44e7,0xb4bf1));function _0x3e7d(_0x3bca33,_0x21f648)&#123;var _0x44e77c=_0x44e7();return _0x3e7d=function(_0x3e7de6,_0x31febc)&#123;_0x3e7de6=_0x3e7de6-0x8b;var _0x5e5850=_0x44e77c[_0x3e7de6];return _0x5e5850;&#125;,_0x3e7d(_0x3bca33,_0x21f648);&#125;function wut_is_this_now()&#123;var _0x594956=_0x3e7d;console['log'](_0x594956(0x8d));&#125;function _0x44e7()&#123;var _0x45d08e=['9llCgNo','aHR0cHM6Ly9naXRodWIuY29tL2lzaGFuLXN1cmFuYS9jaGFsbGVuZ2Uv','924ofopJB','157098ttDGva','24257277amdsdY','4657680WaicJD','8xHtqsd','16252Wzqfcs','1198795eUAfID','4025110GXoybM','79682QSnxsS','84xBJssw'];_0x44e7=function()&#123;return _0x45d08e;&#125;;return _0x44e7();&#125;"</span><span class="token punctuation">,</span>
+    <span class="token property">"iat"</span><span class="token operator">:</span> <span class="token number">1516239022</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可看出<code>desc</code>处对代码进行了混淆，尝试反混淆</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json">(function(topic<span class="token punctuation">,</span> b) <span class="token punctuation">&#123;</span>
+  <span class="token comment">/** @type &#123;function (number, ?): ?&#125; */</span>
+  var getter = _0x3e7d;
+  var out = topic();
+  for (;!!<span class="token punctuation">[</span><span class="token punctuation">]</span>;) <span class="token punctuation">&#123;</span>
+    try <span class="token punctuation">&#123;</span>
+      <span class="token comment">/** @type &#123;number&#125; */</span>
+      var a = -parseInt(getter(<span class="token number">146</span>)) / <span class="token number">1</span> * (parseInt(getter(<span class="token number">150</span>)) / <span class="token number">2</span>) + parseInt(getter(<span class="token number">142</span>)) / <span class="token number">3</span> * (-parseInt(getter(<span class="token number">147</span>)) / <span class="token number">4</span>) + parseInt(getter(<span class="token number">148</span>)) / <span class="token number">5</span> + parseInt(getter(<span class="token number">143</span>)) / <span class="token number">6</span> * (-parseInt(getter(<span class="token number">139</span>)) / <span class="token number">7</span>) + parseInt(getter(<span class="token number">145</span>)) / <span class="token number">8</span> + -parseInt(getter(<span class="token number">140</span>)) / <span class="token number">9</span> * (parseInt(getter(<span class="token number">149</span>)) / <span class="token number">10</span>) + parseInt(getter(<span class="token number">144</span>)) / <span class="token number">11</span>;
+      if (a === b) <span class="token punctuation">&#123;</span>
+        break;
+      <span class="token punctuation">&#125;</span> else <span class="token punctuation">&#123;</span>
+        out<span class="token punctuation">[</span><span class="token string">"push"</span><span class="token punctuation">]</span>(out<span class="token punctuation">[</span><span class="token string">"shift"</span><span class="token punctuation">]</span>());
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> catch (_0x4b289c) <span class="token punctuation">&#123;</span>
+      out<span class="token punctuation">[</span><span class="token string">"push"</span><span class="token punctuation">]</span>(out<span class="token punctuation">[</span><span class="token string">"shift"</span><span class="token punctuation">]</span>());
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>)(_0x44e7<span class="token punctuation">,</span> <span class="token number">740337</span>);
+<span class="token comment">/**
+ * @param &#123;number&#125; opt_attributes
+ * @param &#123;?&#125; deepDataAndEvents
+ * @return &#123;?&#125;
+ */</span>
+function _0x3e7d(opt_attributes<span class="token punctuation">,</span> deepDataAndEvents) <span class="token punctuation">&#123;</span>
+  var args = _0x44e7();
+  return _0x3e7d = function(opt_attributes<span class="token punctuation">,</span> deepDataAndEvents) <span class="token punctuation">&#123;</span>
+    <span class="token comment">/** @type &#123;number&#125; */</span>
+    opt_attributes = opt_attributes - <span class="token number">139</span>;
+    var pageY = args<span class="token punctuation">[</span>opt_attributes<span class="token punctuation">]</span>;
+    return pageY;
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> _0x3e7d(opt_attributes<span class="token punctuation">,</span> deepDataAndEvents);
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/**
+ * @return &#123;undefined&#125;
+ */</span>
+function wut_is_this_now() <span class="token punctuation">&#123;</span>
+  <span class="token comment">/** @type &#123;function (number, ?): ?&#125; */</span>
+  var prepArgs = _0x3e7d;
+  console<span class="token punctuation">[</span><span class="token string">"log"</span><span class="token punctuation">]</span>(prepArgs(<span class="token number">141</span>));
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/**
+ * @return &#123;?&#125;
+ */</span>
+function _0x44e7() <span class="token punctuation">&#123;</span>
+  <span class="token comment">/** @type &#123;Array&#125; */</span>
+  var aHR0cHM6Ly9naXRodWIuY29tL2lzaGFuLXN1cmFuYS9jaGFsbGVuZ2Uv = <span class="token punctuation">[</span><span class="token string">"9llCgNo"</span><span class="token punctuation">,</span> <span class="token string">"aHR0cHM6Ly9naXRodWIuY29tL2lzaGFuLXN1cmFuYS9jaGFsbGVuZ2Uv"</span><span class="token punctuation">,</span> <span class="token string">"924ofopJB"</span><span class="token punctuation">,</span> <span class="token string">"157098ttDGva"</span><span class="token punctuation">,</span> <span class="token string">"24257277amdsdY"</span><span class="token punctuation">,</span> <span class="token string">"4657680WaicJD"</span><span class="token punctuation">,</span> <span class="token string">"8xHtqsd"</span><span class="token punctuation">,</span> <span class="token string">"16252Wzqfcs"</span><span class="token punctuation">,</span> <span class="token string">"1198795eUAfID"</span><span class="token punctuation">,</span> <span class="token string">"4025110GXoybM"</span><span class="token punctuation">,</span> <span class="token string">"79682QSnxsS"</span><span class="token punctuation">,</span> <span class="token string">"84xBJssw"</span><span class="token punctuation">]</span>;
+  <span class="token comment">/**
+   * @return &#123;?&#125;
+   */</span>
+  _0x44e7 = function() <span class="token punctuation">&#123;</span>
+    return aHR0cHM6Ly9naXRodWIuY29tL2lzaGFuLXN1cmFuYS9jaGFsbGVuZ2Uv;<span class="token comment">//base64解码为https://github.com/ishan-surana/challenge/</span>
+  <span class="token punctuation">&#125;</span>;
+  return _0x44e7();
+<span class="token punctuation">&#125;</span>
+;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>flag就在里面，但是由于比赛结束，flag已经删除。。。</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/12/20/niteCTF-2023-Image-Gallery-wirteup/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/12/13/BUUCTF-WEB%E4%B9%8B-HarekazeCTF2019-encode-and-encode/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">BUUCTF-WEB之[HarekazeCTF2019]encode_and_encode</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "5s6sYhVyYIhL1fb7zrErH8BX-gzGzoHsz",
+    app_key: "829xTABHQSNKYRHRILDlEluh",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2023
+        <i class="ri-heart-fill heart_icon"></i> n0rt6
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="https://beian.miit.gov.cn/" target="_black" rel="nofollow">豫ICP备88888888</a>
+        </li>
+        
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Index</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">Categories</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">Tags</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">Friends</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About Me</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
