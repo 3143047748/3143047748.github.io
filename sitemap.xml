@@ -749,14 +749,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/ctf/</loc>
+    <loc>http://3143047748.github.io/categories/Bugku/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/Bugku/</loc>
+    <loc>http://3143047748.github.io/categories/ctf/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -777,13 +777,6 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/crypto/</loc>
-    <lastmod>2024-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://3143047748.github.io/categories/buuctf/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -791,14 +784,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/hvv/</loc>
+    <loc>http://3143047748.github.io/categories/crypto/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
+    <loc>http://3143047748.github.io/categories/hvv/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -819,7 +812,7 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
+    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -841,6 +834,13 @@
   
   <url>
     <loc>http://3143047748.github.io/categories/nssctf/</loc>
+    <lastmod>2024-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://3143047748.github.io/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</loc>
     <lastmod>2024-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
