@@ -161,7 +161,7 @@ Nmap done: <span class="token number">1</span> IP address <span class="token pun
 <h2 id="连接ssh"><a href="#连接ssh" class="headerlink" title="连接ssh"></a>连接ssh</h2><p>开启建立后打开另一个终端进行ssh连接，发现连接上之后就会立即断开<br><img src="https://img-blog.csdnimg.cn/direct/134e48a161034a7583f63e5f25585fcf.png" alt="456"></p>
 <p>涉及到了<code>.bashrc</code>文件，在加载shell的时候由于<code>.bashrc</code>文件的配置，bash 在每次启动时都会加载 .bashrc 文件的内容。每个用户的 home 目录都有这个 shell 脚本。它用来存储并加载你的终端配置和环境变量。<br>有可能<code>.bashrc</code>文件写有关闭shell的内容，这里有两个方法：<br>第一：删除.bashrc文件（有风险）<br>第二：使用-t 来开启一个终端</p>
 <blockquote>
-<p>ssh <a href="mailto:&#x6a;&#x6f;&#104;&#110;&#64;&#x31;&#50;&#x37;&#46;&#x30;&#46;&#48;&#46;&#49;">&#x6a;&#x6f;&#104;&#110;&#64;&#x31;&#50;&#x37;&#46;&#x30;&#46;&#48;&#46;&#49;</a> -p 6666 -t “&#x2F;bin&#x2F;&#x2F;sh” </p>
+<p>ssh <a href="mailto:&#x6a;&#x6f;&#x68;&#x6e;&#64;&#49;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#x31;">&#x6a;&#x6f;&#x68;&#x6e;&#64;&#49;&#50;&#55;&#46;&#48;&#46;&#48;&#46;&#x31;</a> -p 6666 -t “&#x2F;bin&#x2F;&#x2F;sh” </p>
 </blockquote>
 <p>使用第二种<br>连接完成之后对靶机进行信息收集，找到login.php中存在数据库账号密码<br><img src="https://img-blog.csdnimg.cn/direct/80429c4272d7467bb82055fef168896a.png" alt="456"><br>连接数据库后发现另外两个用户，查看&#x2F;home下确实存在。<br><img src="https://img-blog.csdnimg.cn/direct/0eca6ffdb4534c6f9d9737e315693be4.png" alt="123"></p>
 <p>sara可以连接，william不可以。连接后发现sara用户存在一定的root权限<br><img src="https://img-blog.csdnimg.cn/direct/f7fd2f112f864ce0bd1ae9d831d95ab0.png" alt="789"><br>查看root目录下的flag.txt文件发现有root密码<br><img src="https://img-blog.csdnimg.cn/direct/837b5f62fa1842188b881a0b00844608.png" alt="456"><br>连接ssh，拿到flag。<br><img src="https://img-blog.csdnimg.cn/direct/472f4411a17e45bbad93ea73a3468ef7.png" alt="456"></p>

