@@ -741,14 +741,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/tags/XSS/</loc>
+    <loc>http://3143047748.github.io/tags/java/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/tags/java/</loc>
+    <loc>http://3143047748.github.io/tags/XSS/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -799,14 +799,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/Bugku/</loc>
+    <loc>http://3143047748.github.io/categories/ctfshow/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/ctfshow/</loc>
+    <loc>http://3143047748.github.io/categories/Bugku/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -820,14 +820,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/crypto/</loc>
+    <loc>http://3143047748.github.io/categories/buuctf/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/buuctf/</loc>
+    <loc>http://3143047748.github.io/categories/crypto/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -841,14 +841,14 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/hvv/</loc>
+    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/sqli-labs/</loc>
+    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -862,7 +862,7 @@
   </url>
   
   <url>
-    <loc>http://3143047748.github.io/categories/uploadfile/</loc>
+    <loc>http://3143047748.github.io/categories/hvv/</loc>
     <lastmod>2024-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
