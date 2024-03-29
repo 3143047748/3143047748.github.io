@@ -92,8 +92,8 @@ http://3143047748.github.io/categories/ctf/
 http://3143047748.github.io/categories/Bugku/
 http://3143047748.github.io/categories/ctfshow/
 http://3143047748.github.io/categories/%E9%9D%B6%E5%9C%BA/
-http://3143047748.github.io/categories/crypto/
 http://3143047748.github.io/categories/buuctf/
+http://3143047748.github.io/categories/crypto/
 http://3143047748.github.io/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/
 http://3143047748.github.io/categories/hvv/
 http://3143047748.github.io/categories/uploadfile/
